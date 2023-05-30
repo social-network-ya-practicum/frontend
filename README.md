@@ -24,7 +24,7 @@ npm run start
 
 ### Документы по проекту
 
-- [Руководство по работе с проектом](https://github.com/apl-by/projectDraft/blob/main/docs/style-guide/style-guide.md)
+- [Руководство по работе с проектом](https://github.com/social-network-ya-practicum/frontend/blob/develop/docs/style-guide/style-guide.md)
 
 ### Стэк
 
