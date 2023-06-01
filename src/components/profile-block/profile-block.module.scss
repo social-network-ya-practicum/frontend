@@ -2,14 +2,14 @@
 .block{
   border-radius: 16px;
   background-color: #EAEAEA;
-  padding: 30px 23px 30px 12px;
+  padding: 32px 18px;
 }
   
 .photo{
   border-radius: 50%;
-  width: 67px;
-  height: 67px;
-  background-color: #D9D9D9;
+  width: 68px;
+  height: 68px;
+  background-color: #969696;
 }
 
 .name{
@@ -21,7 +21,7 @@
   margin: 12px 0 4px 0;
 }
 
-.prof{
+.role{
   margin: 0;
   font-family: 'Proxima Nova';
   font-style: normal;
@@ -31,15 +31,18 @@
   color: #757575;
 }
   
-.list{
-  list-style: none;
-  margin: 50px 0 0 0;
-  padding: 0;
-}
+// .list{
+//   display: grid;
+//   list-style: none;
+//   margin: 50px 0 0 0;
+//   padding: 0;
+//   gap: 10px;
+// }
   
 .item{
   display: flex;
   justify-content: space-between;
+  margin-top: 28px;
 }
 
 .text{
