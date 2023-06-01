@@ -1,0 +1,62 @@
+
+.block{
+  border-radius: 16px;
+  background-color: #EAEAEA;
+  padding: 30px 23px 30px 12px;
+}
+  
+.photo{
+  border-radius: 50%;
+  width: 67px;
+  height: 67px;
+  background-color: #D9D9D9;
+}
+
+.name{
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  margin: 12px 0 4px 0;
+}
+
+.prof{
+  margin: 0;
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #757575;
+}
+  
+.list{
+  list-style: none;
+  margin: 50px 0 0 0;
+  padding: 0;
+}
+  
+.item{
+  display: flex;
+  justify-content: space-between;
+}
+
+.text{
+  margin: 0;
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #757575;
+}
+
+.span{
+  font-family: 'Proxima Nova';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #757575;
+}
