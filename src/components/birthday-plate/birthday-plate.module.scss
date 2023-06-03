@@ -1,0 +1,87 @@
+* {
+	box-sizing: border-box;
+}
+
+.birthdayPlate {
+	$headerBG: #979797;
+	$plateBG: #d9d9d9;
+
+	background-color: $plateBG;
+	border-radius: 16px;
+	font-size: 16px;
+	overflow: hidden;
+	padding: 0;
+	width: 357px;
+
+	&__header {
+		background-color: $headerBG;
+		padding: 16px 20px 8px;
+	}
+
+	&__title {
+		margin: 0;
+		padding: 0;
+	}
+
+	&__list {
+		overflow: hidden;
+		padding: 20px 20px 32px;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		padding-bottom: 20px;
+	}
+
+	&__item:last-child {
+		padding-bottom: 0px;
+	}
+
+	&__imgWrapper {
+		border-radius: 50%;
+		overflow: hidden;
+		margin-right: 16px;
+		height: 64px;
+		width: 64px;
+
+		img {
+			object-fit: cover;
+			object-position: center;
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		width: 220px;
+
+		p {
+			margin: 0;
+			padding: 0 0 4px 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		p:last-child {
+			padding-bottom: 0;
+		}
+	}
+
+	&__birthdayFreeDay {
+		display: flex;
+		align-items: center;
+
+		img {
+			margin-right: 20px;
+		}
+
+		p {
+			max-width: 269px;
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
