@@ -1,0 +1,77 @@
+.header {
+	font-family: 'Inter';
+	background: #EAEAEA;
+	padding: 24px 72px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&__logo {
+		display: flex;
+		align-items: center;
+	}
+
+	&__img {
+		width: 32px;
+		height: 32px;
+		background: #181818;
+		border-radius: 100px;
+	}
+
+	&__title {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 120%;
+		margin: 0 0 0 8px;
+		color: #181818;
+	}
+
+	&__wrapper {
+		display: flex;
+		align-items: center;
+	}
+
+	&__icon {
+		width: 15px;
+		height: 15.41px;
+		margin-right: 10.5px;
+	}
+
+	&__text {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 120%;
+		color: #181818;
+		margin: 0;
+	}
+
+	&__user {
+		display: flex;
+		margin-left: 80px;
+		align-items: center;
+	}
+
+	&__name {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 120%;
+		margin: 0;
+		color: #181818;
+	}
+
+	&__avatar {
+		width: 32px;
+		height: 32px;
+		background: #969696;
+		border-radius: 100px;
+		margin-left: 8px;
+	}
+}
+
+button + button {
+	margin-left: 20px;
+}
