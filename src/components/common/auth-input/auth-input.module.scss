@@ -1,0 +1,27 @@
+.auth-input {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	font-style: normal;
+	font-weight: 400;
+
+	&__title {
+		font-size: 16px;
+		line-height: 19px;
+		margin-bottom: 20px;
+	}
+
+	&__input {
+		display: flex;
+		align-items: center;
+		outline: none;
+		background: #f7f8fa;
+		border: 1px solid #d3d9de;
+		width: 100%;
+		min-height: 40px;
+		padding: 0 12px;
+		border-radius: 6px;
+		font-size: 15px;
+		line-height: 20px;
+	}
+}
