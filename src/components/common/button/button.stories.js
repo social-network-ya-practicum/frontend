@@ -1,5 +1,7 @@
 import Button from './button';
 import '../../../index.scss';
+import svgIcon from './images/sbExampleBefore.svg';
+import avatar from './images/sbExampleAfter.svg';
 
 export default {
 	title: 'Button',
@@ -26,11 +28,24 @@ export const Rect = (args) => (
 
 export const Rounded = (args) => (
 	<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-		<Button shape="rounded" {...args}>
+		<Button variant="rounded" {...args}>
 			Button
 		</Button>
-		<Button shape="rounded" variant="outlined" {...args}>
+		<Button variant="rounded" viewType="outlined" {...args}>
 			Button
+		</Button>
+	</div>
+);
+
+export const Text = (args) => (
+	<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+		<Button variant="text" {...args}>
+			<img src={svgIcon} alt="icon" />
+			<span style={{ marginLeft: '8px' }}>Лента</span>
+		</Button>
+		<Button variant="text" {...args}>
+			<span style={{ marginRight: '8px' }}>Юзер</span>
+			<img src={avatar} alt="avatar" />
 		</Button>
 	</div>
 );
