@@ -1,67 +1,64 @@
+.profile-block {
+	border-radius: 16px;
+	background-color: #eaeaea;
+	padding: 32px 18px;
+	width: 127px;
 
-.profile-block{
-  border-radius: 16px;
-  background-color: #EAEAEA;
-  padding: 32px 18px;
-  width: 127px;
+	&__photo {
+		border-radius: 50%;
+		width: 68px;
+		height: 68px;
+		background-color: #969696;
+	}
 
-  
-  &__photo{
-    border-radius: 50%;
-    width: 68px;
-    height: 68px;
-    background-color: #969696;
-  }
+	&__avatar {
+		height: 100%;
+		width: 100%;
+	}
 
-  &__avatar{
-    height: 100%;
-    width: 100%;
-  }
+	&__name {
+		font-family: 'Proxima Nova';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		margin: 12px 0 4px 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-  &__name{
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    margin: 12px 0 4px 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+	&__role {
+		margin: 0;
+		font-family: 'Proxima Nova';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 16px;
+		color: #757575;
+	}
 
-  &__role{
-    margin: 0;
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
-  }
-    
-    
-  &__item{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 28px;
-  }
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 28px;
+	}
 
-  &__text{
-    margin: 0;
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
-  }
+	&__text {
+		margin: 0;
+		font-family: 'Proxima Nova';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 16px;
+		color: #757575;
+	}
 
-  &__span{
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
-  }
+	&__span {
+		font-family: 'Proxima Nova';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 16px;
+		color: #757575;
+	}
 }
