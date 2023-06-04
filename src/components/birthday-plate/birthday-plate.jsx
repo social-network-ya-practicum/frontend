@@ -8,10 +8,10 @@ function BirthdayPlate({ data }) {
 			<div className={styles.birthdayPlate__header}>
 				<h2 className={styles.birthdayPlate__title}>Дни рождения</h2>
 			</div>
-			<section className={styles.birthdayPlate__list}>
+			<ul className={styles.birthdayPlate__list}>
 				{data.length > 0 ? (
 					data.slice(0, 3).map((person) => (
-						<article key={person.id} className={styles.birthdayPlate__item}>
+						<li key={person.id} className={styles.birthdayPlate__item}>
 							<div className={styles.birthdayPlate__imgWrapper}>
 								<img src={person.photo} alt="Аватар пользователя" />
 							</div>
@@ -21,18 +21,18 @@ function BirthdayPlate({ data }) {
 								</p>
 								<p>{person.birthday_date}</p>
 							</div>
-						</article>
+						</li>
 					))
 				) : (
-					<article className={styles.birthdayPlate__birthdayFreeDay}>
+					<li className={styles.birthdayPlate__birthdayFreeDay}>
 						<img src={iconCake} alt="cake" />
 						<p>
 							Сегодня в нашей компании никто не отмечает День рождения, но мы
 							желаем вам хорошего дня!
 						</p>
-					</article>
+					</li>
 				)}
-			</section>
+			</ul>
 		</section>
 	);
 }

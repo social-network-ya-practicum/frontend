@@ -1,4 +1,5 @@
 import BirthdayPlate from './birthday-plate';
+import '../../index.scss';
 
 export default {
 	title: 'Birthday Plate',
