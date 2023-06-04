@@ -1,11 +1,51 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 
-body {
+:root {
+	// 1. variables for colors:
+	// 1.1 fonts:
+	--text_color_default: #000000;
+	--text_color_light: #ffffff;
+	--text_color_secondary: #757575;
+
+	// 1.2 backgrounds:
+	--bg_color_default: #ffffff;
+
+	// 1.3 buttons:
+	--btn_color_primary: #818c99;
+	--btn_color_secondary: #8f9fb3;
+
+	// 1.4 common:
+	--color_000000: #000000;
+	--color_0b0b0b: #0b0b0b;
+	--color_ffffff: #ffffff;
+	--color_f4f4f4: #f4f4f4;
+	--color_757575: #757575;
+	--color_818c99: #818c99;
+	--color_8f9fb3: #8f9fb3;
+	--color_969696: #969696;
+	--color_979797: #979797;
+	--color_99a2ad: #99a2ad;
+	--color_eaeaea: #eaeaea;
+	--color_ebebeb: #ebebeb;
+	--color_bbb8b8: #bbb8b8;
+	--color_d9d9d9: #d9d9d9;
+	--color_d3d9de: #d3d9de;
+	--color_cad5e3: #cad5e3;
+}
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	padding: 0;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
+}
+
+body {
+	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	color: var(--text_color_default);
+	background-color: var(--bg_color_default);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
