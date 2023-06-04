@@ -1,0 +1,70 @@
+$primary-color: #818c99;
+$secondary-color: #8f9fb3;
+
+@mixin common-styles {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: max-content;
+	font-style: normal;
+	font-weight: 400;
+	border-width: 2px;
+	border-style: solid;
+	padding: 0 24px;
+	color: inherit;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+@mixin common-mods {
+	&_color_primary {
+		border-color: $primary-color;
+		background-color: $primary-color;
+	}
+
+	&_color_secondary {
+		border-color: $secondary-color;
+		background-color: $secondary-color;
+	}
+
+	&_full-widthed {
+		width: 100%;
+	}
+
+	&_filled {
+		border: none;
+		color: #ffffff;
+	}
+
+	&_outlined {
+		background-color: transparent;
+	}
+}
+
+.button-rect {
+	@include common-styles;
+	@include common-mods;
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: -0.078px;
+	min-height: 42px;
+	border-radius: 4px;
+}
+
+.button-rounded {
+	@include common-styles;
+	@include common-mods;
+	font-size: 16px;
+	line-height: 120%;
+	min-height: 35px;
+	border-radius: 16px;
+}
+
+.button-text {
+	@include common-styles;
+	border: none;
+	padding: 0;
+	min-height: 35px;
+	font-size: 16px;
+	line-height: 120%;
+}
