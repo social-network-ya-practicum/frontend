@@ -1,5 +1,5 @@
 import ProfileBlock from './profile-block';
-import '../../../index.scss';
+import '../../index.scss';
 
 
 export default {
