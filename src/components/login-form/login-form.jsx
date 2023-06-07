@@ -19,7 +19,7 @@ function LoginForm({ onSubmit, mix }) {
 					type="email"
 					name="email"
 					title="Корпоративнаая почта"
-					value=""
+					value="xxxxxxxxxxxxx@f.rr"
 					onChange={(e) => console.log(e)}
 					mix={styles[`mix-auth-input`]}
 				/>
@@ -27,7 +27,7 @@ function LoginForm({ onSubmit, mix }) {
 					type="password"
 					name="password"
 					title="Пароль"
-					value=""
+					value="ffffffff"
 					onChange={(e) => console.log(e)}
 					mix={styles[`mix-auth-input`]}
 				/>

@@ -32,10 +32,14 @@
 	--color_d9d9d9: #d9d9d9;
 	--color_d3d9de: #d3d9de;
 	--color_cad5e3: #cad5e3;
+	--color_cfcfcf: #cfcfcf;
 
 	// 2. other variables:
 	--header_height: 80px;
 	--footer_height: 116px;
+
+	// 3. fonts
+	--font-family-default: 'Open Sans', 'Inter', Arial, Helvetica, sans-serif;
 }
 
 *,
@@ -47,7 +51,7 @@
 }
 
 body {
-	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	font-family: var(--font-family-default);
 	color: var(--text_color_default);
 	background-color: var(--bg_color_default);
 	-webkit-font-smoothing: antialiased;
