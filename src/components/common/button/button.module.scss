@@ -1,19 +1,20 @@
-$primary-color: #818c99;
-$secondary-color: #8f9fb3;
+$primary-color: var(--color_818c99);
 
 @mixin common-styles {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: max-content;
+	font-size: 16px;
+	line-height: 120%;
 	font-style: normal;
 	font-weight: 400;
+	text-align: center;
 	border-width: 2px;
 	border-style: solid;
-	padding: 0 24px;
+	padding: 0 20px;
 	color: inherit;
-	cursor: pointer;
-	background-color: transparent;
+	background: none;
 }
 
 @mixin common-mods {
@@ -22,18 +23,12 @@ $secondary-color: #8f9fb3;
 		background-color: $primary-color;
 	}
 
-	&_color_secondary {
-		border-color: $secondary-color;
-		background-color: $secondary-color;
-	}
-
 	&_full-widthed {
 		width: 100%;
 	}
 
 	&_filled {
-		border: none;
-		color: #ffffff;
+		color: var(--text_color_light);
 	}
 
 	&_outlined {
@@ -41,22 +36,10 @@ $secondary-color: #8f9fb3;
 	}
 }
 
-.button-rect {
-	@include common-styles;
-	@include common-mods;
-	font-size: 13px;
-	line-height: 16px;
-	letter-spacing: -0.078px;
-	min-height: 42px;
-	border-radius: 4px;
-}
-
 .button-rounded {
 	@include common-styles;
 	@include common-mods;
-	font-size: 16px;
-	line-height: 120%;
-	min-height: 35px;
+	min-height: 44px;
 	border-radius: 16px;
 }
 
