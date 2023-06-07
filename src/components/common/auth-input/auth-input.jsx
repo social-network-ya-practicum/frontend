@@ -9,9 +9,9 @@ const cn = classNames.bind(styles);
 
 function AuthInput({ title, type, name, value, onChange, mix }) {
 	const id = useId();
-	const [showPassword, setShowPassword] = useState(true);
-	const typeIcon = showPassword ? eye : eyeSlash;
-	const attrType = type === 'password' && !showPassword ? 'text' : type;
+	const [shownPassword, setShownPassword] = useState(false);
+	const typeIcon = !shownPassword ? eye : eyeSlash;
+	const attrType = type === 'password' && shownPassword ? 'text' : type;
 
 	const cnAuthInput = cn('auth-input', mix);
 
@@ -31,7 +31,7 @@ function AuthInput({ title, type, name, value, onChange, mix }) {
 				{type === 'password' && (
 					<button
 						className={styles['auth-input__icon-btn']}
-						onClick={() => setShowPassword(!showPassword)}
+						onClick={() => setShownPassword(!shownPassword)}
 					>
 						<img src={typeIcon} alt="eye-icon" />
 					</button>
