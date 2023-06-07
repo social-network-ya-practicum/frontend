@@ -9,7 +9,7 @@ const cn = classNames.bind(styles);
 
 function AuthInput({ title, type, name, value, onChange, mix }) {
 	const id = useId();
-	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(true);
 	const typeIcon = showPassword ? eye : eyeSlash;
 	const attrType = type === 'password' && !showPassword ? 'text' : type;
 
