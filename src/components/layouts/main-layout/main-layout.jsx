@@ -10,9 +10,10 @@ function MainLayout() {
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					height: 83,
+					height: 'var(--header_height)',
 					backgroundColor: '#EAEAEA',
 					width: '100%',
+					position: 'fixed',
 				}}
 			>
 				Заглушка Header
@@ -21,6 +22,20 @@ function MainLayout() {
 			<main className={styles.layout__content}>
 				<Outlet />
 			</main>
+
+			{/* @TODO:  Заменить <footer> на Footer */}
+			<footer
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					height: 'var(--footer_height)',
+					backgroundColor: '#EAEAEA',
+					width: '100%',
+				}}
+			>
+				Заглушка Footer
+			</footer>
 		</div>
 	);
 }

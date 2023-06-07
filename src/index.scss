@@ -4,7 +4,7 @@
 :root {
 	// 1. variables for colors:
 	// 1.1 fonts:
-	--text_color_default: #000000;
+	--text_color_default: #181818;
 	--text_color_light: #ffffff;
 	--text_color_secondary: #757575;
 
@@ -17,6 +17,7 @@
 
 	// 1.4 common:
 	--color_000000: #000000;
+	--color_181818: #181818;
 	--color_0b0b0b: #0b0b0b;
 	--color_ffffff: #ffffff;
 	--color_f4f4f4: #f4f4f4;
@@ -32,6 +33,14 @@
 	--color_d9d9d9: #d9d9d9;
 	--color_d3d9de: #d3d9de;
 	--color_cad5e3: #cad5e3;
+	--color_cfcfcf: #cfcfcf;
+
+	// 2. other variables:
+	--header_height: 80px;
+	--footer_height: 116px;
+
+	// 3. fonts
+	--font-family-default: 'Open Sans', 'Inter', Arial, Helvetica, sans-serif;
 }
 
 *,
@@ -43,7 +52,7 @@
 }
 
 body {
-	font-family: 'Inter', Arial, Helvetica, sans-serif;
+	font-family: var(--font-family-default);
 	color: var(--text_color_default);
 	background-color: var(--bg_color_default);
 	-webkit-font-smoothing: antialiased;
