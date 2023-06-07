@@ -15,24 +15,17 @@ export const Default = {
 	},
 };
 
-export const Rect = (args) => (
-	<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-		<Button fullWidth {...args}>
-			Button
-		</Button>
-		<Button fullWidth color="secondary" {...args}>
-			Button
-		</Button>
-	</div>
-);
-
 export const Rounded = (args) => (
 	<div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-		<Button variant="rounded" {...args}>
+		<Button {...args}>Button</Button>
+		<Button viewType="outlined" {...args}>
 			Button
 		</Button>
-		<Button variant="rounded" viewType="outlined" {...args}>
-			Button
+		<Button maxWidth="147px" {...args}>
+			Вход
+		</Button>
+		<Button viewType="outlined" maxWidth="147px" {...args}>
+			Регистрация
 		</Button>
 	</div>
 );
