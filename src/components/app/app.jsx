@@ -1,13 +1,24 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 import MainLayout from '../layouts/main-layout/main-layout';
+import MainPageShell from '../main-page-shell/main-page-shell';
 
 function App() {
 	return (
 		<Routes>
 			<Route element={<MainLayout />}>
 				<Route path="/" element={<Outlet />}>
-					<Route index element={<div>path = '/'</div>} />
-					<Route path="contacts" element={<div>path = '/contacts'</div>} />
+					<Route index element={
+            <MainPageShell>
+              <div>path = '/'</div>
+            </MainPageShell>
+          } />
+					
+          <Route path="contacts" element={
+            <MainPageShell>
+              <div>path = '/contacts'</div>
+            </MainPageShell>
+          } />
+
 					<Route
 						path="contacts/:contactId"
 						element={<div>path = '/contacts/:contactId'</div>}
