@@ -5,13 +5,13 @@ import Logo from './image/logo.svg';
 import Button from '../common/button/button';
 import styles from './header.module.scss';
 
-const Header = ({ mix }) => {
+const Header = ({ user, mix }) => {
 	// Мы получим юзера из хука react query
-	const user = {
-		first_name: 'Юлия',
-		photo: '',
-		userId: 'string',
-	};
+	// const user = {
+	// 	first_name: 'Юлия',
+	// 	photo: '',
+	// 	userId: 'string',
+	// };
 
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
@@ -94,9 +94,15 @@ const Header = ({ mix }) => {
 export default Header;
 
 Header.propTypes = {
+	user: PropTypes.shape({
+		first_name: PropTypes.string.isRequired,
+		photo: PropTypes.string,
+		userId: PropTypes.string.isRequired,
+	}),
 	mix: PropTypes.string,
 };
 
 Header.defaultProps = {
+	user: null,
 	mix: undefined,
 };
