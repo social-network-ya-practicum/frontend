@@ -1,8 +1,8 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 import MainLayout from '../layouts/main-layout/main-layout';
-import MainPageShell from '../main-page-shell/main-page-shell';
 import LoginPage from '../../pages/login-page/login-page';
 import RergisterPage from '../../pages/register-page/register-page';
+import MainPageShell from '../main-page-shell/main-page-shell';
 
 function App() {
 	return (
