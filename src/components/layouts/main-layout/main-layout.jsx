@@ -6,7 +6,6 @@ function MainLayout() {
 	return (
 		<div className={styles.layout}>
 			<Header mix={styles['mix-header']} />
-
 			<main className={styles.layout__content}>
 				<Outlet />
 			</main>
