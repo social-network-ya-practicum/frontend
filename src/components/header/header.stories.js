@@ -1,4 +1,4 @@
-import { Header } from './header';
+import Header from './header';
 
 export default {
 	title: 'Header',
@@ -10,15 +10,9 @@ export default {
 };
 
 export const LoggedIn = {
-	args: {
-		user: {
-			first_name: 'Юлия',
-      photo: null,
-		},
-	},
+	args: {},
 };
 
 export const LoggedOut = {
-	args: {
-	},
+	args: {},
 };

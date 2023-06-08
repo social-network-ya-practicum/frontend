@@ -8,21 +8,17 @@ function Button({
 	children,
 	type,
 	variant,
-	viewType,
-	color,
-	fullWidth,
+	width,
+	outlined,
+	active,
 	disabled,
 	mix,
 	onClick,
-	width,
 }) {
 	const cnButton = cn(
 		`button-${variant}`,
-		`button-${variant}_${viewType}`,
-		`button-${variant}_color_${color}`,
-		{
-			[`button-${variant}_full-widthed`]: fullWidth,
-		},
+		{ [`button-${variant}_outlined`]: outlined },
+		{ [`button-${variant}_active`]: active },
 		mix
 	);
 
@@ -44,24 +40,22 @@ export default Button;
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
 	type: PropTypes.oneOf(['button', 'submit']),
-	variant: PropTypes.oneOf(['rounded', 'text', 'active', 'passive']),
-	viewType: PropTypes.oneOf(['outlined']),
-	color: PropTypes.oneOf(['primary', 'secondary']),
-	fullWidth: PropTypes.bool,
+	variant: PropTypes.oneOf(['primary', 'secondary', 'text']),
+	width: PropTypes.string,
+	outlined: PropTypes.bool,
+	active: PropTypes.bool,
 	disabled: PropTypes.bool,
 	mix: PropTypes.string,
 	onClick: PropTypes.func,
-	width: PropTypes.string,
 };
 
 Button.defaultProps = {
 	type: 'button',
-	variant: 'rounded',
-	viewType: '',
-	color: 'primary',
-	fullWidth: true,
+	variant: 'primary',
+	width: 'max-content',
+	outlined: false,
+	active: false,
 	disabled: false,
 	mix: undefined,
 	onClick: undefined,
-	width: undefined,
 };

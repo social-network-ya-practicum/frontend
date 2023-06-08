@@ -6,23 +6,28 @@
 	// 1.1 fonts:
 	--text_color_default: #010101;
 	--text_color_light: #ffffff;
-	--text_color_secondary: #757575;
+	--text_color_secondary: #7e7f80;
 
 	// 1.2 backgrounds:
 	--bg_color_default: #ffffff;
 
 	// 1.3 buttons:
-	--btn_color_primary: #65F0C6;
-	--btn_color_secondary: #ffffff;
+	--btn_color_default: #65f0c6;
+	--btn_color_active: #24dca4;
+	--btn_color_hover: #24dca4;
+	--btn_color_disabled: #cfd4d9;
+
+	--btn-text_color_active: #d7e9fa;
+	--btn-text_color_hover: #d7e9fa;
 
 	// 1.4 common:
 	--color_000000: #000000;
 	--color_181818: #181818;
 	--color_0b0b0b: #0b0b0b;
-  --color_D7E9FA: #D7E9FA;
+	--color_d7e9fa: #d7e9fa;
 	--color_ffffff: #ffffff;
 	--color_f4f4f4: #f4f4f4;
-  --color_65F0C6: #65F0C6;
+	--color_65f0c6: #65f0c6;
 	--color_757575: #757575;
 	--color_818c99: #818c99;
 	--color_8f9fb3: #8f9fb3;
@@ -38,7 +43,7 @@
 	--color_cfcfcf: #cfcfcf;
 
 	// 2. other variables:
-	--header_height: 80px;
+	--header_height: 84px;
 	--footer_height: 116px;
 
 	// 3. fonts
