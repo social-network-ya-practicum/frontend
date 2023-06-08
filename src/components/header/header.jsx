@@ -1,40 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Lenta from './image/lenta-icon.svg';
-import Contacts from './image/contact-icon.svg';
-
+import Logo from './image/logo.svg';
 import Button from '../common/button/button';
 import styles from './header.module.scss';
 
-export const Header = ({ user, onLogin, onRegister, onClick, ...args }) => (
+export const Header = ({ user, onLogin, onRegister, onClick }) => (
 	<header>
 		<div className={styles.header}>
 			<a className={styles.header__logo} href="/#">
-				<div className={styles.header__img} />
-				<h1 className={styles.header__title}>Корпоративная сеть</h1>
+				<div className={styles.header__imgBlock}><img className={styles.header__img} src={Logo} alt="Логотип" /></div>
+				<span className={styles.header__title}>Корпоративная сеть</span>
 			</a>
-			<div className={styles.header__wrapper}>
+			<div className={styles.header__info}>
 				{user ? (
 					<div className={styles.header__wrapper}>
             <div className={styles.header__wrapper}>
-              <Button variant="text" onClick={onClick} {...args}>
-                <img className={styles.header__icon} src={Lenta} alt="Лента"/>
+              <Button variant="text" onClick={onClick}>
                 <p className={styles.header__text}>Лента</p>
               </Button>
-              <Button variant="text" onClick={onClick} {...args}>
-                <img className={styles.header__icon} src={Contacts} alt="Контакты"/>
+              <Button variant="text" onClick={onClick}>
                 <p className={styles.header__text}>Контакты</p>
               </Button>
             </div>
             <div className={styles.header__user}>
-              <p className={styles.header__name}>{user.name}</p>
-              <div className={styles.header__avatar} />
+              <p className={styles.header__name}>{user.first_name}</p>
+              <div className={styles.header__imgBlock}><img className={styles.header__img} src={user.photo || ''} alt="Фото" /></div>
             </div>
 					</div>
 				) : (
 					<>
-						<Button variant="rounded" onClick={onLogin} {...args}>Вход</Button>
-						<Button variant="rounded" viewType="outlined" onClick={onRegister} {...args}>Регистрация</Button>
+						<Button variant="active" color="secondary" viewType="outlined"  width="123px" onClick={onLogin}>Вход</Button>
+						<Button variant="passive" viewType="outlined" width="123px" onClick={onRegister}>Регистрация</Button>
 					</>
 				)}
 			</div>
@@ -44,7 +40,8 @@ export const Header = ({ user, onLogin, onRegister, onClick, ...args }) => (
 
 Header.propTypes = {
 	user: PropTypes.shape({
-		name: PropTypes.string.isRequired,
+		first_name: PropTypes.string.isRequired,
+    photo: PropTypes.string,
 	}),
 	onLogin: PropTypes.func.isRequired,
 	onRegister: PropTypes.func.isRequired,

@@ -12,7 +12,8 @@ export default {
 export const LoggedIn = {
 	args: {
 		user: {
-			name: 'Юлия',
+			first_name: 'Юлия',
+      photo: null,
 		},
 	},
 };
