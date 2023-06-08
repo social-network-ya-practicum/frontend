@@ -14,6 +14,7 @@ function Button({
 	disabled,
 	mix,
 	onClick,
+	width,
 }) {
 	const cnButton = cn(
 		`button-${variant}`,
@@ -28,6 +29,7 @@ function Button({
 	return (
 		<button
 			className={cnButton}
+			style={{ width, minWidth: 'max-content' }}
 			type={type}
 			disabled={disabled}
 			onClick={onClick}
@@ -42,22 +44,24 @@ export default Button;
 Button.propTypes = {
 	children: PropTypes.node.isRequired,
 	type: PropTypes.oneOf(['button', 'submit']),
-	variant: PropTypes.oneOf(['rect', 'rounded', 'text']),
-	viewType: PropTypes.oneOf(['filled', 'outlined']),
+	variant: PropTypes.oneOf(['rounded', 'text', 'active', 'passive']),
+	viewType: PropTypes.oneOf(['outlined']),
 	color: PropTypes.oneOf(['primary', 'secondary']),
 	fullWidth: PropTypes.bool,
 	disabled: PropTypes.bool,
 	mix: PropTypes.string,
 	onClick: PropTypes.func,
+	width: PropTypes.string,
 };
 
 Button.defaultProps = {
 	type: 'button',
-	variant: 'rect',
-	viewType: 'filled',
+	variant: 'rounded',
+	viewType: '',
 	color: 'primary',
-	fullWidth: false,
+	fullWidth: true,
 	disabled: false,
 	mix: undefined,
 	onClick: undefined,
+	width: undefined,
 };

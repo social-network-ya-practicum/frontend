@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './register-form.module.scss';
 import AuthInput from '../common/auth-input/auth-input';
@@ -8,6 +9,17 @@ const cn = classNames.bind(styles);
 
 function RegisterForm({ onSubmit, mix }) {
 	const cnLoginForm = cn('form', mix);
+
+	const [inputValue, setInputValue] = useState({
+		email: '',
+		passwordFirst: '',
+		passwordSecond: '',
+	});
+
+	const onChange = (e) => {
+		const { name, value } = e.target;
+		setInputValue({ ...inputValue, [name]: value });
+	};
 
 	return (
 		<form className={cnLoginForm} onSubmit={onSubmit}>
@@ -19,24 +31,24 @@ function RegisterForm({ onSubmit, mix }) {
 					type="email"
 					name="email"
 					title="Введите корпоративную почту"
-					value=""
-					onChange={(e) => console.log(e)}
+					value={inputValue.email}
+					onChange={onChange}
 					mix={styles[`mix-auth-input`]}
 				/>
 				<AuthInput
 					type="password"
-					name="password"
+					name="passwordFirst"
 					title="Введите пароль"
-					value=""
-					onChange={(e) => console.log(e)}
+					value={inputValue.passwordFirst}
+					onChange={onChange}
 					mix={styles[`mix-auth-input`]}
 				/>
 				<AuthInput
 					type="password"
-					name="password"
+					name="passwordSecond"
 					title="Повторите пароль"
-					value=""
-					onChange={(e) => console.log(e)}
+					value={inputValue.passwordSecond}
+					onChange={onChange}
 					mix={styles[`mix-auth-input`]}
 				/>
 				<Button type="submit" fullWidth>

@@ -4,6 +4,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import RergisterPage from '../../pages/register-page/register-page';
 import MainPageShell from '../main-page-shell/main-page-shell';
 
+
 function App() {
 	return (
 		<Routes>
