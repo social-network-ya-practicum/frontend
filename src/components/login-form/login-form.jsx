@@ -42,7 +42,7 @@ function LoginForm({ onSubmit, mix }) {
 					onChange={onChange}
 					mix={styles[`mix-auth-input`]}
 				/>
-				<Button type="submit" fullWidth>
+				<Button type="submit" width="100%">
 					Войти
 				</Button>
 			</div>

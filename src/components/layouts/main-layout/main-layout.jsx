@@ -1,25 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import styles from './main-layout.module.scss';
-// import MainPageShell from '../../main-page-shell/main-page-shell';
+import Header from '../../header/header';
 
 function MainLayout() {
 	return (
 		<div className={styles.layout}>
-			{/* @TODO:  Заменить <header> на Header */}
-			<header
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					height: 'var(--header_height)',
-					backgroundColor: '#EAEAEA',
-					width: '100%',
-					position: 'fixed',
-				}}
-			>
-				Заглушка Header
-			</header>
-
+			<Header mix={styles['mix-header']} />
 			<main className={styles.layout__content}>
 				<Outlet />
 			</main>

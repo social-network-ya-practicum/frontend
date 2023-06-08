@@ -1,14 +1,16 @@
 header {
-  width:100%;
-  //height: 84px;
-  height: var(--header_height);
-  display: flex;
+	width: 100%;
+	//height: 84px;
+	height: var(--header_height);
+	display: flex;
 	align-items: center;
+	justify-content: center;
+	background-color: var(--bg_color_header);
 }
 
 .header {
-  width: 100%;
-  max-width: 1280px;
+	width: 100%;
+	max-width: 1280px;
 	font-family: var(--font-family-default);
 	background: var(--color_ffffff);
 	padding: 0 72px;
@@ -19,24 +21,25 @@ header {
 	&__logo {
 		display: flex;
 		align-items: center;
-    text-decoration: none;
+		text-decoration: none;
 	}
 
 	&__imgBlock {
-    width: 32px;
-    height: 32px;
-		background: linear-gradient(var(--color_ffffff), var(--color_ffffff)) padding-box,
-    linear-gradient(180deg, #0B96B3 24.48%, #1FC995 91.67%) border-box;
-    border: 1px solid transparent;
-    border-radius: 100px;
-  }
+		width: 32px;
+		height: 32px;
+		background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
+				padding-box,
+			linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
+		border: 1px solid transparent;
+		border-radius: 100px;
+	}
 
-  &__img {
-    position: relative;
-    top: 4px;
-    left: 5px;
-    object-fit: cover;
-  }
+	&__img {
+		position: relative;
+		top: 4px;
+		left: 5px;
+		object-fit: cover;
+	}
 
 	&__title {
 		font-weight: 400;
@@ -46,16 +49,13 @@ header {
 		color: var(--text_color_default);
 	}
 
-  &__info {
+	&__info {
 		display: flex;
 		align-items: center;
-    gap: 20px;
 	}
 
 	&__wrapper {
 		display: flex;
-		align-items: center;
-    gap: 48px;
 	}
 
 	&__text {
@@ -67,23 +67,20 @@ header {
 		margin: 0;
 	}
 
-	&__user {
-		display: flex;
-		margin-left: 12px;
-		align-items: center;
-    gap: 8px;
-	}
-
 	&__name {
 		font-style: normal;
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 120%;
-		margin: 0;
+		margin-right: 8px;
 		color: var(--text_color_default);
 	}
 }
 
-button + button {
-	gap: 48px;
+.mix-button {
+	margin-right: 24px;
+}
+
+.mix-button-user {
+	margin-left: 48px;
 }

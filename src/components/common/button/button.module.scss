@@ -1,7 +1,6 @@
-$primary-color: var(--color_65F0C6);
-$secondary-color: var(--color_D7E9FA);
-
 @mixin common-styles {
+	$border-width: 2px;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,59 +10,77 @@ $secondary-color: var(--color_D7E9FA);
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
-	border-width: 2px;
-	border-style: solid;
+	border: $border-width solid;
+	border-radius: 16px;
 	color: inherit;
 	background: none;
+	padding: 0 calc(24px - $border-width * 2);
+	cursor: pointer;
+	transition: 0.3s;
 }
 
-@mixin common-mods {
-	&_color_primary {
-		border-color: $primary-color;
-		background-color: $primary-color;
-	}
-
-  &_color_secondary {
-		border-color: $secondary-color;
-	}
-
-	&_full-widthed {
-		width: 100%;
-	}
-
-	&_outlined {
-		background-color: transparent;
-	}
-}
-
-.button-rounded {
+.button-primary {
 	@include common-styles;
-	@include common-mods;
-	min-height: 43px;
-	border-radius: 16px;
+	height: 43px;
+	border-color: var(--btn_color_default);
+	background-color: var(--btn_color_default);
+
+	&:active {
+		border-color: var(--btn_color_active);
+		background-color: var(--btn_color_active);
+	}
+
+	&:hover {
+		border-color: var(--btn_color_hover);
+		background-color: var(--btn_color_hover);
+	}
+
+	&:disabled {
+		border-color: var(--btn_color_disabled);
+		background: var(--btn_color_disabled);
+		color: var(--text_color_secondary);
+	}
 }
 
-.button-active {
+.button-secondary {
 	@include common-styles;
-	@include common-mods;
-	min-height: 35px;
-	border-radius: 16px;
-  border-width: 1px;
-  min-width: 123px;
-}
+	height: 43px;
+	border-color: var(--btn_color_default);
 
-.button-passive {
-	@include common-styles;
-	@include common-mods;
-	min-height: 35px;
-	border: none;
+	&:active {
+		border-color: var(--btn_color_active);
+	}
+
+	&:hover {
+		border-color: var(--btn_color_hover);
+	}
+
+	&:disabled {
+		border-color: var(--btn_color_disabled);
+		color: var(--text_color_secondary);
+	}
 }
 
 .button-text {
 	@include common-styles;
+	$border-text-width: 1px;
 	border: none;
-	padding: 0;
-	min-height: 35px;
-	font-size: 16px;
-	line-height: 120%;
+	padding: 0 calc(12px - $border-text-width * 2);
+	height: 35px;
+
+	&_outlined {
+		border: $border-text-width solid transparent;
+	}
+
+	&_active {
+		border: $border-text-width solid var(--btn-text_color_active);
+	}
+
+	&:active {
+		border-color: var(--btn-text_color_active);
+	}
+
+	&:hover {
+		border-color: var(--btn-text_color_active);
+	}
 }

@@ -33,10 +33,14 @@ ProfileBlock.propTypes = {
 	info: PropTypes.shape({
 		firstName: PropTypes.string.isRequired,
 		lastName: PropTypes.string.isRequired,
-	}).isRequired,
+	}),
 };
 
 ProfileBlock.defaultProps = {
 	role: '',
 	avatar: '',
+	info: {
+		firstName: '',
+		lastName: '',
+	},
 };
