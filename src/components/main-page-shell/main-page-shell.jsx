@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
+import { Outlet } from 'react-router-dom';
 import ProfileBlock from '../profile-block/profile-block';
 import styles from './main-page-shell.module.scss';
 
-function MainPageShell( {children} ) {
+
+function MainPageShell() {
 	return (
 		<div className={styles['main-page-shell']}>
       <div className={styles['main-page-shell__box']}>
         <ProfileBlock/>
-        {children}
+        <Outlet/>
       </div>
 		</div>
 	);
@@ -15,8 +16,4 @@ function MainPageShell( {children} ) {
 
 export default MainPageShell;
 
-
-MainPageShell.propTypes = {
-  children: PropTypes.node.isRequired
-}
 
