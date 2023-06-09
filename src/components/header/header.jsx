@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Logo from './image/logo.svg';
+import Logo from '../../image/logo.svg';
 import Button from '../common/button/button';
 import styles from './header.module.scss';
 
@@ -19,7 +19,7 @@ const Header = ({ user, mix }) => {
 	return (
 		<header className={mix}>
 			<div className={styles.header}>
-				<a className={styles.header__logo} href="/#">
+				<a className={styles.header__logo} href={() => navigate('/')}>
 					<div className={styles.header__imgBlock}>
 						<img className={styles.header__img} src={Logo} alt="Логотип" />
 					</div>
@@ -64,25 +64,6 @@ const Header = ({ user, mix }) => {
 						</div>
 					) : (
 						<>
-							<Button
-								variant="text"
-								outlined
-								width="123px"
-								active={pathname === '/login'}
-								onClick={() => navigate('/login')}
-								mix={styles['mix-button']}
-							>
-								Вход
-							</Button>
-							<Button
-								variant="text"
-								outlined
-								width="123px"
-								active={pathname === '/register'}
-								onClick={() => navigate('/register')}
-							>
-								Регистрация
-							</Button>
 						</>
 					)}
 				</div>
