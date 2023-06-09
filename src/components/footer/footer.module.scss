@@ -33,16 +33,6 @@ footer {
     }
 	}
 
-	&__imgBlock {
-		width: 32px;
-		height: 32px;
-		background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
-				padding-box,
-			linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
-		border: 1px solid transparent;
-		border-radius: 100px;
-	}
-
 	&__img {
 		position: relative;
 		top: 4px;
@@ -58,6 +48,8 @@ footer {
 	&__menu {
 		display: flex;
     gap: 50px;
+    list-style-type: none;
+    max-width: 40vw;
 	}
 
 	&__text {
@@ -67,6 +59,7 @@ footer {
 		line-height: 120%;
 		color: var(--text_color_default);
 		margin: 0;
+    text-decoration: none;
 
     &_size_s {
       font-size: 14px;

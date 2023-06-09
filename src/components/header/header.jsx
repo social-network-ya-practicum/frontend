@@ -1,11 +1,11 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
-import Button from '../common/button/button';
+import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 
-const Header = ({ user, mix }) => {
+function Header({ user }) {
 	// Мы получим юзера из хука react query
 	// const user = {
 	// 	first_name: 'Юлия',
@@ -13,54 +13,51 @@ const Header = ({ user, mix }) => {
 	// 	userId: 'string',
 	// };
 
-	const { pathname } = useLocation();
-	const navigate = useNavigate();
-
 	return (
-		<header className={mix}>
+		<header>
 			<div className={styles.header}>
-				<a className={styles.header__logo} href={() => navigate('/')}>
-					<div className={styles.header__imgBlock}>
+				<NavLink to='/' className={styles.header__logo}>
+					<BorderGradient>
 						<img className={styles.header__img} src={Logo} alt="Логотип" />
-					</div>
+					</BorderGradient>
 					<span className={styles.header__title}>Корпоративная сеть</span>
-				</a>
+				</NavLink>
 				<div className={styles.header__info}>
 					{user ? (
 						<div className={styles.header__wrapper}>
-							<div className={styles.header__wrapper}>
-								<Button
-									variant="text"
-									outlined
-									active={pathname === '/'}
-									onClick={() => navigate('/')}
-									mix={styles['mix-button']}
-								>
-									<p className={styles.header__text}>Лента</p>
-								</Button>
-								<Button
-									variant="text"
-									outlined
-									active={pathname === '/contacts'}
-									onClick={() => navigate('/contacts')}
-								>
-									<p className={styles.header__text}>Контакты</p>
-								</Button>
-							</div>
-							<Button
-								variant="text"
-								onClick={() => navigate(`/${user.userId}`)}
-								mix={styles['mix-button-user']}
-							>
-								<p className={styles.header__name}>{user.first_name}</p>
-								<div className={styles.header__imgBlock}>
-									<img
-										className={styles.header__img}
-										src={user.photo || ''}
-										alt="Фото"
-									/>
-								</div>
-							</Button>
+							<nav className={styles.header__wrapper}>
+								<li>
+                  <NavLink
+                    to='/'
+                    className={(isActive) => isActive ? styles.header__link_active : styles.header__link}
+                  >
+                    Лента
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/contacts'
+                    className={(isActive) => isActive ? styles.header__link_active : styles.header__link}
+                  >
+                    Контакты
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={`/${user.userId}`}
+                    className={styles.header__user}
+                  >
+                    <p className={styles.header__name}>{user.first_name}</p>
+                    <BorderGradient>
+                      <img
+                        className={styles.header__img}
+                        src={user.photo || ''}
+                        alt="Фото"
+                      />
+                    </BorderGradient>
+                  </NavLink>
+                </li>
+							</nav>
 						</div>
 					) : (
 						<>
@@ -80,10 +77,8 @@ Header.propTypes = {
 		photo: PropTypes.string,
 		userId: PropTypes.string.isRequired,
 	}),
-	mix: PropTypes.string,
 };
 
 Header.defaultProps = {
 	user: null,
-	mix: undefined,
 };
