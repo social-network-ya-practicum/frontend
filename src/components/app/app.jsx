@@ -2,7 +2,8 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import MainLayout from '../layouts/main-layout/main-layout';
 import LoginPage from '../../pages/login-page/login-page';
 import RergisterPage from '../../pages/register-page/register-page';
-import MainPageShell from '../main-page-shell/main-page-shell';
+import MainPageShell from '../layouts/main-page-shell/main-page-shell';
+import MainPageContent from '../layouts/main-page-content/main-page-content';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
 			<Route element={<MainLayout />}>
 				<Route path="/" element={<Outlet />}>
 					<Route element={<MainPageShell/>} >
-            <Route index element={<div>path = '/'</div>}/>
+            <Route index element={<MainPageContent/>}/>
             <Route path="contacts" element={<div>path = '/contacts'</div>}/>
           </Route>
 					<Route

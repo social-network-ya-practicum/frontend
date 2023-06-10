@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import ProfileBlock from '../profile-block/profile-block';
+import ProfileBlock from '../../profile-block/profile-block';
 import styles from './main-page-shell.module.scss';
+
 
 
 function MainPageShell() {
