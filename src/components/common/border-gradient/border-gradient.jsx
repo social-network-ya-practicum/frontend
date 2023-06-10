@@ -4,21 +4,10 @@ import styles from './border-gradient.module.scss';
 
 const cn = classNames.bind(styles);
 
-function BorderGradient({
-	children,
-	size,
-}) {
-  const cnBorderGradient = cn(
-		`borderGradient-${size}`
-	);
+function BorderGradient({ children, size }) {
+	const cnBorderGradient = cn(`borderGradient-${size}`);
 
-	return (
-		<div
-      className={cnBorderGradient}
-		>
-			{children}
-		</div>
-	);
+	return <div className={cnBorderGradient}>{children}</div>;
 }
 
 export default BorderGradient;

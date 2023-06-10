@@ -17,7 +17,7 @@ export const Default = {
 export const Small = (args) => (
 	<div>
 		<BorderGradient size="small" {...args}>
-      <img width="100%" src={Logo} alt="Логотип" />
+			<img width="100%" src={Logo} alt="Логотип" />
 		</BorderGradient>
 	</div>
 );
@@ -25,7 +25,7 @@ export const Small = (args) => (
 export const Medium = (args) => (
 	<div>
 		<BorderGradient size="medium" {...args}>
-      <img width="100%" src={Logo} alt="Логотип" />
+			<img width="100%" src={Logo} alt="Логотип" />
 		</BorderGradient>
 	</div>
 );
@@ -33,7 +33,7 @@ export const Medium = (args) => (
 export const Large = (args) => (
 	<div>
 		<BorderGradient size="large" {...args}>
-      <img width="100%" src={Logo} alt="Логотип" />
+			<img width="100%" src={Logo} alt="Логотип" />
 		</BorderGradient>
 	</div>
 );
