@@ -1,8 +1,9 @@
 @import url(../../index.scss);
 
 .birthdayPlate {
-	$headerBG: #979797;
-	$plateBG: #d9d9d9;
+	$headerBG: var(--color_65f0c6);
+	$plateBG: var(--color_ffffff);
+  $fontFamily: var(--font-family-default);
 
 	background-color: $plateBG;
 	border-radius: 16px;
@@ -13,10 +14,13 @@
 
 	&__header {
 		background-color: $headerBG;
-		padding: 16px 20px 8px;
+		padding: 16px 20px 16px;
 	}
 
 	&__title {
+    font-family: $fontFamily;
+    font-size: 16px;
+    font-weight: 700;
 		margin: 0;
 		padding: 0;
 	}
@@ -39,27 +43,15 @@
 		padding-bottom: 0px;
 	}
 
-	&__imgWrapper {
-		border-radius: 50%;
-		overflow: hidden;
-		margin-right: 16px;
-		height: 64px;
-		width: 64px;
-
-		img {
-			object-fit: cover;
-			object-position: center;
-			height: 100%;
-			width: 100%;
-		}
-	}
-
 	&__info {
 		display: flex;
 		flex-direction: column;
+    font-family: $fontFamily;
+    font-weight: 400;
 		width: 220px;
 
 		p {
+      font-size: 16px;
 			margin: 0;
 			padding: 0 0 4px 0;
 			overflow: hidden;
@@ -67,6 +59,7 @@
 		}
 
 		p:last-child {
+      font-size: 14px;
 			padding-bottom: 0;
 		}
 	}
@@ -80,9 +73,16 @@
 		}
 
 		p {
+      flex-direction: column;
+      font-family: $fontFamily;
+      font-size: 16px;
 			max-width: 269px;
 			margin: 0;
 			padding: 0;
 		}
 	}
+}
+
+.mix-border-gradient {
+  margin-right: 16px;
 }

@@ -16,7 +16,7 @@ function Header({ user }) {
 	return (
 		<header>
 			<div className={styles.header}>
-				<NavLink to='/' className={styles.header__logo}>
+				<NavLink to="/" className={styles.header__logo}>
 					<BorderGradient>
 						<img className={styles.header__img} src={Logo} alt="Логотип" />
 					</BorderGradient>
@@ -26,50 +26,57 @@ function Header({ user }) {
 					{user ? (
 						<div className={styles.header__wrapper}>
 							<nav>
-                <ul className={styles.header__wrapper}>
-                  <li>
-                    <NavLink
-                      to='/'
-                      className={(isActive) => `${styles.header__link} ${isActive ? styles.header__link_active : ""}`}
-                    >
-                      Лента
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to='/contacts'
-                      className={(isActive) => `${styles.header__link} ${isActive ? styles.header__link_active : ""}`}
-                    >
-                      Контакты
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={`/${user.userId}`}
-                      className={styles.header__user}
-                    >
-                      <p className={styles.header__name}>{user.first_name}</p>
-                      <BorderGradient>
-                        <img
-                          className={styles.header__img}
-                          src={user.photo || ''}
-                          alt="Фото"
-                        />
-                      </BorderGradient>
-                    </NavLink>
-                  </li>
-                </ul>
+								<ul className={styles.header__wrapper}>
+									<li>
+										<NavLink
+											to="/"
+											className={(isActive) =>
+												`${styles.header__link} ${
+													isActive ? styles.header__link_active : ''
+												}`
+											}
+										>
+											Лента
+										</NavLink>
+									</li>
+									<li>
+										<NavLink
+											to="/contacts"
+											className={(isActive) =>
+												`${styles.header__link} ${
+													isActive ? styles.header__link_active : ''
+												}`
+											}
+										>
+											Контакты
+										</NavLink>
+									</li>
+									<li>
+										<NavLink
+											to={`/${user.userId}`}
+											className={styles.header__user}
+										>
+											<p className={styles.header__name}>{user.first_name}</p>
+											<BorderGradient>
+												<img
+													className={styles.header__img}
+													src={user.photo || ''}
+													alt="Фото"
+												/>
+											</BorderGradient>
+										</NavLink>
+									</li>
+								</ul>
 							</nav>
 						</div>
 					) : (
-						<>
-						</>
+						<div>{null}</div>
 					)}
 				</div>
 			</div>
 		</header>
 	);
-};
+}
 
 export default Header;
 
