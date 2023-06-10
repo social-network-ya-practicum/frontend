@@ -11,22 +11,24 @@ function Footer({ user, mix }) {
       <div className={styles.footer}>
         <div className={styles.foooter__info}>
           {user ? (
-            <nav className={styles.footer__menu}>
-              <li>
-                <NavLink to="/#" className={styles.footer__text}>
-                  Помощь
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/#" className={styles.footer__text}>
-                  Документы
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/#" className={styles.footer__text}>
-                  Реквизиты компании
-                </NavLink>
-              </li>
+            <nav>
+              <ul className={styles.footer__menu}>
+                <li>
+                  <NavLink to="/#" className={styles.footer__text}>
+                    Помощь
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/#" className={styles.footer__text}>
+                    Документы
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/#" className={styles.footer__text}>
+                    Реквизиты компании
+                  </NavLink>
+                </li>
+              </ul>
             </nav>
           ) : (
               <>

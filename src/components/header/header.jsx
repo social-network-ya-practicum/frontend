@@ -25,38 +25,40 @@ function Header({ user }) {
 				<div className={styles.header__info}>
 					{user ? (
 						<div className={styles.header__wrapper}>
-							<nav className={styles.header__wrapper}>
-								<li>
-                  <NavLink
-                    to='/'
-                    className={(isActive) => isActive ? styles.header__link_active : styles.header__link}
-                  >
-                    Лента
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/contacts'
-                    className={(isActive) => isActive ? styles.header__link_active : styles.header__link}
-                  >
-                    Контакты
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={`/${user.userId}`}
-                    className={styles.header__user}
-                  >
-                    <p className={styles.header__name}>{user.first_name}</p>
-                    <BorderGradient>
-                      <img
-                        className={styles.header__img}
-                        src={user.photo || ''}
-                        alt="Фото"
-                      />
-                    </BorderGradient>
-                  </NavLink>
-                </li>
+							<nav>
+                <ul className={styles.header__wrapper}>
+                  <li>
+                    <NavLink
+                      to='/'
+                      className={(isActive) => `${styles.header__link} ${isActive ? styles.header__link_active : ""}`}
+                    >
+                      Лента
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to='/contacts'
+                      className={(isActive) => `${styles.header__link} ${isActive ? styles.header__link_active : ""}`}
+                    >
+                      Контакты
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={`/${user.userId}`}
+                      className={styles.header__user}
+                    >
+                      <p className={styles.header__name}>{user.first_name}</p>
+                      <BorderGradient>
+                        <img
+                          className={styles.header__img}
+                          src={user.photo || ''}
+                          alt="Фото"
+                        />
+                      </BorderGradient>
+                    </NavLink>
+                  </li>
+                </ul>
 							</nav>
 						</div>
 					) : (
