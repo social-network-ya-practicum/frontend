@@ -30,7 +30,7 @@ function Header({ user, mix }) {
 									<li>
 										<NavLink
 											to="/"
-											className={(isActive) =>
+											className={({ isActive }) =>
 												`${styles.header__link} ${
 													isActive ? styles.header__link_active : ''
 												}`
@@ -42,7 +42,7 @@ function Header({ user, mix }) {
 									<li>
 										<NavLink
 											to="/contacts"
-											className={(isActive) =>
+											className={({ isActive }) =>
 												`${styles.header__link} ${
 													isActive ? styles.header__link_active : ''
 												}`

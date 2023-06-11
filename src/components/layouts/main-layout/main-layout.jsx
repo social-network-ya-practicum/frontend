@@ -5,7 +5,14 @@ import Header from '../../header/header';
 function MainLayout() {
 	return (
 		<div className={styles.layout}>
-			<Header mix={styles['mix-header']} />
+			<Header
+				mix={styles['mix-header']}
+				user={{
+					first_name: 'Юлия',
+					photo: '',
+					userId: 'string',
+				}}
+			/>
 			<main className={styles.layout__content}>
 				<Outlet />
 			</main>
