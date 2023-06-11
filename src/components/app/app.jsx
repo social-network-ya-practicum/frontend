@@ -4,26 +4,26 @@ import LoginPage from '../../pages/login-page/login-page';
 import MainPageShell from '../main-page-shell/main-page-shell';
 
 function App() {
-	return (
-		<Routes>
-			<Route element={<MainLayout />}>
-				<Route path="/" element={<Outlet />}>
-					<Route element={<MainPageShell />}>
-						<Route index element={<div>path = '/'</div>} />
-						<Route path="contacts" element={<div>path = '/contacts'</div>} />
-					</Route>
-					<Route
-						path="contacts/:contactId"
-						element={<div>path = '/contacts/:contactId'</div>}
-					/>
-					<Route path=":user" element={<div>path = '/:user'</div>} />
-					<Route path=":user/edit" element={<div>path = '/:user/edit'</div>} />
-				</Route>
-				<Route path="/login" element={<LoginPage />} />
-			</Route>
-			<Route path="*" element={<div>Page 404</div>} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Outlet />}>
+          <Route element={<MainPageShell />}>
+            <Route index element={<div>path = '/'</div>} />
+            <Route path="contacts" element={<div>path = '/contacts'</div>} />
+          </Route>
+          <Route
+            path="contacts/:contactId"
+            element={<div>path = '/contacts/:contactId'</div>}
+          />
+          <Route path=":user" element={<div>path = '/:user'</div>} />
+          <Route path=":user/edit" element={<div>path = '/:user/edit'</div>} />
+        </Route>
+        <Route path="/login" element={<LoginPage />} />
+      </Route>
+      <Route path="*" element={<div>Page 404</div>} />
+    </Routes>
+  );
 }
 
 export default App;

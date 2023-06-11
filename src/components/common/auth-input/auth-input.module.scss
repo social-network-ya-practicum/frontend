@@ -1,63 +1,63 @@
 $input-text-padding: 12px;
 
 .auth-input {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	font-family: var(--font-family-default);
-	font-style: normal;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 120%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-family-default);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
 
-	&__title {
-		margin-bottom: 12px;
-	}
+  &__title {
+    margin-bottom: 12px;
+  }
 
-	&__wrapper {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		background: var(--bg_color_default);
-		border-radius: 16px;
-		padding: 0 $input-text-padding;
-		height: 48px;
-		position: relative;
-	}
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: var(--bg_color_default);
+    border-radius: 16px;
+    padding: 0 $input-text-padding;
+    height: 48px;
+    position: relative;
+  }
 
-	&__input {
-		display: flex;
-		align-items: center;
-		outline: none;
-		border: none;
-		background: none;
-		width: 100%;
-		flex: 1;
-		color: var(--text_color_secondary);
+  &__input {
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    width: 100%;
+    flex: 1;
+    color: var(--text_color_secondary);
 
-		&::placeholder {
-			color: var(--text_color_placeholder);
-		}
+    &::placeholder {
+      color: var(--text_color_placeholder);
+    }
 
-		&_type_error {
-			color: var(--text_color_error);
-		}
-	}
+    &_type_error {
+      color: var(--text_color_error);
+    }
+  }
 
-	&__icon-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border: none;
-		outline: none;
-		background: none;
-		box-shadow: none;
-		margin-left: 12px;
-	}
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    margin-left: 12px;
+  }
 
-	&__error {
-		font-size: 14px;
-		color: var(--text_color_error);
-		padding: 4px 0 0 $input-text-padding;
-	}
+  &__error {
+    font-size: 14px;
+    color: var(--text_color_error);
+    padding: 4px 0 0 $input-text-padding;
+  }
 }
