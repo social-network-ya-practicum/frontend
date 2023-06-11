@@ -16,7 +16,7 @@
 	background: none;
 	padding: 0 calc(24px - $border-width * 2);
 	cursor: pointer;
-	transition: 0.3s;
+	transition: var(--anim-duration-default);
 }
 
 .button-primary {
@@ -58,29 +58,5 @@
 	&:disabled {
 		border-color: var(--btn_color_disabled);
 		color: var(--text_color_secondary);
-	}
-}
-
-.button-text {
-	@include common-styles;
-	$border-text-width: 1px;
-	border: none;
-	padding: 0 calc(12px - $border-text-width * 2);
-	height: 35px;
-
-	&_outlined {
-		border: $border-text-width solid transparent;
-	}
-
-	&_active {
-		border: $border-text-width solid var(--btn-text_color_active);
-	}
-
-	&:active {
-		border-color: var(--btn-text_color_active);
-	}
-
-	&:hover {
-		border-color: var(--btn-text_color_active);
 	}
 }
