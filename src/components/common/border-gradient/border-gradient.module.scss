@@ -1,25 +1,25 @@
 @mixin borderGradient {
-	background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
-			padding-box,
-		linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
-	border: 1px solid transparent;
-	border-radius: 100px;
+  background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
+      padding-box,
+    linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
+  border: 1px solid transparent;
+  border-radius: 100px;
 }
 
 .borderGradient-small {
-	@include borderGradient;
-	width: 32px;
-	height: 32px;
+  @include borderGradient;
+  width: 32px;
+  height: 32px;
 }
 
 .borderGradient-medium {
-	@include borderGradient;
-	width: 56px;
-	height: 56px;
+  @include borderGradient;
+  width: 56px;
+  height: 56px;
 }
 
 .borderGradient-large {
-	@include borderGradient;
-	width: 68px;
-	height: 68px;
+  @include borderGradient;
+  width: 68px;
+  height: 68px;
 }
