@@ -5,7 +5,7 @@ footer {
 	align-items: center;
 	justify-content: center;
 	background-color: var(--bg_color_footer);
-  flex-shrink: 0;
+	flex-shrink: 0;
 }
 
 .footer {
@@ -16,21 +16,21 @@ footer {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-  position: relative;
+	position: relative;
 
 	&__logo {
-    width:fit-content;
+		width: fit-content;
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    
-    &:hover {
-      cursor: pointer;
-    }
+		position: absolute;
+		margin: auto;
+		left: 0;
+		right: 0;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	&__img {
@@ -47,9 +47,9 @@ footer {
 
 	&__menu {
 		display: flex;
-    gap: 50px;
-    list-style-type: none;
-    max-width: 40vw;
+		gap: 50px;
+		list-style-type: none;
+		max-width: 40vw;
 	}
 
 	&__text {
@@ -59,10 +59,10 @@ footer {
 		line-height: 120%;
 		color: var(--text_color_default);
 		margin: 0;
-    text-decoration: none;
+		text-decoration: none;
 
-    &_size_s {
-      font-size: 14px;
-    }
+		&_size_s {
+			font-size: 14px;
+		}
 	}
 }

@@ -8,16 +8,16 @@ header {
 }
 
 @mixin link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 120%;
-  color: var(--text_color_default);
-  margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 120%;
+	color: var(--text_color_default);
+	margin: 0;
 }
 
 .header {
@@ -34,10 +34,10 @@ header {
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-    
-    &:hover {
-      cursor: pointer;
-    }
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	&__imgBlock {
@@ -72,34 +72,34 @@ header {
 
 	&__wrapper {
 		display: flex;
-    gap: 24px;
-    list-style-type: none;
+		gap: 24px;
+		list-style-type: none;
 	}
 
-  &__link {
-    @include link;
-    text-decoration: none;
-    padding: 8px 12px;
-    
-    &:hover {
-      border-radius: 16px;
-      border: 1px solid var(--color_d7e9fa);
-    }
+	&__link {
+		@include link;
+		text-decoration: none;
+		padding: 8px 12px;
 
-    &_active {
-      @include link;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--color_d7e9fa);
-    }
-  }
+		&:hover {
+			border-radius: 16px;
+			border: 1px solid var(--color_d7e9fa);
+		}
+
+		&_active {
+			@include link;
+			text-decoration: none;
+			padding: 8px 12px;
+			border-radius: 16px;
+			border: 1px solid var(--color_d7e9fa);
+		}
+	}
 
 	&__user {
-    @include link;
-    text-decoration: none;
-    padding: 0 0 0 24px;
-    height: 100%;
+		@include link;
+		text-decoration: none;
+		padding: 0 0 0 24px;
+		height: 100%;
 	}
 
 	&__name {
