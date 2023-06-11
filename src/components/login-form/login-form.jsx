@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import AuthInput from '../common/auth-input/auth-input';
 import Button from '../common/button/button';
 import styles from './login-form.module.scss';
+import useValidator from '../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
@@ -18,6 +19,8 @@ function LoginForm({ onSubmit, mix }) {
 		password: '',
 	});
 
+	const { checkEmail, checkPassword } = useValidator();
+
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setInputValue({ ...inputValue, [name]: value });
@@ -25,8 +28,12 @@ function LoginForm({ onSubmit, mix }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(123);
-		if (Object.values(error).some((i) => i !== '')) return;
+		const errEmail = checkEmail(inputValue.email);
+		const errPassword = checkPassword(inputValue.password);
+		if (errEmail || errPassword) {
+			setError({ email: errEmail, password: errPassword });
+			return;
+		}
 		onSubmit(inputValue);
 	};
 
