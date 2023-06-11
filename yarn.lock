@@ -8792,6 +8792,16 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"mobx-react-lite@^3.4.3":
+  "integrity" "sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg=="
+  "resolved" "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.4.3.tgz"
+  "version" "3.4.3"
+
+"mobx@^6.1.0":
+  "integrity" "sha512-HdKewQEREEJgsWnErClfbFoVebze6rGazxFLU/XUyrII8dORfVszN1V0BMRnQSzcgsNNtkX8DHj3nC6cdWE9YQ=="
+  "resolved" "https://registry.npmjs.org/mobx/-/mobx-6.9.0.tgz"
+  "version" "6.9.0"
+
 "mri@^1.2.0":
   "integrity" "sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA=="
   "resolved" "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz"
@@ -10390,7 +10400,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@16.8.0 - 18":
+"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@16.8.0 - 18":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

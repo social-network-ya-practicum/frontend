@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import styles from './main-layout.module.scss';
 import Header from '../../header/header';
+import Footer from '../../footer/footer';
 
 function MainLayout() {
 	return (
@@ -16,20 +17,13 @@ function MainLayout() {
 			<main className={styles.layout__content}>
 				<Outlet />
 			</main>
-
-			{/* @TODO:  Заменить <footer> на Footer */}
-			<footer
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					height: 'var(--footer_height)',
-					backgroundColor: '#EAEAEA',
-					width: '100%',
+			<Footer
+				user={{
+					first_name: 'Юлия',
+					photo: '',
+					userId: 'string',
 				}}
-			>
-				Заглушка Footer
-			</footer>
+			/>
 		</div>
 	);
 }
