@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 import iconCake from './icon-birthday-cake.svg';
+import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './birthday-plate.module.scss';
 
-function BirthdayPlate({ data }) {
+const cn = classNames.bind(styles);
+
+function BirthdayPlate({ data, mix }) {
+  const cnBirthdayPlate = cn('birthdayPlate', mix);
+
   return (
-    <section className={styles.birthdayPlate}>
+    <section className={cnBirthdayPlate}>
       <div className={styles.birthdayPlate__header}>
         <h2 className={styles.birthdayPlate__title}>Дни рождения</h2>
       </div>
@@ -12,9 +18,9 @@ function BirthdayPlate({ data }) {
         {data.length > 0 ? (
           data.slice(0, 3).map((person) => (
             <li key={person.id} className={styles.birthdayPlate__item}>
-              <div className={styles.birthdayPlate__imgWrapper}>
-                <img src={person.photo} alt="Аватар пользователя" />
-              </div>
+              <BorderGradient size="medium" mix={styles[`mix-border-gradient`]}>
+                <img src={person.photo || ''} alt="Фото" />
+              </BorderGradient>
               <div className={styles.birthdayPlate__info}>
                 <p>
                   {person.first_name} {person.last_name}
@@ -51,17 +57,9 @@ BirthdayPlate.propTypes = {
 };
 
 BirthdayPlate.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      first_name: PropTypes.string,
-    })
-  ),
+  mix: PropTypes.string,
 };
 
-BirthdayPlate.getDefaultProps = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      photo: '',
-    })
-  ),
+BirthdayPlate.defaultProps = {
+  mix: null,
 };
