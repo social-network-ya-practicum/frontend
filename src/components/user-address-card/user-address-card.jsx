@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import styles from './user-address-card.module.scss';
+import BorderGradient from '../common/border-gradient/border-gradient';
 
 function UserAddressCard({ avatar, info, contacts }) {
   return (
     <section className={styles.card}>
       <div className={styles.card__avatarBlock}>
-        {avatar && (
-          <img className={styles.card__avatarImg} src={avatar} alt="" />
-        )}
+        <BorderGradient size="medium">
+          {avatar && (
+            <img className={styles.card__avatarImg} src={avatar} alt="Avatar" />
+          )}
+        </BorderGradient>
       </div>
       <div className={styles.card__info}>
         <div className={styles.card__fio}>
@@ -15,14 +18,8 @@ function UserAddressCard({ avatar, info, contacts }) {
         </div>
         <div>{info.position}</div>
       </div>
-      <div className={styles.card__contacts}>
-        <div className={styles.card__contact}>
-          <span>{contacts.jobEmail}</span>
-        </div>
-        <div className={styles.card__contact}>
-          <span>{contacts.jobPhone}</span>
-        </div>
-      </div>
+      <div className={styles.card__contact}>{contacts.jobPhone}</div>
+      <div className={styles.card__contact}>{contacts.jobEmail}</div>
     </section>
   );
 }
