@@ -1,25 +1,25 @@
 .layout {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 
-	&__content {
-		// Для обозначения границы main (потом удалить)
-		outline: 0.1px solid grey;
-		// --------------------------------
+  &__content {
+    // Для обозначения границы main (потом удалить)
+    outline: 0.1px solid grey;
+    // --------------------------------
 
-		display: flex;
-		flex-direction: column;
-		padding-top: var(--header_height);
-		width: 100%;
-		max-width: 1280px;
-		flex-grow: 1;
-		flex-shrink: 1;
-	}
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--header_height);
+    width: 100%;
+    max-width: 1280px;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
 }
 
 .mix-header {
-	position: fixed;
+  position: fixed;
 }
