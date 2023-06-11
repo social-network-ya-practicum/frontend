@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types';
-import Email from './email.svg';
-import Phone from './phone.svg';
 import styles from './user-address-card.module.scss';
 
 function UserAddressCard({ avatar, info, contacts }) {
@@ -19,11 +17,9 @@ function UserAddressCard({ avatar, info, contacts }) {
       </div>
       <div className={styles.card__contacts}>
         <div className={styles.card__contact}>
-          <img src={Email} alt="email" />
           <span>{contacts.jobEmail}</span>
         </div>
         <div className={styles.card__contact}>
-          <img src={Phone} alt="phone" />
           <span>{contacts.jobPhone}</span>
         </div>
       </div>
