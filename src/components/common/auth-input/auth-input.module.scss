@@ -1,3 +1,5 @@
+$input-text-padding: 12px;
+
 .auth-input {
   display: flex;
   flex-direction: column;
@@ -16,10 +18,11 @@
     display: flex;
     align-items: center;
     width: 100%;
-    background: var(--color_cfcfcf);
+    background: var(--bg_color_default);
     border-radius: 16px;
-    padding: 0 12px;
+    padding: 0 $input-text-padding;
     height: 48px;
+    position: relative;
   }
 
   &__input {
@@ -31,6 +34,14 @@
     width: 100%;
     flex: 1;
     color: var(--text_color_secondary);
+
+    &::placeholder {
+      color: var(--text_color_placeholder);
+    }
+
+    &_type_error {
+      color: var(--text_color_error);
+    }
   }
 
   &__icon-btn {
@@ -42,5 +53,11 @@
     background: none;
     box-shadow: none;
     margin-left: 12px;
+  }
+
+  &__error {
+    font-size: 14px;
+    color: var(--text_color_error);
+    padding: 4px 0 0 $input-text-padding;
   }
 }

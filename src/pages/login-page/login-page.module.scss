@@ -6,16 +6,46 @@
   align-items: center;
   min-height: calc(100vh - var(--header_height) - var(--footer_height));
 
-  // &__buffer-top и &__buffer-bottom добавлены для позиционирования формы на странице, с учётом того, что для базового экрана  из макета  на 1280x1167 - расстояние от формы до Header 299px, а до Footer 317px. Пропорция сохранится для любой высоты экрана
+  // &__buffer-top и &__buffer-bottom добавлены для позиционирования формы на
+  // странице, с учётом того, что для базового экрана  из макета  на размер
+  // 1280x800 - расстояние от формы до Header 116px, а до Footer 130px.
+  // Пропорция сохранится для любой высоты экрана
 
   &__buffer-top {
-    min-height: 60px;
+    min-height: 116px;
     display: flex;
     flex: 1;
   }
   &__buffer-bottom {
-    min-height: 80px;
+    min-height: 130px;
     display: flex;
-    flex: calc(317 / 299);
+    flex: calc(130 / 116);
+  }
+
+  &__form-wrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    max-width: 502px;
+  }
+
+  &__image {
+    display: flex;
+    position: absolute;
+    pointer-events: none;
+
+    &_size_small {
+      top: -93px;
+      left: calc(100% + 33px);
+    }
+    &_size_medium {
+      top: -32px;
+      right: calc(100% + 58px);
+    }
+    &_size_large {
+      top: 184.5px;
+      left: calc(100% + 73px);
+    }
   }
 }

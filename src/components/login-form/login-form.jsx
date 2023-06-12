@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import AuthInput from '../common/auth-input/auth-input';
 import Button from '../common/button/button';
 import styles from './login-form.module.scss';
+import useValidator from '../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
@@ -13,15 +14,33 @@ function LoginForm({ onSubmit, mix }) {
     password: '',
   });
 
+  const [error, setError] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { checkEmail, checkPassword } = useValidator();
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errEmail = checkEmail(inputValue.email);
+    const errPassword = checkPassword(inputValue.password);
+    if (errEmail || errPassword) {
+      setError({ email: errEmail, password: errPassword });
+      return;
+    }
+    onSubmit(inputValue);
+  };
+
   const cnLoginForm = cn('form', mix);
 
   return (
-    <form className={cnLoginForm} onSubmit={onSubmit}>
+    <form className={cnLoginForm} onSubmit={handleSubmit} noValidate>
       <h2 className={styles.form__title}>
         Добро пожаловать в корпоративную сеть
       </h2>
@@ -33,6 +52,10 @@ function LoginForm({ onSubmit, mix }) {
           value={inputValue.email}
           onChange={onChange}
           mix={styles[`mix-auth-input`]}
+          placeholder="Введите email"
+          error={error.email}
+          setError={setError}
+          validator={checkEmail}
         />
         <AuthInput
           type="password"
@@ -41,6 +64,10 @@ function LoginForm({ onSubmit, mix }) {
           value={inputValue.password}
           onChange={onChange}
           mix={styles[`mix-auth-input`]}
+          placeholder="Введите пароль"
+          error={error.password}
+          setError={setError}
+          validator={checkPassword}
         />
         <Button type="submit" width="100%">
           Войти

@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--bg_color_primary);
 
   &__content {
     // Для обозначения границы main (потом удалить)
@@ -15,8 +16,9 @@
     padding-top: var(--header_height);
     width: 100%;
     max-width: 1280px;
-    flex-grow: 1;
-    flex-shrink: 1;
+    flex: 1;
+    min-height: calc(100vh - var(--footer_height));
+    overflow-x: hidden;
   }
 }
 
