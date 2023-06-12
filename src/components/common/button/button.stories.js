@@ -1,6 +1,5 @@
 import Button from './button';
 import '../../../index.scss';
-import avatar from './images/sbExampleAfter.svg';
 
 export default {
   title: 'Button',
@@ -22,10 +21,8 @@ export const Primary = (args) => (
     <Button width="100%" disabled {...args}>
       Button
     </Button>
-    <Button width="max-content" {...args}>
-      Button
-    </Button>
-    <Button width="max-content" disabled {...args}>
+    <Button {...args}>Button</Button>
+    <Button disabled {...args}>
       Button
     </Button>
   </div>
@@ -39,26 +36,11 @@ export const Secondary = (args) => (
     <Button width="100%" variant="secondary" disabled {...args}>
       Button
     </Button>
-    <Button variant="secondary" width="max-content" {...args}>
+    <Button variant="secondary" {...args}>
       Button
     </Button>
-    <Button variant="secondary" width="max-content" disabled {...args}>
+    <Button variant="secondary" disabled {...args}>
       Button
-    </Button>
-  </div>
-);
-
-export const Text = (args) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-    <Button variant="text" outlined {...args}>
-      Лента
-    </Button>
-    <Button variant="text" outlined active {...args}>
-      Лента
-    </Button>
-    <Button variant="text" {...args}>
-      <span style={{ marginRight: '8px' }}>Юзер</span>
-      <img src={avatar} alt="avatar" />
     </Button>
   </div>
 );

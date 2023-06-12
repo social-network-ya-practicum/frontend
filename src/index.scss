@@ -7,9 +7,12 @@
   --text_color_default: #010101;
   --text_color_light: #ffffff;
   --text_color_secondary: #7e7f80;
+  --text_color_placeholder: #cfd4d9;
+  --text_color_error: #ff6b6b;
 
   // 1.2 backgrounds:
   --bg_color_default: #ffffff;
+  --bg_color_primary: #f3f9ff;
   --bg_color_header: #ffffff;
   --bg_color_footer: #d7e9fa;
 
@@ -50,6 +53,10 @@
 
   // 3. fonts
   --font-family-default: 'Open Sans', 'Inter', Arial, Helvetica, sans-serif;
+
+  // 4. animation
+  // 4.1 duration
+  --anim-duration-default: 0.3s;
 }
 
 *,
