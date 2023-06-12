@@ -32,10 +32,7 @@ function BirthdayPlate({ data, mix }) {
         ) : (
           <li className={styles.birthdayPlate__birthdayFreeDay}>
             <img src={iconCake} alt="cake" />
-            <p>
-              Сегодня в нашей компании никто не отмечает День рождения, но мы
-              желаем вам хорошего дня!
-            </p>
+            <p>Сtymymymkugkmuh</p>
           </li>
         )}
       </ul>
