@@ -22,7 +22,7 @@ function SearchInput({ value, handleChange, mix }) {
   };
 
   return (
-    <div className={cnSearchInput}>
+    <section className={cnSearchInput}>
       <img src={SearchIcon} alt="search" />
       <input
         type="text"
@@ -38,7 +38,7 @@ function SearchInput({ value, handleChange, mix }) {
           <img src={CanselIcon} alt="cansel" name="close" />
         </button>
       )}
-    </div>
+    </section>
   );
 }
 
