@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import styles from './auth-input.module.scss';
 import eye from './images/eye.svg';
 import eyeSlash from './images/eye-slash.svg';
-import useValidator from '../../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
@@ -17,14 +16,13 @@ function AuthInput({
   placeholder,
   error,
   setError,
+  validator,
   mix,
 }) {
   const id = useId();
   const [shownPassword, setShownPassword] = useState(false);
   const typeIcon = !shownPassword ? eye : eyeSlash;
   const attrType = type === 'password' && shownPassword ? 'text' : type;
-
-  const validator = useValidator(type);
 
   const onFocus = () => {
     setError((prev) => ({ ...prev, [name]: '' }));
@@ -85,6 +83,7 @@ AuthInput.propTypes = {
   placeholder: PropTypes.string,
   error: PropTypes.string,
   setError: PropTypes.func.isRequired,
+  validator: PropTypes.func.isRequired,
   mix: PropTypes.string,
 };
 

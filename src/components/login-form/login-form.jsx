@@ -55,6 +55,7 @@ function LoginForm({ onSubmit, mix }) {
           placeholder="Введите email"
           error={error.email}
           setError={setError}
+          validator={checkEmail}
         />
         <AuthInput
           type="password"
@@ -66,6 +67,7 @@ function LoginForm({ onSubmit, mix }) {
           placeholder="Введите пароль"
           error={error.password}
           setError={setError}
+          validator={checkPassword}
         />
         <Button type="submit" width="100%">
           Войти
