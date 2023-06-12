@@ -1,87 +1,87 @@
 @import url(../../index.scss);
 
 .birthdayPlate {
-	$headerBG: var(--color_65f0c6);
-	$plateBG: var(--color_ffffff);
+  $headerBG: var(--color_65f0c6);
+  $plateBG: var(--color_ffffff);
   $fontFamily: var(--font-family-default);
 
-	background-color: $plateBG;
-	border-radius: 16px;
-	font-size: 16px;
-	overflow: hidden;
-	padding: 0 0 32px;
-	width: 357px;
+  background-color: $plateBG;
+  border-radius: 16px;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 0 0 32px;
+  width: 357px;
   height: min-content;
 
-	&__header {
-		background-color: $headerBG;
-		padding: 16px 20px 16px;
-	}
+  &__header {
+    background-color: $headerBG;
+    padding: 16px 20px 16px;
+  }
 
-	&__title {
+  &__title {
     font-family: $fontFamily;
     font-size: 16px;
     font-weight: 700;
-		margin: 0;
-		padding: 0;
-	}
+    margin: 0;
+    padding: 0;
+  }
 
-	&__list {
-		list-style: none;
-		margin: 0;
-		overflow: hidden;
-		padding: 20px 20px 0;
-	}
+  &__list {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 20px 20px 0;
+  }
 
-	&__item {
-		display: flex;
-		align-items: center;
-		margin: 0;
-		padding-bottom: 20px;
-	}
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 20px;
+  }
 
-	&__item:last-child {
-		padding-bottom: 0px;
-	}
+  &__item:last-child {
+    padding-bottom: 0px;
+  }
 
-	&__info {
-		display: flex;
-		flex-direction: column;
+  &__info {
+    display: flex;
+    flex-direction: column;
     font-family: $fontFamily;
     font-weight: 400;
-		width: 220px;
+    width: 220px;
 
-		p {
+    p {
       font-size: 16px;
-			margin: 0;
-			padding: 0 0 4px 0;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
+      margin: 0;
+      padding: 0 0 4px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-		p:last-child {
+    p:last-child {
       font-size: 14px;
-			padding-bottom: 0;
-		}
-	}
+      padding-bottom: 0;
+    }
+  }
 
-	&__birthdayFreeDay {
-		display: flex;
-		align-items: center;
+  &__birthdayFreeDay {
+    display: flex;
+    align-items: center;
 
-		img {
-			margin-right: 20px;
-		}
+    img {
+      margin-right: 20px;
+    }
 
-		p {
+    p {
       flex-direction: column;
       font-family: $fontFamily;
       font-size: 16px;
-			max-width: 269px;
-			margin: 0;
-			padding: 0;
-		}
-	}
+      max-width: 269px;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
 .mix-border-gradient {
