@@ -34,7 +34,7 @@ function BirthdayPlate({ data, mix }) {
             <img src={iconCake} alt="cake" />
             <p>
               Сегодня в нашей компании никто не отмечает День рождения, но мы
-              желаем вам хорошего дня!
+              желаем вам хорошего дня!ergrthtrhtyjhytjtythty
             </p>
           </li>
         )}
