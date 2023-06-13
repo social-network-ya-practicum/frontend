@@ -20,5 +20,5 @@ BorderGradient.propTypes = {
 
 BorderGradient.defaultProps = {
   size: 'small',
-  mix: PropTypes.string,
+  mix: undefined,
 };
