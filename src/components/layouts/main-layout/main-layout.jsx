@@ -1,31 +1,23 @@
 import { Outlet } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import styles from './main-layout.module.scss';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
+import { useStore } from '../../../contexts/RootStoreContext';
 
-function MainLayout() {
+const MainLayout = observer(() => {
+  const { userStore } = useStore();
+  const { user } = userStore;
+
   return (
     <div className={styles.layout}>
-      <Header
-        mix={styles['mix-header']}
-        user={{
-          first_name: 'Юлия',
-          photo: '',
-          userId: 'string',
-        }}
-      />
+      <Header mix={styles['mix-header']} user={user} />
       <main className={styles.layout__content}>
         <Outlet />
       </main>
-      <Footer
-        user={{
-          first_name: 'Юлия',
-          photo: '',
-          userId: 'string',
-        }}
-      />
+      <Footer user={user} />
     </div>
   );
-}
+});
 
 export default MainLayout;
