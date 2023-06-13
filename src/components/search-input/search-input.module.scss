@@ -1,0 +1,27 @@
+.searchInput {
+  display: flex;
+  align-items: center;
+  gap: 10.5px;
+  width: 705px;
+  height: 44px;
+  background: var(--color_ffffff);
+  border-radius: 16px;
+  padding: 0 17px;
+
+  &__input {
+    flex-grow: 2;
+    border: none;
+    outline: none;
+  }
+  
+  &__close {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
