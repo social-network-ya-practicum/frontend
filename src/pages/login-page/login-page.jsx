@@ -36,7 +36,13 @@ const LoginPage = observer(() => {
         password: 'Frontend23',
       }),
     })
-      .then((res) => res.json())
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : res.json().then((r) => {
+              throw new Error(JSON.stringify(r));
+            })
+      )
       .then((res) => {
         const token = res.auth_token;
         setCookie(TOKEN_NAME, token);
@@ -47,6 +53,9 @@ const LoginPage = observer(() => {
           setError(err);
           setIsLoading(false);
         });
+        // Для develoop ---------------
+        alert(err.message);
+        // ---------------------------
       });
 
     // -------------------------------------------------------------------------------

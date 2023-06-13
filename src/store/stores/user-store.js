@@ -44,7 +44,13 @@ class UserStore {
           'Content-type': 'application/json',
           Authorization: `Token ${token}`,
         },
-      }).then((r) => r.json());
+      }).then((result) =>
+        result.ok
+          ? result.json()
+          : result.json().then((r) => {
+              throw new Error(JSON.stringify(r));
+            })
+      );
 
       // -----------------------------------------------------------------------------
 
@@ -57,7 +63,11 @@ class UserStore {
       runInAction(() => {
         this.error = err;
         this.setIsLoading(false);
+        if (!this.wasUserRequest) this.wasUserRequest = true;
       });
+      // Для develoop ---------------
+      alert(err.message);
+      // ---------------------------
     }
   };
 }
