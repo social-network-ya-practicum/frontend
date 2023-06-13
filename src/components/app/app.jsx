@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import MainLayout from '../layouts/main-layout/main-layout';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPageShell from '../main-page-shell/main-page-shell';
+import ContactsPage from '../../pages/contacts-page/contacts-page';
 import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
 
@@ -31,7 +32,7 @@ const App = observer(() => {
         >
           <Route element={<MainPageShell />}>
             <Route index element={<div>path = '/'</div>} />
-            <Route path="contacts" element={<div>path = '/contacts'</div>} />
+            <Route path="contacts" element={<ContactsPage />} />
           </Route>
           <Route
             path="contacts/:contactId"
