@@ -1,16 +1,15 @@
 .profile-block {
 	border-radius: 16px;
-	background-color: #eaeaea;
+	background-color: #FFFFFF;
 	padding: 32px 17px 32px 12px;
 	width: 163px;
-  min-height: 229px;
-  max-height: 248px;
+  height: fit-content;
 
 	&__photo {
 		border-radius: 50%;
 		width: 68px;
 		height: 68px;
-		background-color: #969696;
+		background-image: url(./avatar68.svg);
 	}
 
 	&__avatar {
@@ -19,7 +18,7 @@
 	}
 
 	&__name {
-		font-family: 'Proxima Nova';
+		font-family: var(--font-family-default);
 		font-style: normal;
 		font-weight: 700;
 		font-size: 16px;
@@ -31,7 +30,7 @@
 
 	&__role {
 		margin: 0;
-		font-family: 'Proxima Nova';
+		font-family: var(--font-family-default);
 		font-style: normal;
 		font-weight: 400;
 		font-size: 13px;
@@ -47,7 +46,7 @@
 
 	&__text {
 		margin: 0;
-		font-family: 'Proxima Nova';
+		font-family: var(--font-family-default);
 		font-style: normal;
 		font-weight: 400;
 		font-size: 13px;
@@ -56,7 +55,7 @@
 	}
 
 	&__span {
-		font-family: 'Proxima Nova';
+		font-family: var(--font-family-default);
 		font-style: normal;
 		font-weight: 400;
 		font-size: 13px;

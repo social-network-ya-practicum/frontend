@@ -4,4 +4,10 @@
   grid-template-columns: minmax(max-content, 552px) minmax(max-content, 357px);
   min-height: 90vh;
 
+  &__posts{
+    margin: 32px 0 0 0;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+  }
 }

@@ -1,0 +1,212 @@
+.post{
+  background-color: #fff;
+  border-radius: 16px;
+  margin: 0;
+  padding: 24px 28px;
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  
+  &__info{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  &__info-box{
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+  }
+  
+  &__avatar{
+    background-image: url(./icons/avatar.svg);
+    height: 36px;
+    width: 36px;
+    background-size: contain;
+  }
+
+  &__owner {
+    margin: 0;
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  &__date{
+    margin: 0;
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #7E7F80;
+  }
+  
+  &__img{
+    background: #D7E9FA;
+    border-radius: 16px;
+    width: 100%;
+  }
+  
+  &__text{
+    margin: 0;
+
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #010101;
+    border: none;
+    resize: none;
+    height: 100%;
+  }
+  
+  &__like-container{
+    display: flex;
+    align-items: center;
+  }
+  
+  &__like{
+    height: 20px;
+    width: 20px;
+    background-image: url(./icons/like__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+
+    &:hover{
+      cursor: pointer;
+    }
+
+  }
+
+  
+  &__like-countner{
+    margin-left: 10px;
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 120%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg, #0EB0D1 14.06%, #1FC995 79.17%)
+    
+  }
+  
+  &__edit{
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    height: 24px;
+    width: 24px;
+    background-image: url(./icons/more__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  
+  &__change{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &__add{
+    display: flex;
+  }
+  
+  &__file{
+    height: 20px;
+    width: 20px;
+    background-image: url(./icons/file__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+    margin-right: 8px;
+    
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  
+  &__smile{
+    height: 20px;
+    width: 20px;
+    background-image: url(./icons/smile__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+    
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  
+  &__btns{
+    display: flex;
+    gap: 8px;
+  }
+  
+  &__btn-save{
+    font-family: var(--font-family-default);
+    background: #65F0C6;
+    border-radius: 16px;
+    padding: 12px 24px;
+    border: none;
+
+    &:hover{
+      cursor: pointer;
+      background-color: #24DCA4;
+    }
+  }
+  
+  &__btn-cancel{
+    font-family: var(--font-family-default);
+    background: #FFFFFF;
+    border: 2px solid #65F0C6;
+    padding: 10px 22px;
+    border-radius: 16px;
+
+    &:hover{
+      cursor: pointer;
+      border: 2px solid #24DCA4;
+    }
+  }
+  
+  // Попап
+  
+  &__actions{
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    padding: 10x;
+    visibility: hidden;
+  }
+  
+  &__action:hover {
+    cursor: pointer;
+  }
+  
+  &__action_type_edit{
+  }
+  
+  &__action_type_delete{
+  }
+}
