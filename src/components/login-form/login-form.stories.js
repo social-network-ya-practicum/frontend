@@ -5,10 +5,23 @@ export default {
   title: 'LoginForm',
   component: LoginForm,
   tags: ['autodocs'],
-};
-
-export const Default = {
-  args: {
-    onSubmit: () => undefined,
+  argTypes: {
+    disabled: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
   },
 };
+
+export const Default = (args) => (
+  <div
+    style={{
+      background: '#f3f9ff',
+      padding: 40,
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
+    <LoginForm onSubmit={() => undefined} {...args} />
+  </div>
+);
