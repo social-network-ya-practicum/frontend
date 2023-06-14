@@ -191,22 +191,54 @@
   
   &__actions{
     position: absolute;
-    top: 30px;
-    right: 40px;
+    top: 40px;
+    right: 28px;
     display: flex;
     flex-direction: column;
-    background-color: aqua;
-    padding: 10x;
+    align-items: start;
+    gap: 12px;
+    background: #D7E9FA;
+    border-radius: 16px;
     visibility: hidden;
+    padding: 16px 24px 24px 16px;
+
+    &_active{
+      visibility: visible;
+    }
   }
   
-  &__action:hover {
-    cursor: pointer;
+
+  &__action{
+
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    background-color: transparent;
+    border: none;
+    vertical-align: middle;
+
+    &:hover {
+      cursor: pointer;
+    }
+    
+    &_type_edit::before{
+      content: url(./icons/edit.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    
+    &_type_delete::before{
+      content: url(./icons/trash__icon.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
   }
-  
-  &__action_type_edit{
-  }
-  
-  &__action_type_delete{
-  }
+
+
 }

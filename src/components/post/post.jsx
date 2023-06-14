@@ -4,10 +4,21 @@ import styles from './post.module.scss'
 
 function Post(){
   const [isPostChanging, setIsPostchanging] = useState(false) ;
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   function handleEditClick() {
     setIsPostchanging(true)
+    setIsPopupOpened(false)
   }
+
+  function handleCancelClick() {
+    setIsPostchanging(false)
+  }
+
+  function handleOpenPopup() {
+    setIsPopupOpened(true)
+  }
+
 
 
   return (
@@ -38,18 +49,18 @@ function Post(){
         <button className={styles.post__smile}> </button>
       </div>
       <div className={styles.post__btns}>
-        <button className={styles['post__btn-cancel']}>Отменить</button>
+        <button className={styles['post__btn-cancel']} onClick={handleCancelClick}>Отменить</button>
         <button className ={styles['post__btn-save']}>Сохранить</button> 
       </div>
     </div>
     }
     {/* кнопка редактировать и попап */}
     
-    <button className={styles.post__edit} onClick={handleEditClick}> </button>
+    <button className={styles.post__edit} onClick={handleOpenPopup}> </button>
 
-    <div className={styles.post__actions}>
-      <button className={`${styles.post__action}  ${styles.post__action_type_edit}`}>Отменить</button>
-      <button className={`${styles.post__action}  ${styles.post__action_type_delete}`}>Сохранить</button>
+    <div className={`${styles.post__actions} ${isPopupOpened&& styles.post__actions_active}`}>
+      <button className={`${styles.post__action}  ${styles.post__action_type_edit}`}  onClick={handleEditClick}>Редактировать пост</button>
+      <button className={`${styles.post__action}  ${styles.post__action_type_delete}`}>Удалить пост</button>
     </div>
     
     
