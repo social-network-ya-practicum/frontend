@@ -21,16 +21,17 @@
 	}
 
 	&__avatarImg {
-		height: 56px;
-		width: 56px;
+		height: 100%;
+		width: 100%;
 		border-radius: 50%;
 	}
 
 	&__info {
 		display: flex;
 		flex-direction: column;
-		margin: 42px 0;
-		justify-content: space-between;
+		justify-content: center;
+    gap: 8px;
+    width: 391px;
 	}
 
 	&__fio {
@@ -40,10 +41,14 @@
 	&__contact {
 		display: flex;
 		align-items: center;
-		justify-content: center;
+    flex-grow: 2;
 
 		&:nth-child(3) {
-			flex-grow: 2;
+      justify-content: left;
+		}
+
+    &:nth-child(4) {
+      justify-content: right;
 		}
 	}
 
