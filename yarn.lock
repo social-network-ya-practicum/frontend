@@ -2055,7 +2055,7 @@
     "@storybook/client-logger" "7.0.7"
     "@storybook/manager-api" "7.0.7"
 
-"@storybook/blocks@7.0.7":
+"@storybook/blocks@^7.0.0", "@storybook/blocks@7.0.7":
   "integrity" "sha512-ehR0hAFWNHHqmrmbwYPKhLpgbIBKtyMbeoGClTRSnrVBGONciYJdmxegkCTReUklCY+HBJjtlwNowT+7+5sSaw=="
   "resolved" "https://registry.npmjs.org/@storybook/blocks/-/blocks-7.0.7.tgz"
   "version" "7.0.7"
@@ -2259,7 +2259,7 @@
     "prettier" "^2.8.0"
     "recast" "^0.23.1"
 
-"@storybook/components@7.0.7":
+"@storybook/components@^7.0.0", "@storybook/components@7.0.7":
   "integrity" "sha512-6PLs9LMkBuhH/w4bSJ72tYgICMbOOIHuoB/fQdVlzhsdnXL2fM/v4RVW2N7v+Oz3lYXp/JtV8V9Ub8h6eDQKXg=="
   "resolved" "https://registry.npmjs.org/@storybook/components/-/components-7.0.7.tgz"
   "version" "7.0.7"
@@ -2306,7 +2306,7 @@
     "resolve-from" "^5.0.0"
     "ts-dedent" "^2.0.0"
 
-"@storybook/core-events@7.0.7":
+"@storybook/core-events@^7.0.0", "@storybook/core-events@7.0.7":
   "integrity" "sha512-XNsR2RgaL2vBwuqsu+KA1DzGmB1UFfrAhpxhmyWTKDCniwtTLlaXgfKbqwcrOrPu/o1YswgIup/9UHepRHaf4A=="
   "resolved" "https://registry.npmjs.org/@storybook/core-events/-/core-events-7.0.7.tgz"
   "version" "7.0.7"
@@ -2434,7 +2434,7 @@
     "@storybook/global" "^5.0.0"
     "@storybook/preview-api" "7.0.7"
 
-"@storybook/manager-api@7.0.7":
+"@storybook/manager-api@^7.0.0", "@storybook/manager-api@7.0.7":
   "integrity" "sha512-QTd/P72peAhofKqK+8yzIO9iWAEfPn8WUGGveV2KGaTlSlgbr87RLHEKilcXMZcYhBWC9izFRmjKum9ROdskrQ=="
   "resolved" "https://registry.npmjs.org/@storybook/manager-api/-/manager-api-7.0.7.tgz"
   "version" "7.0.7"
@@ -2515,7 +2515,7 @@
     "semver" "^7.3.7"
     "webpack" "5"
 
-"@storybook/preview-api@7.0.7":
+"@storybook/preview-api@^7.0.0", "@storybook/preview-api@7.0.7":
   "integrity" "sha512-R5pmGTodpu6hbwEg2RM2ulWtW3d426YzsisHrZJ+FT9lecWauN1y9xHCz7HdNzEFhT8r4YOa24L9ZS3mosZ7hA=="
   "resolved" "https://registry.npmjs.org/@storybook/preview-api/-/preview-api-7.0.7.tgz"
   "version" "7.0.7"
@@ -2639,7 +2639,7 @@
     "@testing-library/user-event" "^13.2.1"
     "ts-dedent" "^2.2.0"
 
-"@storybook/theming@7.0.7":
+"@storybook/theming@^7.0.0", "@storybook/theming@7.0.7":
   "integrity" "sha512-InTZe+Sgco1NsxgiG+cyUKWQe3GsjlIyU/o5qDdtOTXcZ64HzyBuAZlAequSddqfDeMDqxRFPc2w1J28MAUHxA=="
   "resolved" "https://registry.npmjs.org/@storybook/theming/-/theming-7.0.7.tgz"
   "version" "7.0.7"
@@ -2649,7 +2649,7 @@
     "@storybook/global" "^5.0.0"
     "memoizerific" "^1.11.3"
 
-"@storybook/types@7.0.7":
+"@storybook/types@^7.0.0", "@storybook/types@7.0.7":
   "integrity" "sha512-v9piuwp8FvTiHXIOOi5lEyTEJKhnbcbhVxgJ3VFhhXYFd0DTz6Bst0XIIgkgs21ITb3xhkfPbCRUueMcbXO1MA=="
   "resolved" "https://registry.npmjs.org/@storybook/types/-/types-7.0.7.tgz"
   "version" "7.0.7"
@@ -8792,6 +8792,16 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"mobx-react-lite@^3.4.3":
+  "integrity" "sha512-NkJREyFTSUXR772Qaai51BnE1voWx56LOL80xG7qkZr6vo8vEaLF3sz1JNUVh+rxmUzxYaqOhfuxTfqUh0FXUg=="
+  "resolved" "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.4.3.tgz"
+  "version" "3.4.3"
+
+"mobx@^6.1.0", "mobx@^6.9.0":
+  "integrity" "sha512-HdKewQEREEJgsWnErClfbFoVebze6rGazxFLU/XUyrII8dORfVszN1V0BMRnQSzcgsNNtkX8DHj3nC6cdWE9YQ=="
+  "resolved" "https://registry.npmjs.org/mobx/-/mobx-6.9.0.tgz"
+  "version" "6.9.0"
+
 "mri@^1.2.0":
   "integrity" "sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA=="
   "resolved" "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz"
@@ -10290,7 +10300,7 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
 
-"react-inspector@^6.0.0":
+"react-inspector@^6.0.0", "react-inspector@^6.0.1":
   "integrity" "sha512-cxKSeFTf7jpSSVddm66sKdolG90qURAX3g1roTeaN6x0YEbtWc8JpmFN9+yIqLNH2uEkYerWLtJZIXRIFuBKrg=="
   "resolved" "https://registry.npmjs.org/react-inspector/-/react-inspector-6.0.1.tgz"
   "version" "6.0.1"
@@ -10320,7 +10330,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.11.0.tgz"
   "version" "0.11.0"
 
-"react-router-dom@^6.11.2":
+"react-router-dom@^6.11.2", "react-router-dom@^6.3.0":
   "integrity" "sha512-JNbKtAeh1VSJQnH6RvBDNhxNwemRj7KxCzc5jb7zvDSKRnPWIFj9pO+eXqjM69gQJ0r46hSz1x4l9y0651DKWw=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.11.2.tgz"
   "version" "6.11.2"
@@ -10328,7 +10338,7 @@
     "@remix-run/router" "1.6.2"
     "react-router" "6.11.2"
 
-"react-router@6.11.2":
+"react-router@^6.3.0", "react-router@6.11.2":
   "integrity" "sha512-74z9xUSaSX07t3LM+pS6Un0T55ibUE/79CzfZpy5wsPDZaea1F8QkrsiyRnA2YQ7LwE/umaydzXZV80iDCPkMg=="
   "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.11.2.tgz"
   "version" "6.11.2"
@@ -10390,7 +10400,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@16.8.0 - 18":
+"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@16.8.0 - 18":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -11307,6 +11317,13 @@
   "integrity" "sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w=="
   "resolved" "https://registry.npmjs.org/store2/-/store2-2.14.2.tgz"
   "version" "2.14.2"
+
+"storybook-addon-react-router-v6@^1.0.2":
+  "integrity" "sha512-38W+9D2sIrYAi+oRSbsLhR/umNoLVw2DWF84Jp4f/ZoB8Cg0Qtbvwk043oHqzNOpZrfgj0FaV006oaJBVpE8Kw=="
+  "resolved" "https://registry.npmjs.org/storybook-addon-react-router-v6/-/storybook-addon-react-router-v6-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "react-inspector" "^6.0.1"
 
 "storybook@7.0.7":
   "integrity" "sha512-MaFAhpPm/KsaoIQfGzapnRyXNh1VbS8l38BNZR5ZD97ejGkLukJ7TO4fFS87Hyy6whAXo6tTdtqeCByMQ9gRFA=="

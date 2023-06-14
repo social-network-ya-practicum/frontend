@@ -1,53 +1,91 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Logo from './image/logo.svg';
-import Button from '../common/button/button';
+import Logo from '../../image/logo.svg';
+import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 
-export const Header = ({ user, onLogin, onRegister, onClick }) => (
-	<header>
-		<div className={styles.header}>
-			<a className={styles.header__logo} href="/#">
-				<div className={styles.header__imgBlock}><img className={styles.header__img} src={Logo} alt="Логотип" /></div>
-				<span className={styles.header__title}>Корпоративная сеть</span>
-			</a>
-			<div className={styles.header__info}>
-				{user ? (
-					<div className={styles.header__wrapper}>
+function Header({ user, mix }) {
+  return (
+    <header className={mix}>
+      <div className={styles.header}>
+        <NavLink to="/" className={styles.header__logo}>
+          <BorderGradient>
+            <img
+              className={styles['header__img-logo']}
+              src={Logo}
+              alt="Логотип"
+            />
+          </BorderGradient>
+          <span className={styles.header__title}>Корпоративная сеть</span>
+        </NavLink>
+        <div className={styles.header__info}>
+          {user && (
             <div className={styles.header__wrapper}>
-              <Button variant="text" onClick={onClick}>
-                <p className={styles.header__text}>Лента</p>
-              </Button>
-              <Button variant="text" onClick={onClick}>
-                <p className={styles.header__text}>Контакты</p>
-              </Button>
+              <nav>
+                <ul className={styles.header__wrapper}>
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        `${styles.header__link} ${
+                          isActive ? styles.header__link_active : ''
+                        }`
+                      }
+                    >
+                      Лента
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/contacts"
+                      className={({ isActive }) =>
+                        `${styles.header__link} ${
+                          isActive ? styles.header__link_active : ''
+                        }`
+                      }
+                    >
+                      Контакты
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={`/${user.email}`}
+                      className={styles.header__user}
+                    >
+                      <p className={styles.header__name}>{user.first_name}</p>
+                      <BorderGradient>
+                        <img
+                          className={styles['header__img-avatar']}
+                          src={user.photo || defaultAvatar}
+                          alt="Фото"
+                        />
+                      </BorderGradient>
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
             </div>
-            <div className={styles.header__user}>
-              <p className={styles.header__name}>{user.first_name}</p>
-              <div className={styles.header__imgBlock}><img className={styles.header__img} src={user.photo || ''} alt="Фото" /></div>
-            </div>
-					</div>
-				) : (
-					<>
-						<Button variant="active" color="secondary" viewType="outlined"  width="123px" onClick={onLogin}>Вход</Button>
-						<Button variant="passive" viewType="outlined" width="123px" onClick={onRegister}>Регистрация</Button>
-					</>
-				)}
-			</div>
-		</div>
-	</header>
-);
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
 
 Header.propTypes = {
-	user: PropTypes.shape({
-		first_name: PropTypes.string.isRequired,
-    photo: PropTypes.string,
-	}),
-	onLogin: PropTypes.func.isRequired,
-	onRegister: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    first_name: PropTypes.string,
+    photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+  }),
+  mix: PropTypes.string,
 };
 
 Header.defaultProps = {
-	user: null,
+  user: null,
+  mix: undefined,
 };

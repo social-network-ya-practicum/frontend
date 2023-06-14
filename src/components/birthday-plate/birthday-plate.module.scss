@@ -1,88 +1,89 @@
 @import url(../../index.scss);
 
 .birthdayPlate {
-	$headerBG: #979797;
-	$plateBG: #d9d9d9;
+  $headerBG: var(--color_65f0c6);
+  $plateBG: var(--color_ffffff);
+  $fontFamily: var(--font-family-default);
 
-	background-color: $plateBG;
-	border-radius: 16px;
-	font-size: 16px;
-	overflow: hidden;
-	padding: 0;
-	width: 357px;
+  background-color: $plateBG;
+  border-radius: 16px;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 0 0 32px;
+  width: 357px;
+  height: min-content;
 
-	&__header {
-		background-color: $headerBG;
-		padding: 16px 20px 8px;
-	}
+  &__header {
+    background-color: $headerBG;
+    padding: 16px 20px 16px;
+  }
 
-	&__title {
-		margin: 0;
-		padding: 0;
-	}
+  &__title {
+    font-family: $fontFamily;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
 
-	&__list {
-		list-style: none;
-		margin: 0;
-		overflow: hidden;
-		padding: 20px 20px 32px;
-	}
+  &__list {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 20px 20px 0;
+  }
 
-	&__item {
-		display: flex;
-		align-items: center;
-		margin: 0;
-		padding-bottom: 20px;
-	}
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 20px;
+  }
 
-	&__item:last-child {
-		padding-bottom: 0px;
-	}
+  &__item:last-child {
+    padding-bottom: 0px;
+  }
 
-	&__imgWrapper {
-		border-radius: 50%;
-		overflow: hidden;
-		margin-right: 16px;
-		height: 64px;
-		width: 64px;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    font-family: $fontFamily;
+    font-weight: 400;
+    width: 220px;
 
-		img {
-			object-fit: cover;
-			object-position: center;
-			height: 100%;
-			width: 100%;
-		}
-	}
+    p {
+      font-size: 16px;
+      margin: 0;
+      padding: 0 0 4px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-	&__info {
-		display: flex;
-		flex-direction: column;
-		width: 220px;
+    p:last-child {
+      font-size: 14px;
+      padding-bottom: 0;
+    }
+  }
 
-		p {
-			margin: 0;
-			padding: 0 0 4px 0;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
+  &__birthdayFreeDay {
+    display: flex;
+    align-items: center;
 
-		p:last-child {
-			padding-bottom: 0;
-		}
-	}
+    img {
+      margin-right: 20px;
+    }
 
-	&__birthdayFreeDay {
-		display: flex;
-		align-items: center;
+    p {
+      flex-direction: column;
+      font-family: $fontFamily;
+      font-size: 16px;
+      max-width: 269px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
 
-		img {
-			margin-right: 20px;
-		}
-
-		p {
-			max-width: 269px;
-			margin: 0;
-			padding: 0;
-		}
-	}
+.mix-border-gradient {
+  margin-right: 16px;
 }

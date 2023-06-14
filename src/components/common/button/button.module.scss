@@ -1,69 +1,62 @@
-$primary-color: var(--color_65F0C6);
-$secondary-color: var(--color_D7E9FA);
-
 @mixin common-styles {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: max-content;
-	font-size: 16px;
-	line-height: 120%;
-	font-style: normal;
-	font-weight: 400;
-	text-align: center;
-	border-width: 2px;
-	border-style: solid;
-	color: inherit;
-	background: none;
+  $border-width: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  font-size: 16px;
+  line-height: 120%;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  border: $border-width solid;
+  border-radius: 16px;
+  color: inherit;
+  background: none;
+  padding: 0 calc(24px - $border-width * 2);
+  cursor: pointer;
+  transition: var(--anim-duration-default);
 }
 
-@mixin common-mods {
-	&_color_primary {
-		border-color: $primary-color;
-		background-color: $primary-color;
-	}
+.button-primary {
+  @include common-styles;
+  height: 43px;
+  border-color: var(--btn_color_default);
+  background-color: var(--btn_color_default);
 
-  &_color_secondary {
-		border-color: $secondary-color;
-	}
+  &:active {
+    border-color: var(--btn_color_active);
+    background-color: var(--btn_color_active);
+  }
 
-	&_full-widthed {
-		width: 100%;
-	}
+  &:hover {
+    border-color: var(--btn_color_hover);
+    background-color: var(--btn_color_hover);
+  }
 
-	&_outlined {
-		background-color: transparent;
-	}
+  &:disabled {
+    border-color: var(--btn_color_disabled);
+    background: var(--btn_color_disabled);
+    color: var(--text_color_secondary);
+  }
 }
 
-.button-rounded {
-	@include common-styles;
-	@include common-mods;
-	min-height: 43px;
-	border-radius: 16px;
-}
+.button-secondary {
+  @include common-styles;
+  height: 43px;
+  border-color: var(--btn_color_default);
 
-.button-active {
-	@include common-styles;
-	@include common-mods;
-	min-height: 35px;
-	border-radius: 16px;
-  border-width: 1px;
-  min-width: 123px;
-}
+  &:active {
+    border-color: var(--btn_color_active);
+  }
 
-.button-passive {
-	@include common-styles;
-	@include common-mods;
-	min-height: 35px;
-	border: none;
-}
+  &:hover {
+    border-color: var(--btn_color_hover);
+  }
 
-.button-text {
-	@include common-styles;
-	border: none;
-	padding: 0;
-	min-height: 35px;
-	font-size: 16px;
-	line-height: 120%;
+  &:disabled {
+    border-color: var(--btn_color_disabled);
+    color: var(--text_color_secondary);
+  }
 }

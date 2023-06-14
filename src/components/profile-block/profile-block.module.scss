@@ -12,10 +12,10 @@
 		background-image: url(./avatar68.svg);
 	}
 
-	&__avatar {
-		height: 100%;
-		width: 100%;
-	}
+  &__avatar {
+    height: 100%;
+    width: 100%;
+  }
 
 	&__name {
 		font-family: var(--font-family-default);
@@ -38,11 +38,11 @@
 		color: #757575;
 	}
 
-	&__item {
-		display: flex;
-		justify-content: space-between;
-		margin-top: 28px;
-	}
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+  }
 
 	&__text {
 		margin: 0;
