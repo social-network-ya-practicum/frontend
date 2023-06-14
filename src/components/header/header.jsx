@@ -4,21 +4,19 @@ import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function Header({ user, mix }) {
-  // Мы получим юзера из хука react query
-  // const user = {
-  // 	first_name: 'Юлия',
-  // 	photo: '',
-  // 	userId: 'string',
-  // };
-
   return (
     <header className={mix}>
       <div className={styles.header}>
         <NavLink to="/" className={styles.header__logo}>
           <BorderGradient>
-            <img className={styles.header__img} src={Logo} alt="Логотип" />
+            <img
+              className={styles['header__img-logo']}
+              src={Logo}
+              alt="Логотип"
+            />
           </BorderGradient>
           <span className={styles.header__title}>Корпоративная сеть</span>
         </NavLink>
@@ -53,14 +51,14 @@ function Header({ user, mix }) {
                   </li>
                   <li>
                     <NavLink
-                      to={`/${user.userId}`}
+                      to={`/${user.email}`}
                       className={styles.header__user}
                     >
                       <p className={styles.header__name}>{user.first_name}</p>
                       <BorderGradient>
                         <img
-                          className={styles.header__img}
-                          src={user.photo || ''}
+                          className={styles['header__img-avatar']}
+                          src={user.photo || defaultAvatar}
                           alt="Фото"
                         />
                       </BorderGradient>
@@ -80,9 +78,9 @@ export default Header;
 
 Header.propTypes = {
   user: PropTypes.shape({
-    first_name: PropTypes.string.isRequired,
-    photo: PropTypes.string,
-    userId: PropTypes.string.isRequired,
+    email: PropTypes.string,
+    first_name: PropTypes.string,
+    photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
   }),
   mix: PropTypes.string,
 };

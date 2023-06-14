@@ -48,7 +48,7 @@ function Footer({ user, mix }) {
 export default Footer;
 
 Footer.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.oneOfType([PropTypes.objectOf([null]), PropTypes.object]),
   mix: PropTypes.string,
 };
 

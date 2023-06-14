@@ -61,7 +61,10 @@ function AuthInput({
         {type === 'password' && (
           <button
             className={styles['auth-input__icon-btn']}
-            onClick={() => setShownPassword(!shownPassword)}
+            onClick={(e) => {
+              e.preventDefault();
+              setShownPassword(!shownPassword);
+            }}
           >
             <img src={typeIcon} alt="eye-icon" />
           </button>

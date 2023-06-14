@@ -8,7 +8,7 @@ import useValidator from '../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
-function LoginForm({ onSubmit, mix }) {
+const LoginForm = ({ onSubmit, mix, disabled }) => {
   const [inputValue, setInputValue] = useState({
     email: '',
     password: '',
@@ -28,12 +28,18 @@ function LoginForm({ onSubmit, mix }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const errEmail = checkEmail(inputValue.email);
-    const errPassword = checkPassword(inputValue.password);
-    if (errEmail || errPassword) {
-      setError({ email: errEmail, password: errPassword });
-      return;
-    }
+    // Валидация формы на submit
+    //  Закоментировал на время разработки
+    // -----------------------------------------------------------------------
+    // !!!! НЕ УДАЛЯТЬ!!!! Раскомментировать для проверки валидности формы
+
+    // const errEmail = checkEmail(inputValue.email);
+    // const errPassword = checkPassword(inputValue.password);
+    // if (errEmail || errPassword) {
+    //   setError({ email: errEmail, password: errPassword });
+    //   return;
+    // }
+    // -----------------------------------------------------------------------
     onSubmit(inputValue);
   };
 
@@ -69,21 +75,23 @@ function LoginForm({ onSubmit, mix }) {
           setError={setError}
           validator={checkPassword}
         />
-        <Button type="submit" width="100%">
+        <Button type="submit" width="100%" disabled={disabled}>
           Войти
         </Button>
       </div>
     </form>
   );
-}
+};
 
 export default LoginForm;
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   mix: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 LoginForm.defaultProps = {
   mix: undefined,
+  disabled: false,
 };

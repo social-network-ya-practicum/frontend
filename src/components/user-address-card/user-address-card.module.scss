@@ -1,24 +1,24 @@
 .card {
-	font-weight: 400;
-	font-size: 14px;
-	display: flex;
-	width: 941px;
-	height: 128px;
-	border-radius: 16px;
-	background: var(--bg_color_layout);
-	padding-left: 24px;
-	padding-right: 36px;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  width: 941px;
+  height: 128px;
+  border-radius: 16px;
+  background: var(--bg_color_layout);
+  padding-left: 24px;
+  padding-right: 36px;
 
-	&__avatarBlock {
-		width: 56px;
-		height: 56px;
-		border-radius: 50%;
-		background-color: var(--color_ffffff);
-		display: flex;
-		margin-top: 36px;
-		margin-bottom: 36px;
-		margin-right: 24px;
-	}
+  &__avatarBlock {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color_ffffff);
+    display: flex;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    margin-right: 24px;
+  }
 
 	&__avatarImg {
 		height: 100%;
@@ -34,9 +34,9 @@
     width: 391px;
 	}
 
-	&__fio {
-		font-size: 16px;
-	}
+  &__fio {
+    font-size: 16px;
+  }
 
 	&__contact {
 		display: flex;
@@ -52,8 +52,8 @@
 		}
 	}
 
-	&:hover {
-		cursor: pointer;
-		background-color: var(--color_ffffff);
-	}
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color_ffffff);
+  }
 }

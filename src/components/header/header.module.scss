@@ -41,20 +41,17 @@ header {
     }
   }
 
-  &__imgBlock {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
-        padding-box,
-      linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
-    border: 1px solid transparent;
-    border-radius: 100px;
+  &__img-logo {
+    align-self: flex-start;
+    margin-top: 3px;
+    margin-left: 4px;
+    object-fit: cover;
   }
 
-  &__img {
-    position: relative;
-    top: 4px;
-    left: 5px;
+  &__img-avatar {
+    width: 95%;
+    height: 95%;
+    object-position: center;
     object-fit: cover;
   }
 
