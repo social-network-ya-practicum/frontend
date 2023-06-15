@@ -5,9 +5,7 @@ function usePagingObserver(ref, loading, page, totalPages, setPage) {
 
   useEffect(() => {
     if (loading) return;
-    if (observer.current) {
-      observer.current.disconnect();
-    }
+    if (!ref.current) return;
 
     const callbackObserver = (entries) => {
       if (entries[0].isIntersecting && page < totalPages) {
@@ -17,6 +15,13 @@ function usePagingObserver(ref, loading, page, totalPages, setPage) {
 
     observer.current = new IntersectionObserver(callbackObserver);
     observer.current.observe(ref.current);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 }

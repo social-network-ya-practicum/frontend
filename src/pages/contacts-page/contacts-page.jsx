@@ -1,84 +1,57 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../contexts/RootStoreContext';
 import styles from './contacts-page.module.scss';
 import SearchInput from '../../components/search-input/search-input';
 import UserAddressCard from '../../components/user-address-card/user-address-card';
 import usePagingObserver from '../../hooks/use-paging-observer';
 
-// Заглушка получения для токена, в дальнейшем будем брать из хранилища
-const token = 'Token 600e5fa5739de7d4b0902ec01cd63f500b111203';
-
-function ContactsPage() {
-  const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [contacts, setContacts] = useState(null);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+const ContactsPage = observer(() => {
+  const { contactsStore } = useStore();
   const ref = useRef();
 
-  usePagingObserver(ref, loading, page, totalPages, setPage);
+  usePagingObserver(
+    ref,
+    contactsStore.loading,
+    contactsStore.page,
+    contactsStore.totalPages,
+    contactsStore.setPage
+  );
+
+  useEffect(
+    () => () => {
+      contactsStore.setContacts(null);
+      contactsStore.setSearch('');
+    },
+    [contactsStore]
+  );
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`https://csn.sytes.net/api/v1/addressbook?page=1&search=${search}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setContacts(data);
-        setPage(1);
-        setTotalPages(Math.ceil(data.count / 5));
-        setError('');
-      })
-      .catch(() => setError('Ошибка при получении данных с сервера'))
-      .finally(() => setLoading(false));
-  }, [search]);
+    contactsStore.getContacts();
+    return () => {
+      contactsStore.setPage(1);
+    };
+  }, [contactsStore, contactsStore.search]);
 
   useEffect(() => {
-    if (page > 1) {
-      setLoading(true);
-      fetch(
-        `https://csn.sytes.net/api/v1/addressbook?page=${page}&search=${search}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${token}`,
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setContacts({
-            ...contacts,
-            ...data,
-            results: [...contacts.results, ...data.results],
-          });
-          setError('');
-        })
-        .catch(() => setError('Ошибка при получении данных с сервера'))
-        .finally(() => setLoading(false));
+    if (contactsStore.page > 1) {
+      contactsStore.getNextPage();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [contactsStore, contactsStore.page]);
 
   return (
     <article>
       <SearchInput
-        value={search}
-        handleChange={setSearch}
+        value={contactsStore.search}
+        handleChange={contactsStore.setSearch}
         mix={styles['mix-search-input']}
       />
-      {error ? (
-        <p>{error}</p>
+      {contactsStore.error ? (
+        <p>{contactsStore.error}</p>
       ) : (
         <>
-          {contacts?.results.map((employee) => (
+          {contactsStore.contacts?.results.map((employee) => (
             <Link
               key={employee.id}
               to={`/contacts/${employee.id}`}
@@ -102,11 +75,11 @@ function ContactsPage() {
           <div ref={ref} />
         </>
       )}
-      {search && !contacts?.count && !error && (
-        <p>К сожалению, поиск не дал результатов</p>
-      )}
+      {contactsStore.search &&
+        !contactsStore.contacts?.count &&
+        !contactsStore.error && <p>К сожалению, поиск не дал результатов</p>}
     </article>
   );
-}
+});
 
 export default ContactsPage;
