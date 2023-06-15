@@ -1,0 +1,25 @@
+.post-input{
+
+  &__form{
+    background: #FFFFFF;
+    border-radius: 16px;
+  }
+
+  &__avatar{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-color: gray;
+  }
+
+  &__input{
+    height: 19px;
+    width: 100%;
+    border: none;
+  }
+  &__file{
+    height: 20px;
+    width: 20px;
+    background-image: url(./images/file.svg);
+  }
+}
