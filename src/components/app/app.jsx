@@ -18,6 +18,7 @@ const App = observer(() => {
     getUser();
   }, [getUser, wasUserRequest]);
 
+  if (!wasUserRequest) return null;
 
   return (
     <Routes>
