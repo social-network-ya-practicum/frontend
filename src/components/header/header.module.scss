@@ -55,6 +55,10 @@ header {
     object-fit: cover;
   }
 
+  &__img-arrow {
+    object-position: center;
+  }
+
   &__title {
     font-weight: 400;
     font-size: 16px;
@@ -91,10 +95,35 @@ header {
     }
   }
 
+  &__container {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
   &__user {
     @include link;
     padding: 0 0 0 24px;
     height: 100%;
+  }
+
+  &__user-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 16px 24px 24px 16px;
+    gap: 12px;
+    background: var(--color_d7e9fa);
+    border-radius: 16px;
+    visibility: hidden;
+
+    &_active{
+      visibility: visible;
+    }
   }
 
   &__name {
@@ -104,5 +133,32 @@ header {
     line-height: 120%;
     margin-right: 8px;
     color: var(--text_color_default);
+  }
+
+  &__menu-button {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__action {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: var(--text_color_default);
+    margin: 0;
+    white-space: nowrap;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
