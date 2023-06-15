@@ -20,32 +20,37 @@
     margin-right: 24px;
   }
 
-  &__avatarImg {
-    height: 56px;
-    width: 56px;
-    border-radius: 50%;
-  }
+	&__avatarImg {
+		height: 100%;
+		width: 100%;
+		border-radius: 50%;
+	}
 
-  &__info {
-    display: flex;
-    flex-direction: column;
-    margin: 42px 0;
-    justify-content: space-between;
-  }
+	&__info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+    gap: 8px;
+    width: 391px;
+	}
 
   &__fio {
     font-size: 16px;
   }
 
-  &__contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	&__contact {
+		display: flex;
+		align-items: center;
+    flex-grow: 2;
 
-    &:nth-child(3) {
-      flex-grow: 2;
-    }
-  }
+		&:nth-child(3) {
+      justify-content: left;
+		}
+
+    &:nth-child(4) {
+      justify-content: right;
+		}
+	}
 
   &:hover {
     cursor: pointer;
