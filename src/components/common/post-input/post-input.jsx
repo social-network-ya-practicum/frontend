@@ -4,6 +4,7 @@ import styles from './post-input.module.scss';
 function PostInput() {
   const [activeInput, setActiveInput] = useState(false);
   const [file, setFile] = useState(null);
+  const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
 
   function hanldeActiveInput() {
@@ -18,8 +19,22 @@ function PostInput() {
     setFile(event.target.files[0]);
   };
 
+  function handleOpenPopup() {
+    setIsSmilePopupOpened(!isSmilePopupOpened);
+  }
+
+  // временная фукция для рендера смайликов
+
+  function renderSmiles(length) {
+    const arr = [];
+    for (let i = 0; i <= length; i += 1) {
+      arr[i] = <li className={styles['post-input__popup-item']}> </li>;
+    }
+    return arr;
+  }
+
   // console.log(file);
-  // console.log(preview);
+  // console.log(isSmilePopupOpened);
 
   useEffect(() => {
     function hanldecloseActiveInput(event) {
@@ -63,9 +78,17 @@ function PostInput() {
           />
 
           {!activeInput && (
-            <button type="button" className={styles['post-input__file']}>
-              {' '}
-            </button>
+            <label
+              htmlFor="post-input__file"
+              className={styles['post-input__file-label']}
+            >
+              <input
+                type="file"
+                id="post-input__file"
+                className={styles['post-input__file']}
+                onChange={handleFileChange}
+              />
+            </label>
           )}
         </div>
 
@@ -83,7 +106,11 @@ function PostInput() {
                   onChange={handleFileChange}
                 />
               </label>
-              <button type="button" className={styles['post-input__smile']}>
+              <button
+                type="button"
+                className={styles['post-input__smile']}
+                onClick={handleOpenPopup}
+              >
                 {' '}
               </button>
             </div>
@@ -94,6 +121,13 @@ function PostInput() {
             >
               Опубликовать
             </button>
+
+            {isSmilePopupOpened && (
+              <ul className={styles['post-input__popup']}>
+                {/* <li className={styles['post-input__popup-item']}> </li> */}
+                {renderSmiles(28)}
+              </ul>
+            )}
           </div>
         )}
       </form>

@@ -59,22 +59,13 @@
 
   &__file {
     display: none;
-    //   height: 20px;
-    //   width: 20px;
-    //   background-image: url(./images/file.svg);
-    //   background-color: transparent;
-    //   background-position: center;
-    //   border: none;
-
-    //   &:hover {
-    //     cursor: pointer;
-    //   }
   }
 
   &__stuff {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   &__smile {
@@ -101,6 +92,36 @@
     &:hover {
       cursor: pointer;
       background-color: #24dca4;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    list-style: none;
+    width: auto;
+    height: 164px;
+    background-color: var(--bg_color_primary);
+    z-index: 1;
+    left: 48px;
+    top: 19px;
+    padding: 16px;
+    border-radius: 16px;
+    display: grid;
+    gap: 8px;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+  }
+
+  &__popup-item {
+    height: 20px;
+    width: 20px;
+    background-image: url(./images/smile__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
