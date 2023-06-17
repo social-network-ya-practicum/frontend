@@ -37,10 +37,10 @@ ProfileBlock.propTypes = {
 };
 
 ProfileBlock.defaultProps = {
-  role: '',
+  role: 'Бухгалтер',
   avatar: '',
   info: {
-    firstName: '',
-    lastName: '',
+    firstName: 'Юлия',
+    lastName: 'Леденцова',
   },
 };

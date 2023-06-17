@@ -8,8 +8,7 @@ import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function Header({ user, mix }) {
-
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleOpenClick = () => {
     setIsMenuOpen(true);
@@ -17,7 +16,7 @@ function Header({ user, mix }) {
 
   function handleClose() {
     setIsMenuOpen(false);
-  };
+  }
 
   React.useEffect(() => {
     function handleEscapeKey(e) {
@@ -26,8 +25,8 @@ function Header({ user, mix }) {
       }
     }
 
-    document.addEventListener('keydown', handleEscapeKey)
-    return () => document.removeEventListener('keydown', handleEscapeKey)
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
   return (
@@ -87,20 +86,29 @@ function Header({ user, mix }) {
                           />
                         </BorderGradient>
                       </NavLink>
-                      <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
-                          <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
+                      <button
+                        className={styles['header__menu-button']}
+                        type="button"
+                        onClick={handleOpenClick}
+                      >
+                        <img
+                          className={styles['header__img-arrow']}
+                          src={Arrow}
+                          alt="Настройка профиля"
+                        />
                       </button>
-                      <nav className={`${styles['header__user-actions']} ${isMenuOpen&&styles['header__user-actions_active']}`}>
+                      <nav
+                        className={`${styles['header__user-actions']} ${
+                          isMenuOpen && styles['header__user-actions_active']
+                        }`}
+                      >
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}
                         >
                           Редактировать профиль
                         </NavLink>
-                        <NavLink
-                          to="/logout"
-                          className={styles.header__action}
-                        >
+                        <NavLink to="/logout" className={styles.header__action}>
                           Выйти
                         </NavLink>
                       </nav>
