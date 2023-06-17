@@ -3,6 +3,8 @@ import styles from './post-input.module.scss';
 
 function PostInput() {
   const [activeInput, setActiveInput] = useState(false);
+  const [file, setFile] = useState(null);
+  // const [preview, setPreview] = useState(null);
 
   function hanldeActiveInput() {
     setActiveInput(true);
@@ -11,6 +13,13 @@ function PostInput() {
   function hanldeCloseActiveInput() {
     setActiveInput(false);
   }
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  // console.log(file);
+  // console.log(preview);
 
   useEffect(() => {
     function hanldecloseActiveInput(event) {
@@ -24,6 +33,21 @@ function PostInput() {
       document.removeEventListener('click', hanldecloseActiveInput);
     };
   }, [activeInput]);
+
+  useEffect(() => {
+    if (file) {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        // reader.onloadend = () => {
+        //   setFile(reader.result);
+        // };
+        reader.readAsDataURL(file);
+        // console.log('это изображение');
+      } else {
+        // console.log('это не изображение');
+      }
+    }
+  }, [file]);
 
   return (
     <div id="post-input" className={styles['post-input']}>
@@ -48,9 +72,17 @@ function PostInput() {
         {activeInput && (
           <div className={styles['post-input__stuff']}>
             <div>
-              <button type="button" className={styles['post-input__file']}>
-                {' '}
-              </button>
+              <label
+                htmlFor="post-input__file"
+                className={styles['post-input__file-label']}
+              >
+                <input
+                  type="file"
+                  id="post-input__file"
+                  className={styles['post-input__file']}
+                  onChange={handleFileChange}
+                />
+              </label>
               <button type="button" className={styles['post-input__smile']}>
                 {' '}
               </button>

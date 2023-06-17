@@ -43,7 +43,8 @@
     }
   }
 
-  &__file {
+  &__file-label {
+    display: inline-block;
     height: 20px;
     width: 20px;
     background-image: url(./images/file.svg);
@@ -54,6 +55,20 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  &__file {
+    display: none;
+    //   height: 20px;
+    //   width: 20px;
+    //   background-image: url(./images/file.svg);
+    //   background-color: transparent;
+    //   background-position: center;
+    //   border: none;
+
+    //   &:hover {
+    //     cursor: pointer;
+    //   }
   }
 
   &__stuff {
