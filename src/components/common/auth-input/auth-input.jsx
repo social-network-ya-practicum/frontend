@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './auth-input.module.scss';
 import eye from './images/eye.svg';
+import eyeError from './images/eye-error.svg';
 import eyeSlash from './images/eye-slash.svg';
+import eyeSlashError from './images/eye-slash-error.svg';
 
 const cn = classNames.bind(styles);
 
@@ -22,6 +24,7 @@ function AuthInput({
   const id = useId();
   const [shownPassword, setShownPassword] = useState(false);
   const typeIcon = !shownPassword ? eye : eyeSlash;
+  const typeIconOnError = !shownPassword ? eyeError : eyeSlashError;
   const attrType = type === 'password' && shownPassword ? 'text' : type;
 
   const onFocus = () => {
@@ -56,7 +59,7 @@ function AuthInput({
           id={id}
           onFocus={onFocus}
           onBlur={onBlur}
-          minLength={5}
+          spellCheck="false"
         />
         {type === 'password' && (
           <button
@@ -66,7 +69,7 @@ function AuthInput({
               setShownPassword(!shownPassword);
             }}
           >
-            <img src={typeIcon} alt="eye-icon" />
+            <img src={error ? typeIconOnError : typeIcon} alt="eye-icon" />
           </button>
         )}
       </div>
