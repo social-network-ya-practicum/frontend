@@ -1,25 +1,127 @@
-.post-input{
-
-  &__form{
-    background: #FFFFFF;
+.post-input {
+  &__form {
+    background: #ffffff;
     border-radius: 16px;
+    padding: 12px 28px;
+    display: grid;
+    row-gap: 20px;
   }
 
-  &__avatar{
+  &__box {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 36px 1fr fit-content(20px);
+    align-items: center;
+    column-gap: 12px;
+  }
+
+  &__avatar {
     height: 32px;
     width: 32px;
     border-radius: 50%;
-    background-color: gray;
+    background-image: url(./images/avatar.svg);
+    margin-right: 4px;
   }
 
-  &__input{
+  &__input {
     height: 19px;
     width: 100%;
     border: none;
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #474747;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus::placeholder {
+      opacity: 0;
+    }
   }
-  &__file{
+
+  &__file-label {
+    display: inline-block;
     height: 20px;
     width: 20px;
     background-image: url(./images/file.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__file {
+    display: none;
+  }
+
+  &__stuff {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &__smile {
+    height: 20px;
+    width: 20px;
+    background-image: url(./images/smile__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+    margin-left: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__btn {
+    font-family: var(--font-family-default);
+    background: #65f0c6;
+    border-radius: 16px;
+    padding: 12px 24px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #24dca4;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    list-style: none;
+    width: auto;
+    height: 164px;
+    background-color: var(--bg_color_primary);
+    z-index: 1;
+    left: 48px;
+    top: 19px;
+    padding: 16px;
+    border-radius: 16px;
+    display: grid;
+    gap: 8px;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+  }
+
+  &__popup-item {
+    height: 20px;
+    width: 20px;
+    background-image: url(./images/smile__icon.svg);
+    background-color: transparent;
+    background-position: center;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

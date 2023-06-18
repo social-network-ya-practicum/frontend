@@ -1,4 +1,4 @@
-.post{
+.post {
   background-color: #fff;
   border-radius: 16px;
   margin: 0;
@@ -8,21 +8,20 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  
-  
-  &__info{
+
+  &__info {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-  
-  &__info-box{
+
+  &__info-box {
     display: flex;
     gap: 4px;
     flex-direction: column;
   }
-  
-  &__avatar{
+
+  &__avatar {
     background-image: url(./icons/avatar.svg);
     height: 36px;
     width: 36px;
@@ -38,23 +37,23 @@
     line-height: 120%;
   }
 
-  &__date{
+  &__date {
     margin: 0;
     font-family: var(--font-family-default);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 120%;
-    color: #7E7F80;
+    color: #7e7f80;
   }
-  
-  &__img{
-    background: #D7E9FA;
+
+  &__img {
+    background: #d7e9fa;
     border-radius: 16px;
     width: 100%;
   }
-  
-  &__text{
+
+  &__text {
     margin: 0;
 
     font-family: var(--font-family-default);
@@ -67,13 +66,13 @@
     resize: none;
     height: 100%;
   }
-  
-  &__like-container{
+
+  &__like-container {
     display: flex;
     align-items: center;
   }
-  
-  &__like{
+
+  &__like {
     height: 20px;
     width: 20px;
     background-image: url(./icons/like__icon.svg);
@@ -81,14 +80,12 @@
     background-position: center;
     border: none;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
-
   }
 
-  
-  &__like-countner{
+  &__like-countner {
     margin-left: 10px;
     font-family: var(--font-family-default);
     font-style: normal;
@@ -99,11 +96,10 @@
     -moz-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-image: linear-gradient(90deg, #0EB0D1 14.06%, #1FC995 79.17%)
-    
+    background-image: linear-gradient(90deg, #0eb0d1 14.06%, #1fc995 79.17%);
   }
-  
-  &__edit{
+
+  &__edit {
     position: absolute;
     top: 24px;
     right: 28px;
@@ -114,22 +110,22 @@
     background-position: center;
     border: none;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
-  
-  &__change{
+
+  &__change {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
-  &__add{
+
+  &__add {
     display: flex;
   }
-  
-  &__file{
+
+  &__file {
     height: 20px;
     width: 20px;
     background-image: url(./icons/file__icon.svg);
@@ -137,59 +133,59 @@
     background-position: center;
     border: none;
     margin-right: 8px;
-    
-    &:hover{
+
+    &:hover {
       cursor: pointer;
     }
   }
-  
-  &__smile{
+
+  &__smile {
     height: 20px;
     width: 20px;
     background-image: url(./icons/smile__icon.svg);
     background-color: transparent;
     background-position: center;
     border: none;
-    
-    &:hover{
+
+    &:hover {
       cursor: pointer;
     }
   }
-  
-  &__btns{
+
+  &__btns {
     display: flex;
     gap: 8px;
   }
-  
-  &__btn-save{
+
+  &__btn-save {
     font-family: var(--font-family-default);
-    background: #65F0C6;
+    background: #65f0c6;
     border-radius: 16px;
     padding: 12px 24px;
     border: none;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
-      background-color: #24DCA4;
+      background-color: #24dca4;
     }
   }
-  
-  &__btn-cancel{
+
+  &__btn-cancel {
     font-family: var(--font-family-default);
-    background: #FFFFFF;
-    border: 2px solid #65F0C6;
+    background: #ffffff;
+    border: 2px solid #65f0c6;
     padding: 10px 22px;
     border-radius: 16px;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
-      border: 2px solid #24DCA4;
+      border: 2px solid #24dca4;
     }
   }
-  
+
   // Попап
-  
-  &__actions{
+
+  &__actions {
     position: absolute;
     top: 40px;
     right: 28px;
@@ -197,19 +193,17 @@
     flex-direction: column;
     align-items: start;
     gap: 12px;
-    background: #D7E9FA;
+    background: #d7e9fa;
     border-radius: 16px;
     visibility: hidden;
     padding: 16px 24px 24px 16px;
 
-    &_active{
+    &_active {
       visibility: visible;
     }
   }
-  
 
-  &__action{
-
+  &__action {
     font-family: var(--font-family-default);
     font-style: normal;
     font-weight: 400;
@@ -222,16 +216,16 @@
     &:hover {
       cursor: pointer;
     }
-    
-    &_type_edit::before{
+
+    &_type_edit::before {
       content: url(./icons/edit.svg);
       height: 20px;
       width: 20px;
       margin-right: 4px;
       vertical-align: middle;
     }
-    
-    &_type_delete::before{
+
+    &_type_delete::before {
       content: url(./icons/trash__icon.svg);
       height: 20px;
       width: 20px;
@@ -239,6 +233,4 @@
       vertical-align: middle;
     }
   }
-
-
 }
