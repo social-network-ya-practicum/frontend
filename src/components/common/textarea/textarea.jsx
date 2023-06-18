@@ -1,17 +1,47 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './textarea.module.scss';
 
 function Textarea({ text, charLimit, isPostChanging }) {
+  const [value, setValue] = useState(text);
+
   const [textExpanded, setTextExpanded] = useState(false);
+  const [height, setHeight] = useState('auto');
+
+  const onChange = (event) => setValue(event.target.value);
+
+  useEffect(() => {
+    setHeight('auto');
+  }, [value, isPostChanging]);
+
+  const handleChange = (event) => {
+    setHeight('auto');
+    if (onChange) {
+      onChange(event);
+    }
+  };
+
+  const handleInput = (event) => {
+    const { target } = event;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight}px`;
+    setHeight(`${target.scrollHeight}px`);
+  };
 
   if (text.length <= charLimit) {
     return isPostChanging ? (
-      <textarea className={styles.post__text} minLength={1} maxLength={2000}>
-        {text}
-      </textarea>
+      <textarea
+        className={styles.textarea}
+        minLength={1}
+        maxLength={2000}
+        // ref={textAreaRef}
+        value={value}
+        onChange={handleChange}
+        onInput={handleInput}
+        style={{ height }}
+      />
     ) : (
-      <p>{text}</p>
+      <p className={styles.textarea}>{text}</p>
     );
   }
 
@@ -22,10 +52,12 @@ function Textarea({ text, charLimit, isPostChanging }) {
       className={styles.textarea}
       minLength={1}
       maxLength={2000}
-      value={text}
-    >
-      ''
-    </textarea>
+      // ref={textAreaRef}
+      value={value}
+      onChange={handleChange}
+      onInput={handleInput}
+      style={{ height }}
+    />
   ) : (
     <p className={styles.textarea}>
       {limitedText}
@@ -39,25 +71,6 @@ function Textarea({ text, charLimit, isPostChanging }) {
       )}
     </p>
   );
-
-  // {
-  //   isPostChanging ?
-  //       <textarea
-  //       className={styles.textarea}
-  //       minLength={1}
-  //       maxLength={2000}
-  //       value={text}
-  //     >
-  // ''
-  // </textarea>
-  // :
-
-  // <p>
-  //   {limitedText}
-  // </p>
-
-  //   // {!textExpanded&& <button className={styles.textarea__btn} onClick={()=>setTextExpanded(!textExpanded)}>...eще</button>}
-  // }
 }
 
 export default Textarea;

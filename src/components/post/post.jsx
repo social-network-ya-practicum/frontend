@@ -17,7 +17,7 @@ function Post({ text, author, pubdate, images, likecount }) {
   }
 
   function handleOpenPopup() {
-    setIsPopupOpened(true);
+    setIsPopupOpened(!isPopupOpened);
   }
 
   return (
