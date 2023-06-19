@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import styles from './textarea.module.scss';
 
 function Textarea({ text, charLimit, isPostChanging }) {
-  const [value, setValue] = useState(text);
-
   const [textExpanded, setTextExpanded] = useState(false);
+
+  const [value, setValue] = useState(text);
   const [height, setHeight] = useState('auto');
 
   const onChange = (event) => setValue(event.target.value);
@@ -20,7 +20,7 @@ function Textarea({ text, charLimit, isPostChanging }) {
       onChange(event);
     }
   };
-
+  // тагретом является именно инпут надо придумать как при нажатии сразу проверять
   const handleInput = (event) => {
     const { target } = event;
     target.style.height = 'auto';
@@ -39,6 +39,7 @@ function Textarea({ text, charLimit, isPostChanging }) {
         onChange={handleChange}
         onInput={handleInput}
         style={{ height }}
+        id="textarea"
       />
     ) : (
       <p className={styles.textarea}>{text}</p>
@@ -57,6 +58,7 @@ function Textarea({ text, charLimit, isPostChanging }) {
       onChange={handleChange}
       onInput={handleInput}
       style={{ height }}
+      id="textarea"
     />
   ) : (
     <p className={styles.textarea}>

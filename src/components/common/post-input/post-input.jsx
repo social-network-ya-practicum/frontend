@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react';
 import styles from './post-input.module.scss';
 
 function PostInput() {
+  const [value, setValue] = useState('');
+  const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
   const [file, setFile] = useState(null);
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
+
+  const textStyle = {
+    height: heightText,
+  };
 
   function hanldeActiveInput() {
     setActiveInput(true);
@@ -13,6 +19,7 @@ function PostInput() {
 
   function hanldeCloseActiveInput() {
     setActiveInput(false);
+    setHeightText('19px');
   }
 
   const handleFileChange = (event) => {
@@ -36,18 +43,38 @@ function PostInput() {
   // console.log(file);
   // console.log(isSmilePopupOpened);
 
+  const onChange = (event) => setValue(event.target.value);
+
   useEffect(() => {
-    function hanldecloseActiveInput(event) {
-      if (activeInput && !event.target.closest('#post-input')) {
+    setHeightText('auto');
+  }, [value]);
+
+  const handleChange = (event) => {
+    setHeightText('auto');
+    if (onChange) {
+      onChange(event);
+    }
+  };
+
+  const handleInput = (event) => {
+    const { target } = event;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight}px`;
+    setHeightText(`${target.scrollHeight}px`);
+  };
+
+  useEffect(() => {
+    function hanldecloseingActiveInput(event) {
+      if (activeInput && !event.target.closest('#post-input') && !value) {
         hanldeCloseActiveInput();
       }
     }
 
-    document.addEventListener('click', hanldecloseActiveInput);
+    document.addEventListener('click', hanldecloseingActiveInput);
     return () => {
-      document.removeEventListener('click', hanldecloseActiveInput);
+      document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput]);
+  }, [activeInput, value]);
 
   useEffect(() => {
     if (file) {
@@ -69,12 +96,16 @@ function PostInput() {
       <form className={styles['post-input__form']}>
         <div className={styles['post-input__box']}>
           <div className={styles['post-input__avatar']}> </div>
-          <input
+          <textarea
             className={styles['post-input__input']}
             type="text"
             placeholder="Напишите сообщение..."
             maxLength={2000}
             onClick={hanldeActiveInput}
+            onChange={handleChange}
+            onInput={handleInput}
+            rows={1}
+            style={textStyle}
           />
 
           {!activeInput && (

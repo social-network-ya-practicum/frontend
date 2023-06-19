@@ -21,6 +21,7 @@
     border-radius: 50%;
     background-image: url(./images/avatar.svg);
     margin-right: 4px;
+    align-self: flex-start;
   }
 
   &__input {
@@ -33,6 +34,8 @@
     font-size: 16px;
     line-height: 120%;
     color: #474747;
+    resize: none;
+    overflow: hidden;
 
     &:focus {
       outline: none;

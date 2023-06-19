@@ -32,9 +32,6 @@ function Post({ text, author, pubdate, images, likecount }) {
 
       {images && <img src={images} alt="" className={styles.post__img} />}
       <Textarea text={text} charLimit={300} isPostChanging={isPostChanging} />
-      {/* <textarea className={styles.post__text}>
-        {text}
-      </textarea> */}
 
       {!isPostChanging ? (
         <div className={styles['post__like-container']}>
