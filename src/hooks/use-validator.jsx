@@ -10,6 +10,13 @@ import { useCallback } from 'react';
 
 function useValidator() {
   const checkEmail = useCallback((value) => {
+    if (!value) return 'Введите почту';
+    if (value.length < 6) {
+      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
+    }
     if (value.startsWith('@')) {
       return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
     }
@@ -25,18 +32,16 @@ function useValidator() {
     if (!/@[^_]+$/.test(value)) {
       return 'Часть адреса после @ не может содержать символ "_"';
     }
-    if (value.length < 6) {
-      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
-    }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
+
     return '';
   }, []);
 
   const checkEmailOnChange = useCallback((value) => {
     if (/[^\w@.]/.test(value)) {
       return 'Для ввода почты используйте только латинский алфавит, цифры, нижнее подчеркивание и @';
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
     }
 
     if (/@/.test(value)) {
@@ -51,13 +56,12 @@ function useValidator() {
         return 'Часть адреса после @ не может содержать символ "_"';
       }
     }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
+
     return '';
   }, []);
 
   const checkPassword = useCallback((value) => {
+    if (!value) return 'Введите пароль';
     if (value.length < 8) {
       return `Минимальное количество символов: 8. Длинна пароля сейчас: ${value.length}`;
     }
