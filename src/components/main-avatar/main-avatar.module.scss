@@ -1,0 +1,38 @@
+$block-width: 357px;
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $block-width;
+
+  &__img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $block-width;
+    height: 316px;
+    border-radius: 16px;
+    background-color: var(--bg_color_default);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  &__img {
+    display: flex;
+    object-position: center;
+    object-fit: contain;
+  }
+}
+
+.form {
+  display: flex;
+  width: 100%;
+
+  &__input {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: -9999px;
+  }
+}

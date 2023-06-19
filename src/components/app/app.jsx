@@ -8,6 +8,7 @@ import MainPageContent from '../layouts/main-page-content/main-page-content';
 import ContactsPage from '../../pages/contacts-page/contacts-page';
 import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
+import MainAvatar from '../main-avatar/main-avatar';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -40,7 +41,14 @@ const App = observer(() => {
             element={<div>path = '/contacts/:contactId'</div>}
           />
           <Route path=":user" element={<div>path = '/:user'</div>} />
-          <Route path=":user/edit" element={<div>path = '/:user/edit'</div>} />
+          <Route
+            path=":user/edit"
+            element={
+              <div>
+                <MainAvatar onSubmit={() => undefined} />
+              </div>
+            }
+          />
         </Route>
         <Route
           path="/login"

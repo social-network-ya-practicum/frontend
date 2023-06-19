@@ -1,7 +1,14 @@
 import { useCallback } from 'react';
 
 /**
- * Хук возвращает объект с набором доступных функций-валидаторов. Функции  с префиксом OnChange предназначены
+ * Хук возвращает объект с набором доступных функций-валидаторов {
+ *    checkEmail,
+ *    checkPassword,
+ *    checkImage
+ *    checkEmailOnChange,
+ *    checkPasswordOnChange,
+ * }.
+ * Функции  с префиксом OnChange предназначены
  * для немедленной валидации на каждый ввод символа
  *
  * @returns {Object} - объект с функциями-валидаторами
@@ -94,11 +101,24 @@ function useValidator() {
     return '';
   }, []);
 
+  const checkImage = useCallback((value) => {
+    const maxSize = 5 * 1024 * 1024; // 5 MB
+    const { name, size } = value;
+    if (!/(.jpg)|(.jpeg)$/.test(name)) {
+      return 'Допустимый формат для фото: .jpg, .jpeg';
+    }
+    if (size > maxSize) {
+      return 'Файл слишком большой. Максимальный размер: 5MB';
+    }
+    return '';
+  }, []);
+
   return {
     checkEmail,
     checkPassword,
     checkEmailOnChange,
     checkPasswordOnChange,
+    checkImage,
   };
 }
 

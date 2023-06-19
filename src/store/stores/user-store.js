@@ -15,6 +15,10 @@ class UserStore {
     makeAutoObservable(this);
   }
 
+  get avatar() {
+    return this.user ? this.user?.photo : null;
+  }
+
   setIsLoading = (value) => {
     this.isLoading = value;
   };
