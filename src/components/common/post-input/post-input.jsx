@@ -5,7 +5,10 @@ function PostInput() {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
-  const [file, setFile] = useState(null);
+  const [image, setImage] = useState({
+    file: null,
+    prewiev: null,
+  });
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
 
@@ -23,7 +26,12 @@ function PostInput() {
   }
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    setActiveInput(true);
+    const fileImg = event.target.files[0];
+    setImage({
+      file: fileImg,
+      prewiev: URL.createObjectURL(fileImg),
+    });
   };
 
   function handleOpenPopup() {
@@ -63,9 +71,21 @@ function PostInput() {
     setHeightText(`${target.scrollHeight}px`);
   };
 
+  function handleCancelfile() {
+    setImage({
+      file: null,
+      prewiev: null,
+    });
+  }
+
   useEffect(() => {
     function hanldecloseingActiveInput(event) {
-      if (activeInput && !event.target.closest('#post-input') && !value) {
+      if (
+        activeInput &&
+        !event.target.closest('#post-input') &&
+        !value &&
+        !image.prewiev
+      ) {
         hanldeCloseActiveInput();
       }
     }
@@ -74,22 +94,22 @@ function PostInput() {
     return () => {
       document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput, value]);
+  }, [activeInput, value, image]);
 
-  useEffect(() => {
-    if (file) {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        // reader.onloadend = () => {
-        //   setFile(reader.result);
-        // };
-        reader.readAsDataURL(file);
-        // console.log('это изображение');
-      } else {
-        // console.log('это не изображение');
-      }
-    }
-  }, [file]);
+  // useEffect(() => {
+  //   if (file) {
+  //     if (file.type.startsWith('image/')) {
+  //       const reader = new FileReader();
+  //       // reader.onloadend = () => {
+  //       //   setFile(reader.result);
+  //       // };
+  //       reader.readAsDataURL(file);
+  //       // console.log('это изображение');
+  //     } else {
+  //       // console.log('это не изображение');
+  //     }
+  //   }
+  // }, [file]);
 
   return (
     <div id="post-input" className={styles['post-input']}>
@@ -124,42 +144,60 @@ function PostInput() {
         </div>
 
         {activeInput && (
-          <div className={styles['post-input__stuff']}>
-            <div>
-              <label
-                htmlFor="post-input__file"
-                className={styles['post-input__file-label']}
-              >
-                <input
-                  type="file"
-                  id="post-input__file"
-                  className={styles['post-input__file']}
-                  onChange={handleFileChange}
+          <>
+            {image.prewiev && (
+              <div className={styles['post-input__prewiev']}>
+                <img
+                  className={styles['post-input__img']}
+                  src={image.prewiev}
+                  alt="превью"
                 />
-              </label>
+                <button
+                  className={styles['post-input__cansel-btn']}
+                  type="button"
+                  onClick={handleCancelfile}
+                >
+                  {' '}
+                </button>
+              </div>
+            )}
+            <div className={styles['post-input__stuff']}>
+              <div>
+                <label
+                  htmlFor="post-input__file"
+                  className={styles['post-input__file-label']}
+                >
+                  <input
+                    type="file"
+                    id="post-input__file"
+                    className={styles['post-input__file']}
+                    onChange={handleFileChange}
+                  />
+                </label>
+                <button
+                  type="button"
+                  className={styles['post-input__smile']}
+                  onClick={handleOpenPopup}
+                >
+                  {' '}
+                </button>
+              </div>
               <button
                 type="button"
-                className={styles['post-input__smile']}
-                onClick={handleOpenPopup}
+                className={styles['post-input__btn']}
+                onClick={hanldeCloseActiveInput}
               >
-                {' '}
+                Опубликовать
               </button>
-            </div>
-            <button
-              type="button"
-              className={styles['post-input__btn']}
-              onClick={hanldeCloseActiveInput}
-            >
-              Опубликовать
-            </button>
 
-            {isSmilePopupOpened && (
-              <ul className={styles['post-input__popup']}>
-                {/* <li className={styles['post-input__popup-item']}> </li> */}
-                {renderSmiles(28)}
-              </ul>
-            )}
-          </div>
+              {isSmilePopupOpened && (
+                <ul className={styles['post-input__popup']}>
+                  {/* <li className={styles['post-input__popup-item']}> </li> */}
+                  {renderSmiles(28)}
+                </ul>
+              )}
+            </div>
+          </>
         )}
       </form>
     </div>

@@ -64,6 +64,32 @@
     display: none;
   }
 
+  &__prewiev {
+    position: relative;
+  }
+
+  &__img {
+    background: var(--bg_color_primary);
+    border-radius: 16px;
+    width: fit-content;
+    max-width: 496px;
+  }
+
+  &__cansel-btn {
+    position: absolute;
+    background-color: transparent;
+    background-image: url(./images/x__icon.svg);
+    width: 20px;
+    height: 20px;
+    border: none;
+    top: 8px;
+    right: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__stuff {
     display: flex;
     justify-content: space-between;

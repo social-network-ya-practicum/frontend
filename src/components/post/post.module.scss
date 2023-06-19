@@ -49,7 +49,7 @@
   }
 
   &__img {
-    background: #d7e9fa;
+    background: var(--bg_color_primary);
     border-radius: 16px;
     width: 100%;
     max-width: 496px;
