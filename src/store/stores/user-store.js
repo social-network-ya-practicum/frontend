@@ -46,6 +46,10 @@ class UserStore {
     this.error = error;
   };
 
+  logout = () => {
+    this.userRes = null;
+  };
+
   getUser = async () => {
     const token = getCookie(TOKEN_NAME);
     if (!token) {
