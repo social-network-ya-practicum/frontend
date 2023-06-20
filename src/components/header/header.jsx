@@ -11,7 +11,6 @@ import { deleteCookie } from '../../utils/utils';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix }) {
-
   const [isOpen, setIsOpen] = React.useState(false);
   const { userStore } = useStore();
   const { setError } = userStore;
@@ -68,7 +67,7 @@ function Header({ user, mix }) {
   const handleClose = () => {
     setIsOpen(false);
   };
-
+  
   const handleOpenClick = () => {
     setIsOpen(true);
   };
@@ -141,10 +140,19 @@ function Header({ user, mix }) {
                           />
                         </BorderGradient>
                       </NavLink>
-                      <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
-                          <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
+                      <button
+                        className={styles['header__menu-button']}
+                        type="button"
+                        onClick={handleOpenClick}
+                      >
+                        <img
+                          className={styles['header__img-arrow']}
+                          src={Arrow}
+                          alt="Настройка профиля"
+                        />
                       </button>
                       <Popup isOpen={isOpen} handleClose={handleClose} >
+
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}
