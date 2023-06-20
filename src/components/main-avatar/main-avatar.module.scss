@@ -20,8 +20,12 @@ $block-width: 357px;
 
   &__img {
     display: flex;
+    max-width: 100%;
+    max-height: 100%;
+    width: min-content;
+    height: min-content;
     object-position: center;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 

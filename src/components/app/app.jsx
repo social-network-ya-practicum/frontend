@@ -9,6 +9,7 @@ import ContactsPage from '../../pages/contacts-page/contacts-page';
 import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
 import MainAvatar from '../main-avatar/main-avatar';
+import InfoForm from '../info-form/info-form';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -44,8 +45,9 @@ const App = observer(() => {
           <Route
             path=":user/edit"
             element={
-              <div>
+              <div style={{ display: 'flex' }}>
                 <MainAvatar onSubmit={() => undefined} />
+                <InfoForm onSubmit={() => undefined} user={null} />
               </div>
             }
           />

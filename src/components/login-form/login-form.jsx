@@ -28,11 +28,17 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
+    let err = '';
+    if (name === 'email') {
+      err = checkEmailOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (name === 'password') {
+      err = checkPasswordOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (err) return;
     setInputValue({ ...inputValue, [name]: value });
-    if (name === 'email')
-      setError((prev) => ({ ...prev, [name]: checkEmailOnChange(value) }));
-    if (name === 'password')
-      setError((prev) => ({ ...prev, [name]: checkPasswordOnChange(value) }));
   };
 
   const handleSubmit = (e) => {

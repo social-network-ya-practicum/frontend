@@ -1,24 +1,19 @@
-import MainAvatar from './main-avatar';
+import InfoForm from './info-form';
 import '../../index.scss';
-import foto from './imagesSb/template.jpg';
 
 export default {
-  title: 'MainAvatar',
-  component: MainAvatar,
+  title: 'InfoForm',
+  component: InfoForm,
   tags: ['autodocs'],
   argTypes: {
     disabled: {
       options: [true, false],
       control: { type: 'radio' },
     },
-    avatar: {
-      options: ['withFoto', 'withoutFoto'],
-      mapping: { withFoto: foto, withoutFoto: null },
-      control: { type: 'radio' },
-    },
   },
 };
 
+// eslint-disable-next-line no-unused-vars
 export const Default = (args) => (
   <div
     style={{
@@ -28,6 +23,6 @@ export const Default = (args) => (
       justifyContent: 'center',
     }}
   >
-    <MainAvatar onSubmit={() => undefined} {...args} />
+    <InfoForm onSubmit={() => undefined} {...args} />
   </div>
 );
