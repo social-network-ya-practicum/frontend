@@ -6,15 +6,12 @@ import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
-import { useStore } from '../../contexts/RootStoreContext';
 import { getCookie, deleteCookie } from '../../utils/utils';
 import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix, logout }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { userStore } = useStore();
-  const { setError } = userStore;
 
   const handleLogout = () => {
     const token = getCookie(TOKEN_NAME);
@@ -27,7 +24,7 @@ function Header({ user, mix, logout }) {
       headers: {
         Authorization: `Token ${token}`,
       },
-    }).catch((err) => setError(err));
+    }).catch((err) => console.log(err));
     // ---------------------------------------------------------------
 
     deleteCookie(TOKEN_NAME);
