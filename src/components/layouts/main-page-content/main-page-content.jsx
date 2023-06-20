@@ -7,16 +7,16 @@ function MainPageContent() {
   return (
     <div className={styles['main-page-content']}>
       <div>
-        <PostInput/>
+        <PostInput />
         <ul className={styles['main-page-content__posts']}>
-          <Post/>
-          <Post/>
+          <Post />
+          <Post />
         </ul>
       </div>
       <div>Дни рождения</div>
       {/* <BirthdayPlate/> */}
     </div>
-  )
+  );
 }
 
 export default MainPageContent;

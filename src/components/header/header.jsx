@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
@@ -7,7 +7,8 @@ import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 import { useStore } from '../../contexts/RootStoreContext';
-import { deleteCookie } from '../../utils/utils';
+import { getCookie, deleteCookie } from '../../utils/utils';
+import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix }) {
@@ -15,52 +16,22 @@ function Header({ user, mix }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const { userStore } = useStore();
   const { setError } = userStore;
-
-  // ----------------------------------------------------------
-  // Временная переменная, убрать после замены на запрос из api
-  const [isToken, setIsToken] = React.useState(false);
-  //-----------------------------------------------------------
+  const token = getCookie(TOKEN_NAME);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // -----------------------------------------------------------------------------
     // После - заменить на запрос из api (mainApi.logout())
-    // Тестовый захардкоженый запрос за токеном
-    fetch('https://csn.sytes.net/api/v1/auth/token/login/', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'test@test.test',
-        password: 'Frontend23',
-      }),
-    })
-      .then((res) =>
-        res.ok
-          ? res.json()
-          : res.json().then((r) => {
-              throw new Error(JSON.stringify(r));
-            })
-      )
-      .then((res) => {
-        const token = res.auth_token;
-        setIsToken(token);
-      })
-      .catch((err) => {
-        setError(err);
-    });
-
     fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
       method: 'POST',
       headers: {
-        autherization: `Token ${isToken}`,
+        Authorization: `Token ${token}`,
       },
     })
     // ---------------------------------------------------------------
       .then(() => {
         deleteCookie();
-        localStorage.clear();
-        console.log("Выход");
+        navigate(0);
       })
       .catch((err) => setError(err))
   }

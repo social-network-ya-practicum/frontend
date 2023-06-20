@@ -8,7 +8,7 @@
 
   // &__buffer-top и &__buffer-bottom добавлены для позиционирования формы на
   // странице, с учётом того, что для базового экрана  из макета  на размер
-  // 1280x800 - расстояние от формы до Header 116px, а до Footer 130px.
+  // 1280x800 - расстояние от формы до Header 116px, а до Footer 208px.
   // Пропорция сохранится для любой высоты экрана
 
   &__buffer-top {
@@ -17,9 +17,9 @@
     flex: 1;
   }
   &__buffer-bottom {
-    min-height: 130px;
+    min-height: 208px;
     display: flex;
-    flex: calc(130 / 116);
+    flex: calc(208 / 116);
   }
 
   &__form-wrapper {
@@ -36,16 +36,12 @@
     pointer-events: none;
 
     &_size_small {
-      top: -93px;
-      left: calc(100% + 33px);
+      top: 207px;
+      left: calc(100% + 94px);
     }
     &_size_medium {
-      top: -32px;
-      right: calc(100% + 58px);
-    }
-    &_size_large {
-      top: 184.5px;
-      left: calc(100% + 73px);
+      top: 301px;
+      left: 462px;
     }
   }
 }

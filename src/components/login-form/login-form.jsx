@@ -19,27 +19,30 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
     password: '',
   });
 
-  const { checkEmail, checkPassword } = useValidator();
+  const {
+    checkEmail,
+    checkPassword,
+    checkEmailOnChange,
+    checkPasswordOnChange,
+  } = useValidator();
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
+    if (name === 'email')
+      setError((prev) => ({ ...prev, [name]: checkEmailOnChange(value) }));
+    if (name === 'password')
+      setError((prev) => ({ ...prev, [name]: checkPasswordOnChange(value) }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Валидация формы на submit
-    //  Закоментировал на время разработки
-    // -----------------------------------------------------------------------
-    // !!!! НЕ УДАЛЯТЬ!!!! Раскомментировать для проверки валидности формы
-
-    // const errEmail = checkEmail(inputValue.email);
-    // const errPassword = checkPassword(inputValue.password);
-    // if (errEmail || errPassword) {
-    //   setError({ email: errEmail, password: errPassword });
-    //   return;
-    // }
-    // -----------------------------------------------------------------------
+    const errEmail = checkEmail(inputValue.email);
+    const errPassword = checkPassword(inputValue.password);
+    if (errEmail || errPassword) {
+      setError({ email: errEmail, password: errPassword });
+      return;
+    }
     onSubmit(inputValue);
   };
 
@@ -54,7 +57,7 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
         <AuthInput
           type="email"
           name="email"
-          title="Корпоративнаая почта"
+          title="Корпоративная почта"
           value={inputValue.email}
           onChange={onChange}
           mix={styles[`mix-auth-input`]}
@@ -75,10 +78,18 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
           setError={setError}
           validator={checkPassword}
         />
-        <Button type="submit" width="100%" disabled={disabled}>
+        <Button type="submit" width="249px" disabled={disabled}>
           Войти
         </Button>
       </div>
+
+      {/* !ДЛЯ УДАЛЕНИЯ! Данные для входа под тестовым аккаунтом */}
+      <div style={{ position: 'absolute', left: -200 }}>
+        Для входа
+        <p>email: test@test.test </p>
+        <p> password: Frontend23</p>
+      </div>
+      {/* --------------------------------------------------------- */}
     </form>
   );
 };

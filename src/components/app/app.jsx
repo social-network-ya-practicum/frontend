@@ -32,7 +32,7 @@ const App = observer(() => {
           }
         >
           <Route element={<MainPageShell />}>
-            <Route index element={<MainPageContent/>} />
+            <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
           </Route>
           <Route

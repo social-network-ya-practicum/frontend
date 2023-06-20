@@ -1,21 +1,15 @@
 import { useCallback } from 'react';
 
 /**
- * Хук возвращает либо функцию-валидатор(если передан тип input в качестве аргумента), либо объект с набором доступных функций-валидаторов.
+ * Хук возвращает объект с набором доступных функций-валидаторов. Функции  с префиксом OnChange предназначены
+ * для немедленной валидации на каждый ввод символа
  *
- * @param {string} inputType - тип проверяемого iput
- * @returns {Object|Function} - объект с функциями-валидаторами, или функция-валидатор
+ * @returns {Object} - объект с функциями-валидаторами
  * @property {Function} -  функция-валидатор, которая возвращает текст ошибки.
  */
 
-function useValidator(inputType) {
+function useValidator() {
   const checkEmail = useCallback((value) => {
-    if (value.length < 6) {
-      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
-    }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
     if (value.startsWith('@')) {
       return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
     }
@@ -26,10 +20,39 @@ function useValidator(inputType) {
       return 'Часть адреса после @ не может содержать другие символы @';
     }
     if (!/^\w+@\w+\.\w+$/.test(value)) {
-      return 'Для ввода почты используйте только латинский алфавит, цифры, нижнее подчеркивание и @. Пример ввода user_1@example.com';
+      return 'Некорректный email. Пример ввода user_1@example.com';
     }
     if (!/@[^_]+$/.test(value)) {
       return 'Часть адреса после @ не может содержать символ "_"';
+    }
+    if (value.length < 6) {
+      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
+    }
+    return '';
+  }, []);
+
+  const checkEmailOnChange = useCallback((value) => {
+    if (/[^\w@.]/.test(value)) {
+      return 'Для ввода почты используйте только латинский алфавит, цифры, нижнее подчеркивание и @';
+    }
+
+    if (/@/.test(value)) {
+      if (value.startsWith('@')) {
+        return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
+      }
+
+      if (value.match(/@/g)?.[1]) {
+        return 'Часть адреса после @ не может содержать другие символы @';
+      }
+      if (!/@[^_]*$/.test(value)) {
+        return 'Часть адреса после @ не может содержать символ "_"';
+      }
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
     }
     return '';
   }, []);
@@ -56,24 +79,23 @@ function useValidator(inputType) {
     return '';
   }, []);
 
-  if (inputType === undefined) {
-    return { checkEmail, checkPassword };
-  }
+  const checkPasswordOnChange = useCallback((value) => {
+    if (/[^\w.,!?]/.test(value)) {
+      return 'Для ввода почты используйте только латинский алфавит, цифры и перечисленные символы: точка, запятая, нижнее подчёркивание, ?,!';
+    }
+    if (value.length > 20) {
+      return `Максимальное количество символов: 20. Длинна пароля сейчас: ${value.length}`;
+    }
 
-  switch (inputType) {
-    case 'email': {
-      return checkEmail;
-    }
-    case 'password': {
-      return checkPassword;
-    }
-    default: {
-      return () =>
-        console.trace({
-          message: 'Переданный в input тип отсутствует в useValidator',
-        });
-    }
-  }
+    return '';
+  }, []);
+
+  return {
+    checkEmail,
+    checkPassword,
+    checkEmailOnChange,
+    checkPasswordOnChange,
+  };
 }
 
 export default useValidator;
