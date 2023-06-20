@@ -119,6 +119,7 @@ function Header({ user, mix }) {
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}
+                          onClick={handleClose}
                         >
                           Редактировать профиль
                         </NavLink>
