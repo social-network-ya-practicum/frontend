@@ -18,8 +18,7 @@ function Header({ user, mix, logout }) {
 
   const handleLogout = () => {
     const token = getCookie(TOKEN_NAME);
-    deleteCookie(TOKEN_NAME);
-    logout();
+
     // -----------------------------------------------------------------------------
     // После - заменить на запрос из api (mainApi.logout())
 
@@ -28,9 +27,11 @@ function Header({ user, mix, logout }) {
       headers: {
         Authorization: `Token ${token}`,
       },
-    })
-      // ---------------------------------------------------------------
-      .catch((err) => setError(err));
+    }).catch((err) => setError(err));
+    // ---------------------------------------------------------------
+
+    deleteCookie(TOKEN_NAME);
+    logout();
   };
 
   const handleClose = () => {
