@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useId, useLayoutEffect, useRef, useState } from 'react';
+import { useId, useLayoutEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './info-textarea.module.scss';
 
@@ -17,20 +17,20 @@ const InfoTextrea = ({
   mix,
 }) => {
   const textareaRef = useRef(null);
-  // Установка высоты для авторесайза textarea
-  const [heigth, setHeight] = useState('66px');
 
   const id = useId();
   const cnRoot = cn('textarea', mix);
 
   useLayoutEffect(() => {
-    const textareaHeight = textareaRef.current.scrollHeight;
-    setHeight(`${textareaHeight}px`);
+    const el = textareaRef.current;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
   }, []);
 
   const handleChange = (e) => {
-    const textareaHeight = textareaRef.current.scrollHeight;
-    setHeight(`${textareaHeight}px`);
+    const el = textareaRef.current;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
     onChange(e);
   };
 
@@ -61,7 +61,6 @@ const InfoTextrea = ({
         id={id}
         className={styles.textarea__textarea}
         ref={textareaRef}
-        style={{ height: heigth }}
       />
       {error && <span className={styles['info-input__error']}>{error}</span>}
     </label>
