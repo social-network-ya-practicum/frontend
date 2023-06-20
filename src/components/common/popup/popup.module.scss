@@ -12,17 +12,17 @@
   border-radius: 16px;
   z-index: 2;
 
-  &_active{
+  &_active {
     visibility: visible;
   }
 
   &__overlay {
-    background-color:transparent;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    display:block;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
   }
 }
