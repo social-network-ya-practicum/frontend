@@ -30,7 +30,7 @@ function Header({ user, mix }) {
     })
     // ---------------------------------------------------------------
       .then(() => {
-        deleteCookie();
+        deleteCookie(TOKEN_NAME);
         navigate(0);
       })
       .catch((err) => setError(err))
