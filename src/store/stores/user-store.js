@@ -15,6 +15,7 @@ class UserStore {
     const user = this.userRes;
     return user
       ? {
+          id: user?.id ?? null,
           last_name: user?.last_name ?? '',
           first_name: user?.first_name ?? '',
           middle_name: user?.middle_name ?? '',

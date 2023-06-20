@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useId, useRef, useState } from 'react';
+import { useId, useLayoutEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './info-textarea.module.scss';
 
@@ -22,6 +22,11 @@ const InfoTextrea = ({
 
   const id = useId();
   const cnRoot = cn('textarea', mix);
+
+  useLayoutEffect(() => {
+    const textareaHeight = textareaRef.current.scrollHeight;
+    setHeight(`${textareaHeight}px`);
+  }, []);
 
   const handleChange = (e) => {
     const textareaHeight = textareaRef.current.scrollHeight;
