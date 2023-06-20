@@ -110,16 +110,16 @@ header {
 
   &__user-actions {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     align-items: start;
+    visibility: hidden;
     padding: 16px 24px 24px 16px;
     gap: 12px;
     background: var(--color_d7e9fa);
     border-radius: 16px;
-    visibility: hidden;
 
     &_active{
       visibility: visible;
@@ -156,6 +156,7 @@ header {
     color: var(--text_color_default);
     margin: 0;
     white-space: nowrap;
+    z-index: 3;
 
     &:hover {
       cursor: pointer;

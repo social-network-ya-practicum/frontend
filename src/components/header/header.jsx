@@ -6,17 +6,71 @@ import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
+import { useStore } from '../../contexts/RootStoreContext';
+import { deleteCookie } from '../../utils/utils';
+import Popup from '../common/popup/popup';
 
 function Header({ user, mix }) {
 
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { userStore } = useStore();
+  const { setError } = userStore;
 
-  const handleOpenClick = () => {
-    setIsMenuOpen(true);
+  // ----------------------------------------------------------
+  // Временная переменная, убрать после замены на запрос из api
+  const [isToken, setIsToken] = React.useState(false);
+  //-----------------------------------------------------------
+
+  const handleLogout = () => {
+    // -----------------------------------------------------------------------------
+    // После - заменить на запрос из api (mainApi.logout())
+    // Тестовый захардкоженый запрос за токеном
+    fetch('https://csn.sytes.net/api/v1/auth/token/login/', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'test@test.test',
+        password: 'Frontend23',
+      }),
+    })
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : res.json().then((r) => {
+              throw new Error(JSON.stringify(r));
+            })
+      )
+      .then((res) => {
+        const token = res.auth_token;
+        setIsToken(token);
+      })
+      .catch((err) => {
+        setError(err);
+    });
+
+    fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
+      method: 'POST',
+      headers: {
+        autherization: `Token ${isToken}`,
+      },
+    })
+    // ---------------------------------------------------------------
+      .then(() => {
+        deleteCookie();
+        localStorage.clear();
+        console.log("Выход");
+      })
+      .catch((err) => setError(err))
+  }
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
-  function handleClose() {
-    setIsMenuOpen(false);
+  const handleOpenClick = () => {
+    setIsOpen(true);
   };
 
   React.useEffect(() => {
@@ -25,9 +79,9 @@ function Header({ user, mix }) {
         handleClose();
       }
     }
-
+    
     document.addEventListener('keydown', handleEscapeKey)
-    return () => document.removeEventListener('keydown', handleEscapeKey)
+    return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
   return (
@@ -90,7 +144,7 @@ function Header({ user, mix }) {
                       <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
                           <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
                       </button>
-                      <nav className={`${styles['header__user-actions']} ${isMenuOpen&&styles['header__user-actions_active']}`}>
+                      <Popup isOpen={isOpen} handleClose={handleClose} >
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}
@@ -98,12 +152,13 @@ function Header({ user, mix }) {
                           Редактировать профиль
                         </NavLink>
                         <NavLink
-                          to="/logout"
+                          to="/login"
                           className={styles.header__action}
+                          onClick={handleLogout}
                         >
                           Выйти
                         </NavLink>
-                      </nav>
+                      </Popup>
                     </div>
                   </li>
                 </ul>
