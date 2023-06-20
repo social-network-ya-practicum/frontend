@@ -12,7 +12,6 @@ import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix }) {
-
   const [isOpen, setIsOpen] = React.useState(false);
   const { userStore } = useStore();
   const { setError } = userStore;
@@ -28,13 +27,13 @@ function Header({ user, mix }) {
         Authorization: `Token ${token}`,
       },
     })
-    // ---------------------------------------------------------------
+      // ---------------------------------------------------------------
       .then(() => {
         deleteCookie(TOKEN_NAME);
         navigate(0);
       })
-      .catch((err) => setError(err))
-  }
+      .catch((err) => setError(err));
+  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -50,8 +49,8 @@ function Header({ user, mix }) {
         handleClose();
       }
     }
-    
-    document.addEventListener('keydown', handleEscapeKey)
+
+    document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
@@ -112,10 +111,18 @@ function Header({ user, mix }) {
                           />
                         </BorderGradient>
                       </NavLink>
-                      <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
-                          <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
+                      <button
+                        className={styles['header__menu-button']}
+                        type="button"
+                        onClick={handleOpenClick}
+                      >
+                        <img
+                          className={styles['header__img-arrow']}
+                          src={Arrow}
+                          alt="Настройка профиля"
+                        />
                       </button>
-                      <Popup isOpen={isOpen} handleClose={handleClose} >
+                      <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}

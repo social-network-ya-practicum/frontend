@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styles from './post.module.scss';
 import Textarea from '../common/textarea/textarea';
+import { handlerDataFormat } from '../../utils/data-format';
 
 function Post({ text, author, pubdate, images, likecount }) {
   const [isPostChanging, setIsPostchanging] = useState(false);
@@ -20,13 +21,18 @@ function Post({ text, author, pubdate, images, likecount }) {
     setIsPopupOpened(!isPopupOpened);
   }
 
+  console.log(handlerDataFormat(`${pubdate}`));
   return (
     <li className={styles.post}>
       <div className={styles.post__info}>
         <div className={styles.post__avatar}> </div>
         <div className={styles['post__info-box']}>
-          <p className={styles.post__owner}>{author}</p>
-          <span className={styles.post__date}>{pubdate}</span>
+          <p className={styles.post__owner}>
+            {author.first_name} {author.last_name}
+          </p>
+          <span className={styles.post__date}>
+            {handlerDataFormat(`${pubdate}`)}
+          </span>
         </div>
       </div>
 
