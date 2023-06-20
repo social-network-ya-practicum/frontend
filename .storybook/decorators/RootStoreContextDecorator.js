@@ -27,7 +27,7 @@ import rootStore from '../../src/store/root-store';
 //       control: { type: 'radio' },
 //     },
 //   },
-//   decorators: [RootStoreContextDecorator(storeTemplate)],
+//   decorators: [RootStoreContextDecorator(rootStoreCopy)],
 // };
 
 //  Теперь при выборе флага withData: true - будет применяться контекст c
