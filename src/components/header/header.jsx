@@ -1,22 +1,48 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
+import { useStore } from '../../contexts/RootStoreContext';
+import { getCookie, deleteCookie } from '../../utils/utils';
+import { TOKEN_NAME } from '../../utils/settings';
+import Popup from '../common/popup/popup';
 
 function Header({ user, mix }) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const handleOpenClick = () => {
-    setIsMenuOpen(true);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { userStore } = useStore();
+  const { setError } = userStore;
+  const token = getCookie(TOKEN_NAME);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // -----------------------------------------------------------------------------
+    // После - заменить на запрос из api (mainApi.logout())
+    fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    // ---------------------------------------------------------------
+      .then(() => {
+        deleteCookie(TOKEN_NAME);
+        navigate(0);
+      })
+      .catch((err) => setError(err))
+  }
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
-  function handleClose() {
-    setIsMenuOpen(false);
-  }
+  const handleOpenClick = () => {
+    setIsOpen(true);
+  };
 
   React.useEffect(() => {
     function handleEscapeKey(e) {
@@ -24,8 +50,8 @@ function Header({ user, mix }) {
         handleClose();
       }
     }
-
-    document.addEventListener('keydown', handleEscapeKey);
+    
+    document.addEventListener('keydown', handleEscapeKey)
     return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
@@ -86,32 +112,25 @@ function Header({ user, mix }) {
                           />
                         </BorderGradient>
                       </NavLink>
-                      <button
-                        className={styles['header__menu-button']}
-                        type="button"
-                        onClick={handleOpenClick}
-                      >
-                        <img
-                          className={styles['header__img-arrow']}
-                          src={Arrow}
-                          alt="Настройка профиля"
-                        />
+                      <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
+                          <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
                       </button>
-                      <nav
-                        className={`${styles['header__user-actions']} ${
-                          isMenuOpen && styles['header__user-actions_active']
-                        }`}
-                      >
+                      <Popup isOpen={isOpen} handleClose={handleClose} >
                         <NavLink
                           to="/:user/edit"
                           className={styles.header__action}
+                          onClick={handleClose}
                         >
                           Редактировать профиль
                         </NavLink>
-                        <NavLink to="/logout" className={styles.header__action}>
+                        <NavLink
+                          to="/login"
+                          className={styles.header__action}
+                          onClick={handleLogout}
+                        >
                           Выйти
                         </NavLink>
-                      </nav>
+                      </Popup>
                     </div>
                   </li>
                 </ul>
