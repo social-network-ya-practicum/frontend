@@ -1,3 +1,6 @@
+$textarea-text-paddingX: 12px;
+$textarea-max-width: 388px;
+
 .textarea {
   display: flex;
   flex-direction: column;
@@ -15,12 +18,22 @@
     resize: none;
     background: var(--bg_color_primary);
     border-radius: 16px;
-    max-width: 388px;
+    max-width: $textarea-max-width;
     width: 100%;
     min-height: 66px;
     border: none;
     outline: none;
-    padding: 4px 12px;
+    padding: 4px $textarea-text-paddingX;
     overflow-y: hidden;
+  }
+
+  &__error {
+    font-size: 14px;
+    color: var(--text_color_error);
+    padding: 0 $textarea-text-paddingX;
+    width: 100%;
+    max-width: $textarea-max-width;
+    white-space: pre-wrap;
+    margin-left: auto;
   }
 }

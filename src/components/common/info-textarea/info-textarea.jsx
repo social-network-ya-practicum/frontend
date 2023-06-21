@@ -62,7 +62,7 @@ const InfoTextrea = ({
         className={styles.textarea__textarea}
         ref={textareaRef}
       />
-      {error && <span className={styles['info-input__error']}>{error}</span>}
+      {error && <span className={styles.textarea__error}>{error}</span>}
     </label>
   );
 };

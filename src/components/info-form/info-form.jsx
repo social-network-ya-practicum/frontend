@@ -6,7 +6,7 @@ import styles from './info-form.module.scss';
 import InfoInput from '../common/info-input/info-input';
 import InfoSelect from '../common/info-select/info-select';
 import InfoTextrea from '../common/info-textarea/info-textarea';
-// import useValidator from '../../hooks/use-validator';
+import useValidator from '../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
@@ -37,7 +37,16 @@ const initialErrors = {
 };
 
 const InfoForm = ({ onSubmit, mix, disabled, user }) => {
-  // const { checkImage } = useValidator();
+  const {
+    checkEmail,
+    checkEmailOnChange,
+    checkText,
+    checkTextOnChange,
+    checkTel,
+    checkTelOnChange,
+    checkTextarea,
+    checkTextareaOnChange,
+  } = useValidator();
 
   const initialInputs = user
     ? {
@@ -61,9 +70,27 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
+    let err = '';
+    if (
+      ['last_name', 'first_name', 'middle_name', 'job_title'].includes(name)
+    ) {
+      err = checkTextOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (name === 'personal_email') {
+      err = checkEmailOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (['corporate_phone_number', 'personal_phone_number'].includes(name)) {
+      err = checkTelOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (name === 'bio') {
+      err = checkTextareaOnChange(value);
+      setError((prev) => ({ ...prev, [name]: err }));
+    }
+    if (err) return;
     setInputValue({ ...inputValue, [name]: value });
-    // if (name === 'email')
-    //   setError((prev) => ({ ...prev, [name]: checkEmailOnChange(value) }));
   };
 
   const handleSubmit = (e) => {
@@ -90,6 +117,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.last_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={checkText}
           error={error.last_name}
           setError={setError}
         />
@@ -100,6 +128,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.first_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={checkText}
           error={error.first_name}
           setError={setError}
         />
@@ -110,6 +139,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.middle_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={checkText}
           error={error.middle_name}
           setError={setError}
         />
@@ -120,6 +150,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.job_title}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={checkText}
           error={error.job_title}
           setError={setError}
         />
@@ -140,6 +171,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.corporate_phone_number}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={checkTel}
           error={error.corporate_phone_number}
           setError={setError}
         />
@@ -150,6 +182,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.personal_email}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={(value) => checkEmail(value, { isRequired: false })}
           error={error.personal_email}
           setError={setError}
         />
@@ -160,6 +193,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.personal_phone_number}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
+          validator={(value) => checkTel(value, { isRequired: false })}
           error={error.personal_phone_number}
           setError={setError}
         />
@@ -175,6 +209,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           title="О себе"
           value={inputValue.bio}
           onChange={onChange}
+          validator={(value) => checkTextarea(value, { isRequired: false })}
           error={error.bio}
           setError={setError}
         />

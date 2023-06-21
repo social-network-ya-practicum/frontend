@@ -3,57 +3,83 @@ import { useCallback } from 'react';
 /**
  * Хук возвращает объект с набором доступных функций-валидаторов {
  *    checkEmail,
- *    checkPassword,
- *    checkImage
  *    checkEmailOnChange,
+ *    checkPassword,
  *    checkPasswordOnChange,
+ *    checkImage
+ *    checkText,
+ *    checkTextOnChange
+ *    checkTel
+ *    checkTelOnChange,
+ *    checkTextarea,
+ *    checkTextareaOnChange,
  * }.
  * Функции  с префиксом OnChange предназначены
  * для немедленной валидации на каждый ввод символа
  *
  * @returns {Object} - объект с функциями-валидаторами
- * @property {Function} -  функция-валидатор, которая возвращает текст ошибки.
+ *
+ * Функции-валидаторы принимают два аргумента - строку для проверки и объект опций.
+ * Для общих функций валидаторов:
+ * @param {string} value - первый аргумент - строка.
+ * @param {Object} options - второй аргумент - объект опций.
+ * @param {number} [options.min] - опция min - минимальная длинна строки
+ * @param {number} [options.max] - опция max - максимальная длинна строки
+ * @param {boolean} [options.isRequired] - опция isRequired указывает на статус поля ввода.
+ * @returns {string} - функция возвращает текст ошибки, либо пустую строку при успешной
+ * валидации
+ *
+ * Для функций валидаторов с постфиксом OnChange:
+ * @param {string} value - первый аргумент - строка.
+ * @param {Object} options - второй аргумент - объект опций.
+ * @param {number} [options.max] - опция max - максимальная длинна строки
+ * @returns {string} - функция возвращает текст ошибки, либо пустую строку при успешной
+ * валидации
  */
 
 function useValidator() {
-  const checkEmail = useCallback((value) => {
-    if (!value) return 'Введите почту';
-    if (value.length < 6) {
-      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
-    }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
-    if (value.startsWith('@')) {
-      return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
-    }
-    if (!/@/.test(value)) {
-      return 'Пропущен обязательный символ @';
-    }
-    if (value.match(/@/g)?.[1]) {
-      return 'Часть адреса после @ не может содержать другие символы @';
-    }
-    if (!/^\w+@\w+\.\w+$/.test(value)) {
-      return 'Некорректный email. Пример ввода user_1@example.com';
-    }
-    if (!/@[^_]+$/.test(value)) {
-      return 'Часть адреса после @ не может содержать символ "_"';
-    }
+  const checkEmail = useCallback(
+    (value, { min = 6, max = 100, isRequired = true } = {}) => {
+      if (!isRequired && !value) return '';
+      if (!value) return 'Поле обязательно для заполнения';
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (value.length > max) {
+        return `Максимальное количество символов: ${max}`;
+      }
+      if (value.startsWith('@')) {
+        return 'Пропущена часть почты слева от символа @';
+      }
+      if (!/@/.test(value)) {
+        return 'Пропущен обязательный символ @';
+      }
+      if (value.match(/@/g)?.[1]) {
+        return 'Часть адреса после @ не может содержать другие символы @';
+      }
+      if (!/^\w+@\w+\.\w+$/.test(value)) {
+        return 'Некорректный email. Пример ввода user_1@example.com';
+      }
+      if (!/@[^_]+$/.test(value)) {
+        return 'Часть адреса после @ не может содержать символ "_"';
+      }
 
-    return '';
-  }, []);
+      return '';
+    },
+    []
+  );
 
-  const checkEmailOnChange = useCallback((value) => {
+  const checkEmailOnChange = useCallback((value, { max = 100 } = {}) => {
     if (/[^\w@.]/.test(value)) {
-      return 'Для ввода почты используйте только латинский алфавит, цифры, нижнее подчеркивание и @';
+      return 'Недопустимый символ ввода';
     }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
+    if (value.length > max) {
+      return `Максимальное количество символов: ${max}`;
     }
 
     if (/@/.test(value)) {
       if (value.startsWith('@')) {
-        return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
+        return 'Пропущена часть почты слева от символа @';
       }
 
       if (value.match(/@/g)?.[1]) {
@@ -67,37 +93,40 @@ function useValidator() {
     return '';
   }, []);
 
-  const checkPassword = useCallback((value) => {
-    if (!value) return 'Введите пароль';
-    if (value.length < 8) {
-      return `Минимальное количество символов: 8. Длинна пароля сейчас: ${value.length}`;
-    }
-    if (value.length > 20) {
-      return `Максимальное количество символов: 20. Длинна пароля сейчас: ${value.length}`;
-    }
-    if (!/^[\w.,!?]+$/.test(value)) {
-      return 'Для ввода почты используйте только латинский алфавит, цифры и перечисленные символы: точка, запятая, нижнее подчёркивание, ?,!';
-    }
-    if (!/[A-Z]/.test(value)) {
-      return 'Обязательна минимум одна заглавная буква';
-    }
-    if (!/[a-z]/.test(value)) {
-      return 'Обязательна минимум одна строчная буква';
-    }
-    if (!/[0-9]/.test(value)) {
-      return 'Обязательна минимум одна цифра';
-    }
-    return '';
-  }, []);
+  const checkPassword = useCallback(
+    (value, { min = 8, max = 20, isRequired = true } = {}) => {
+      if (!isRequired && !value) return '';
+      if (!value) return 'Поле обязательно для заполнения';
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (value.length > max) {
+        return `Максимальное количество символов: ${max}`;
+      }
+      if (!/^[\w.,!?]+$/.test(value)) {
+        return 'Недопустимый символ ввода';
+      }
+      if (!/[A-Z]/.test(value)) {
+        return 'Обязательна минимум одна заглавная буква';
+      }
+      if (!/[a-z]/.test(value)) {
+        return 'Обязательна минимум одна строчная буква';
+      }
+      if (!/[0-9]/.test(value)) {
+        return 'Обязательна минимум одна цифра';
+      }
+      return '';
+    },
+    []
+  );
 
-  const checkPasswordOnChange = useCallback((value) => {
+  const checkPasswordOnChange = useCallback((value, { max = 20 } = {}) => {
     if (/[^\w.,!?]/.test(value)) {
-      return 'Для ввода почты используйте только латинский алфавит, цифры и перечисленные символы: точка, запятая, нижнее подчёркивание, ?,!';
+      return 'Недопустимый символ ввода';
     }
-    if (value.length > 20) {
-      return `Максимальное количество символов: 20. Длинна пароля сейчас: ${value.length}`;
+    if (value.length > max) {
+      return `Максимальное количество символов: ${max}`;
     }
-
     return '';
   }, []);
 
@@ -113,12 +142,97 @@ function useValidator() {
     return '';
   }, []);
 
+  const checkText = useCallback(
+    (value, { min = 2, max = 15, isRequired = true } = {}) => {
+      if (!isRequired && !value) return '';
+      if (!value) return 'Поле обязательно для заполнения';
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (value.length > max) {
+        return `Максимальное количество символов: ${max}`;
+      }
+      if (/[^А-Яа-я-\s]/.test(value)) {
+        return 'Недопустимый символ ввода';
+      }
+      return '';
+    },
+    []
+  );
+
+  const checkTextOnChange = useCallback((value, { max = 15 } = {}) => {
+    if (value.length > max) {
+      return `Максимальное количество символов: ${max}`;
+    }
+    if (/[^А-Яа-я-\s]/.test(value)) {
+      return 'Недопустимый символ ввода';
+    }
+    return '';
+  }, []);
+
+  const checkTel = useCallback(
+    (value, { min = 10, max = 12, isRequired = true } = {}) => {
+      if (!isRequired && !value) return '';
+      if (!value) return 'Поле обязательно для заполнения';
+      if (/[^+\d]/.test(value)) {
+        return 'Недопустимый символ ввода';
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (value.length > max) {
+        return `Максимальное количество символов: ${max}`;
+      }
+
+      return '';
+    },
+    []
+  );
+
+  const checkTelOnChange = useCallback((value, { max = 12 } = {}) => {
+    if (/[^+\d]/.test(value)) {
+      return 'Недопустимый символ ввода';
+    }
+    if (value.length > max) {
+      return `Максимальное количество символов: ${max}`;
+    }
+    return '';
+  }, []);
+
+  const checkTextarea = useCallback(
+    (value, { min = 0, max = 500, isRequired = true } = {}) => {
+      if (!isRequired && !value) return '';
+      if (!value) return 'Поле обязательно для заполнения';
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (value.length > max) {
+        return `Максимальное количество символов: ${max}`;
+      }
+      return '';
+    },
+    []
+  );
+
+  const checkTextareaOnChange = useCallback((value, { max = 500 } = {}) => {
+    if (value.length > max) {
+      return `Максимальное количество символов: ${max}`;
+    }
+    return '';
+  }, []);
+
   return {
     checkEmail,
     checkPassword,
     checkEmailOnChange,
     checkPasswordOnChange,
     checkImage,
+    checkText,
+    checkTextOnChange,
+    checkTel,
+    checkTelOnChange,
+    checkTextarea,
+    checkTextareaOnChange,
   };
 }
 
