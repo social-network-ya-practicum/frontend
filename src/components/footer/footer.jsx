@@ -18,16 +18,16 @@ function Footer({ user, mix }) {
                 </li>
                 {user && (
                   <>
-                  <li>
-                    <NavLink to="/#" className={styles.footer__text}>
-                      Документы
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/#" className={styles.footer__text}>
-                      Реквизиты компании
-                    </NavLink>
-                  </li>
+                    <li>
+                      <NavLink to="/#" className={styles.footer__text}>
+                        Документы
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/#" className={styles.footer__text}>
+                        Реквизиты компании
+                      </NavLink>
+                    </li>
                   </>
                 )}
               </ul>

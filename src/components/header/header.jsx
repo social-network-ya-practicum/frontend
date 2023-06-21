@@ -1,40 +1,35 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
-import { useStore } from '../../contexts/RootStoreContext';
 import { getCookie, deleteCookie } from '../../utils/utils';
 import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
-function Header({ user, mix }) {
-
+function Header({ user, mix, logout }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { userStore } = useStore();
-  const { setError } = userStore;
-  const token = getCookie(TOKEN_NAME);
-  const navigate = useNavigate();
 
   const handleLogout = () => {
+    const token = getCookie(TOKEN_NAME);
+
     // -----------------------------------------------------------------------------
     // После - заменить на запрос из api (mainApi.logout())
+
     fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
       method: 'POST',
       headers: {
         Authorization: `Token ${token}`,
       },
-    })
+    }).catch((err) => console.log(err));
     // ---------------------------------------------------------------
-      .then(() => {
-        deleteCookie(TOKEN_NAME);
-        navigate(0);
-      })
-      .catch((err) => setError(err))
-  }
+
+    deleteCookie(TOKEN_NAME);
+    logout();
+  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -50,8 +45,8 @@ function Header({ user, mix }) {
         handleClose();
       }
     }
-    
-    document.addEventListener('keydown', handleEscapeKey)
+
+    document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
@@ -100,7 +95,7 @@ function Header({ user, mix }) {
                   <li>
                     <div className={styles.header__container}>
                       <NavLink
-                        to={`/${user.email}`}
+                        to={`/${user.id}`}
                         className={styles.header__user}
                       >
                         <p className={styles.header__name}>{user.first_name}</p>
@@ -112,12 +107,20 @@ function Header({ user, mix }) {
                           />
                         </BorderGradient>
                       </NavLink>
-                      <button className={styles['header__menu-button']} type="button" onClick={handleOpenClick}>
-                          <img className={styles['header__img-arrow']} src={Arrow} alt="Настройка профиля" />
+                      <button
+                        className={styles['header__menu-button']}
+                        type="button"
+                        onClick={handleOpenClick}
+                      >
+                        <img
+                          className={styles['header__img-arrow']}
+                          src={Arrow}
+                          alt="Настройка профиля"
+                        />
                       </button>
-                      <Popup isOpen={isOpen} handleClose={handleClose} >
+                      <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
-                          to="/:user/edit"
+                          to={`${user.id}/edit`}
                           className={styles.header__action}
                           onClick={handleClose}
                         >
@@ -147,11 +150,12 @@ export default Header;
 
 Header.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string,
+    id: PropTypes.number,
     first_name: PropTypes.string,
     photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
   }),
   mix: PropTypes.string,
+  logout: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {
