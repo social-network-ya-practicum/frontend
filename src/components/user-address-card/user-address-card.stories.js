@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom';
 import UserAddressCard from './user-address-card';
 
 export default {
@@ -6,17 +7,17 @@ export default {
   tags: ['autodocs'],
 };
 
-export const Example = {
-  args: {
-    info: {
-      firstName: 'Эльвира',
-      middleName: 'Ароновна',
-      lastName: 'Зойкина',
-      position: 'Администратор офиса',
-    },
-    contacts: {
-      jobEmail: 'zoykina@yandex.ru',
-      jobPhone: '+7 926 567 34 34',
-    },
-  },
-};
+export const Example = (args) => (
+  <BrowserRouter>
+    <UserAddressCard
+      id="1"
+      firstName="Эльвира"
+      middleName="Ароновна"
+      lastName="Зойкина"
+      position="Администратор офиса"
+      jobEmail="zoykina@yandex.ru"
+      jobPhone="+7 926 567 34 34"
+      {...args}
+    />
+  </BrowserRouter>
+);
