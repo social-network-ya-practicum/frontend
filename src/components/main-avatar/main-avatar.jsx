@@ -124,7 +124,10 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
       </form>
       <CloseIcon
         className={cnCloseIcon}
-        onClick={() => setSelectedFile(null)}
+        onClick={() => {
+          refInput.current.value = null;
+          setSelectedFile(null);
+        }}
       />
     </div>
   );
