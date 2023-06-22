@@ -1,7 +1,14 @@
 import { useCallback } from 'react';
 
 /**
- * Хук возвращает объект с набором доступных функций-валидаторов. Функции  с префиксом OnChange предназначены
+ * Хук возвращает объект с набором доступных функций-валидаторов {
+ *    checkEmail,
+ *    checkPassword,
+ *    checkImage
+ *    checkEmailOnChange,
+ *    checkPasswordOnChange,
+ * }.
+ * Функции  с префиксом OnChange предназначены
  * для немедленной валидации на каждый ввод символа
  *
  * @returns {Object} - объект с функциями-валидаторами
@@ -10,6 +17,13 @@ import { useCallback } from 'react';
 
 function useValidator() {
   const checkEmail = useCallback((value) => {
+    if (!value) return 'Введите почту';
+    if (value.length < 6) {
+      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
+    }
     if (value.startsWith('@')) {
       return 'Это не полный адрес. Введите его целиком, вместе с той частью, которая находится слева от символа @';
     }
@@ -25,18 +39,16 @@ function useValidator() {
     if (!/@[^_]+$/.test(value)) {
       return 'Часть адреса после @ не может содержать символ "_"';
     }
-    if (value.length < 6) {
-      return `Минимальное количество символов: 6. Длинна текста сейчас: ${value.length}`;
-    }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
+
     return '';
   }, []);
 
   const checkEmailOnChange = useCallback((value) => {
     if (/[^\w@.]/.test(value)) {
       return 'Для ввода почты используйте только латинский алфавит, цифры, нижнее подчеркивание и @';
+    }
+    if (value.length > 100) {
+      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
     }
 
     if (/@/.test(value)) {
@@ -51,13 +63,12 @@ function useValidator() {
         return 'Часть адреса после @ не может содержать символ "_"';
       }
     }
-    if (value.length > 100) {
-      return `Максимальное количество символов: 100. Длинна текста сейчас: ${value.length}`;
-    }
+
     return '';
   }, []);
 
   const checkPassword = useCallback((value) => {
+    if (!value) return 'Введите пароль';
     if (value.length < 8) {
       return `Минимальное количество символов: 8. Длинна пароля сейчас: ${value.length}`;
     }
@@ -90,11 +101,24 @@ function useValidator() {
     return '';
   }, []);
 
+  const checkImage = useCallback((value) => {
+    const maxSize = 5 * 1024 * 1024; // 5 MB
+    const { name, size } = value;
+    if (!/(.jpg)|(.jpeg)$/.test(name)) {
+      return 'Допустимый формат для фото: .jpg, .jpeg';
+    }
+    if (size > maxSize) {
+      return 'Файл слишком большой. Максимальный размер: 5MB';
+    }
+    return '';
+  }, []);
+
   return {
     checkEmail,
     checkPassword,
     checkEmailOnChange,
     checkPasswordOnChange,
+    checkImage,
   };
 }
 

@@ -1,0 +1,26 @@
+.textarea {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    margin-bottom: 12px;
+  }
+
+  &__textarea {
+    resize: none;
+    background: var(--bg_color_primary);
+    border-radius: 16px;
+    max-width: 388px;
+    width: 100%;
+    min-height: 66px;
+    border: none;
+    outline: none;
+    padding: 4px 12px;
+    overflow-y: hidden;
+  }
+}

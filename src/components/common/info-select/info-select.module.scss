@@ -1,0 +1,40 @@
+.select {
+  display: flex;
+  max-width: max-content;
+  position: relative;
+
+  &__box {
+    display: flex;
+    align-items: center;
+    min-width: 83px;
+    height: 28px;
+    background: var(--bg_color_primary);
+    border-radius: 16px;
+    padding: 0 12px;
+  }
+
+  &__value {
+    font-family: var(--font-family-default);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 4px;
+    right: 12px;
+
+    &_up {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

@@ -7,11 +7,11 @@ import { useStore } from '../../../contexts/RootStoreContext';
 
 const MainLayout = observer(() => {
   const { userStore } = useStore();
-  const { user } = userStore;
+  const { user, logout } = userStore;
 
   return (
     <div className={styles.layout}>
-      <Header mix={styles['mix-header']} user={user} />
+      <Header mix={styles['mix-header']} user={user} logout={logout} />
       <main className={styles.layout__content}>
         <Outlet />
       </main>

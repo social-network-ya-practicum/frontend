@@ -1,28 +1,26 @@
 $input-text-padding: 12px;
+$input-max-width: 254px;
 
-.auth-input {
+.info-input {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 388px;
   font-family: var(--font-family-default);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
 
-  &__title {
-    margin-bottom: 6px;
-  }
-
   &__wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: var(--bg_color_default);
-    border-radius: 16px;
-    padding: 0 $input-text-padding;
-    height: 48px;
-    position: relative;
+  }
+
+  &__title {
+    font-size: 14px;
   }
 
   &__input {
@@ -30,9 +28,13 @@ $input-text-padding: 12px;
     align-items: center;
     outline: none;
     border: none;
-    background: none;
+    background: var(--bg_color_primary);
+    border-radius: 16px;
+    height: 28px;
     width: 100%;
-    flex: 1;
+    max-width: $input-max-width;
+    color: var(--text_color_default);
+    padding: 0 $input-text-padding;
 
     &::placeholder {
       color: var(--text_color_placeholder);
@@ -43,20 +45,13 @@ $input-text-padding: 12px;
     }
   }
 
-  &__icon-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    outline: none;
-    background: none;
-    box-shadow: none;
-    margin-left: 12px;
-  }
-
   &__error {
     font-size: 14px;
     color: var(--text_color_error);
-    padding: 4px 0 0 $input-text-padding;
+    padding: 0 $input-text-padding;
+    width: 100%;
+    max-width: $input-max-width;
+    word-break: break-all;
+    margin-left: auto;
   }
 }
