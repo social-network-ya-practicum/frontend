@@ -1,3 +1,5 @@
+import RootStoreContextDecorator from './decorators/RootStoreContextDecorator';
+import rootStore from '../src/store/root-store';
 import '../src/index.scss';
 
 /** @type { import('@storybook/react').Preview } */
@@ -11,6 +13,7 @@ const preview = {
       },
     },
   },
+  decorators: [RootStoreContextDecorator(rootStore)],
 };
 
 export default preview;

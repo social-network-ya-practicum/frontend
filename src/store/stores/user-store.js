@@ -3,13 +3,36 @@ import { getCookie } from '../../utils/utils';
 import { TOKEN_NAME } from '../../utils/settings';
 
 class UserStore {
-  user = null;
+  userRes = null;
 
   isLoading = false;
 
   error = null;
 
   wasUserRequest = false;
+
+  get user() {
+    const user = this.userRes;
+    return user
+      ? {
+          id: user?.id ?? null,
+          last_name: user?.last_name ?? '',
+          first_name: user?.first_name ?? '',
+          middle_name: user?.middle_name ?? '',
+          job_title: user?.job_title ?? '',
+          email: user?.email ?? '',
+          personal_email: user?.personal_email ?? '',
+          corporate_phone_number: user?.corporate_phone_number ?? '',
+          personal_phone_number: user?.personal_phone_number ?? '',
+          birthday_day: user?.birthday_day ? String(user.birthday_day) : '1',
+          birthday_month: user?.birthday_month
+            ? String(user.birthday_month)
+            : '1',
+          bio: user?.bio ?? '',
+          photo: user?.photo ?? null,
+        }
+      : user;
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -21,6 +44,10 @@ class UserStore {
 
   setError = (error) => {
     this.error = error;
+  };
+
+  logout = () => {
+    this.userRes = null;
   };
 
   getUser = async () => {
@@ -55,7 +82,7 @@ class UserStore {
       // -----------------------------------------------------------------------------
 
       runInAction(() => {
-        this.user = res;
+        this.userRes = res;
         this.setIsLoading(false);
         if (!this.wasUserRequest) this.wasUserRequest = true;
       });
