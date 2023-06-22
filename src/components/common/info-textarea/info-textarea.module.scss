@@ -25,6 +25,14 @@ $textarea-max-width: 388px;
     outline: none;
     padding: 4px $textarea-text-paddingX;
     overflow-y: hidden;
+
+    &::placeholder {
+      color: var(--text_color_placeholder);
+    }
+
+    &_type_error {
+      color: var(--text_color_error);
+    }
   }
 
   &__error {

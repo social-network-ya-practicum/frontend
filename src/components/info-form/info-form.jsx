@@ -70,26 +70,24 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    let err = '';
     if (
       ['last_name', 'first_name', 'middle_name', 'job_title'].includes(name)
     ) {
-      err = checkTextOnChange(value);
+      const err = checkTextOnChange(value);
       setError((prev) => ({ ...prev, [name]: err }));
     }
     if (name === 'personal_email') {
-      err = checkEmailOnChange(value);
+      const err = checkEmailOnChange(value);
       setError((prev) => ({ ...prev, [name]: err }));
     }
     if (['corporate_phone_number', 'personal_phone_number'].includes(name)) {
-      err = checkTelOnChange(value);
+      const err = checkTelOnChange(value);
       setError((prev) => ({ ...prev, [name]: err }));
     }
     if (name === 'bio') {
-      err = checkTextareaOnChange(value);
+      const err = checkTextareaOnChange(value);
       setError((prev) => ({ ...prev, [name]: err }));
     }
-    if (err) return;
     setInputValue({ ...inputValue, [name]: value });
   };
 

@@ -177,6 +177,9 @@ function useValidator() {
       if (/[^+\d]/.test(value)) {
         return 'Недопустимый символ ввода';
       }
+      if (!/^\+\d*$/.test(value)) {
+        return 'Недопустимый формат ввода. Следуйте шаблону +7123456789 ';
+      }
       if (value.length < min) {
         return `Минимальное количество символов: ${min}`;
       }
@@ -190,8 +193,13 @@ function useValidator() {
   );
 
   const checkTelOnChange = useCallback((value, { max = 12 } = {}) => {
+    if (!value) return '';
     if (/[^+\d]/.test(value)) {
       return 'Недопустимый символ ввода';
+    }
+
+    if (!/^\+\d*$/.test(value)) {
+      return 'Недопустимый формат ввода. Следуйте шаблону +7123456789 ';
     }
     if (value.length > max) {
       return `Максимальное количество символов: ${max}`;
