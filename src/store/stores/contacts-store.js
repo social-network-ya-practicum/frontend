@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import api from '../../utils/MainApi';
+import api from '../../utils/main-api';
 
 class ContactsStore {
   search = '';

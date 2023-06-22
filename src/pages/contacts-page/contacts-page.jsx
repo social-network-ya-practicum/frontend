@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
 import styles from './contacts-page.module.scss';
 import SearchInput from '../../components/search-input/search-input';
-import UserAddressCard from '../../components/user-address-card/user-address-card';
+import ContactsList from '../../components/contacts-list/contacts-list';
 import usePagingObserver from '../../hooks/use-paging-observer';
 
 const ContactsPage = observer(() => {
@@ -39,19 +39,7 @@ const ContactsPage = observer(() => {
         <p>{contactsStore.error}</p>
       ) : (
         <>
-          {contactsStore.contacts.map((employee) => (
-            <UserAddressCard
-              key={employee.id}
-              id={employee.id}
-              avatar={employee.photo}
-              firstName={employee.first_name}
-              middleName={employee.middle_name}
-              lastName={employee.last_name}
-              position={employee.job_title}
-              jobEmail={employee.email}
-              jobPhone={employee.corporate_phone_number}
-            />
-          ))}
+          <ContactsList contacts={contactsStore.contacts} />
           <div ref={ref} />
         </>
       )}
