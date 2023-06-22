@@ -20,6 +20,9 @@ const InfoTextrea = ({
 
   const id = useId();
   const cnRoot = cn('textarea', mix);
+  const cnTextarea = cn('textarea__textarea', {
+    textarea__textarea_type_error: error,
+  });
 
   useLayoutEffect(() => {
     const el = textareaRef.current;
@@ -59,10 +62,10 @@ const InfoTextrea = ({
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
-        className={styles.textarea__textarea}
+        className={cnTextarea}
         ref={textareaRef}
       />
-      {error && <span className={styles['info-input__error']}>{error}</span>}
+      {error && <span className={styles.textarea__error}>{error}</span>}
     </label>
   );
 };
