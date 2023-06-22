@@ -14,7 +14,7 @@ export const Default = {
 
 export const Example = {
   args: {
-    user: {
+    contact: {
       birthday_day: '14',
       birthday_month: '7',
       bio: 'Люблю бегать по утрам, готовлю вкусный черничный пирог. Уэс Андерсон – мой личный герой.',
@@ -24,7 +24,7 @@ export const Example = {
 
 export const Example2 = {
   args: {
-    user: {
+    contact: {
       birthday_day: '14',
       birthday_month: '7',
       bio: 'Люблю бегать по утрам.',

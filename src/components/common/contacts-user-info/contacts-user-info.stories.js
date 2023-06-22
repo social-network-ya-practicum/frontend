@@ -14,7 +14,7 @@ export const Default = {
 
 export const Example = {
   args: {
-    user: {
+    contact: {
       email: 'user@user.com',
       corporate_phone_number: '+ 7 (495) 999 99 99',
       personal_email: '—',

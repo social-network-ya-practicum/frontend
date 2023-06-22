@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './contacts-user-info.module.scss';
 
-function ContactsUserInfo({ user }) {
+function ContactsUserInfo({ contact }) {
 
   return (
     <section className={styles['contacts-user-info']}>
@@ -14,10 +14,10 @@ function ContactsUserInfo({ user }) {
           <p className={styles['contacts-user-info__text']}>Личный телефон</p>
         </div>
         <div className={styles['contacts-user-info__container']}>
-          <p className={styles['contacts-user-info__value']}>{user.email}</p>
-          <p className={styles['contacts-user-info__value']}>{user.corporate_phone_number}</p>
-          <p className={styles['contacts-user-info__value']}>{user.personal_email}</p>
-          <p className={styles['contacts-user-info__value']}>{user.personal_phone_number}</p>
+          <p className={styles['contacts-user-info__value']}>{contact.email}</p>
+          <p className={styles['contacts-user-info__value']}>{contact.corporate_phone_number}</p>
+          <p className={styles['contacts-user-info__value']}>{contact.personal_email}</p>
+          <p className={styles['contacts-user-info__value']}>{contact.personal_phone_number}</p>
         </div>
       </div>
     </section>
@@ -27,7 +27,7 @@ function ContactsUserInfo({ user }) {
 export default ContactsUserInfo;
 
 ContactsUserInfo.propTypes = {
-  user: PropTypes.shape({
+  contact: PropTypes.shape({
     email: PropTypes.string,
     corporate_phone_number: PropTypes.string,
     personal_email: PropTypes.string,
@@ -36,7 +36,7 @@ ContactsUserInfo.propTypes = {
 };
 
 ContactsUserInfo.defaultProps = {
-  user: {
+  contact: {
     email: '—',
     corporate_phone_number: '—',
     personal_email: '—',

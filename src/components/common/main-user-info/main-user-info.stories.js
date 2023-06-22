@@ -14,10 +14,8 @@ export const Default = {
 
 export const Сolleague = {
   args: {
-    userStore: {
-      id: '2',
-    },
-    user: {
+    id: '2',
+    contact: {
       id: '1',
       photo: null,
       firstName: 'Юлия',
@@ -30,10 +28,8 @@ export const Сolleague = {
 
 export const Me = {
   args: {
-    userStore: {
-      id: '2',
-    },
-    user: {
+    id: '2',
+    contact: {
       id: '2',
       photo: null,
       firstName: 'Юлия',
