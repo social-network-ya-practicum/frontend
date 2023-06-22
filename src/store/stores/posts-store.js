@@ -28,7 +28,25 @@ class PostsStore {
       .catch((err) => console.log(err));
   };
 
-  // addPost = () =>
+  // addPost = (post) => {
+  //   this.isLoading = true;
+  //   api.postUserPost(post)
+
+  // }
+  deletePost = (id) => {
+    api
+      .deletePost(id)
+      .then(() => {
+        this.posts = this.post.filter((post) => post.id !== id);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // editPost = (post) => {
+  //   api.patchUserPost(post)
+  //   .then
+  // }
+  //   likePost
 }
 
 export default new PostsStore();

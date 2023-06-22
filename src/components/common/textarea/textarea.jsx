@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import styles from './textarea.module.scss';
 
-function Textarea({ text, charLimit, isPostChanging }) {
+function Textarea({ value, setValue, charLimit, isPostChanging }) {
   const [textExpanded, setTextExpanded] = useState(false);
 
-  const [value, setValue] = useState(text);
   const [height, setHeight] = useState('auto');
 
   const onChange = (event) => setValue(event.target.value);
@@ -28,7 +27,7 @@ function Textarea({ text, charLimit, isPostChanging }) {
     setHeight(`${target.scrollHeight}px`);
   };
 
-  if (text.length <= charLimit) {
+  if (value.length <= charLimit) {
     return isPostChanging ? (
       <textarea
         className={styles.textarea}
@@ -42,11 +41,11 @@ function Textarea({ text, charLimit, isPostChanging }) {
         id="textarea"
       />
     ) : (
-      <p className={styles.textarea}>{text}</p>
+      <p className={styles.textarea}>{value}</p>
     );
   }
 
-  const limitedText = textExpanded ? text : text.substring(0, charLimit);
+  const limitedText = textExpanded ? value : value.substring(0, charLimit);
 
   return isPostChanging ? (
     <textarea
@@ -78,13 +77,15 @@ function Textarea({ text, charLimit, isPostChanging }) {
 export default Textarea;
 
 Textarea.propTypes = {
-  text: PropTypes.string,
+  value: PropTypes.string,
+  setValue: PropTypes.func.isRequired,
   charLimit: PropTypes.number,
   isPostChanging: PropTypes.bool,
 };
 
 Textarea.defaultProps = {
-  text: 'Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаемся?',
+  value:
+    'Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаемся?',
   charLimit: 300,
   isPostChanging: false,
 };
