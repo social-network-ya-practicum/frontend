@@ -28,7 +28,7 @@ export default ContactsUserInfo;
 
 ContactsUserInfo.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+    email: PropTypes.string,
     corporate_phone_number: PropTypes.string,
     personal_email: PropTypes.string,
     personal_phone_number: PropTypes.string,

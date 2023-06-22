@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './main-user-info.module.scss';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
-import { useStore } from '../../../contexts/RootStoreContext';
 
-function MainUserInfo({ user }) {
-  const { userStore } = useStore();
+function MainUserInfo({ user, userStore }) {
   const isOwn = user.id === userStore.id;
 
   return (
@@ -25,22 +23,25 @@ function MainUserInfo({ user }) {
         <div className={styles['main-user-info__wrapper']}>
           <p className={styles['main-user-info__role']}>{user.job_title}</p>
           { isOwn &&
-          <NavLink
-            to="/:user/edit"
-            className={styles['main-user-info__action']}
-          >
-            Редактировать профиль
-          </NavLink>
+            <NavLink
+              to="/:user/edit"
+              className={styles['main-user-info__action']}
+            >
+              Редактировать профиль
+            </NavLink>
           }
         </div>
       </div>
     </section>
   )
-}
+};
 
 export default MainUserInfo;
 
 MainUserInfo.propTypes = {
+  userStore: PropTypes.shape({
+    id: PropTypes.number,
+  }),
   user: PropTypes.shape({
     id: PropTypes.number,
     photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
@@ -48,16 +49,19 @@ MainUserInfo.propTypes = {
     lastName: PropTypes.string,
     middle_name: PropTypes.string,
     job_title: PropTypes.string,
-  })
+  }),
 };
 
 MainUserInfo.defaultProps = {
+  userStore: {
+    id: '2',
+  },
   user: {
     id: '1',
     photo: null,
-    firstName: 'Юлия',
-    middle_name: 'Сергеевна',
-    lastName: 'Левакова',
-    job_title: 'Бухгалтер',
-  }
+    firstName: 'Имя',
+    middle_name: 'Отчество',
+    lastName: 'Фамилия',
+    job_title: 'Должность',
+  },
 };

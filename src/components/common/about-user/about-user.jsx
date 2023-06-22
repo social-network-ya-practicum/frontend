@@ -3,27 +3,12 @@ import styles from './about-user.module.scss';
 
 function AboutUser({ user }) {
 
-  const months=[
-    'Января',
-    'Февраля',
-    'Марта',
-    'Апреля',
-    'Мая',
-    'Июня',
-    'Июля',
-    'Августа',
-    'Сентября',
-    'Октября',
-    'Ноября',
-    'Декабря',
-  ];
-
   return (
     <section className={styles['about-user']}>
       <h2 className={styles['about-user__title']}>О себе</h2>
       <div className={styles['about-user__birthday']}>
         <p className={styles['about-user__text']}>День рождения</p>
-        <p className={styles['about-user__value']}>{user.birthday_day} {months[user.birthday_month-1]}</p>
+        <p className={styles['about-user__value']}>{user.birthday_day} {user.birthday_month-1}</p>
       </div>
       <p className={styles['about-user__bio']}>{user.bio}</p>
     </section>
