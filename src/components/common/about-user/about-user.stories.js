@@ -8,8 +8,7 @@ export default {
 };
 
 export const Default = {
-  args: {
-  },
+  args: {},
 };
 
 export const Example = {
@@ -18,8 +17,8 @@ export const Example = {
       birthday_day: '14',
       birthday_month: '7',
       bio: 'Люблю бегать по утрам, готовлю вкусный черничный пирог. Уэс Андерсон – мой личный герой.',
-    }
-  }
+    },
+  },
 };
 
 export const Example2 = {
@@ -28,6 +27,6 @@ export const Example2 = {
       birthday_day: '14',
       birthday_month: '7',
       bio: 'Люблю бегать по утрам.',
-    }
-  }
+    },
+  },
 };

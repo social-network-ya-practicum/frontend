@@ -10,32 +10,6 @@ import useValidator from '../../hooks/use-validator';
 
 const cn = classNames.bind(styles);
 
-const initialUser = {
-  last_name: '',
-  first_name: '',
-  middle_name: '',
-  job_title: '',
-  email: '',
-  personal_email: '',
-  corporate_phone_number: '',
-  personal_phone_number: '',
-  birthday_day: '1',
-  birthday_month: 'Январь',
-  bio: '',
-};
-
-const initialErrors = {
-  last_name: '',
-  first_name: '',
-  middle_name: '',
-  job_title: '',
-  email: '',
-  personal_email: '',
-  corporate_phone_number: '',
-  personal_phone_number: '',
-  bio: '',
-};
-
 const InfoForm = ({ onSubmit, mix, disabled, user }) => {
   const {
     checkEmail,
@@ -48,21 +22,42 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     checkTextareaOnChange,
   } = useValidator();
 
-  const initialInputs = user
-    ? {
-        last_name: user.last_name,
-        first_name: user.first_name,
-        middle_name: user.middle_name,
-        job_title: user.job_title,
-        email: user.email,
-        personal_email: user.personal_email,
-        corporate_phone_number: user.corporate_phone_number,
-        personal_phone_number: user.personal_phone_number,
-        birthday_day: user.birthday_day,
-        birthday_month: user.birthday_month,
-        bio: user.bio,
-      }
-    : initialUser;
+  const initialInputs = {
+    last_name: user.last_name,
+    first_name: user.first_name,
+    middle_name: user.middle_name,
+    job_title: user.job_title,
+    email: user.email,
+    personal_email: user.personal_email,
+    corporate_phone_number: user.corporate_phone_number,
+    personal_phone_number: user.personal_phone_number,
+    birthday_day: user.birthday_day,
+    birthday_month: user.birthday_month,
+    bio: user.bio,
+  };
+
+  const initialErrors = {
+    last_name: '',
+    first_name: '',
+    middle_name: '',
+    job_title: '',
+    email: '',
+    personal_email: '',
+    corporate_phone_number: '',
+    personal_phone_number: '',
+    bio: '',
+  };
+
+  const validators = {
+    last_name: checkText,
+    first_name: checkText,
+    middle_name: checkText,
+    job_title: checkText,
+    personal_email: (value) => checkEmail(value, { isRequired: false }),
+    corporate_phone_number: checkTel,
+    personal_phone_number: (value) => checkTel(value, { isRequired: false }),
+    bio: (value) => checkTextarea(value, { isRequired: false }),
+  };
 
   const [inputValue, setInputValue] = useState(initialInputs);
 
@@ -93,7 +88,13 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    let err = false;
+    Object.entries(validators).forEach(([k, func]) => {
+      const errVal = func(inputValue[k]);
+      setError((prev) => ({ ...prev, [k]: errVal }));
+      if (err) err = true;
+    });
+    if (err) return;
     onSubmit();
   };
 
@@ -115,7 +116,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.last_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={checkText}
+          validator={validators.last_name}
           error={error.last_name}
           setError={setError}
         />
@@ -126,7 +127,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.first_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={checkText}
+          validator={validators.first_name}
           error={error.first_name}
           setError={setError}
         />
@@ -137,7 +138,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.middle_name}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={checkText}
+          validator={validators.middle_name}
           error={error.middle_name}
           setError={setError}
         />
@@ -148,7 +149,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.job_title}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={checkText}
+          validator={validators.job_title}
           error={error.job_title}
           setError={setError}
         />
@@ -169,7 +170,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.corporate_phone_number}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={checkTel}
+          validator={validators.corporate_phone_number}
           error={error.corporate_phone_number}
           setError={setError}
         />
@@ -180,7 +181,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.personal_email}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={(value) => checkEmail(value, { isRequired: false })}
+          validator={validators.personal_email}
           error={error.personal_email}
           setError={setError}
         />
@@ -191,7 +192,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           value={inputValue.personal_phone_number}
           onChange={onChange}
           mix={styles[`mix-info-input`]}
-          validator={(value) => checkTel(value, { isRequired: false })}
+          validator={validators.personal_phone_number}
           error={error.personal_phone_number}
           setError={setError}
         />
@@ -207,13 +208,21 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           title="О себе"
           value={inputValue.bio}
           onChange={onChange}
-          validator={(value) => checkTextarea(value, { isRequired: false })}
+          validator={validators.bio}
           error={error.bio}
           setError={setError}
         />
       </fieldset>
       <div className={styles['form__btn-wrapper']}>
-        <Button width="100%" variant="secondary" disabled={disabled}>
+        <Button
+          width="100%"
+          variant="secondary"
+          disabled={disabled}
+          onClick={() => {
+            setInputValue(initialInputs);
+            setError(initialErrors);
+          }}
+        >
           Отменить
         </Button>
         <Button type="submit" width="100%" disabled={disabled}>
@@ -230,11 +239,22 @@ InfoForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   mix: PropTypes.string,
   disabled: PropTypes.bool,
-  user: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.object]),
+  user: PropTypes.shape({
+    last_name: PropTypes.string,
+    first_name: PropTypes.string,
+    middle_name: PropTypes.string,
+    job_title: PropTypes.string,
+    email: PropTypes.string,
+    personal_email: PropTypes.string,
+    corporate_phone_number: PropTypes.string,
+    personal_phone_number: PropTypes.string,
+    birthday_day: PropTypes.string,
+    birthday_month: PropTypes.string,
+    bio: PropTypes.string,
+  }).isRequired,
 };
 
 InfoForm.defaultProps = {
   mix: undefined,
   disabled: false,
-  user: null,
 };

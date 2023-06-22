@@ -22,19 +22,19 @@ function MainUserInfo({ contact, id }) {
         <p className={styles['main-user-info__text']}>Должность</p>
         <div className={styles['main-user-info__wrapper']}>
           <p className={styles['main-user-info__role']}>{contact.job_title}</p>
-          { isOwn &&
+          {isOwn && (
             <NavLink
               to="/:user/edit"
               className={styles['main-user-info__action']}
             >
               Редактировать профиль
             </NavLink>
-          }
+          )}
         </div>
       </div>
     </section>
-  )
-};
+  );
+}
 
 export default MainUserInfo;
 
