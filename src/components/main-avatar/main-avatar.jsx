@@ -61,6 +61,9 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           alt="аватар"
         />
       </picture>
+      <p className={styles.avatar__restriction}>
+        Размер изображения не более 5мб
+      </p>
       <form
         className={styles.form}
         onSubmit={handleSubmit}

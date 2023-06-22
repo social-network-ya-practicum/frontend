@@ -20,7 +20,7 @@ const initialUser = {
   corporate_phone_number: '',
   personal_phone_number: '',
   birthday_day: '1',
-  birthday_month: '1',
+  birthday_month: 'Январь',
   bio: '',
 };
 

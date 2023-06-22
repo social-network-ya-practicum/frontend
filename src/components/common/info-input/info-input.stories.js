@@ -11,7 +11,7 @@ export default {
 
 export const Email = (args) => {
   const [state, setState] = useState({
-    personal_email: '',
+    personal_email: 'tt@tt.ru',
   });
   const [error, setError] = useState({
     personal_email: '',

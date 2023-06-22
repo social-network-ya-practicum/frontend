@@ -14,7 +14,6 @@ $block-width: 357px;
     height: 316px;
     border-radius: 16px;
     background-color: var(--bg_color_default);
-    margin-bottom: 32px;
     overflow: hidden;
   }
 
@@ -26,6 +25,14 @@ $block-width: 357px;
     height: min-content;
     object-position: center;
     object-fit: cover;
+  }
+
+  &__restriction {
+    font-size: 14px;
+    font-family: var(--font-family-default);
+    line-height: 120%;
+    margin: 8px 0 32px 0;
+    align-self: flex-start;
   }
 }
 
