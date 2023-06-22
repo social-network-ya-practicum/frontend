@@ -21,7 +21,6 @@ function Post({ text, author, pubdate, images, likecount }) {
     setIsPopupOpened(!isPopupOpened);
   }
 
-  console.log(handlerDataFormat(`${pubdate}`));
   return (
     <li className={styles.post}>
       <div className={styles.post__info}>

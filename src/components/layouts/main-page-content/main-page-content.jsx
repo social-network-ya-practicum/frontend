@@ -1,32 +1,38 @@
 // import BirthdayPlate from '../../birthday-plate/birthday-plate';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './main-page-content.module.scss';
 import PostInput from '../../common/post-input/post-input';
 import Post from '../../post/post';
-import { getCookie } from '../../../utils/utils';
-import { TOKEN_NAME } from '../../../utils/settings';
+// import { getCookie } from '../../../utils/utils';
+// import { TOKEN_NAME } from '../../../utils/settings';
+// import api from '../../../utils/main-api';
 
-function MainPageContent() {
+const MainPageContent = observer(() => {
   // временнная мера, чтобы начать работу с апи постов
-  const [posts, setPost] = useState([]);
+  // const [posts, setPost] = useState([]);
 
-  const token = getCookie(TOKEN_NAME);
+  // const token = getCookie(TOKEN_NAME);
   // console.log(token)
 
-  useEffect(() => {
-    fetch('https://csn.sytes.net/api/v1/posts?page=1', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setPost(data.results))
-      .catch((err) => console.log(err));
-  }, [token]);
+  const { postsStore } = useStore();
 
-  const postsElements = posts.map((post) => (
+  useEffect(() => {
+    //   fetch('https://csn.sytes.net/api/v1/posts?page=1', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Token ${token}`,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => setPost(data.results))
+    //     .catch((err) => console.log(err));
+    postsStore.getPosts();
+  }, [postsStore]);
+
+  const postsElements = postsStore.posts.map((post) => (
     <Post
       {...post}
       key={post.id}
@@ -37,7 +43,7 @@ function MainPageContent() {
       likecount={post.like_count}
     />
   ));
-  console.log(posts);
+  console.log(postsStore.posts);
 
   return (
     <div className={styles['main-page-content']}>
@@ -53,6 +59,6 @@ function MainPageContent() {
       {/* <BirthdayPlate/> */}
     </div>
   );
-}
+});
 
 export default MainPageContent;
