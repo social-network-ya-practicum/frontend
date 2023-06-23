@@ -137,7 +137,7 @@ function useValidator() {
       return 'Допустимый формат для фото: .jpg, .jpeg';
     }
     if (size > maxSize) {
-      return 'Размер изображения больше 5мб';
+      return 'Размер изображения не более 5мб';
     }
     return '';
   }, []);
