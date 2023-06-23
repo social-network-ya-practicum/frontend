@@ -52,11 +52,22 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     last_name: checkText,
     first_name: checkText,
     middle_name: checkText,
-    job_title: checkText,
+    job_title: (value) => checkText(value, { max: 50 }),
     personal_email: (value) => checkEmail(value, { isRequired: false }),
     corporate_phone_number: checkTel,
     personal_phone_number: (value) => checkTel(value, { isRequired: false }),
     bio: (value) => checkTextarea(value, { isRequired: false }),
+  };
+
+  const validatorsOnChange = {
+    last_name: checkTextOnChange,
+    first_name: checkTextOnChange,
+    middle_name: checkTextOnChange,
+    job_title: (value) => checkTextOnChange(value, { max: 50 }),
+    personal_email: checkEmailOnChange,
+    corporate_phone_number: checkTelOnChange,
+    personal_phone_number: checkTelOnChange,
+    bio: checkTextareaOnChange,
   };
 
   const [inputValue, setInputValue] = useState(initialInputs);
@@ -65,24 +76,8 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (
-      ['last_name', 'first_name', 'middle_name', 'job_title'].includes(name)
-    ) {
-      const err = checkTextOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
-    if (name === 'personal_email') {
-      const err = checkEmailOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
-    if (['corporate_phone_number', 'personal_phone_number'].includes(name)) {
-      const err = checkTelOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
-    if (name === 'bio') {
-      const err = checkTextareaOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
+    const err = validatorsOnChange[name](value);
+    setError((prev) => ({ ...prev, [name]: err }));
     setInputValue({ ...inputValue, [name]: value });
   };
 
