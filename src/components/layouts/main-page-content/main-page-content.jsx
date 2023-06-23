@@ -1,22 +1,42 @@
 // import BirthdayPlate from '../../birthday-plate/birthday-plate';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './main-page-content.module.scss';
 import PostInput from '../../common/post-input/post-input';
 import Post from '../../post/post';
 
-function MainPageContent() {
+const MainPageContent = observer(() => {
+  const { postsStore } = useStore();
+
+  useEffect(() => {
+    postsStore.getPosts();
+  }, [postsStore]);
+
+  const postsElements = postsStore.posts.map((post) => (
+    <Post
+      {...post}
+      post={post}
+      id={post.id}
+      key={post.id}
+      text={post.text}
+      author={post.author}
+      pubdate={post.pub_date}
+      images={post.images[0]}
+      likecount={post.like_count}
+    />
+  ));
+
   return (
     <div className={styles['main-page-content']}>
       <div>
         <PostInput />
-        <ul className={styles['main-page-content__posts']}>
-          <Post />
-          <Post />
-        </ul>
+        <ul className={styles['main-page-content__posts']}>{postsElements}</ul>
       </div>
       <div>Дни рождения</div>
       {/* <BirthdayPlate/> */}
     </div>
   );
-}
+});
 
 export default MainPageContent;
