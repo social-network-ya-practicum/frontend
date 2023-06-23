@@ -234,17 +234,17 @@ class MainApi {
       body: JSON.stringify({
         text: data.text,
         author: {
-          email: data.email,
-          first_name: data.firstName,
-          last_name: data.lastName,
-          middle_name: data.middleName,
-          job_title: data.jobTitle,
-          personal_email: data.personalEmail,
-          corporate_phone_number: data.corporatePhoneNumber,
-          personal_phone_number: data.personalPhoneNumber,
-          bio: data.bio,
+          email: data.author.email,
+          first_name: data.author.firstName,
+          last_name: data.author.lastName,
+          middle_name: data.author.middleName,
+          job_title: data.author.jobTitle,
+          personal_email: data.author.personalEmail,
+          corporate_phone_number: data.author.corporatePhoneNumber,
+          personal_phone_number: data.author.personalPhoneNumber,
+          bio: data.author.bio,
         },
-        images: data.images,
+        images: [{}],
       }),
     }).then((res) => this._checkResponse(res));
 
