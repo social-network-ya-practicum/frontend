@@ -11,10 +11,13 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
-  const [image, setImage] = useState({
-    file: null,
-    prewiev: null,
-  });
+  // const [image, setImage] = useState({
+  //   // file: null,
+  //   // prewiev: null,
+  // });
+
+    const [image, setImage] = useState([]);
+
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
 
@@ -34,10 +37,11 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    setImage({
+    console.log(event.target.files)
+    setImage([{
       file: fileImg,
-      prewiev: URL.createObjectURL(fileImg),
-    });
+      url: URL.createObjectURL(fileImg),
+    }]);
   };
 
   function handleOpenPopup() {
@@ -85,8 +89,13 @@ const PostInput = observer(() => {
   }
 
   function handleAddPost() {
-    console.log({ text: value, author: user, image: image.file });
-    addPost({ text: value, author: user, image: image.file });
+    console.log({ text: value, author: user, images: image });
+    addPost({ text: value, author: user, images: image });
+    setValue('');
+    setIsSmilePopupOpened(false);
+    hanldeCloseActiveInput();
+
+
   }
 
   useEffect(() => {

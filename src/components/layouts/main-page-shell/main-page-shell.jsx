@@ -11,8 +11,6 @@ function MainPageShell() {
   const [data, setData] = useState({});
   const { userStore } = useStore();
   const { user } = userStore;
-  console.log(user);
-  console.log(data);
 
   useEffect(() => {
     api

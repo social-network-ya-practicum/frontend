@@ -5,12 +5,15 @@ import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './main-page-content.module.scss';
 import PostInput from '../../common/post-input/post-input';
 import Post from '../../post/post';
+import { TOKEN_NAME } from '../../../utils/settings';
+import { getCookie } from '../../../utils/utils';
 
 const MainPageContent = observer(() => {
   const { postsStore } = useStore();
   const { posts, getPosts } = postsStore;
 
   useEffect(() => {
+    console.log(getCookie(TOKEN_NAME))
     getPosts();
   }, [getPosts]);
 
