@@ -36,7 +36,11 @@ class MainApi {
         ...this._headers,
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
-    }).then((res) => this._checkResponse(res));
+    }).then((res) => {
+      // временный вариант, проблема с CORS(???) поработать с бэком
+      console.log(res);
+      return this._checkResponse(res);
+    });
 
   /**  Удаляем like */
   deleteLike = (data) =>
