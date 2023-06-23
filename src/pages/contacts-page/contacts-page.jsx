@@ -8,41 +8,46 @@ import usePagingObserver from '../../hooks/use-paging-observer';
 
 const ContactsPage = observer(() => {
   const { contactsStore } = useStore();
+  const {
+    contacts,
+    count,
+    search,
+    page,
+    totalPages,
+    loading,
+    error,
+    resetContacts,
+    setPage,
+    setSearch,
+    getContacts,
+    getNextPage,
+  } = contactsStore;
   const ref = useRef();
 
-  usePagingObserver(
-    ref,
-    contactsStore.loading,
-    contactsStore.page,
-    contactsStore.totalPages,
-    contactsStore.setPage
-  );
+  usePagingObserver(ref, loading, page, totalPages, setPage);
 
-  useEffect(() => () => contactsStore.resetContacts(), [contactsStore]);
+  useEffect(() => () => resetContacts(), [resetContacts]);
 
   useEffect(() => {
-    contactsStore.getContacts();
-  }, [contactsStore, contactsStore.search]);
+    getContacts();
+  }, [getContacts, search]);
 
   useEffect(() => {
-    contactsStore.getNextPage();
-  }, [contactsStore, contactsStore.page]);
+    getNextPage();
+  }, [getNextPage, page]);
 
   return (
     <article>
-      <SearchInput
-        handleChange={contactsStore.setSearch}
-        mix={styles['mix-search-input']}
-      />
-      {contactsStore.error ? (
-        <p>{contactsStore.error}</p>
+      <SearchInput handleChange={setSearch} mix={styles['mix-search-input']} />
+      {error ? (
+        <p>{error}</p>
       ) : (
         <>
-          <ContactsList contacts={contactsStore.contacts} />
+          <ContactsList contacts={contacts} />
           <div ref={ref} />
         </>
       )}
-      {contactsStore.search && !contactsStore.count && !contactsStore.error && (
+      {search && !count && !error && (
         <p>К сожалению, поиск не дал результатов</p>
       )}
     </article>
