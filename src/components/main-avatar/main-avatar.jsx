@@ -69,6 +69,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   });
   const cnImg = cn('avatar__img', {
     avatar__img_type_default: imgSrc === defaultAvatar,
+    avatar__img_clickable: isEditMode && imgSrc === defaultAvatar,
   });
   const cnCloseIcon = cn('avatar__close', {
     avatar__close_disabled: imgSrc === defaultAvatar || !isEditMode,
@@ -76,12 +77,22 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
 
   return (
     <div className={cnMainAvatar}>
-      <button onClick={handleImgClick} tabIndex={-1} className={cnBtnPic}>
+      {imgSrc !== defaultAvatar && (
         <picture className={styles['avatar__img-wrapper']}>
           <source srcSet={imgSrc} media="(min-width: 800px)" />
           <img className={cnImg} src={imgSrc} alt="аватар" />
         </picture>
-      </button>
+      )}
+      {imgSrc === defaultAvatar && (
+        <button onClick={handleImgClick} tabIndex={-1} className={cnBtnPic}>
+          <img className={cnImg} src={imgSrc} alt="аватар" />
+          {isEditMode && (
+            <span className={styles['avatar__default-title']}>
+              Добавить фотографию
+            </span>
+          )}
+        </button>
+      )}
       <p className={styles.avatar__restriction}>
         Размер изображения не более 5мб
       </p>

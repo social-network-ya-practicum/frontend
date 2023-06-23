@@ -12,7 +12,7 @@ const EditPage = observer(() => {
   const { user } = userStore;
 
   // const handleSubmit = useCallback((input) => input, []);
-
+  if (!user) return null;
   return (
     <section className={styles['edit-page']}>
       <MainAvatar
