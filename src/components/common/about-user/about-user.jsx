@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styles from './about-user.module.scss';
 
 function AboutUser({ contact }) {
-
   return (
     <section className={styles['about-user']}>
       <h2 className={styles['about-user__title']}>О себе</h2>

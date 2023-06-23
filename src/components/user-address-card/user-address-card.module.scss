@@ -3,11 +3,16 @@
   font-size: 14px;
   display: flex;
   width: 941px;
-  height: 128px;
+  height: 96px;
   border-radius: 16px;
   background: var(--bg_color_layout);
   padding-left: 24px;
   padding-right: 36px;
+
+  &__link {
+    text-decoration: none;
+    color: var(--text_color_default);
+  }
 
   &__avatarBlock {
     width: 56px;
@@ -15,8 +20,8 @@
     border-radius: 50%;
     background-color: var(--color_ffffff);
     display: flex;
-    margin-top: 36px;
-    margin-bottom: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 24px;
   }
 
@@ -36,12 +41,14 @@
 
   &__fio {
     font-size: 16px;
+    overflow-wrap: anywhere;
   }
 
   &__contact {
     display: flex;
-    align-items: center;
     flex-grow: 2;
+    margin-top: 20px;
+    overflow-wrap: anywhere;
 
     &:nth-child(3) {
       justify-content: left;

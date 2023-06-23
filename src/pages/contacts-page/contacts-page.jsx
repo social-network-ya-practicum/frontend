@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
 import styles from './contacts-page.module.scss';
 import SearchInput from '../../components/search-input/search-input';
-import UserAddressCard from '../../components/user-address-card/user-address-card';
+import ContactsList from '../../components/contacts-list/contacts-list';
 import usePagingObserver from '../../hooks/use-paging-observer';
 
 const ContactsPage = observer(() => {
@@ -19,25 +18,14 @@ const ContactsPage = observer(() => {
     contactsStore.setPage
   );
 
-  useEffect(
-    () => () => {
-      contactsStore.setContacts(null);
-      contactsStore.setSearch('');
-    },
-    [contactsStore]
-  );
+  useEffect(() => () => contactsStore.resetContacts(), [contactsStore]);
 
   useEffect(() => {
     contactsStore.getContacts();
-    return () => {
-      contactsStore.setPage(1);
-    };
   }, [contactsStore, contactsStore.search]);
 
   useEffect(() => {
-    if (contactsStore.page > 1) {
-      contactsStore.getNextPage();
-    }
+    contactsStore.getNextPage();
   }, [contactsStore, contactsStore.page]);
 
   return (
@@ -51,33 +39,13 @@ const ContactsPage = observer(() => {
         <p>{contactsStore.error}</p>
       ) : (
         <>
-          {contactsStore.contacts?.results.map((employee) => (
-            <Link
-              key={employee.id}
-              to={`/contacts/${employee.id}`}
-              className={styles.contactsPage__link}
-            >
-              <UserAddressCard
-                avatar={employee.photo}
-                info={{
-                  firstName: employee.first_name,
-                  middleName: employee.middle_name,
-                  lastName: employee.last_name,
-                  position: employee.job_title,
-                }}
-                contacts={{
-                  jobEmail: employee.email,
-                  jobPhone: employee.corporate_phone_number,
-                }}
-              />
-            </Link>
-          ))}
+          <ContactsList contacts={contactsStore.contacts} />
           <div ref={ref} />
         </>
       )}
-      {contactsStore.search &&
-        !contactsStore.contacts?.count &&
-        !contactsStore.error && <p>К сожалению, поиск не дал результатов</p>}
+      {contactsStore.search && !contactsStore.count && !contactsStore.error && (
+        <p>К сожалению, поиск не дал результатов</p>
+      )}
     </article>
   );
 });

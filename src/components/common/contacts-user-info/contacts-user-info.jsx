@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styles from './contacts-user-info.module.scss';
 
 function ContactsUserInfo({ contact }) {
-
   return (
     <section className={styles['contacts-user-info']}>
       <h2 className={styles['contacts-user-info__title']}>Контакты</h2>

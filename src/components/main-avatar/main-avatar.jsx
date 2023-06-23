@@ -5,6 +5,7 @@ import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
 import defaultAvatar from '../../image/defaultAvatar.svg';
+import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
 
 const cn = classNames.bind(styles);
 
@@ -13,54 +14,77 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   const refInput = useRef(null);
   const { checkImage } = useValidator();
 
-  const [file, setFile] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(avatar);
   const [error, setError] = useState('');
   // @TODO: после ответа дизайнеров, вывести ошибку
   console.log('err', error);
 
-  const handleBtnClick = () => {
-    setFile(null);
+  const imgSrc = selectedFile ?? defaultAvatar;
+
+  const handleEditBtnClick = () => {
     setError('');
-    refInput.current.value = null;
+    setIsEditMode(true);
+    refInput.current.click();
+  };
+
+  const handleImgClick = () => {
+    if (!isEditMode) return;
+    setError('');
     refInput.current.click();
   };
 
   const onChange = (e) => {
-    const value = e.target.files[0];
-    const err = checkImage(value);
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const err = checkImage(file);
     if (err) {
       setError(err);
       return;
     }
-    setFile(value);
-    // setTimeout - для того, чтобы отработал setFile(value)
-    // и в handleSubmit переменная file была не null
-    setTimeout(() =>
-      refForm.current.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true })
-      )
-    );
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const imageDataURL = event.target.result;
+      setSelectedFile(imageDataURL);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', file);
-    onSubmit(formData);
+    console.log(111);
+    onSubmit(selectedFile);
+  };
+
+  const handleCancelEdit = () => {
+    setSelectedFile(avatar);
+    setError('');
+    setIsEditMode(false);
   };
 
   const cnMainAvatar = cn('avatar', mix);
+  const cnBtnPic = cn('avatar__btn-picture', {
+    'avatar__btn-picture_clickable': isEditMode,
+  });
+  const cnImg = cn('avatar__img', {
+    avatar__img_type_default: imgSrc === defaultAvatar,
+  });
+  const cnCloseIcon = cn('avatar__close', {
+    avatar__close_disabled: imgSrc === defaultAvatar || !isEditMode,
+  });
 
   return (
     <div className={cnMainAvatar}>
-      <picture className={styles['avatar__img-wrapper']}>
-        <source srcSet={avatar ?? defaultAvatar} media="(min-width: 800px)" />
-        <img
-          className={styles.avatar__img}
-          src={avatar ?? defaultAvatar}
-          alt="аватар"
-        />
-      </picture>
+      <button onClick={handleImgClick} tabIndex={-1} className={cnBtnPic}>
+        <picture className={styles['avatar__img-wrapper']}>
+          <source srcSet={imgSrc} media="(min-width: 800px)" />
+          <img className={cnImg} src={imgSrc} alt="аватар" />
+        </picture>
+      </button>
+      <p className={styles.avatar__restriction}>
+        Размер изображения не более 5мб
+      </p>
       <form
         className={styles.form}
         onSubmit={handleSubmit}
@@ -77,10 +101,31 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           onChange={onChange}
           ref={refInput}
         />
-        <Button width="100%" disabled={disabled} onClick={handleBtnClick}>
-          Добавить фотографию
-        </Button>
+        {!isEditMode && (
+          <Button width="100%" onClick={handleEditBtnClick}>
+            Редактировать фотографию
+          </Button>
+        )}
+        {isEditMode && (
+          <div className={styles['form__btn-wrapper']}>
+            <Button
+              width="100%"
+              variant="secondary"
+              disabled={disabled}
+              onClick={handleCancelEdit}
+            >
+              Отменить
+            </Button>
+            <Button type="submit" width="100%" disabled={disabled}>
+              Сохранить
+            </Button>
+          </div>
+        )}
       </form>
+      <CloseIcon
+        className={cnCloseIcon}
+        onClick={() => setSelectedFile(null)}
+      />
     </div>
   );
 };

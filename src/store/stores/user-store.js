@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getCookie } from '../../utils/utils';
-import { TOKEN_NAME } from '../../utils/settings';
+import { TOKEN_NAME, dates } from '../../utils/settings';
 
 class UserStore {
   userRes = null;
@@ -26,8 +26,8 @@ class UserStore {
           personal_phone_number: user?.personal_phone_number ?? '',
           birthday_day: user?.birthday_day ? String(user.birthday_day) : '1',
           birthday_month: user?.birthday_month
-            ? String(user.birthday_month)
-            : '1',
+            ? dates[user.birthday_month].month
+            : 'Январь',
           bio: user?.bio ?? '',
           photo: user?.photo ?? null,
         }
