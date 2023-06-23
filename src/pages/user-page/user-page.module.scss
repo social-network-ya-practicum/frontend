@@ -1,0 +1,19 @@
+.user-page {
+  display: flex;
+  padding: 44px 72px;
+  gap: 32px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__post {
+    width: 100%;
+    margin: 32px 0 0 0;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+  }
+}

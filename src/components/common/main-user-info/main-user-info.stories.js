@@ -8,8 +8,7 @@ export default {
 };
 
 export const Default = {
-  args: {
-  },
+  args: {},
 };
 
 export const Сolleague = {
@@ -23,7 +22,7 @@ export const Сolleague = {
       lastName: 'Левакова',
       job_title: 'Бухгалтер',
     },
-  }
+  },
 };
 
 export const Me = {
@@ -37,5 +36,5 @@ export const Me = {
       lastName: 'Левакова',
       job_title: 'Бухгалтер',
     },
-  }
+  },
 };

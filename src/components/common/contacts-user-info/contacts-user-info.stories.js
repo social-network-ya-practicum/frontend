@@ -8,8 +8,7 @@ export default {
 };
 
 export const Default = {
-  args: {
-  },
+  args: {},
 };
 
 export const Example = {
@@ -19,6 +18,6 @@ export const Example = {
       corporate_phone_number: '+ 7 (495) 999 99 99',
       personal_email: '—',
       personal_phone_number: '—',
-    }
-  }
+    },
+  },
 };
