@@ -38,3 +38,17 @@ export const deleteCookie = (...args) => {
     })
   );
 };
+
+export const debounce = (callee, timeoutMs) => {
+  let previousCall;
+  let lastCall;
+  let lastCallTimer;
+  return (...args) => {
+    if (lastCall) previousCall = lastCall;
+    lastCall = Date.now();
+    if (previousCall && lastCall - previousCall <= timeoutMs) {
+      clearTimeout(lastCallTimer);
+    }
+    lastCallTimer = setTimeout(() => callee(...args), timeoutMs);
+  };
+};

@@ -31,7 +31,6 @@ const ContactsPage = observer(() => {
   return (
     <article>
       <SearchInput
-        value={contactsStore.search}
         handleChange={contactsStore.setSearch}
         mix={styles['mix-search-input']}
       />
