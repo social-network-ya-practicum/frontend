@@ -1,6 +1,6 @@
 // import { useCallback } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import styles from './user-page.module.scss';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -13,14 +13,18 @@ const UserPage = observer(() => {
   const { userStore, contactStore } = useStore();
   const { user } = userStore;
   const contactId = useParams();
-  const { contact } = contactStore;
+  const { contact, getContact } = contactStore;
+  const location = useLocation();
 
   useEffect(() => {
-    contactStore.getContact(contactId.user);
+    if (location.pathname === `/contacts/${contactId.contactId}`) {
+      getContact(contactId.contactId);
+    }
+    getContact(contactId.userId);
   },
-    [contactId, contactStore]
+    [contactId, getContact, location]
   );
-
+  
   // --------------------------------------------------------
   // Добавить после изменения компонента Post
   /* 
