@@ -1,7 +1,12 @@
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 
-function PostInput() {
+const PostInput = observer(() => {
+  const { userStore, postsStore } = useStore();
+  const { user } = userStore;
+
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
@@ -76,6 +81,11 @@ function PostInput() {
       file: null,
       prewiev: null,
     });
+  }
+
+  function handleAddPost() {
+    console.log({ text: value, author: user, image: image.file });
+    postsStore.addPost({ text: value, author: user, image: image.file });
   }
 
   useEffect(() => {
@@ -185,7 +195,7 @@ function PostInput() {
               <button
                 type="button"
                 className={styles['post-input__btn']}
-                onClick={hanldeCloseActiveInput}
+                onClick={handleAddPost}
               >
                 Опубликовать
               </button>
@@ -202,6 +212,6 @@ function PostInput() {
       </form>
     </div>
   );
-}
+});
 
 export default PostInput;

@@ -28,11 +28,19 @@ class PostsStore {
       .catch((err) => console.log(err));
   };
 
-  // addPost = (post) => {
-  //   this.isLoading = true;
-  //   api.postUserPost(post)
+  addPost = (post) => {
+    this.isLoading = true;
+    api
+      .postUserPost(post)
+      .then((newPost) => {
+        runInAction(() => {
+          this.posts.push(newPost);
+          this.isLoading = false;
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
-  // }
   deletePost = (id) => {
     api
       .deletePost(id)
