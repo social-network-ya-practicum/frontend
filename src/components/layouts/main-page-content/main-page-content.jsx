@@ -8,12 +8,13 @@ import Post from '../../post/post';
 
 const MainPageContent = observer(() => {
   const { postsStore } = useStore();
+  const { posts, getPosts } = postsStore;
 
   useEffect(() => {
-    postsStore.getPosts();
-  }, [postsStore]);
+    getPosts();
+  }, [getPosts]);
 
-  const postsElements = postsStore.posts.map((post) => (
+  const postsElements = posts.map((post) => (
     <Post
       {...post}
       post={post}

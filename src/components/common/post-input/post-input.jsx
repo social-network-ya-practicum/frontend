@@ -6,6 +6,7 @@ import styles from './post-input.module.scss';
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
   const { user } = userStore;
+  const { addPost } = postsStore;
 
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
@@ -85,7 +86,7 @@ const PostInput = observer(() => {
 
   function handleAddPost() {
     console.log({ text: value, author: user, image: image.file });
-    postsStore.addPost({ text: value, author: user, image: image.file });
+    addPost({ text: value, author: user, image: image.file });
   }
 
   useEffect(() => {

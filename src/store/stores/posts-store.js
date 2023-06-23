@@ -34,7 +34,7 @@ class PostsStore {
       .postUserPost(post)
       .then((newPost) => {
         runInAction(() => {
-          this.posts.push(newPost);
+          this.posts.unshift(newPost);
           this.isLoading = false;
         });
       })

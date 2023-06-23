@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './profile-block.module.scss';
 
-function ProfileBlock({ avatar, info, role }) {
+function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
   return (
     <div className={styles['profile-block']}>
       <div className={styles['profile-block__photo']}>
@@ -14,12 +14,12 @@ function ProfileBlock({ avatar, info, role }) {
         )}
       </div>
       <h2 className={styles['profile-block__name']}>
-        {info.firstName} {info.lastName}
+        {firstName} {lastName}
       </h2>
       <p className={styles['profile-block__role']}>{role}</p>
       <div className={styles['profile-block__item']}>
         <p className={styles['profile-block__text']}>Публикации</p>
-        <span className={styles['profile-block__span']}>8</span>
+        <span className={styles['profile-block__span']}>{postsCount}</span>
       </div>
     </div>
   );
@@ -30,17 +30,15 @@ export default ProfileBlock;
 ProfileBlock.propTypes = {
   role: PropTypes.string,
   avatar: PropTypes.string,
-  info: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-  }),
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  postsCount: PropTypes.number,
 };
 
 ProfileBlock.defaultProps = {
   role: 'Бухгалтер',
   avatar: '',
-  info: {
-    firstName: 'Юлия',
-    lastName: 'Леденцова',
-  },
+  firstName: 'Юлия',
+  lastName: 'Леденцова',
+  postsCount: 8,
 };
