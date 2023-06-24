@@ -11,12 +11,12 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
-  // const [image, setImage] = useState({
-  //   // file: null,
-  //   // prewiev: null,
-  // });
+  const [image, setImage] = useState({
+    file: null,
+    url: null,
+  });
 
-  const [image, setImage] = useState([]);
+  // const [image, setImage] = useState([]);
 
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
@@ -37,14 +37,26 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    console.log(event.target.files);
-    setImage([
-      {
-        file: fileImg,
-        url: URL.createObjectURL(fileImg),
-      },
-    ]);
+    setImage({
+      file: fileImg,
+    });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage({
+        url: reader.result,
+      });
+    };
+    reader.readAsDataURL(fileImg);
+
+    // setImage(
+    //   {
+    //     file: fileImg,
+    //     url: URL.createObjectURL(fileImg),
+    //   },
+    // );
   };
+
+  console.log(image);
 
   function handleOpenPopup() {
     setIsSmilePopupOpened(!isSmilePopupOpened);
@@ -165,11 +177,11 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
-            {image.prewiev && (
+            {image.url && (
               <div className={styles['post-input__prewiev']}>
                 <img
                   className={styles['post-input__img']}
-                  src={image.prewiev}
+                  src={image.url}
                   alt="превью"
                 />
                 <button

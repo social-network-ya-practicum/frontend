@@ -38,6 +38,10 @@ const Post = observer(
       setIsPostchanging(false);
     }
 
+    function handleLikePost() {
+      console.log('меня лайкнули');
+    }
+
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
@@ -63,7 +67,9 @@ const Post = observer(
 
         {!isPostChanging ? (
           <div className={styles['post__like-container']}>
-            <button className={styles.post__like}> </button>
+            <button className={styles.post__like} onClick={handleLikePost}>
+              {' '}
+            </button>
             <span className={styles['post__like-countner']}>{likecount}</span>
           </div>
         ) : (
