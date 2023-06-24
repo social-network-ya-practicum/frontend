@@ -13,7 +13,7 @@ const PostInput = observer(() => {
   const [activeInput, setActiveInput] = useState(false);
   const [image, setImage] = useState({
     file: null,
-    url: null,
+    image_link: null,
   });
 
   // const [image, setImage] = useState([]);
@@ -43,7 +43,7 @@ const PostInput = observer(() => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setImage({
-        url: reader.result,
+        image_link: reader.result,
       });
     };
     reader.readAsDataURL(fileImg);
@@ -103,8 +103,8 @@ const PostInput = observer(() => {
   }
 
   function handleAddPost() {
-    console.log({ text: value, author: user, images: image });
-    addPost({ text: value, author: user, images: image });
+    console.log({ text: value, author: user, images: [image] });
+    addPost({ text: value, author: user, images: [image] });
     setValue('');
     setIsSmilePopupOpened(false);
     hanldeCloseActiveInput();
@@ -177,11 +177,11 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
-            {image.url && (
+            {image.image_link && (
               <div className={styles['post-input__prewiev']}>
                 <img
                   className={styles['post-input__img']}
-                  src={image.url}
+                  src={image.image_link}
                   alt="превью"
                 />
                 <button
