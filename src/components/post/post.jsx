@@ -101,15 +101,14 @@ const Post = observer(
             isPopupOpened && styles.post__actions_active
           }`}
         >
-          {!admin ||
-            (admin && currentUser.id === author.id && (
-              <button
-                className={`${styles.post__action}  ${styles.post__action_type_edit}`}
-                onClick={handleEditClick}
-              >
-                Редактировать пост
-              </button>
-            ))}
+          {currentUser.id === author.id && (
+            <button
+              className={`${styles.post__action}  ${styles.post__action_type_edit}`}
+              onClick={handleEditClick}
+            >
+              Редактировать пост
+            </button>
+          )}
           <button
             className={`${styles.post__action}  ${styles.post__action_type_delete}`}
             onClick={handleDeleteClick}
