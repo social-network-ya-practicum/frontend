@@ -16,7 +16,7 @@ const PostInput = observer(() => {
   //   // prewiev: null,
   // });
 
-    const [image, setImage] = useState([]);
+  const [image, setImage] = useState([]);
 
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
@@ -37,11 +37,13 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    console.log(event.target.files)
-    setImage([{
-      file: fileImg,
-      url: URL.createObjectURL(fileImg),
-    }]);
+    console.log(event.target.files);
+    setImage([
+      {
+        file: fileImg,
+        url: URL.createObjectURL(fileImg),
+      },
+    ]);
   };
 
   function handleOpenPopup() {
@@ -94,8 +96,6 @@ const PostInput = observer(() => {
     setValue('');
     setIsSmilePopupOpened(false);
     hanldeCloseActiveInput();
-
-
   }
 
   useEffect(() => {

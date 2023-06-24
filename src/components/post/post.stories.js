@@ -14,6 +14,18 @@ export const DefaultPost = {
     pubdate: '2019-08-24',
     images: '',
     likecount: '18',
+    admin: false,
+  },
+};
+
+export const DefaultPostWithAdminView = {
+  args: {
+    text: 'Админ, Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаем?',
+    author: 'Тамара Райкина',
+    pubdate: '2019-08-24',
+    images: '',
+    likecount: '123',
+    admin: true,
   },
 };
 
@@ -25,6 +37,7 @@ export const PostWithImage = {
     images:
       'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
     likecount: '30',
+    admin: false,
   },
 };
 
@@ -35,6 +48,7 @@ export const PostWithLongText = {
     pubdate: '2021-11-11',
     images: '',
     likecount: '4',
+    admin: false,
   },
 };
 
@@ -46,5 +60,6 @@ export const PostWithLongTextAndImg = {
     images:
       'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
     likecount: '146',
+    admin: false,
   },
 };

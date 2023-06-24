@@ -13,7 +13,7 @@ const MainPageContent = observer(() => {
   const { posts, getPosts } = postsStore;
 
   useEffect(() => {
-    console.log(getCookie(TOKEN_NAME))
+    console.log(getCookie(TOKEN_NAME));
     getPosts();
   }, [getPosts]);
 
