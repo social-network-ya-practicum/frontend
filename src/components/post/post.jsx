@@ -7,7 +7,7 @@ import Textarea from '../common/textarea/textarea';
 import { handlerDataFormat } from '../../utils/data-format';
 
 const Post = observer(
-  ({ text, author, pubdate, images, likecount, id, admin }) => {
+  ({ text, author, pubdate, images, likecount, id, admin, currentUser }) => {
     const [value, setValue] = useState(text);
     const [isPostChanging, setIsPostchanging] = useState(false);
     const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -90,23 +90,26 @@ const Post = observer(
         )}
         {/* кнопка редактировать и попап */}
 
-        <button className={styles.post__edit} onClick={handleOpenPopup}>
-          {' '}
-        </button>
+        {(admin || currentUser.id === author.id) && (
+          <button className={styles.post__edit} onClick={handleOpenPopup}>
+            {' '}
+          </button>
+        )}
 
         <div
           className={`${styles.post__actions} ${
             isPopupOpened && styles.post__actions_active
           }`}
         >
-          {!admin && (
-            <button
-              className={`${styles.post__action}  ${styles.post__action_type_edit}`}
-              onClick={handleEditClick}
-            >
-              Редактировать пост
-            </button>
-          )}
+          {!admin ||
+            (admin && currentUser.id === author.id && (
+              <button
+                className={`${styles.post__action}  ${styles.post__action_type_edit}`}
+                onClick={handleEditClick}
+              >
+                Редактировать пост
+              </button>
+            ))}
           <button
             className={`${styles.post__action}  ${styles.post__action_type_delete}`}
             onClick={handleDeleteClick}
@@ -123,20 +126,34 @@ export default Post;
 
 Post.propTypes = {
   text: PropTypes.string,
-  author: PropTypes.string,
+  author: PropTypes.shape({
+    id: PropTypes.number,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+  }),
   pubdate: PropTypes.instanceOf(Date),
   images: PropTypes.string,
   likecount: PropTypes.number,
   id: PropTypes.number,
   admin: PropTypes.bolean,
+  currentUser: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 };
 
 Post.defaultProps = {
   text: 'Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаемся?',
-  author: 'Тамара Райкина',
+  author: {
+    id: 1,
+    first_name: 'Томара',
+    last_name: 'Райкина',
+  },
   pubdate: '2019-08-24',
   images: '',
   likecount: 18,
   id: 1,
   admin: false,
+  currentUser: {
+    id: 1,
+  },
 };
