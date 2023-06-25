@@ -42,10 +42,14 @@ class PostsStore {
   };
 
   deletePost = (id) => {
+    this.isLoading = true;
     api
       .deletePost(id)
       .then(() => {
-        this.posts = this.post.filter((post) => post.id !== id);
+        runInAction(() => {
+          this.posts = this.post.filter((post) => post.id !== id);
+          this.isLoading = false;
+        });
       })
       .catch((err) => console.log(err));
   };

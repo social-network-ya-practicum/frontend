@@ -9,8 +9,9 @@ import { TOKEN_NAME } from '../../../utils/settings';
 import { getCookie } from '../../../utils/utils';
 
 const MainPageContent = observer(() => {
-  const { postsStore } = useStore();
+  const { postsStore, userStore } = useStore();
   const { posts, getPosts } = postsStore;
+  const { user } = userStore;
 
   useEffect(() => {
     console.log(getCookie(TOKEN_NAME));
@@ -26,8 +27,9 @@ const MainPageContent = observer(() => {
       text={post.text}
       author={post.author}
       pubdate={post.pub_date}
-      images={post.images[0]}
+      images={post.images}
       likecount={post.like_count}
+      currentUser={user}
     />
   ));
 

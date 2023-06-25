@@ -56,8 +56,6 @@ const PostInput = observer(() => {
     // );
   };
 
-  console.log(image);
-
   function handleOpenPopup() {
     setIsSmilePopupOpened(!isSmilePopupOpened);
   }
@@ -72,7 +70,7 @@ const PostInput = observer(() => {
     return arr;
   }
 
-  // console.log(file);
+  console.log(image.file);
   // console.log(isSmilePopupOpened);
 
   const onChange = (event) => setValue(event.target.value);
@@ -98,14 +96,22 @@ const PostInput = observer(() => {
   function handleCancelfile() {
     setImage({
       file: null,
-      prewiev: null,
+      image_link: null,
     });
   }
 
   function handleAddPost() {
-    console.log({ text: value, author: user, images: [image] });
+    console.log({
+      text: value,
+      author: user,
+      images:
+        image.file === null ? [{ image_link: image.image_link }] : [image],
+    });
+    // console.log({ text: value, author: user, images: [image] })
+
     addPost({ text: value, author: user, images: [image] });
     setValue('');
+    handleCancelfile();
     setIsSmilePopupOpened(false);
     hanldeCloseActiveInput();
   }
@@ -158,6 +164,7 @@ const PostInput = observer(() => {
             onInput={handleInput}
             rows={1}
             style={textStyle}
+            value={value}
           />
 
           {!activeInput && (

@@ -13,6 +13,7 @@ const Post = observer(
     const [isPopupOpened, setIsPopupOpened] = useState(false);
 
     const { postsStore } = useStore();
+    const { getPosts } = postsStore;
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -30,6 +31,7 @@ const Post = observer(
 
     function handleDeleteClick() {
       postsStore.deletePost(id);
+      getPosts();
     }
 
     function handleSaveChange() {
@@ -56,7 +58,9 @@ const Post = observer(
           </div>
         </div>
 
-        {images && <img src={images} alt="" className={styles.post__img} />}
+        {images[0] && (
+          <img src={images[0].image_link} alt="" className={styles.post__img} />
+        )}
         <Textarea
           // text={text}
           charLimit={300}
@@ -159,6 +163,6 @@ Post.defaultProps = {
   id: 1,
   admin: false,
   currentUser: {
-    id: 1,
+    id: 4,
   },
 };
