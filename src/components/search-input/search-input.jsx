@@ -1,21 +1,33 @@
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import SearchIcon from './search-icon.svg';
 import CanselIcon from './cansel-icon.svg';
+import { debounce } from '../../utils/utils';
 import styles from './search-input.module.scss';
 
 const cn = classNames.bind(styles);
 
-function SearchInput({ value, handleChange, mix }) {
+function SearchInput({ handleChange, mix }) {
+  const [search, setSearch] = useState('');
   const cnSearchInput = cn('searchInput', mix);
+
+  const debounceHandleChange = useMemo(
+    () => debounce(handleChange, 250),
+    [handleChange]
+  );
+
+  useEffect(() => {
+    debounceHandleChange(search);
+  }, [debounceHandleChange, search]);
 
   const onHandleEvent = (e) => {
     switch (e.target.name) {
       case 'search':
-        handleChange(e.target.value);
+        setSearch(e.target.value);
         break;
       case 'close':
-        handleChange('');
+        setSearch('');
         break;
       default:
     }
@@ -29,11 +41,11 @@ function SearchInput({ value, handleChange, mix }) {
         name="search"
         className={styles.searchInput__input}
         placeholder="Должность или фамилия сотрудника"
-        value={value}
+        value={search}
         onChange={onHandleEvent}
         autoComplete="search"
       />
-      {value && (
+      {search && (
         <button className={styles.searchInput__close} onClick={onHandleEvent}>
           <img src={CanselIcon} alt="cansel" name="close" />
         </button>
@@ -45,7 +57,6 @@ function SearchInput({ value, handleChange, mix }) {
 export default SearchInput;
 
 SearchInput.propTypes = {
-  value: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   mix: PropTypes.string,
 };
