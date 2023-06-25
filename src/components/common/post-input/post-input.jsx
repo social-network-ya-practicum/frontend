@@ -70,7 +70,7 @@ const PostInput = observer(() => {
     return arr;
   }
 
-  console.log(image.file);
+  // console.log(image.image_link);
   // console.log(isSmilePopupOpened);
 
   const onChange = (event) => setValue(event.target.value);
@@ -101,15 +101,19 @@ const PostInput = observer(() => {
   }
 
   function handleAddPost() {
-    console.log({
-      text: value,
-      author: user,
-      images:
-        image.file === null ? [{ image_link: image.image_link }] : [image],
-    });
+    // console.log({
+    //   text: value,
+    //   author: user,
+    //   images:
+    //     image.file === null ? [{}] : [image],
+    // });
     // console.log({ text: value, author: user, images: [image] })
 
-    addPost({ text: value, author: user, images: [image] });
+    addPost({
+      text: value,
+      author: user,
+      images: image.file === null ? [] : [image],
+    });
     setValue('');
     handleCancelfile();
     setIsSmilePopupOpened(false);
@@ -158,6 +162,7 @@ const PostInput = observer(() => {
             className={styles['post-input__input']}
             type="text"
             placeholder="Напишите сообщение..."
+            minLength={1}
             maxLength={2000}
             onClick={hanldeActiveInput}
             onChange={handleChange}
