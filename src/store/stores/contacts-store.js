@@ -1,16 +1,14 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
+import api from '../../utils/main-api';
 
 class ContactsStore {
-  // Заглушка для токена, в дальнейшем будем брать из куков
-  token = 'Token 600e5fa5739de7d4b0902ec01cd63f500b111203';
-
   search = '';
 
   page = 1;
 
-  totalPages = 0;
+  contacts = [];
 
-  contacts = null;
+  count = 0;
 
   error = '';
 
@@ -18,6 +16,10 @@ class ContactsStore {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.count / 5);
   }
 
   setSearch = (value) => {
@@ -28,68 +30,50 @@ class ContactsStore {
     this.page = value;
   };
 
-  setTotalPages = (value) => {
-    this.totalPages = value;
-  };
-
-  setContacts = (data) => {
-    this.contacts = data;
-  };
-
-  setError = (error) => {
-    this.error = error;
-  };
-
-  setLoading = (value) => {
-    this.loading = value;
+  resetContacts = () => {
+    this.contacts = [];
   };
 
   getContacts = () => {
-    this.setLoading(true);
-    fetch(
-      `https://csn.sytes.net/api/v1/addressbook?page=1&search=${this.search}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${this.token}`,
-        },
-      }
-    )
-      .then((response) => response.json())
+    this.loading = true;
+    if (this.page > 1) this.page = 1;
+    api
+      .getAddressBook(`?page=1&search=${this.search}`)
       .then((data) => {
-        this.setContacts(data);
-        this.setTotalPages(Math.ceil(data.count / 5));
-        this.setError('');
+        runInAction(() => {
+          this.contacts = data.results;
+          this.count = data.count;
+          this.error = '';
+          this.loading = false;
+        });
       })
-      .catch(() => this.setError('Ошибка при получении данных с сервера'))
-      .finally(() => this.setLoading(false));
+      .catch(() => {
+        runInAction(() => {
+          this.error = 'Ошибка при получении данных с сервера';
+          this.loading = false;
+        });
+      });
   };
 
   getNextPage = () => {
-    this.setLoading(true);
-    fetch(
-      `https://csn.sytes.net/api/v1/addressbook?page=${this.page}&search=${this.search}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${this.token}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.setContacts({
-          ...this.contacts,
-          ...data,
-          results: [...this.contacts.results, ...data.results],
+    if (this.page > 1) {
+      this.loading = true;
+      api
+        .getAddressBook(`?page=${this.page}&search=${this.search}`)
+        .then((data) => {
+          runInAction(() => {
+            this.contacts = [...this.contacts, ...data.results];
+            this.error = '';
+            this.loading = false;
+          });
+        })
+        .catch(() => {
+          runInAction(() => {
+            this.error = 'Ошибка при получении данных с сервера';
+            this.loading = false;
+          });
         });
-        this.setError('');
-        this.setLoading(false);
-      })
-      .catch(() => this.setError('Ошибка при получении данных с сервера'))
-      .finally(() => this.setLoading(false));
+    }
   };
 }
 
