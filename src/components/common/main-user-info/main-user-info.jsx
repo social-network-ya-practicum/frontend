@@ -4,6 +4,7 @@ import styles from './main-user-info.module.scss';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
 
 function MainUserInfo({ contact, id }) {
+  
   const isOwn = contact.id === id;
 
   return (
@@ -11,7 +12,9 @@ function MainUserInfo({ contact, id }) {
       <div className={styles['main-user-info__container']}>
         <div className={styles['main-user-info__photo']}>
           <img
-            className={styles['main-user-info__avatar']}
+            className={`${styles['main-user-info__avatar']} ${
+              contact.photo ? '' : styles['main-user-info__avatar_default']
+            }`}
             src={contact.photo || defaultAvatar}
             alt="Фото"
           />

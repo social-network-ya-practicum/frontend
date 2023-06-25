@@ -13,11 +13,17 @@ function ContactsUserInfo({ contact }) {
           <p className={styles['contacts-user-info__text']}>
             Корпоративный телефон
           </p>
-          <p className={styles['contacts-user-info__text']}>Личная почта</p>
-          <p className={styles['contacts-user-info__text']}>Личный телефон</p>
+          <p className={styles['contacts-user-info__text']}>
+            Личная почта
+          </p>
+          <p className={styles['contacts-user-info__text']}>
+            Личный телефон
+          </p>
         </div>
         <div className={styles['contacts-user-info__container']}>
-          <p className={styles['contacts-user-info__value']}>{contact.email}</p>
+          <p className={styles['contacts-user-info__value']}>
+            {contact.email}
+          </p>
           <p className={styles['contacts-user-info__value']}>
             {contact.corporate_phone_number}
           </p>
