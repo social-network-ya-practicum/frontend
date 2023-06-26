@@ -8,8 +8,11 @@ import styles from './search-input.module.scss';
 
 const cn = classNames.bind(styles);
 
-function SearchInput({ handleChange, mix }) {
-  const [search, setSearch] = useState('');
+function SearchInput({ searchFromStore, handleChange, mix }) {
+  const [search, setSearch] = useState(() => {
+    if (searchFromStore) return searchFromStore;
+    return '';
+  });
   const cnSearchInput = cn('searchInput', mix);
 
   const debounceHandleChange = useMemo(
@@ -57,6 +60,7 @@ function SearchInput({ handleChange, mix }) {
 export default SearchInput;
 
 SearchInput.propTypes = {
+  searchFromStore: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   mix: PropTypes.string,
 };
