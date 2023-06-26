@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
 import Button from '../common/button/button';
 import styles from './info-form.module.scss';
@@ -7,6 +7,8 @@ import InfoInput from '../common/info-input/info-input';
 import InfoSelect from '../common/info-select/info-select';
 import InfoTextrea from '../common/info-textarea/info-textarea';
 import useValidator from '../../hooks/use-validator';
+import { getDatesList } from '../../utils/utils';
+import { monthes } from '../../utils/settings';
 
 const cn = classNames.bind(styles);
 
@@ -23,17 +25,17 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
   } = useValidator();
 
   const initialInputs = {
-    last_name: user.last_name,
-    first_name: user.first_name,
-    middle_name: user.middle_name,
-    job_title: user.job_title,
-    email: user.email,
-    personal_email: user.personal_email,
-    corporate_phone_number: user.corporate_phone_number,
-    personal_phone_number: user.personal_phone_number,
-    birthday_day: user.birthday_day,
-    birthday_month: user.birthday_month,
-    bio: user.bio,
+    last_name: user ? user.last_name : '',
+    first_name: user ? user.first_name : '',
+    middle_name: user ? user.middle_name : '',
+    job_title: user ? user.job_title : '',
+    email: user ? user.email : '',
+    personal_email: user ? user.personal_email : '',
+    corporate_phone_number: user ? user.corporate_phone_number : '',
+    personal_phone_number: user ? user.personal_phone_number : '',
+    birthday_day: user ? user.birthday_day : '1',
+    birthday_month: user ? user.birthday_month : 'Январь',
+    bio: user ? user.bio : '',
   };
 
   const initialErrors = {
@@ -59,27 +61,40 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     bio: (value) => checkTextarea(value, { isRequired: false }),
   };
 
-  const validatorsOnChange = {
-    last_name: checkTextOnChange,
-    first_name: checkTextOnChange,
-    middle_name: checkTextOnChange,
-    job_title: (value) => checkTextOnChange(value, { max: 50 }),
-    personal_email: checkEmailOnChange,
-    corporate_phone_number: checkTelOnChange,
-    personal_phone_number: checkTelOnChange,
-    bio: checkTextareaOnChange,
-  };
+  const validatorsOnChange = useMemo(
+    () => ({
+      last_name: checkTextOnChange,
+      first_name: checkTextOnChange,
+      middle_name: checkTextOnChange,
+      job_title: (value) => checkTextOnChange(value, { max: 50 }),
+      personal_email: checkEmailOnChange,
+      corporate_phone_number: checkTelOnChange,
+      personal_phone_number: checkTelOnChange,
+      bio: checkTextareaOnChange,
+    }),
+    [
+      checkTextOnChange,
+      checkEmailOnChange,
+      checkTelOnChange,
+      checkTextareaOnChange,
+    ]
+  );
 
   const [inputValue, setInputValue] = useState(initialInputs);
 
   const [error, setError] = useState(initialErrors);
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    const err = validatorsOnChange[name](value);
-    setError((prev) => ({ ...prev, [name]: err }));
-    setInputValue({ ...inputValue, [name]: value });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      if (validatorsOnChange[name]) {
+        const err = validatorsOnChange[name](value);
+        setError((prev) => ({ ...prev, [name]: err }));
+      }
+      setInputValue({ ...inputValue, [name]: value });
+    },
+    [validatorsOnChange, inputValue]
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,7 +105,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
       if (err) err = true;
     });
     if (err) return;
-    onSubmit();
+    onSubmit(inputValue);
   };
 
   const cnInfoForm = cn('form', mix);
@@ -196,7 +211,20 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
         <h3 className={styles['form__fieldset-title']}>О себе</h3>
         <div className={styles.form__birthday}>
           <span className={styles['form__label-title']}>День рождения</span>
-          <InfoSelect />
+          <InfoSelect
+            mix={styles['mix-info-select-day']}
+            name="birthday_day"
+            optionsList={getDatesList(inputValue.birthday_month)}
+            value={inputValue.birthday_day}
+            onChange={onChange}
+          />
+          <InfoSelect
+            mix={styles['mix-info-select-month']}
+            name="birthday_month"
+            optionsList={monthes}
+            value={inputValue.birthday_month}
+            onChange={onChange}
+          />
         </div>
         <InfoTextrea
           name="bio"

@@ -41,6 +41,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
     const err = checkImage(file);
     if (err) {
       setError(err);
+      alert(err);
       return;
     }
     const reader = new FileReader();

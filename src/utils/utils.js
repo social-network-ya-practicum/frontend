@@ -1,3 +1,5 @@
+import { dates } from './settings';
+
 export const setCookie = (name, value, options = {}) => {
   const optionsObj = {
     path: '/',
@@ -37,4 +39,17 @@ export const deleteCookie = (...args) => {
       'max-age': -1,
     })
   );
+};
+
+export const getDatesList = (month) => {
+  const maxValue = Object.values(dates).find((i) => i.month === month).max;
+  const list = Array.from({ length: maxValue }, (_, ind) => String(ind + 1));
+  return list;
+};
+
+export const getMonthNumber = (month) => {
+  const monthNum = Object.entries(dates).find(
+    ([, val]) => val.month === month
+  )[0];
+  return +monthNum;
 };
