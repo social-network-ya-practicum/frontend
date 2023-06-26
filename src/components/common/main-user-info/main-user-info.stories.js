@@ -17,9 +17,9 @@ export const Сolleague = {
     contact: {
       id: '1',
       photo: null,
-      firstName: 'Юлия',
+      first_name: 'Юлия',
       middle_name: 'Сергеевна',
-      lastName: 'Левакова',
+      last_name: 'Левакова',
       job_title: 'Бухгалтер',
     },
   },
@@ -31,9 +31,9 @@ export const Me = {
     contact: {
       id: '2',
       photo: null,
-      firstName: 'Юлия',
+      first_name: 'Юлия',
       middle_name: 'Сергеевна',
-      lastName: 'Левакова',
+      last_name: 'Левакова',
       job_title: 'Бухгалтер',
     },
   },

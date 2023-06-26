@@ -98,7 +98,6 @@ function Header({ user, mix, logout }) {
                         to={`/${user.id}`}
                         className={styles.header__user}
                       >
-                        <p className={styles.header__name}>{user.first_name}</p>
                         <BorderGradient>
                           <img
                             className={styles['header__img-avatar']}
@@ -106,6 +105,7 @@ function Header({ user, mix, logout }) {
                             alt="Фото"
                           />
                         </BorderGradient>
+                        <p className={styles.header__name}>{user.first_name}</p>
                       </NavLink>
                       <button
                         className={styles['header__menu-button']}
