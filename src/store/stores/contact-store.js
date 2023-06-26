@@ -19,7 +19,9 @@ class ContactStore {
           personal_email: contact?.personal_email ?? '',
           corporate_phone_number: contact?.corporate_phone_number ?? '',
           personal_phone_number: contact?.personal_phone_number ?? '',
-          birthday_day: contact?.birthday_day ? String(contact.birthday_day) : '1',
+          birthday_day: contact?.birthday_day
+            ? String(contact.birthday_day)
+            : '1',
           birthday_month: contact?.birthday_month
             ? String(contact.birthday_month)
             : '1',

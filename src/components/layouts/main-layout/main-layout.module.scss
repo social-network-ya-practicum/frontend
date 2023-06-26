@@ -7,10 +7,6 @@
   background-color: var(--bg_color_primary);
 
   &__content {
-    // Для обозначения границы main (потом удалить)
-    outline: 0.1px solid grey;
-    // --------------------------------
-
     display: flex;
     flex-direction: column;
     padding-top: var(--header_height);

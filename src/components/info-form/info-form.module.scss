@@ -38,6 +38,8 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    min-height: 28px;
   }
 
   &__label-title {
@@ -74,4 +76,16 @@
   &:last-of-type {
     margin-bottom: 0;
   }
+}
+
+.mix-info-select-day {
+  position: absolute;
+  top: 0;
+  left: 136px;
+}
+
+.mix-info-select-month {
+  position: absolute;
+  top: 0;
+  left: 225px;
 }

@@ -37,10 +37,7 @@ const App = observer(() => {
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
           </Route>
-          <Route
-            path="contacts/:contactId"
-            element={<UserPage />}
-          />
+          <Route path="contacts/:contactId" element={<UserPage />} />
           <Route path=":userId" element={<UserPage />} />
           <Route path=":user/edit" element={<EditPage />} />
         </Route>

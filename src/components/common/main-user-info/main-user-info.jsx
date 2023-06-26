@@ -4,7 +4,6 @@ import styles from './main-user-info.module.scss';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
 
 function MainUserInfo({ contact, id }) {
-  
   const isOwn = contact.id === id;
 
   return (

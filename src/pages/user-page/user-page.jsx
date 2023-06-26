@@ -21,10 +21,8 @@ const UserPage = observer(() => {
       getContact(contactId.contactId);
     }
     getContact(contactId.userId);
-  },
-    [contactId, getContact, location]
-  );
-  
+  }, [contactId, getContact, location]);
+
   // --------------------------------------------------------
   // Добавить после изменения компонента Post
   /* 
@@ -51,24 +49,17 @@ const UserPage = observer(() => {
   return (
     <section className={styles['user-page']}>
       <div className={styles['user-page__container']}>
-        <MainUserInfo
-          contact={contact}
-          id={user.id}
-        />
-        <ContactsUserInfo
-          contact={contact}
-        />
-        <AboutUser
-          contact={contact}
-        />
+        <MainUserInfo contact={contact} id={user.id} />
+        <ContactsUserInfo contact={contact} />
+        <AboutUser contact={contact} />
       </div>
       <div className={styles['user-page__post']}>
         <Post
-          // text={text}
-          // author={author}
-          // pubdate={pubdate}
-          // images={images}
-          // likecount={likecount}
+        // text={text}
+        // author={author}
+        // pubdate={pubdate}
+        // images={images}
+        // likecount={likecount}
         />
       </div>
     </section>

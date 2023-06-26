@@ -28,14 +28,7 @@ const InfoTextrea = ({
     const el = textareaRef.current;
     el.style.height = 'auto';
     el.style.height = `${el.scrollHeight}px`;
-  }, []);
-
-  const handleChange = (e) => {
-    const el = textareaRef.current;
-    el.style.height = 'auto';
-    el.style.height = `${el.scrollHeight}px`;
-    onChange(e);
-  };
+  }, [value]);
 
   const onFocus = () => {
     if (!validator) return;
@@ -57,7 +50,7 @@ const InfoTextrea = ({
       <textarea
         name={name}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
         onFocus={onFocus}
         onBlur={onBlur}

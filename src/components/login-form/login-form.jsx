@@ -88,11 +88,11 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
       </div>
 
       {/* !ДЛЯ УДАЛЕНИЯ! Данные для входа под тестовым аккаунтом */}
-      <div style={{ position: 'absolute', left: -200 }}>
+      {/* <div style={{ position: 'absolute', left: -200 }}>
         Для входа
         <p>email: test@test.test </p>
         <p> password: Frontend23</p>
-      </div>
+      </div> */}
       {/* --------------------------------------------------------- */}
     </form>
   );

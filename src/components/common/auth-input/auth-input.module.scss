@@ -9,9 +9,10 @@ $input-text-padding: 12px;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
+  position: relative;
 
   &__title {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   &__wrapper {
@@ -55,8 +56,11 @@ $input-text-padding: 12px;
   }
 
   &__error {
+    position: absolute;
+    top: 73px;
+    left: 0;
     font-size: 14px;
     color: var(--text_color_error);
-    padding: 4px 0 0 $input-text-padding;
+    padding: 0 $input-text-padding;
   }
 }

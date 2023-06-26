@@ -1,5 +1,17 @@
 $block-width: 357px;
 $border-radius: 16px;
+$transition-time: 0.5s;
+
+@mixin img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $block-width;
+  height: 316px;
+  border-radius: $border-radius;
+  background-color: var(--bg_color_default);
+  overflow: hidden;
+}
 
 .avatar {
   display: flex;
@@ -8,27 +20,8 @@ $border-radius: 16px;
   max-width: $block-width;
   position: relative;
 
-  &__btn-picture {
-    display: flex;
-    border: none;
-    outline: none;
-    background: transparent;
-    border-radius: $border-radius;
-
-    &_clickable {
-      cursor: pointer;
-    }
-  }
-
   &__img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: $block-width;
-    height: 316px;
-    border-radius: $border-radius;
-    background-color: var(--bg_color_default);
-    overflow: hidden;
+    @include img;
   }
 
   &__img {
@@ -39,9 +32,41 @@ $border-radius: 16px;
     object-fit: cover;
 
     &_type_default {
-      width: max-content;
-      height: max-content;
+      width: 86px;
+      height: 87px;
+      transition: $transition-time;
     }
+
+    &_clickable {
+      cursor: pointer;
+    }
+  }
+
+  &__btn-picture {
+    @include img;
+    flex-direction: column;
+    border: none;
+    outline: none;
+
+    &_clickable {
+      cursor: pointer;
+      &:hover .avatar__img_clickable {
+        width: 90px;
+        height: 91px;
+      }
+      &:hover .avatar__default-title {
+        font-size: 15px;
+      }
+    }
+  }
+
+  &__default-title {
+    font-size: 14px;
+    font-family: var(--font-family-default);
+    font-weight: 700;
+    line-height: 120%;
+    color: var(--text_color_avatar);
+    transition: $transition-time;
   }
 
   &__restriction {
