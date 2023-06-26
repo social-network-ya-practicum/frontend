@@ -10,10 +10,11 @@ import AboutUser from '../../components/common/about-user/about-user';
 import Post from '../../components/post/post';
 
 const UserPage = observer(() => {
-  const { userStore, contactStore } = useStore();
+  const { userStore, contactStore, postsStore } = useStore();
   const { user } = userStore;
   const contactId = useParams();
   const { contact, getContact } = contactStore;
+  const { posts, getPostsUser } = postsStore;
   const location = useLocation();
 
   useEffect(() => {
@@ -24,15 +25,15 @@ const UserPage = observer(() => {
   },
     [contactId, getContact, location]
   );
-  
-  // --------------------------------------------------------
-  // Добавить после изменения компонента Post
-  /* 
-  useEffect(() => {
-    postsStore.getPosts();
-  }, [postsStore]);
 
-  const postsElements = postsStore.posts.map((post) => (
+  useEffect(() => {
+    if (location.pathname === `/contacts/${contactId.contactId}`) {
+      getPostsUser(contactId.contactId);
+    }
+    getPostsUser(contactId.userId);
+  }, [getPostsUser, contactId, location]);
+
+  const postsElements = posts.map((post) => (
     <Post
       {...post}
       post={post}
@@ -41,13 +42,12 @@ const UserPage = observer(() => {
       text={post.text}
       author={post.author}
       pubdate={post.pub_date}
-      images={post.images[0]}
+      images={post.images}
       likecount={post.like_count}
+      currentUser={user}
     />
   ));
-  // ---------------------------------------------------------
-  */
-
+  
   return (
     <section className={styles['user-page']}>
       <div className={styles['user-page__container']}>
@@ -62,15 +62,9 @@ const UserPage = observer(() => {
           contact={contact}
         />
       </div>
-      <div className={styles['user-page__post']}>
-        <Post
-          // text={text}
-          // author={author}
-          // pubdate={pubdate}
-          // images={images}
-          // likecount={likecount}
-        />
-      </div>
+      <ul className={styles['user-page__post']}>
+        {postsElements}
+      </ul>
     </section>
   );
 });

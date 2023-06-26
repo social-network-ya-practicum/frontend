@@ -28,6 +28,20 @@ class PostsStore {
       .catch((err) => console.log(err));
   };
 
+  getPostsUser = (userID) => {
+    this.isLoading = true;
+    api
+      .getUserPostsList(userID)
+      .then((data) => {
+        runInAction(() => {
+          this.posts = data.results;
+          this.isLoading = false;
+        });
+      })
+      // setPost(data.results))
+      .catch((err) => console.log(err));
+  };
+
   addPost = (post) => {
     this.isLoading = true;
     api

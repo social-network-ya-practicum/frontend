@@ -4,7 +4,9 @@ footer {
   align-items: center;
   justify-content: center;
   background-color: var(--bg_color_footer);
-  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 .footer {

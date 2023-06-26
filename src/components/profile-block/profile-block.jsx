@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
 import styles from './profile-block.module.scss';
+import BorderGradient from '../common/border-gradient/border-gradient';
 
 function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
   return (
     <div className={styles['profile-block']}>
       <div className={styles['profile-block__photo']}>
         {avatar && (
-          <img
-            className={styles['profile-block__avatar']}
-            src={avatar}
-            alt="аватар"
-          />
+          <BorderGradient size="large">
+            <img
+              className={styles['profile-block__avatar']}
+              src={avatar}
+              alt="аватар"
+            />
+          </BorderGradient>
         )}
       </div>
       <h2 className={styles['profile-block__name']}>

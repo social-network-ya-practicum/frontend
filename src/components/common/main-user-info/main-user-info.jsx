@@ -20,7 +20,7 @@ function MainUserInfo({ contact, id }) {
           />
         </div>
         <h2 className={styles['main-user-info__name']}>
-          {contact.firstName} {contact.middle_name} {contact.lastName}
+          {contact.first_name} {contact.middle_name} {contact.last_name}
         </h2>
         <p className={styles['main-user-info__text']}>Должность</p>
         <div className={styles['main-user-info__wrapper']}>
@@ -46,8 +46,8 @@ MainUserInfo.propTypes = {
   contact: PropTypes.shape({
     id: PropTypes.number,
     photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
     middle_name: PropTypes.string,
     job_title: PropTypes.string,
   }),
@@ -58,9 +58,9 @@ MainUserInfo.defaultProps = {
   contact: {
     id: '1',
     photo: null,
-    firstName: 'Имя',
+    first_name: 'Имя',
     middle_name: 'Отчество',
-    lastName: 'Фамилия',
+    last_name: 'Фамилия',
     job_title: 'Должность',
   },
 };
