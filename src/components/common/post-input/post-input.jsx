@@ -1,14 +1,23 @@
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 
-function PostInput() {
+const PostInput = observer(() => {
+  const { userStore, postsStore } = useStore();
+  const { user } = userStore;
+  const { addPost } = postsStore;
+
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
   const [image, setImage] = useState({
     file: null,
-    prewiev: null,
+    image_link: null,
   });
+
+  // const [image, setImage] = useState([]);
+
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
   // const [preview, setPreview] = useState(null);
 
@@ -30,8 +39,21 @@ function PostInput() {
     const fileImg = event.target.files[0];
     setImage({
       file: fileImg,
-      prewiev: URL.createObjectURL(fileImg),
     });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage({
+        image_link: reader.result,
+      });
+    };
+    reader.readAsDataURL(fileImg);
+
+    // setImage(
+    //   {
+    //     file: fileImg,
+    //     url: URL.createObjectURL(fileImg),
+    //   },
+    // );
   };
 
   function handleOpenPopup() {
@@ -48,7 +70,7 @@ function PostInput() {
     return arr;
   }
 
-  // console.log(file);
+  // console.log(image.image_link);
   // console.log(isSmilePopupOpened);
 
   const onChange = (event) => setValue(event.target.value);
@@ -74,8 +96,28 @@ function PostInput() {
   function handleCancelfile() {
     setImage({
       file: null,
-      prewiev: null,
+      image_link: null,
     });
+  }
+
+  function handleAddPost() {
+    // console.log({
+    //   text: value,
+    //   author: user,
+    //   images:
+    //     image.file === null ? [{}] : [image],
+    // });
+    // console.log({ text: value, author: user, images: [image] })
+
+    addPost({
+      text: value,
+      author: user,
+      images: image.file === null ? [] : [image],
+    });
+    setValue('');
+    handleCancelfile();
+    setIsSmilePopupOpened(false);
+    hanldeCloseActiveInput();
   }
 
   useEffect(() => {
@@ -120,12 +162,14 @@ function PostInput() {
             className={styles['post-input__input']}
             type="text"
             placeholder="Напишите сообщение..."
+            minLength={1}
             maxLength={2000}
             onClick={hanldeActiveInput}
             onChange={handleChange}
             onInput={handleInput}
             rows={1}
             style={textStyle}
+            value={value}
           />
 
           {!activeInput && (
@@ -145,11 +189,11 @@ function PostInput() {
 
         {activeInput && (
           <>
-            {image.prewiev && (
+            {image.image_link && (
               <div className={styles['post-input__prewiev']}>
                 <img
                   className={styles['post-input__img']}
-                  src={image.prewiev}
+                  src={image.image_link}
                   alt="превью"
                 />
                 <button
@@ -185,7 +229,7 @@ function PostInput() {
               <button
                 type="button"
                 className={styles['post-input__btn']}
-                onClick={hanldeCloseActiveInput}
+                onClick={handleAddPost}
               >
                 Опубликовать
               </button>
@@ -202,6 +246,6 @@ function PostInput() {
       </form>
     </div>
   );
-}
+});
 
 export default PostInput;
