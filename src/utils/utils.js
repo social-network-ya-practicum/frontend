@@ -41,6 +41,20 @@ export const deleteCookie = (...args) => {
   );
 };
 
+export const debounce = (callee, timeoutMs) => {
+  let previousCall;
+  let lastCall;
+  let lastCallTimer;
+  return (...args) => {
+    if (lastCall) previousCall = lastCall;
+    lastCall = Date.now();
+    if (previousCall && lastCall - previousCall <= timeoutMs) {
+      clearTimeout(lastCallTimer);
+    }
+    lastCallTimer = setTimeout(() => callee(...args), timeoutMs);
+  };
+};
+
 export const getDatesList = (month) => {
   const maxValue = Object.values(dates).find((i) => i.month === month).max;
   const list = Array.from({ length: maxValue }, (_, ind) => String(ind + 1));

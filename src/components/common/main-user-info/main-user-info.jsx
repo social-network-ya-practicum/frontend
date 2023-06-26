@@ -11,7 +11,9 @@ function MainUserInfo({ contact, id }) {
       <div className={styles['main-user-info__container']}>
         <div className={styles['main-user-info__photo']}>
           <img
-            className={styles['main-user-info__avatar']}
+            className={`${styles['main-user-info__avatar']} ${
+              contact.photo ? '' : styles['main-user-info__avatar_default']
+            }`}
             src={contact.photo || defaultAvatar}
             alt="Фото"
           />

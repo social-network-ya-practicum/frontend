@@ -9,6 +9,7 @@ import ContactsPage from '../../pages/contacts-page/contacts-page';
 import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
 import EditPage from '../../pages/edit-page/edit-page';
+import UserPage from '../../pages/user-page/user-page';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -36,11 +37,8 @@ const App = observer(() => {
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
           </Route>
-          <Route
-            path="contacts/:contactId"
-            element={<div>path = '/contacts/:contactId'</div>}
-          />
-          <Route path=":user" element={<div>path = '/:user'</div>} />
+          <Route path="contacts/:contactId" element={<UserPage />} />
+          <Route path=":userId" element={<UserPage />} />
           <Route path=":user/edit" element={<EditPage />} />
         </Route>
         <Route
