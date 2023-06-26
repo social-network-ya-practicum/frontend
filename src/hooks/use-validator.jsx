@@ -42,8 +42,8 @@ function useValidator() {
     (value, { min = 6, max = 100, isRequired = true } = {}) => {
       if (!isRequired && !value) return '';
       if (!value) return 'Поле обязательно для заполнения';
-      if (value.length < min) {
-        return `Минимальное количество символов: ${min}`;
+      if (/[^\w@.]/.test(value)) {
+        return 'Недопустимый символ ввода';
       }
       if (value.length > max) {
         return `Максимальное количество символов: ${max}`;
@@ -51,11 +51,14 @@ function useValidator() {
       if (value.startsWith('@')) {
         return 'Пропущена часть почты слева от символа @';
       }
-      if (!/@/.test(value)) {
-        return 'Пропущен обязательный символ @';
-      }
       if (value.match(/@/g)?.[1]) {
         return 'Часть адреса после @ не может содержать другие символы @';
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
+      }
+      if (!/@/.test(value)) {
+        return 'Пропущен обязательный символ @';
       }
       if (!/^\w+@\w+\.\w+$/.test(value)) {
         return 'Некорректный email. Пример ввода user_1@example.com';
@@ -97,11 +100,14 @@ function useValidator() {
     (value, { min = 8, max = 20, isRequired = true } = {}) => {
       if (!isRequired && !value) return '';
       if (!value) return 'Поле обязательно для заполнения';
-      if (value.length < min) {
-        return `Минимальное количество символов: ${min}`;
+      if (/[^\w.,!?]/.test(value)) {
+        return 'Недопустимый символ ввода';
       }
       if (value.length > max) {
         return `Максимальное количество символов: ${max}`;
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
       }
       if (!/^[\w.,!?]+$/.test(value)) {
         return 'Недопустимый символ ввода';
@@ -146,11 +152,14 @@ function useValidator() {
     (value, { min = 2, max = 15, isRequired = true } = {}) => {
       if (!isRequired && !value) return '';
       if (!value) return 'Поле обязательно для заполнения';
-      if (value.length < min) {
-        return `Минимальное количество символов: ${min}`;
-      }
       if (value.length > max) {
         return `Максимальное количество символов: ${max}`;
+      }
+      if (/[^А-Яа-я-\s]/.test(value)) {
+        return 'Недопустимый символ ввода';
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
       }
       if (/[^А-Яа-я-\s]/.test(value)) {
         return 'Недопустимый символ ввода';
@@ -180,11 +189,11 @@ function useValidator() {
       if (!/^\+\d*$/.test(value)) {
         return 'Недопустимый формат ввода. Следуйте шаблону +7123456789 ';
       }
-      if (value.length < min) {
-        return `Минимальное количество символов: ${min}`;
-      }
       if (value.length > max) {
         return `Максимальное количество символов: ${max}`;
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
       }
 
       return '';
@@ -211,11 +220,11 @@ function useValidator() {
     (value, { min = 0, max = 500, isRequired = true } = {}) => {
       if (!isRequired && !value) return '';
       if (!value) return 'Поле обязательно для заполнения';
-      if (value.length < min) {
-        return `Минимальное количество символов: ${min}`;
-      }
       if (value.length > max) {
         return `Максимальное количество символов: ${max}`;
+      }
+      if (value.length < min) {
+        return `Минимальное количество символов: ${min}`;
       }
       return '';
     },

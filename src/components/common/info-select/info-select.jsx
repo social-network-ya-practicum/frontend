@@ -21,18 +21,37 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
   const [startScrollY, setStartScrollY] = useState(0);
 
   useLayoutEffect(() => {
-    const list = listRef.current;
-    list.style.overflowY = 'scroll';
-    list.style.height = '139px';
-    const scroll = scrollRef.current;
-    const thumb = thumbRef.current;
-    const maxRealScroll = list.scrollHeight - list.clientHeight;
-    const maxCustomScroll = scroll.clientHeight - thumb.clientHeight;
-    const ratio = maxCustomScroll / maxRealScroll;
-    list.style.overflowY = 'hidden';
-    list.style.height = '28px';
-    setScrollRatio(ratio);
-  }, []);
+    const getScrollRatio = () => {
+      const list = listRef.current;
+      list.style.overflowY = 'scroll';
+      list.style.height = '139px';
+      const scroll = scrollRef.current;
+      const thumb = thumbRef.current;
+      const maxRealScroll = list.scrollHeight - list.clientHeight;
+      const maxCustomScroll = scroll.clientHeight - thumb.clientHeight;
+      const ratio = maxCustomScroll / maxRealScroll;
+      list.style.overflowY = 'hidden';
+      list.style.height = '28px';
+      setScrollRatio(ratio);
+    };
+
+    const setCurrentScroll = () => {
+      const item = itemsRef.current[value];
+      const paddingY = 3;
+      const list = listRef.current;
+      const listOffset = list.offsetTop;
+      const itemOffset = item.offsetTop;
+      const maxRealScroll = list.scrollHeight - list.clientHeight;
+      const scrollPosition = itemOffset - listOffset;
+      list.scrollTop =
+        scrollPosition < maxRealScroll
+          ? scrollPosition
+          : maxRealScroll + paddingY;
+    };
+
+    getScrollRatio();
+    setCurrentScroll();
+  }, [value]);
 
   const open = () => {
     const list = listRef.current;
