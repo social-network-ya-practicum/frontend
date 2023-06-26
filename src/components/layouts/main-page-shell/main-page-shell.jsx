@@ -13,11 +13,14 @@ function MainPageShell() {
   const { user } = userStore;
 
   useEffect(() => {
+    if (!user) return;
     api
       .getUserShortData(user.id)
       .then((res) => setData(res.results[0]))
       .catch((err) => console.log(err));
   }, [user]);
+
+  if (!user) return null;
 
   return (
     <div className={styles['main-page-shell']}>

@@ -168,7 +168,7 @@ class MainApi {
 
   /**  Редактируем данные пользователя */
   patchUserData = (data) =>
-    fetch(`${this._url}/users/${data.userID}/`, {
+    fetch(`${this._url}/users/${data.id}/`, {
       method: 'PATCH',
       credentials: 'include',
       headers: {
@@ -176,15 +176,30 @@ class MainApi {
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
       body: JSON.stringify({
-        email: data.email,
-        first_name: data.firstName,
-        last_name: data.lastName,
-        middle_name: data.middleName,
-        job_title: data.jobTitle,
-        personal_email: data.personalEmail,
-        corporate_phone_number: data.corporatePhoneNumber,
-        personal_phone_number: data.personalPhoneNumber,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        middle_name: data.middle_name,
+        job_title: data.job_title,
+        personal_email: data.personal_email,
+        corporate_phone_number: data.corporate_phone_number,
+        personal_phone_number: data.personal_phone_number,
+        birthday_day: data.birthday_day,
+        birthday_month: data.birthday_month,
         bio: data.bio,
+      }),
+    }).then((res) => this._checkResponse(res));
+
+  /**  Редактируем аватар пользователя */
+  patchUserAvatar = (data) =>
+    fetch(`${this._url}/users/${data.id}/`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        photo: data.photo,
       }),
     }).then((res) => this._checkResponse(res));
 

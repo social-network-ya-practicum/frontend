@@ -1,11 +1,14 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getCookie } from '../../utils/utils';
 import { TOKEN_NAME, dates } from '../../utils/settings';
+import api from '../../utils/main-api';
 
 class UserStore {
   userRes = null;
 
   isLoading = false;
+
+  isLoadingAvatar = false;
 
   error = null;
 
@@ -96,6 +99,33 @@ class UserStore {
       alert(err.message);
       // ---------------------------
     }
+  };
+
+  patchUser = (data) => {
+    this.setIsLoading(true);
+    this.error = null;
+    api
+      .patchUserData(data)
+      .then((res) => {
+        this.userRes = res;
+      })
+      .catch((err) => alert(err))
+      .finally(() => this.setIsLoading(false));
+  };
+
+  patchUserAvatar = (data) => {
+    this.isLoadingAvatar = true;
+    this.error = null;
+    api
+      .patchUserAvatar(data)
+      .then((res) => {
+        console.log(res);
+        this.userRes = res;
+      })
+      .catch((err) => alert(err))
+      .finally(() => {
+        this.isLoadingAvatar = false;
+      });
   };
 }
 
