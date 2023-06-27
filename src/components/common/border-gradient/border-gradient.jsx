@@ -14,7 +14,7 @@ export default BorderGradient;
 
 BorderGradient.propTypes = {
   children: PropTypes.node.isRequired,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(['small', 'small-plus', 'medium', 'large']),
   mix: PropTypes.string,
 };
 

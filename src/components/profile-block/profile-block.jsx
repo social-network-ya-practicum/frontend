@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './profile-block.module.scss';
 import BorderGradient from '../common/border-gradient/border-gradient';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
   return (
@@ -10,7 +11,7 @@ function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
           <BorderGradient size="large">
             <img
               className={styles['profile-block__avatar']}
-              src={avatar}
+              src={avatar || defaultAvatar}
               alt="аватар"
             />
           </BorderGradient>

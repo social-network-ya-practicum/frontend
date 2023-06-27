@@ -22,10 +22,8 @@ const UserPage = observer(() => {
       getContact(contactId.contactId);
     }
     getContact(contactId.userId);
-  },
-    [contactId, getContact, location]
-  );
-  
+  }, [contactId, getContact, location]);
+
   useEffect(() => {
     if (location.pathname === `/contacts/${contactId.contactId}`) {
       getPostsUser(contactId.contactId);
@@ -47,7 +45,7 @@ const UserPage = observer(() => {
       currentUser={user}
     />
   ));
-  
+
   return (
     <section className={styles['user-page']}>
       <div className={styles['user-page__container']}>
@@ -55,9 +53,7 @@ const UserPage = observer(() => {
         <ContactsUserInfo contact={contact} />
         <AboutUser contact={contact} />
       </div>
-      <ul className={styles['user-page__post']}>
-        {postsElements}
-      </ul>
+      <ul className={styles['user-page__post']}>{postsElements}</ul>
     </section>
   );
 });

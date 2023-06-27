@@ -5,6 +5,8 @@ import { useStore } from '../../contexts/RootStoreContext';
 import styles from './post.module.scss';
 import Textarea from '../common/textarea/textarea';
 import { handlerDataFormat } from '../../utils/data-format';
+import BorderGradient from '../common/border-gradient/border-gradient';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 
 const Post = observer(
   ({ text, author, pubdate, images, likecount, id, admin, currentUser }) => {
@@ -14,6 +16,8 @@ const Post = observer(
 
     const { postsStore } = useStore();
     const { getPosts } = postsStore;
+
+    // console.log(author)
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -47,7 +51,14 @@ const Post = observer(
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
-          <div className={styles.post__avatar}> </div>
+          {/* <div className={styles.post__avatar}> </div> */}
+          <BorderGradient size="small-plus">
+            <img
+              src={author.photo || defaultAvatar}
+              alt="фото"
+              className={styles.post__avatar}
+            />
+          </BorderGradient>
           <div className={styles['post__info-box']}>
             <p className={styles.post__owner}>
               {author.first_name} {author.last_name}
