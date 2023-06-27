@@ -8,7 +8,7 @@ import letterMedium from './images/letter-medium.svg';
 import styles from './login-page.module.scss';
 import { useStore } from '../../contexts/RootStoreContext';
 import { setCookie } from '../../utils/utils';
-import { TOKEN_NAME } from '../../utils/settings';
+import { COOKIES_OPTIONS, TOKEN_NAME } from '../../utils/settings';
 
 const cn = classNames.bind(styles);
 
@@ -46,7 +46,7 @@ const LoginPage = observer(() => {
         )
         .then((res) => {
           const token = res.auth_token;
-          setCookie(TOKEN_NAME, token);
+          setCookie(TOKEN_NAME, token, COOKIES_OPTIONS);
           getUser();
         })
         .catch((err) => {
