@@ -3,6 +3,10 @@ export const MAINAPI_URL = 'https://csn.sytes.net/api/v1';
 
 export const TOKEN_NAME = 'TOKEN_NAME';
 
+export const COOKIES_OPTIONS = {
+  'max-age': 604_800,
+};
+
 export const dates = {
   1: { month: 'Январь', max: 31 },
   2: { month: 'Февраль', max: 29 },
