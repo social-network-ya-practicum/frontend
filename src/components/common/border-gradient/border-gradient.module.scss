@@ -17,6 +17,12 @@
   height: 32px;
 }
 
+.borderGradient-small-plus {
+  @include borderGradient;
+  width: 36px;
+  height: 36px;
+}
+
 .borderGradient-medium {
   @include borderGradient;
   width: 56px;

@@ -52,7 +52,7 @@ const Post = observer(
       <li className={styles.post}>
         <div className={styles.post__info}>
           {/* <div className={styles.post__avatar}> </div> */}
-          <BorderGradient size="small">
+          <BorderGradient size="small-plus">
             <img
               src={author.photo || defaultAvatar}
               alt="фото"
