@@ -16,7 +16,11 @@ export const DefaultPost = {
       last_name: 'Райкина',
     },
     pubdate: '2019-08-24',
-    images: '',
+    images: [
+      {
+        image_link: '',
+      },
+    ],
     likecount: '18',
     admin: false,
     currentUser: {
@@ -34,7 +38,11 @@ export const DefaultPostWithoutEditButton = {
       last_name: 'Райкина',
     },
     pubdate: '2019-08-24',
-    images: '',
+    images: [
+      {
+        image_link: '',
+      },
+    ],
     likecount: '18',
     admin: false,
     currentUser: {
@@ -52,7 +60,11 @@ export const DefaultAdminPostWithAdminView = {
       last_name: 'Райкина',
     },
     pubdate: '2019-08-24',
-    images: '',
+    images: [
+      {
+        image_link: '',
+      },
+    ],
     likecount: '123',
     admin: true,
     currentUser: {
@@ -70,7 +82,11 @@ export const DefaultUserPostWithAdminView = {
       last_name: 'Райкина',
     },
     pubdate: '2019-08-24',
-    images: '',
+    images: [
+      {
+        image_link: '',
+      },
+    ],
     likecount: '18',
     admin: true,
     currentUser: {
@@ -88,8 +104,12 @@ export const PostWithImage = {
       last_name: 'Райкина',
     },
     pubdate: '2023-08-24',
-    images:
-      'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
+    images: [
+      {
+        image_link:
+          'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
+      },
+    ],
     likecount: '30',
     admin: false,
     currentUser: {
@@ -107,7 +127,11 @@ export const PostWithLongText = {
       last_name: 'Райкина',
     },
     pubdate: '2021-11-11',
-    images: '',
+    images: [
+      {
+        image_link: '',
+      },
+    ],
     likecount: '4',
     admin: false,
     currentUser: {
@@ -125,8 +149,12 @@ export const PostWithLongTextAndImg = {
       last_name: 'Райкина',
     },
     pubdate: '2021-11-11',
-    images:
-      'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
+    images: [
+      {
+        image_link:
+          'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
+      },
+    ],
     likecount: '146',
     admin: false,
     currentUser: {

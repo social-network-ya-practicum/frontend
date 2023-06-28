@@ -61,7 +61,7 @@ class PostsStore {
       .deletePost(id)
       .then(() => {
         runInAction(() => {
-          this.posts = this.post.filter((post) => post.id !== id);
+          this.posts = this.posts.filter((post) => post.id !== id);
           this.isLoading = false;
         });
       })

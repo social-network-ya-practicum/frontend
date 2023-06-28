@@ -151,11 +151,15 @@ Post.propTypes = {
     first_name: PropTypes.string,
     last_name: PropTypes.string,
   }),
-  pubdate: PropTypes.instanceOf(Date),
-  images: PropTypes.string,
+  pubdate: PropTypes.string,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      image_link: PropTypes.string,
+    })
+  ),
   likecount: PropTypes.number,
   id: PropTypes.number,
-  admin: PropTypes.bolean,
+  admin: PropTypes.bool,
   currentUser: PropTypes.shape({
     id: PropTypes.number,
   }),
@@ -169,7 +173,11 @@ Post.defaultProps = {
     last_name: 'Райкина',
   },
   pubdate: '2019-08-24',
-  images: '',
+  images: [
+    {
+      image_link: '',
+    },
+  ],
   likecount: 18,
   id: 1,
   admin: false,
