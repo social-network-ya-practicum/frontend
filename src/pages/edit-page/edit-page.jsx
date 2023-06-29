@@ -37,8 +37,6 @@ const EditPage = observer(() => {
     [user, patchUser]
   );
 
-  if (!user) return null;
-
   return (
     <section className={styles['edit-page']}>
       <MainAvatar

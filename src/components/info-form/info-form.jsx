@@ -108,6 +108,12 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     onSubmit(inputValue);
   };
 
+  const daysList = getDatesList(inputValue.birthday_month);
+
+  if (+daysList.at(-1) < +inputValue.birthday_day) {
+    setInputValue((prev) => ({ ...prev, birthday_day: '1' }));
+  }
+
   const cnInfoForm = cn('form', mix);
 
   return (
@@ -219,7 +225,6 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
             onChange={onChange}
           />
           <InfoSelect
-            mix={styles['mix-info-select-month']}
             name="birthday_month"
             optionsList={monthes}
             value={inputValue.birthday_month}

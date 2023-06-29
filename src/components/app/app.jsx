@@ -13,7 +13,7 @@ import UserPage from '../../pages/user-page/user-page';
 
 const App = observer(() => {
   const { userStore } = useStore();
-  const { getUser, wasUserRequest } = userStore;
+  const { getUser, wasUserRequest, user } = userStore;
 
   useEffect(() => {
     if (wasUserRequest) return;
@@ -28,9 +28,7 @@ const App = observer(() => {
         <Route
           path="/"
           element={
-            <ProtectedRoute to="/login">
-              <Outlet />
-            </ProtectedRoute>
+            <ProtectedRoute to="/login">{user && <Outlet />}</ProtectedRoute>
           }
         >
           <Route element={<MainPageShell />}>
