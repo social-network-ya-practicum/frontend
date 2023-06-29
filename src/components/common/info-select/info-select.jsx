@@ -139,10 +139,9 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
                 value={option}
                 checked={value === option}
                 onChange={onChange}
+                onClick={close}
               />
-              <span className={styles.select__text} onClick={close}>
-                {option}
-              </span>
+              <span className={styles.select__text}>{option}</span>
             </label>
           ))}
           <Arrow className={cnArrow} />
