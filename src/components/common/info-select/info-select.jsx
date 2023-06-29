@@ -144,7 +144,10 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
               <span className={styles.select__text}>{option}</span>
             </label>
           ))}
-          <Arrow className={cnArrow} />
+          <Arrow
+            className={cnArrow}
+            onClick={() => (isOpen ? close() : open())}
+          />
 
           <div
             className={styles.scroll}
