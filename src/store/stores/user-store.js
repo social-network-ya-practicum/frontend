@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { getCookie } from '../../utils/utils';
-import { TOKEN_NAME, dates } from '../../utils/settings';
+import { deleteCookie, getCookie, setCookie } from '../../utils/utils';
+import { COOKIES_OPTIONS, TOKEN_NAME, dates } from '../../utils/settings';
 import api from '../../utils/main-api';
 
 class UserStore {
@@ -41,90 +41,104 @@ class UserStore {
     makeAutoObservable(this);
   }
 
-  setIsLoading = (value) => {
-    this.isLoading = value;
-  };
-
   setError = (error) => {
     this.error = error;
   };
 
-  logout = () => {
-    this.userRes = null;
+  setWasUserRequest = (bool) => {
+    this.wasUserRequest = bool;
   };
 
-  getUser = async () => {
+  setUserRes = (res) => {
+    this.userRes = res;
+  };
+
+  setIsLoading = (bool) => {
+    this.isLoading = bool;
+  };
+
+  setIsLoadingAvatar = (bool) => {
+    this.isLoadingAvatar = bool;
+  };
+
+  logout = () => {
+    api.logout().catch((err) => console.log(err));
+    deleteCookie(TOKEN_NAME);
+    this.setUserRes(null);
+  };
+
+  login = ({ email, password }) => {
+    this.setError(null);
+    this.setIsLoading(true);
+    api
+      .login({ email, password })
+      .then((res) => {
+        const token = res.auth_token;
+        setCookie(TOKEN_NAME, token, COOKIES_OPTIONS);
+        this.getUser();
+      })
+      .catch((err) => {
+        runInAction(() => {
+          this.setError(err);
+          this.setIsLoading(false);
+        });
+        // Для develoop ---------------
+        alert(err.message);
+        // ---------------------------
+      });
+  };
+
+  getUser = () => {
     const token = getCookie(TOKEN_NAME);
     if (!token) {
-      this.wasUserRequest = true;
+      this.setWasUserRequest(true);
       return;
     }
     runInAction(() => {
       this.setIsLoading(true);
-      this.error = null;
+      this.setError(null);
     });
 
-    try {
-      // -----------------------------------------------------------------------------
-      // Тестовый захардкоженый запрос за юзером
-      // После - заменить на запрос из api
-
-      const res = await fetch('https://csn.sytes.net/api/v1/users/me', {
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Token ${token}`,
-        },
-      }).then((result) =>
-        result.ok
-          ? result.json()
-          : result.json().then((r) => {
-              throw new Error(JSON.stringify(r));
-            })
-      );
-
-      // -----------------------------------------------------------------------------
-
-      runInAction(() => {
-        this.userRes = res;
+    api
+      .getCurrentUserData()
+      .then((res) => this.setUserRes(res))
+      .catch((err) => {
+        this.setError(err);
+        // Для develoop ---------------
+        alert(err.message);
+        // ---------------------------
+      })
+      .finally(() => {
         this.setIsLoading(false);
-        if (!this.wasUserRequest) this.wasUserRequest = true;
+        if (!this.wasUserRequest) this.setWasUserRequest(true);
       });
-    } catch (err) {
-      runInAction(() => {
-        this.error = err;
-        this.setIsLoading(false);
-        if (!this.wasUserRequest) this.wasUserRequest = true;
-      });
-      // Для develoop ---------------
-      alert(err.message);
-      // ---------------------------
-    }
   };
 
   patchUser = (data) => {
     this.setIsLoading(true);
-    this.error = null;
+    this.setError(null);
     api
       .patchUserData(data)
       .then((res) => {
-        this.userRes = res;
-      })
-      .catch((err) => alert(err))
-      .finally(() => this.setIsLoading(false));
-  };
-
-  patchUserAvatar = (data) => {
-    this.isLoadingAvatar = true;
-    this.error = null;
-    api
-      .patchUserAvatar(data)
-      .then((res) => {
-        console.log(res);
-        this.userRes = res;
+        this.setUserRes(res);
       })
       .catch((err) => alert(err))
       .finally(() => {
-        this.isLoadingAvatar = false;
+        this.setIsLoading(false);
+      });
+  };
+
+  patchUserAvatar = (data) => {
+    this.setIsLoadingAvatar(true);
+    this.setError(null);
+    api
+      .patchUserAvatar(data)
+      .then((res) => {
+        this.setUserRes(res);
+      })
+      .catch((err) => alert(err))
+      .finally(() => {
+        this.setIsLoadingAvatar(false);
       });
   };
 }
