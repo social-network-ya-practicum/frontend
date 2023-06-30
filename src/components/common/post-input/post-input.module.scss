@@ -1,3 +1,5 @@
+@use '../../../variables' as var;
+
 .post-input {
   &__form {
     background: #ffffff;
@@ -31,7 +33,7 @@
     height: 19px;
     width: 100%;
     border: none;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -73,7 +75,7 @@
   }
 
   &__img {
-    background: var(--bg_color_primary);
+    background: var.$bg_color_primary;
     border-radius: 16px;
     width: fit-content;
     max-width: 496px;
@@ -116,7 +118,7 @@
   }
 
   &__btn {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     background: #65f0c6;
     border-radius: 16px;
     padding: 12px 24px;
@@ -133,7 +135,7 @@
     list-style: none;
     width: auto;
     height: 164px;
-    background-color: var(--bg_color_primary);
+    background-color: var.$bg_color_primary;
     z-index: 1;
     left: 48px;
     top: 19px;

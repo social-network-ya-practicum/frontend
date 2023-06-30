@@ -1,3 +1,5 @@
+@use '../../../variables' as var;
+
 .popup {
   position: absolute;
   top: 34px;
@@ -8,7 +10,7 @@
   visibility: hidden;
   padding: 16px 24px 24px 16px;
   gap: 12px;
-  background: var(--color_d7e9fa);
+  background: var.$color_d7e9fa;
   border-radius: 16px;
   z-index: 2;
 

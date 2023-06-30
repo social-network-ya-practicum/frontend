@@ -1,10 +1,12 @@
+@use '../../../variables' as var;
+
 @mixin borderGradient {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  background: linear-gradient(var(--color_ffffff), var(--color_ffffff))
+  background: linear-gradient(var.$color_ffffff, var.$color_ffffff)
       padding-box,
     linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
   border: 1px solid transparent;

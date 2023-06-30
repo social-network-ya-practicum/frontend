@@ -1,3 +1,5 @@
+@use '../../variables' as var;
+
 .post {
   background-color: #fff;
   border-radius: 16px;
@@ -31,7 +33,7 @@
 
   &__owner {
     margin: 0;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -40,7 +42,7 @@
 
   &__date {
     margin: 0;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -49,7 +51,7 @@
   }
 
   &__img {
-    background: var(--bg_color_primary);
+    background: var.$bg_color_primary;
     border-radius: 16px;
     width: 100%;
     max-width: 496px;
@@ -58,7 +60,7 @@
   &__text {
     margin: 0;
 
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -89,7 +91,7 @@
 
   &__like-countner {
     margin-left: 10px;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -160,7 +162,7 @@
   }
 
   &__btn-save {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     background: #65f0c6;
     border-radius: 16px;
     padding: 12px 24px;
@@ -173,7 +175,7 @@
   }
 
   &__btn-cancel {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     background: #ffffff;
     border: 2px solid #65f0c6;
     padding: 10px 22px;
@@ -206,7 +208,7 @@
   }
 
   &__action {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

@@ -1,7 +1,9 @@
+@use '../../../variables' as var;
+
 .textarea {
   margin: 0;
 
-  font-family: var(--font-family-default);
+  font-family: var.$font-family-default;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -13,12 +15,12 @@
 }
 
 .textarea__btn {
-  font-family: var(--font-family-default);
+  font-family: var.$font-family-default;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 120%;
-  color: var(--text_color_secondary);
+  color: var.$text_color_secondary;
   background-color: transparent;
   border: none;
 

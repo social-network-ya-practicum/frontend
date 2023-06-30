@@ -1,3 +1,5 @@
+@use '../../variables' as var;
+
 $block-width: 357px;
 $border-radius: 16px;
 $transition-time: 0.5s;
@@ -9,7 +11,7 @@ $transition-time: 0.5s;
   width: $block-width;
   height: 316px;
   border-radius: $border-radius;
-  background-color: var(--bg_color_default);
+  background-color: var.$bg_color_default;
   overflow: hidden;
 }
 
@@ -62,16 +64,16 @@ $transition-time: 0.5s;
 
   &__default-title {
     font-size: 14px;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-weight: 700;
     line-height: 120%;
-    color: var(--text_color_avatar);
+    color: var.$text_color_avatar;
     transition: $transition-time;
   }
 
   &__restriction {
     font-size: 14px;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     line-height: 120%;
     margin: 8px 0 32px 0;
     align-self: flex-start;

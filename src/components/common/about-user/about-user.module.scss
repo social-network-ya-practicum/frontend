@@ -1,11 +1,13 @@
+@use '../../../variables' as var;
+
 .about-user {
   width: 552px;
   padding: 40px 44px 44px;
   display: flex;
   flex-direction: column;
-  background: var(--bg_color_default);
+  background: var.$bg_color_default;
   border-radius: 16px;
-  font-family: var(--font-family-default);
+  font-family: var.$font-family-default;
 
   &__title {
     width: 100%;
@@ -13,7 +15,7 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
   }
 
   &__birthday {
@@ -29,7 +31,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 120%;
-    color: var(--text_color_secondary2);
+    color: var.$text_color_secondary2;
   }
 
   &__value {
@@ -37,7 +39,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
   }
 
   &__bio {
@@ -45,6 +47,6 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
   }
 }
