@@ -24,6 +24,39 @@ class MainApi {
         });
 
   /**
+   * Авторизация НАЧАЛО
+   */
+
+  /** Вход */
+
+  login = ({ email, password }) =>
+    fetch(`${this._url}/auth/token/login/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }).then((res) => this._checkResponse(res));
+
+  /** Выход */
+  logout = () =>
+    fetch(`${this._url}/auth/token/login/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    }).then((res) => this._checkResponse(res));
+  /**
+   * Авторизация - КОНЕЦ
+   */
+
+  /**
    * DELETE - запросы НАЧАЛО
    */
 
@@ -311,28 +344,6 @@ class MainApi {
   /**
    * PUT - запросы НАЧАЛО
    */
-
-  /**  Редактируем данные пользователя */
-  putUserData = (data) =>
-    fetch(`${this._url}/users/${data.userID}/`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        ...this._headers,
-        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
-      },
-      body: JSON.stringify({
-        email: data.author.email,
-        first_name: data.author.firstName,
-        last_name: data.author.lastName,
-        middle_name: data.author.middleName,
-        job_title: data.author.jobTitle,
-        personal_email: data.author.personalEmail,
-        corporate_phone_number: data.author.corporatePhoneNumber,
-        personal_phone_number: data.author.personalPhoneNumber,
-        bio: data.author.bio,
-      }),
-    }).then((res) => this._checkResponse(res));
 
   /** Редактируем пост пользователя */
   putUserPost = (data) =>

@@ -6,30 +6,10 @@ import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
-import { getCookie, deleteCookie } from '../../utils/utils';
-import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix, logout }) {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleLogout = () => {
-    const token = getCookie(TOKEN_NAME);
-
-    // -----------------------------------------------------------------------------
-    // После - заменить на запрос из api (mainApi.logout())
-
-    fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
-      method: 'POST',
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    }).catch((err) => console.log(err));
-    // ---------------------------------------------------------------
-
-    deleteCookie(TOKEN_NAME);
-    logout();
-  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -129,7 +109,7 @@ function Header({ user, mix, logout }) {
                         <NavLink
                           to="/login"
                           className={styles.header__action}
-                          onClick={handleLogout}
+                          onClick={() => logout()}
                         >
                           Выйти
                         </NavLink>

@@ -21,69 +21,47 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
   const [startScrollY, setStartScrollY] = useState(0);
 
   useLayoutEffect(() => {
+    const select = rootRef.current;
+    const list = listRef.current;
+    const scroll = scrollRef.current;
+    const thumb = thumbRef.current;
+
+    const setSelectWidth = () => {
+      const listWidth = list
+        .closest('#list-wrapper')
+        .getBoundingClientRect().width;
+      select.style.width = `${listWidth}px`;
+    };
+
     const getScrollRatio = () => {
-      const list = listRef.current;
-      list.style.overflowY = 'scroll';
-      list.style.height = '139px';
-      const scroll = scrollRef.current;
-      const thumb = thumbRef.current;
       const maxRealScroll = list.scrollHeight - list.clientHeight;
       const maxCustomScroll = scroll.clientHeight - thumb.clientHeight;
       const ratio = maxCustomScroll / maxRealScroll;
-      list.style.overflowY = 'hidden';
-      list.style.height = '28px';
-      setScrollRatio(ratio);
+      return ratio;
     };
 
+    setSelectWidth();
+    setScrollRatio(getScrollRatio());
+  }, [optionsList]);
+
+  useEffect(() => {
     const setCurrentScroll = () => {
-      const item = itemsRef.current[value];
-      const paddingY = 3;
       const list = listRef.current;
+      const item = itemsRef.current[value];
       const listOffset = list.offsetTop;
       const itemOffset = item.offsetTop;
-      const maxRealScroll = list.scrollHeight - list.clientHeight;
       const scrollPosition = itemOffset - listOffset;
-      list.scrollTop =
-        scrollPosition < maxRealScroll
-          ? scrollPosition
-          : maxRealScroll + paddingY;
+      list.scrollTop = scrollPosition;
     };
-
-    getScrollRatio();
     setCurrentScroll();
   }, [value]);
 
   const open = () => {
-    const list = listRef.current;
-    list.style.overflowY = 'scroll';
-    list.style.height = '139px';
     setIsOpen(true);
   };
 
   const close = () => {
-    const list = listRef.current;
-    list.style.overflowY = 'hidden';
-    list.style.height = '28px';
     setIsOpen(false);
-  };
-
-  const setScrollPos = (e) => {
-    const paddingY = 3;
-    const item = e.target.closest('label');
-    const list = listRef.current;
-    const listOffset = list.offsetTop;
-    const itemOffset = item.offsetTop;
-    const maxRealScroll = list.scrollHeight - list.clientHeight;
-    const scrollPosition = itemOffset - listOffset;
-    list.scrollTop =
-      scrollPosition < maxRealScroll
-        ? scrollPosition
-        : maxRealScroll + paddingY;
-  };
-
-  const handleChange = (e) => {
-    setScrollPos(e);
-    onChange(e);
   };
 
   const handleScroll = () => {
@@ -100,7 +78,6 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
 
   const handleMouseMove = (e) => {
     if (!isMouseDown) return;
-
     const delta = e.clientY - startScrollY;
     listRef.current.scrollTop = delta / scrollRatio;
   };
@@ -108,20 +85,9 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
   useEffect(() => {
     const handleWindowMouseDown = () => {
       setIsMouseDown(true);
-      // !!!! Не удалять
-      // console.log(e.target, e.target.id);
-      // if (e.target.id === 'selector') return;
-      // console.log(888);
-      // scrollRef.current.style.pointerEvents = 'auto';
-      // scrollRef.current.dispatchEvent(
-      //   new MouseEvent('mousedown', {
-      //     bubbles: true,
-      //     cancelable: true,
-      //   })
-      // );
     };
+
     const handleWindowMouseUp = (e) => {
-      // scrollRef.current.style.pointerEvents = 'none';
       setIsMouseDown(false);
       if (!rootRef.current.contains(e.target) && isOpen) {
         close();
@@ -137,51 +103,61 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
     };
   }, [scrollRatio, isOpen]);
 
-  const cnRoot = cn('select', mix, { select_opened: isOpen });
+  const cnRoot = cn('select', mix);
   const cnArrow = cn('select__arrow', { select__arrow_up: isOpen });
-  const cnList = cn('select__list', { select__list_closed: !isOpen });
-  const cnItem = cn('select__item', { select__item_opened: isOpen });
-  const cnScroll = cn('scroll', { scroll_hidden: !isOpen });
+  const cnListWrapper = cn('select__wrapper', {
+    select__wrapper_hidden: !isOpen,
+  });
 
   return (
     <div className={cnRoot} ref={rootRef}>
-      <div className={cnList} ref={listRef} onScroll={handleScroll}>
-        {optionsList.map((option) => (
-          <label
-            key={option}
-            className={cnItem}
-            ref={(el) => {
-              if (el) itemsRef.current[option] = el;
-            }}
-            htmlFor={option}
-          >
-            <input
-              className={styles.select__radio}
-              type="radio"
-              name={name}
-              id={option}
-              value={option}
-              checked={value === option}
-              onChange={handleChange}
-            />
-            <span
-              className={styles.select__text}
-              onClick={() => (isOpen ? close() : open())}
+      <button type="button" className={styles.select__button} onClick={open}>
+        <span className={styles.select__text}> {value} </span>
+        <Arrow className={cnArrow} />
+      </button>
+
+      <div className={cnListWrapper} id="list-wrapper">
+        <div
+          className={styles.select__list}
+          ref={listRef}
+          onScroll={handleScroll}
+        >
+          {optionsList.map((option) => (
+            <label
+              key={option}
+              className={styles.select__item}
+              ref={(el) => {
+                if (el) itemsRef.current[option] = el;
+              }}
+              htmlFor={option}
             >
-              {option}
-            </span>
-          </label>
-        ))}
-      </div>
-      <Arrow className={cnArrow} onClick={() => (isOpen ? close() : open())} />
-      <div
-        className={cnScroll}
-        ref={scrollRef}
-        id="selector"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-      >
-        <div className={styles.scroll__thumb} ref={thumbRef} />
+              <input
+                className={styles.select__radio}
+                type="radio"
+                name={name}
+                id={option}
+                value={option}
+                checked={value === option}
+                onChange={onChange}
+                onClick={close}
+              />
+              <span className={styles.select__text}>{option}</span>
+            </label>
+          ))}
+          <Arrow
+            className={cnArrow}
+            onClick={() => (isOpen ? close() : open())}
+          />
+
+          <div
+            className={styles.scroll}
+            ref={scrollRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+          >
+            <div className={styles.scroll__thumb} ref={thumbRef} />
+          </div>
+        </div>
       </div>
     </div>
   );

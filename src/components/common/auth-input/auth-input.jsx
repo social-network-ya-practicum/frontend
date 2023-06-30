@@ -63,6 +63,7 @@ function AuthInput({
         />
         {type === 'password' && (
           <button
+            type="button"
             className={styles['auth-input__icon-btn']}
             onClick={(e) => {
               e.preventDefault();

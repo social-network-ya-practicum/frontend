@@ -20,7 +20,7 @@ const EditPage = observer(() => {
 
       patchUserAvatar(data);
     },
-    [user.id, patchUserAvatar]
+    [user, patchUserAvatar]
   );
 
   const handleSubmitForm = useCallback(
@@ -34,7 +34,7 @@ const EditPage = observer(() => {
 
       patchUser(data);
     },
-    [user.id, patchUser]
+    [user, patchUser]
   );
 
   return (
