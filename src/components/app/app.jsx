@@ -10,6 +10,7 @@ import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
 import EditPage from '../../pages/edit-page/edit-page';
 import UserPage from '../../pages/user-page/user-page';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -24,7 +25,13 @@ const App = observer(() => {
 
   return (
     <Routes>
-      <Route element={<MainLayout />}>
+      <Route
+        element={
+          <ScrollToTop>
+            <MainLayout />
+          </ScrollToTop>
+        }
+      >
         <Route
           path="/"
           element={
