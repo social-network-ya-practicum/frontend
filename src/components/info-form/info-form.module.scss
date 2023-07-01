@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 552px;
 
-  &__btn-wrapper {
+  &__btnWrapper {
     display: flex;
     gap: 24px;
   }
@@ -26,7 +26,7 @@
     }
   }
 
-  &__fieldset-title {
+  &__fieldsetTitle {
     font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 700;
@@ -44,7 +44,7 @@
     min-height: 28px;
   }
 
-  &__label-title {
+  &__labelTitle {
     font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
@@ -72,7 +72,7 @@
   }
 }
 
-.mix-info-input {
+.mixInfoInput {
   margin-bottom: 16px;
 
   &:last-of-type {
@@ -80,6 +80,6 @@
   }
 }
 
-.mix-info-select-day {
+.mixInfoSelectDay {
   margin-right: 8px;
 }

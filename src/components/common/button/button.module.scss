@@ -1,6 +1,6 @@
 @use '../../../variables' as var;
 
-@mixin common-styles {
+@mixin commonStyles {
   $border-width: 2px;
 
   display: flex;
@@ -21,8 +21,8 @@
   transition: var.$anim-duration-default;
 }
 
-.button-primary {
-  @include common-styles;
+.buttonPrimary {
+  @include commonStyles;
   height: 43px;
   border-color: var.$btn_color_default;
   background-color: var.$btn_color_default;
@@ -44,8 +44,8 @@
   }
 }
 
-.button-secondary {
-  @include common-styles;
+.buttonSecondary {
+  @include commonStyles;
   height: 43px;
   border-color: var.$btn_color_default;
 

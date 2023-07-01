@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import iconCake from './icon-birthday-cake.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './birthday-plate.module.scss';
 
-const cn = classNames.bind(styles);
-
 function BirthdayPlate({ data, mix }) {
-  const cnBirthdayPlate = cn('birthdayPlate', mix);
+  const cnBirthdayPlate = clsx(styles.birthdayPlate, mix);
 
   return (
     <section className={cnBirthdayPlate}>
@@ -18,7 +16,7 @@ function BirthdayPlate({ data, mix }) {
         {data.length > 0 ? (
           data.slice(0, 3).map((person) => (
             <li key={person.id} className={styles.birthdayPlate__item}>
-              <BorderGradient size="medium" mix={styles[`mix-border-gradient`]}>
+              <BorderGradient size="medium" mix={styles.mixBorderGradient}>
                 <img src={person.photo || ''} alt="Фото" />
               </BorderGradient>
               <div className={styles.birthdayPlate__info}>

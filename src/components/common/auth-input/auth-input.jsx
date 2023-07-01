@@ -1,13 +1,11 @@
 import { useId, useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './auth-input.module.scss';
 import eye from './images/eye.svg';
 import eyeError from './images/eye-error.svg';
 import eyeSlash from './images/eye-slash.svg';
 import eyeSlashError from './images/eye-slash-error.svg';
-
-const cn = classNames.bind(styles);
 
 function AuthInput({
   title,
@@ -39,15 +37,15 @@ function AuthInput({
     setError((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const cnRoot = cn('auth-input', mix);
-  const cnInput = cn('auth-input__input', {
-    'auth-input__input_type_error': error,
+  const cnRoot = clsx(styles.authInput, mix);
+  const cnInput = clsx(styles.authInput__input, {
+    [styles.authInput__input_type_error]: error,
   });
 
   return (
     <label className={cnRoot} htmlFor={id}>
-      <span className={styles['auth-input__title']}>{title}</span>
-      <div className={styles['auth-input__wrapper']}>
+      <span className={styles.authInput__title}>{title}</span>
+      <div className={styles.authInput__wrapper}>
         <input
           className={cnInput}
           type={attrType}
@@ -64,7 +62,7 @@ function AuthInput({
         {type === 'password' && (
           <button
             type="button"
-            className={styles['auth-input__icon-btn']}
+            className={styles.authInput__iconBtn}
             onClick={(e) => {
               e.preventDefault();
               setShownPassword(!shownPassword);
@@ -74,7 +72,7 @@ function AuthInput({
           </button>
         )}
       </div>
-      {error && <span className={styles['auth-input__error']}>{error}</span>}
+      {error && <span className={styles.authInput__error}>{error}</span>}
     </label>
   );
 }

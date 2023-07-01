@@ -2,7 +2,7 @@
 
 $input-text-padding: 12px;
 
-.auth-input {
+.authInput {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -50,7 +50,7 @@ $input-text-padding: 12px;
     }
   }
 
-  &__icon-btn {
+  &__iconBtn {
     display: flex;
     align-items: center;
     justify-content: center;

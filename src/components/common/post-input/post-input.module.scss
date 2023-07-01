@@ -1,6 +1,6 @@
 @use '../../../variables' as var;
 
-.post-input {
+.postInput {
   &__form {
     background: #ffffff;
     border-radius: 16px;
@@ -52,7 +52,7 @@
     }
   }
 
-  &__file-label {
+  &__fileLabel {
     display: inline-block;
     height: 20px;
     width: 20px;
@@ -81,7 +81,7 @@
     max-width: 496px;
   }
 
-  &__cansel-btn {
+  &__canselBtn {
     position: absolute;
     background-color: transparent;
     background-image: url(./images/x.svg);
@@ -147,7 +147,7 @@
     grid-auto-flow: column;
   }
 
-  &__popup-item {
+  &__popupItem {
     height: 20px;
     width: 20px;
     background-image: url(./images/smile__icon.svg);

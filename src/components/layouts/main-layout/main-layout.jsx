@@ -13,7 +13,7 @@ const MainLayout = observer(() => {
 
   return (
     <div className={styles.layout}>
-      <Header mix={styles['mix-header']} user={user} logout={handleLogout} />
+      <Header mix={styles.mixHeader} user={user} logout={handleLogout} />
       <main className={styles.layout__content}>
         <Outlet />
       </main>

@@ -1,6 +1,6 @@
 @use '../../variables' as var;
 
-.login-page {
+.loginPage {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -13,18 +13,18 @@
   // 1280x800 - расстояние от формы до Header 104px, а до Footer 207px.
   // Пропорция сохранится для любой высоты экрана
 
-  &__buffer-top {
+  &__bufferTop {
     min-height: 104px;
     display: flex;
     flex: 1;
   }
-  &__buffer-bottom {
+  &__bufferBottom {
     min-height: 207px;
     display: flex;
     flex: calc(207 / 104);
   }
 
-  &__form-wrapper {
+  &__formWrapper {
     display: flex;
     position: relative;
     justify-content: center;

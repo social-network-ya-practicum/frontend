@@ -43,21 +43,21 @@ header {
     }
   }
 
-  &__img-logo {
+  &__imgLogo {
     align-self: flex-start;
     margin-top: 3px;
     margin-left: 4px;
     object-fit: cover;
   }
 
-  &__img-avatar {
+  &__imgAvatar {
     width: 100%;
     height: 100%;
     object-position: center;
     object-fit: cover;
   }
 
-  &__img-arrow {
+  &__imgArrow {
     object-position: center;
   }
 
@@ -137,7 +137,7 @@ header {
     color: var.$text_color_default;
   }
 
-  &__menu-button {
+  &__menuButton {
     width: 20px;
     height: 20px;
     background-color: transparent;

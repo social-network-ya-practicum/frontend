@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './border-gradient.module.scss';
 
-const cn = classNames.bind(styles);
-
 function BorderGradient({ children, size, mix }) {
-  const cnBorderGradient = cn(`borderGradient-${size}`, mix);
+  const cnBorderGradient = clsx(
+    {
+      [styles.borderGradientSmall]: size === 'small',
+      [styles.borderGradientSmallPlus]: size === 'small-plus',
+      [styles.borderGradientMedium]: size === 'medium',
+      [styles.borderGradientLarge]: size === 'large',
+    },
+    mix
+  );
 
   return <div className={cnBorderGradient}>{children}</div>;
 }

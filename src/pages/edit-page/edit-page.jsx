@@ -38,11 +38,11 @@ const EditPage = observer(() => {
   );
 
   return (
-    <section className={styles['edit-page']}>
+    <section className={styles.editPage}>
       <MainAvatar
         onSubmit={handleSubmitAvatar}
         avatar={user ? user.photo : null}
-        mix={styles['mix-main-avatar']}
+        mix={styles.mixMainAvatar}
         disabled={isLoadingAvatar}
       />
       <InfoForm onSubmit={handleSubmitForm} user={user} disabled={isLoading} />

@@ -3,28 +3,24 @@ import styles from './contacts-user-info.module.scss';
 
 function ContactsUserInfo({ contact }) {
   return (
-    <section className={styles['contacts-user-info']}>
-      <h2 className={styles['contacts-user-info__title']}>Контакты</h2>
-      <div className={styles['contacts-user-info__contacts']}>
-        <div className={styles['contacts-user-info__container']}>
-          <p className={styles['contacts-user-info__text']}>
-            Корпоративная почта
-          </p>
-          <p className={styles['contacts-user-info__text']}>
-            Корпоративный телефон
-          </p>
-          <p className={styles['contacts-user-info__text']}>Личная почта</p>
-          <p className={styles['contacts-user-info__text']}>Личный телефон</p>
+    <section className={styles.contactsUserInfo}>
+      <h2 className={styles.contactsUserInfo__title}>Контакты</h2>
+      <div className={styles.contactsUserInfo__contacts}>
+        <div className={styles.contactsUserInfo__container}>
+          <p className={styles.contactsUserInfo__text}>Корпоративная почта</p>
+          <p className={styles.contactsUserInfo__text}>Корпоративный телефон</p>
+          <p className={styles.contactsUserInfo__text}>Личная почта</p>
+          <p className={styles.contactsUserInfo__text}>Личный телефон</p>
         </div>
-        <div className={styles['contacts-user-info__container']}>
-          <p className={styles['contacts-user-info__value']}>{contact.email}</p>
-          <p className={styles['contacts-user-info__value']}>
+        <div className={styles.contactsUserInfo__container}>
+          <p className={styles.contactsUserInfo__value}>{contact.email}</p>
+          <p className={styles.contactsUserInfo__value}>
             {contact.corporate_phone_number}
           </p>
-          <p className={styles['contacts-user-info__value']}>
+          <p className={styles.contactsUserInfo__value}>
             {contact.personal_email}
           </p>
-          <p className={styles['contacts-user-info__value']}>
+          <p className={styles.contactsUserInfo__value}>
             {contact.personal_phone_number}
           </p>
         </div>

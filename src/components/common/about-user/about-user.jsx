@@ -3,15 +3,15 @@ import styles from './about-user.module.scss';
 
 function AboutUser({ contact }) {
   return (
-    <section className={styles['about-user']}>
-      <h2 className={styles['about-user__title']}>О себе</h2>
-      <div className={styles['about-user__birthday']}>
-        <p className={styles['about-user__text']}>День рождения</p>
-        <p className={styles['about-user__value']}>
+    <section className={styles.aboutUser}>
+      <h2 className={styles.aboutUser__title}>О себе</h2>
+      <div className={styles.aboutUser__birthday}>
+        <p className={styles.aboutUser__text}>День рождения</p>
+        <p className={styles.aboutUser__value}>
           {contact.birthday_day} {contact.birthday_month}
         </p>
       </div>
-      <p className={styles['about-user__bio']}>{contact.bio}</p>
+      <p className={styles.aboutUser__bio}>{contact.bio}</p>
     </section>
   );
 }

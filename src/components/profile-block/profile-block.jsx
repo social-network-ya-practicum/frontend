@@ -5,25 +5,25 @@ import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
   return (
-    <div className={styles['profile-block']}>
-      <div className={styles['profile-block__photo']}>
+    <div className={styles.profileBlock}>
+      <div className={styles.profileBlock__photo}>
         {avatar && (
           <BorderGradient size="large">
             <img
-              className={styles['profile-block__avatar']}
+              className={styles.profileBlock__avatar}
               src={avatar || defaultAvatar}
               alt="аватар"
             />
           </BorderGradient>
         )}
       </div>
-      <h2 className={styles['profile-block__name']}>
+      <h2 className={styles.profileBlock__name}>
         {firstName} {lastName}
       </h2>
-      <p className={styles['profile-block__role']}>{role}</p>
-      <div className={styles['profile-block__item']}>
-        <p className={styles['profile-block__text']}>Публикации</p>
-        <span className={styles['profile-block__span']}>{postsCount}</span>
+      <p className={styles.profileBlock__role}>{role}</p>
+      <div className={styles.profileBlock__item}>
+        <p className={styles.profileBlock__text}>Публикации</p>
+        <span className={styles.profileBlock__span}>{postsCount}</span>
       </div>
     </div>
   );

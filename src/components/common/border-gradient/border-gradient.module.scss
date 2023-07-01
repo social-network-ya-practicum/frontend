@@ -13,25 +13,25 @@
   border-radius: 100px;
 }
 
-.borderGradient-small {
+.borderGradientSmall {
   @include borderGradient;
   width: 32px;
   height: 32px;
 }
 
-.borderGradient-small-plus {
+.borderGradientSmallPlus {
   @include borderGradient;
   width: 36px;
   height: 36px;
 }
 
-.borderGradient-medium {
+.borderGradientMedium {
   @include borderGradient;
   width: 56px;
   height: 56px;
 }
 
-.borderGradient-large {
+.borderGradientLarge {
   @include borderGradient;
   width: 68px;
   height: 68px;
