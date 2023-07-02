@@ -3,11 +3,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './info-select.module.scss';
 import { ReactComponent as Arrow } from './images/arrow.svg';
-
-const cn = classNames.bind(styles);
 
 const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
   const rootRef = useRef(null);
@@ -103,10 +101,12 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
     };
   }, [scrollRatio, isOpen]);
 
-  const cnRoot = cn('select', mix);
-  const cnArrow = cn('select__arrow', { select__arrow_up: isOpen });
-  const cnListWrapper = cn('select__wrapper', {
-    select__wrapper_hidden: !isOpen,
+  const cnRoot = clsx(styles.select, mix);
+  const cnArrow = clsx(styles.select__arrow, {
+    [styles.select__arrow_up]: isOpen,
+  });
+  const cnListWrapper = clsx(styles.select__wrapper, {
+    [styles.select__wrapper_hidden]: !isOpen,
   });
 
   return (

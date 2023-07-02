@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
-
-const cn = classNames.bind(styles);
 
 const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   const refForm = useRef(null);
@@ -64,22 +62,22 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
     setIsEditMode(false);
   };
 
-  const cnMainAvatar = cn('avatar', mix);
-  const cnBtnPic = cn('avatar__btn-picture', {
-    'avatar__btn-picture_clickable': isEditMode,
+  const cnMainAvatar = clsx(styles.avatar, mix);
+  const cnBtnPic = clsx(styles.avatar__btnPicture, {
+    [styles.avatar__btnPicture_clickable]: isEditMode,
   });
-  const cnImg = cn('avatar__img', {
-    avatar__img_type_default: imgSrc === defaultAvatar,
-    avatar__img_clickable: isEditMode && imgSrc === defaultAvatar,
+  const cnImg = clsx(styles.avatar__img, {
+    [styles.avatar__img_type_default]: imgSrc === defaultAvatar,
+    [styles.avatar__img_clickable]: isEditMode && imgSrc === defaultAvatar,
   });
-  const cnCloseIcon = cn('avatar__close', {
-    avatar__close_disabled: imgSrc === defaultAvatar || !isEditMode,
+  const cnCloseIcon = clsx(styles.avatar__close, {
+    [styles.avatar__close_disabled]: imgSrc === defaultAvatar || !isEditMode,
   });
 
   return (
     <div className={cnMainAvatar}>
       {imgSrc !== defaultAvatar && (
-        <picture className={styles['avatar__img-wrapper']}>
+        <picture className={styles.avatar__imgWrapper}>
           <source srcSet={imgSrc} media="(min-width: 800px)" />
           <img className={cnImg} src={imgSrc} alt="аватар" />
         </picture>
@@ -88,7 +86,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
         <button onClick={handleImgClick} tabIndex={-1} className={cnBtnPic}>
           <img className={cnImg} src={imgSrc} alt="аватар" />
           {isEditMode && (
-            <span className={styles['avatar__default-title']}>
+            <span className={styles.avatar__defaultTitle}>
               Добавить фотографию
             </span>
           )}
@@ -119,7 +117,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           </Button>
         )}
         {isEditMode && (
-          <div className={styles['form__btn-wrapper']}>
+          <div className={styles.form__btnWrapper}>
             <Button
               width="100%"
               variant="secondary"

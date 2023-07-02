@@ -1,21 +1,23 @@
-.contacts-user-info {
+@use '../../../variables' as var;
+
+.contactsUserInfo {
   width: 552px;
   padding: 40px 44px 44px;
   gap: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--bg_color_default);
+  background: var.$bg_color_default;
   border-radius: 16px;
 
   &__title {
     width: 100%;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
   }
 
   &__contacts {
@@ -33,20 +35,20 @@
   }
 
   &__text {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 120%;
-    color: var(--text_color_secondary2);
+    color: var.$text_color_secondary2;
   }
 
   &__value {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
   }
 }

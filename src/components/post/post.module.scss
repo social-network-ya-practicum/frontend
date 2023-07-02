@@ -1,3 +1,5 @@
+@use '../../variables' as var;
+
 .post {
   background-color: #fff;
   border-radius: 16px;
@@ -16,7 +18,7 @@
     gap: 12px;
   }
 
-  &__info-box {
+  &__infoBox {
     display: flex;
     gap: 4px;
     flex-direction: column;
@@ -31,7 +33,7 @@
 
   &__owner {
     margin: 0;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -40,7 +42,7 @@
 
   &__date {
     margin: 0;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -49,7 +51,7 @@
   }
 
   &__img {
-    background: var(--bg_color_primary);
+    background: var.$bg_color_primary;
     border-radius: 16px;
     width: 100%;
     max-width: 496px;
@@ -58,7 +60,7 @@
   &__text {
     margin: 0;
 
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -69,7 +71,7 @@
     height: 100%;
   }
 
-  &__like-container {
+  &__likeContainer {
     display: flex;
     align-items: center;
   }
@@ -87,9 +89,9 @@
     }
   }
 
-  &__like-countner {
+  &__likeCounter {
     margin-left: 10px;
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -159,8 +161,8 @@
     gap: 8px;
   }
 
-  &__btn-save {
-    font-family: var(--font-family-default);
+  &__btnSave {
+    font-family: var.$font-family-default;
     background: #65f0c6;
     border-radius: 16px;
     padding: 12px 24px;
@@ -172,8 +174,8 @@
     }
   }
 
-  &__btn-cancel {
-    font-family: var(--font-family-default);
+  &__btnCancel {
+    font-family: var.$font-family-default;
     background: #ffffff;
     border: 2px solid #65f0c6;
     padding: 10px 22px;
@@ -206,7 +208,7 @@
   }
 
   &__action {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

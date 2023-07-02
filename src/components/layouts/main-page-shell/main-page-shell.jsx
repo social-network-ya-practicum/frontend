@@ -1,9 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
 import ProfileBlock from '../../profile-block/profile-block';
 import styles from './main-page-shell.module.scss';
-
 import api from '../../../utils/main-api';
 import { useStore } from '../../../contexts/RootStoreContext';
 
@@ -20,8 +18,8 @@ function MainPageShell() {
   }, [user]);
 
   return (
-    <div className={styles['main-page-shell']}>
-      <div className={styles['main-page-shell__box']}>
+    <div className={styles.mainPageShell}>
+      <div className={styles.mainPageShell__box}>
         <ProfileBlock
           avatar={user.photo}
           firstName={data.first_name}

@@ -59,7 +59,7 @@ const Post = observer(
               className={styles.post__avatar}
             />
           </BorderGradient>
-          <div className={styles['post__info-box']}>
+          <div className={styles.post__infoBox}>
             <p className={styles.post__owner}>
               {author.first_name} {author.last_name}
             </p>
@@ -81,11 +81,11 @@ const Post = observer(
         />
 
         {!isPostChanging ? (
-          <div className={styles['post__like-container']}>
+          <div className={styles.post__likeContainer}>
             <button className={styles.post__like} onClick={handleLikePost}>
               {' '}
             </button>
-            <span className={styles['post__like-countner']}>{likecount}</span>
+            <span className={styles.post__likeCounter}>{likecount}</span>
           </div>
         ) : (
           <div className={styles.post__change}>
@@ -95,13 +95,13 @@ const Post = observer(
             </div>
             <div className={styles.post__btns}>
               <button
-                className={styles['post__btn-cancel']}
+                className={styles.post__btnCancel}
                 onClick={handleCancelClick}
               >
                 Отменить
               </button>
               <button
-                className={styles['post__btn-save']}
+                className={styles.post__btnSave}
                 onClick={handleSaveChange}
               >
                 Сохранить

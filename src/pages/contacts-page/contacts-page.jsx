@@ -41,7 +41,7 @@ const ContactsPage = observer(() => {
       <SearchInput
         searchFromStore={search}
         handleChange={setSearch}
-        mix={styles['mix-search-input']}
+        mix={styles.mixSearchInput}
       />
       {error ? (
         <p>{error}</p>

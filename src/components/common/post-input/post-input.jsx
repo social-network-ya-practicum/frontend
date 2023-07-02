@@ -67,7 +67,7 @@ const PostInput = observer(() => {
   function renderSmiles(length) {
     const arr = [];
     for (let i = 0; i <= length; i += 1) {
-      arr[i] = <li className={styles['post-input__popup-item']}> </li>;
+      arr[i] = <li className={styles.postInput__popupItem}> </li>;
     }
     return arr;
   }
@@ -156,19 +156,19 @@ const PostInput = observer(() => {
   // }, [file]);
 
   return (
-    <div id="post-input" className={styles['post-input']}>
-      <form className={styles['post-input__form']}>
-        <div className={styles['post-input__box']}>
+    <div id="post-input" className={styles.postInput}>
+      <form className={styles.postInput__form}>
+        <div className={styles.postInput__box}>
           {/* <div className={styles['post-input__avatar']}> </div> */}
           <BorderGradient size="small">
             <img
               src={user.photo || defaultAvatar}
               alt="фото"
-              className={styles['post-input__avatar']}
+              className={styles.postInput__avatar}
             />
           </BorderGradient>
           <textarea
-            className={styles['post-input__input']}
+            className={styles.postInput__input}
             type="text"
             placeholder="Напишите сообщение..."
             minLength={1}
@@ -184,12 +184,12 @@ const PostInput = observer(() => {
           {!activeInput && (
             <label
               htmlFor="post-input__file"
-              className={styles['post-input__file-label']}
+              className={styles.postInput__fileLabel}
             >
               <input
                 type="file"
                 id="post-input__file"
-                className={styles['post-input__file']}
+                className={styles.postInput__file}
                 onChange={handleFileChange}
               />
             </label>
@@ -199,14 +199,14 @@ const PostInput = observer(() => {
         {activeInput && (
           <>
             {image.image_link && (
-              <div className={styles['post-input__prewiev']}>
+              <div className={styles.postInput__prewiev}>
                 <img
-                  className={styles['post-input__img']}
+                  className={styles.postInput__img}
                   src={image.image_link}
                   alt="превью"
                 />
                 <button
-                  className={styles['post-input__cansel-btn']}
+                  className={styles.postInput__canselBtn}
                   type="button"
                   onClick={handleCancelfile}
                 >
@@ -214,22 +214,22 @@ const PostInput = observer(() => {
                 </button>
               </div>
             )}
-            <div className={styles['post-input__stuff']}>
+            <div className={styles.postInput__stuff}>
               <div>
                 <label
                   htmlFor="post-input__file"
-                  className={styles['post-input__file-label']}
+                  className={styles.postInput__fileLabel}
                 >
                   <input
                     type="file"
                     id="post-input__file"
-                    className={styles['post-input__file']}
+                    className={styles.postInput__file}
                     onChange={handleFileChange}
                   />
                 </label>
                 <button
                   type="button"
-                  className={styles['post-input__smile']}
+                  className={styles.postInput__smile}
                   onClick={handleOpenPopup}
                 >
                   {' '}
@@ -237,14 +237,14 @@ const PostInput = observer(() => {
               </div>
               <button
                 type="button"
-                className={styles['post-input__btn']}
+                className={styles.postInput__btn}
                 onClick={handleAddPost}
               >
                 Опубликовать
               </button>
 
               {isSmilePopupOpened && (
-                <ul className={styles['post-input__popup']}>
+                <ul className={styles.postInput__popup}>
                   {/* <li className={styles['post-input__popup-item']}> </li> */}
                   {renderSmiles(28)}
                 </ul>

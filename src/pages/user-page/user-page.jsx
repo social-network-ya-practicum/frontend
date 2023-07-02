@@ -47,13 +47,13 @@ const UserPage = observer(() => {
   ));
 
   return (
-    <section className={styles['user-page']}>
-      <div className={styles['user-page__container']}>
+    <section className={styles.userPage}>
+      <div className={styles.userPage__container}>
         <MainUserInfo contact={contact} id={user.id} />
         <ContactsUserInfo contact={contact} />
         <AboutUser contact={contact} />
       </div>
-      <ul className={styles['user-page__post']}>{postsElements}</ul>
+      <ul className={styles.userPage__post}>{postsElements}</ul>
     </section>
   );
 });

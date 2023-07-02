@@ -7,28 +7,25 @@ function MainUserInfo({ contact, id }) {
   const isOwn = contact.id === id;
 
   return (
-    <section className={styles['main-user-info']}>
-      <div className={styles['main-user-info__container']}>
-        <div className={styles['main-user-info__photo']}>
+    <section className={styles.mainUserInfo}>
+      <div className={styles.mainUserInfo__container}>
+        <div className={styles.mainUserInfo__photo}>
           <img
-            className={`${styles['main-user-info__avatar']} ${
-              contact.photo ? '' : styles['main-user-info__avatar_default']
+            className={`${styles.mainUserInfo__avatar} ${
+              contact.photo ? '' : styles.mainUserInfo__avatar_default
             }`}
             src={contact.photo || defaultAvatar}
             alt="Фото"
           />
         </div>
-        <h2 className={styles['main-user-info__name']}>
+        <h2 className={styles.mainUserInfo__name}>
           {contact.first_name} {contact.middle_name} {contact.last_name}
         </h2>
-        <p className={styles['main-user-info__text']}>Должность</p>
-        <div className={styles['main-user-info__wrapper']}>
-          <p className={styles['main-user-info__role']}>{contact.job_title}</p>
+        <p className={styles.mainUserInfo__text}>Должность</p>
+        <div className={styles.mainUserInfo__wrapper}>
+          <p className={styles.mainUserInfo__role}>{contact.job_title}</p>
           {isOwn && (
-            <NavLink
-              to="/:user/edit"
-              className={styles['main-user-info__action']}
-            >
+            <NavLink to="/:user/edit" className={styles.mainUserInfo__action}>
               Редактировать профиль
             </NavLink>
           )}

@@ -35,11 +35,7 @@ function Header({ user, mix, logout }) {
       <div className={styles.header}>
         <NavLink to="/" className={styles.header__logo}>
           <BorderGradient>
-            <img
-              className={styles['header__img-logo']}
-              src={Logo}
-              alt="Логотип"
-            />
+            <img className={styles.header__imgLogo} src={Logo} alt="Логотип" />
           </BorderGradient>
           <span className={styles.header__title}>Корпоративная сеть</span>
         </NavLink>
@@ -80,7 +76,7 @@ function Header({ user, mix, logout }) {
                       >
                         <BorderGradient>
                           <img
-                            className={styles['header__img-avatar']}
+                            className={styles.header__imgAvatar}
                             src={user.photo || defaultAvatar}
                             alt="Фото"
                           />
@@ -88,12 +84,12 @@ function Header({ user, mix, logout }) {
                         <p className={styles.header__name}>{user.first_name}</p>
                       </NavLink>
                       <button
-                        className={styles['header__menu-button']}
+                        className={styles.header__menuButton}
                         type="button"
                         onClick={handleOpenClick}
                       >
                         <img
-                          className={styles['header__img-arrow']}
+                          className={styles.header__imgArrow}
                           src={Arrow}
                           alt="Настройка профиля"
                         />

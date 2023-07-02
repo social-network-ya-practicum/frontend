@@ -1,12 +1,14 @@
+@use '../../../variables' as var;
+
 $input-text-padding: 12px;
 $input-max-width: 254px;
 
-.info-input {
+.infoInput {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 388px;
-  font-family: var(--font-family-default);
+  font-family: var.$font-family-default;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -28,26 +30,26 @@ $input-max-width: 254px;
     align-items: center;
     outline: none;
     border: none;
-    background: var(--bg_color_primary);
+    background: var.$bg_color_primary;
     border-radius: 16px;
     height: 28px;
     width: 100%;
     max-width: $input-max-width;
-    color: var(--text_color_default);
+    color: var.$text_color_default;
     padding: 0 $input-text-padding;
 
     &::placeholder {
-      color: var(--text_color_placeholder);
+      color: var.$text_color_placeholder;
     }
 
     &_type_error {
-      color: var(--text_color_error);
+      color: var.$text_color_error;
     }
   }
 
   &__error {
     font-size: 14px;
-    color: var(--text_color_error);
+    color: var.$text_color_error;
     padding: 0 $input-text-padding;
     width: 100%;
     max-width: $input-max-width;

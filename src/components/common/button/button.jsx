@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './button.module.scss';
 
-const cn = classNames.bind(styles);
-
 function Button({ children, type, variant, width, disabled, mix, onClick }) {
-  const cnButton = cn(`button-${variant}`, mix);
+  const cnButton = clsx(
+    {
+      [styles.buttonPrimary]: variant === 'primary',
+      [styles.buttonSecondary]: variant === 'secondary',
+    },
+    mix
+  );
 
   return (
     <button

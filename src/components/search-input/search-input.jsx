@@ -1,19 +1,17 @@
 import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import SearchIcon from './search-icon.svg';
 import CanselIcon from './cansel-icon.svg';
 import { debounce } from '../../utils/utils';
 import styles from './search-input.module.scss';
-
-const cn = classNames.bind(styles);
 
 function SearchInput({ searchFromStore, handleChange, mix }) {
   const [search, setSearch] = useState(() => {
     if (searchFromStore) return searchFromStore;
     return '';
   });
-  const cnSearchInput = cn('searchInput', mix);
+  const cnSearchInput = clsx(styles.searchInput, mix);
 
   const debounceHandleChange = useMemo(
     () => debounce(handleChange, 250),
