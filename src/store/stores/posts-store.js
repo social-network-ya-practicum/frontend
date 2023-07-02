@@ -87,9 +87,14 @@ class PostsStore {
     this.isLoading = true;
     api
       .postLike(post)
-      .then(() => {
+      .then((likededPost) => {
         runInAction(() => {
-          console.log('пост лайкнут');
+          this.posts = this.posts.map((p) => {
+            if (p.id === likededPost.id) {
+              return likededPost;
+            }
+            return p;
+          });
           this.isLoading = false;
         });
       })
@@ -100,9 +105,14 @@ class PostsStore {
     this.isLoading = true;
     api
       .deleteLike(post)
-      .then(() => {
+      .then((dislikededPost) => {
         runInAction(() => {
-          console.log('пост дизлайкнут');
+          this.posts = this.posts.map((p) => {
+            if (p.id === dislikededPost.id) {
+              return dislikededPost;
+            }
+            return p;
+          });
           this.isLoading = false;
         });
       })

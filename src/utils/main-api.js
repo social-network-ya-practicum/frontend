@@ -225,7 +225,7 @@ class MainApi {
 
   /** Редактируем пост пользователя */
   patchUserPost = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/`, {
+    fetch(`${this._url}/posts/${data.id}/`, {
       method: 'PATCH',
       credentials: 'include',
       headers: {

@@ -9,7 +9,17 @@ import BorderGradient from '../common/border-gradient/border-gradient';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 
 const Post = observer(
-  ({ text, author, pubdate, images, likecount, id, admin, currentUser }) => {
+  ({
+    post,
+    text,
+    author,
+    pubdate,
+    images,
+    likecount,
+    id,
+    admin,
+    currentUser,
+  }) => {
     const [value, setValue] = useState(text);
     const [isPostChanging, setIsPostchanging] = useState(false);
     const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -40,7 +50,7 @@ const Post = observer(
 
     function handleSaveChange() {
       // вытщить пост из пропсов? но надо еще данные записать новые
-      // postsStore.editPost(post)
+      postsStore.editPost({ ...post, post, text: value });
       setIsPostchanging(false);
     }
 
