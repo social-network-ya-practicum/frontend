@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -67,17 +68,21 @@ const Post = observer(
       <li className={styles.post}>
         <div className={styles.post__info}>
           {/* <div className={styles.post__avatar}> </div> */}
-          <BorderGradient size="small-plus">
-            <img
-              src={author.photo || defaultAvatar}
-              alt="фото"
-              className={styles.post__avatar}
-            />
-          </BorderGradient>
+          <NavLink to={`/${author.id}`}>
+            <BorderGradient size="small-plus">
+              <img
+                src={author.photo || defaultAvatar}
+                alt="фото"
+                className={styles.post__avatar}
+              />
+            </BorderGradient>
+          </NavLink>
           <div className={styles['post__info-box']}>
-            <p className={styles.post__owner}>
-              {author.first_name} {author.last_name}
-            </p>
+            <NavLink to={`/${author.id}`} className={styles.post__owner}>
+              <p className={styles.post__owner}>
+                {author.first_name} {author.last_name}
+              </p>
+            </NavLink>
             <span className={styles.post__date}>
               {handlerDataFormat(`${pubdate}`)}
             </span>
