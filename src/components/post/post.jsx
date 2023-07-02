@@ -25,7 +25,8 @@ const Post = observer(
     const [isPopupOpened, setIsPopupOpened] = useState(false);
 
     const { postsStore } = useStore();
-    const { getPosts } = postsStore;
+    const { getPosts, editPost, deletePost, likePost, dislikePost } =
+      postsStore;
 
     // console.log(post)
 
@@ -44,18 +45,22 @@ const Post = observer(
     }
 
     function handleDeleteClick() {
-      postsStore.deletePost(id);
+      deletePost(id);
       getPosts();
     }
 
     function handleSaveChange() {
       // вытщить пост из пропсов? но надо еще данные записать новые
-      postsStore.editPost({ ...post, post, text: value });
+      editPost({ ...post, text: value });
       setIsPostchanging(false);
+      likePost(post);
+      dislikePost(post);
     }
 
     function handleLikePost() {
-      console.log('меня лайкнули');
+      likePost(post);
+
+      // dislikePost(post)
     }
 
     return (

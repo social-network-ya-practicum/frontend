@@ -105,11 +105,11 @@ class PostsStore {
     this.isLoading = true;
     api
       .deleteLike(post)
-      .then((dislikededPost) => {
+      .then(() => {
         runInAction(() => {
           this.posts = this.posts.map((p) => {
-            if (p.id === dislikededPost.id) {
-              return dislikededPost;
+            if (p.id === post.id) {
+              return post;
             }
             return p;
           });

@@ -60,14 +60,24 @@ class MainApi {
 
   /**  Удаляем like */
   deleteLike = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/like`, {
+    fetch(`${this._url}/posts/${data.id}/like/`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
         ...this._headers,
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
-    }).then((res) => this._checkResponse(res));
+    }).then((res) => {
+      if (res.status === 204) {
+        return {};
+      }
+      if (res.ok) {
+        return res.json();
+      }
+      return res.json().then((r) => {
+        throw new Error(JSON.stringify(r));
+      });
+    });
 
   /** Удаляем пользователя */
   deleteUser = (userID) =>
@@ -285,7 +295,7 @@ class MainApi {
 
   /**  Ставим like посту */
   postLike = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/like/`, {
+    fetch(`${this._url}/posts/${data.id}/like/`, {
       method: 'POST',
       credentials: 'include',
       headers: {
