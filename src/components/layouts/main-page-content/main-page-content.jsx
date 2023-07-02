@@ -20,6 +20,10 @@ const MainPageContent = observer(() => {
     getBirthdays();
   }, [getPosts, getBirthdays]);
 
+  // function handlePostLike(post) {
+  //   console.log(post)
+  // }
+
   const postsElements = posts.map((post) => (
     <Post
       {...post}
@@ -32,6 +36,7 @@ const MainPageContent = observer(() => {
       images={post.images}
       likecount={post.like_count}
       currentUser={user}
+      // onPostLike={handlePostLike}
     />
   ));
 

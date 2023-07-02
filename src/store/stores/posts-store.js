@@ -68,11 +68,50 @@ class PostsStore {
       .catch((err) => console.log(err));
   };
 
-  // editPost = (post) => {
-  //   api.patchUserPost(post)
-  //   .then
-  // }
-  //   likePost
+  editPost = (post) => {
+    this.isLoading = true;
+    api.patchUserPost(post).then((updatedPost) => {
+      runInAction(() => {
+        this.posts = this.posts.map((p) => {
+          if (p.id === updatedPost.id) {
+            return updatedPost;
+          }
+          return p;
+        });
+        this.isLoading = false;
+      });
+    });
+  };
+
+  likePost = (post) => {
+    this.isLoading = true;
+    api
+      .postLike(post)
+      .then(() => {
+        runInAction(() => {
+          console.log('пост лайкнут');
+          this.isLoading = false;
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  dislikePost = (post) => {
+    this.isLoading = true;
+    api
+      .deleteLike(post)
+      .then(() => {
+        runInAction(() => {
+          console.log('пост дизлайкнут');
+          this.isLoading = false;
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  changePostLike(post, isLiked) {
+    return isLiked ? this.likePost(post) : this.dislikePost(post);
+  }
 }
 
 export default new PostsStore();

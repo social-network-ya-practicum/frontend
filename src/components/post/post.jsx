@@ -17,7 +17,7 @@ const Post = observer(
     const { postsStore } = useStore();
     const { getPosts } = postsStore;
 
-    // console.log(author)
+    // console.log(post)
 
     function handleEditClick() {
       setIsPostchanging(true);
