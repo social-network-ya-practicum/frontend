@@ -11,31 +11,37 @@ function UserAddressCard({
   middleName,
   lastName,
   position,
+  department = 'Административный департамент',
   jobEmail,
   jobPhone,
 }) {
   return (
-    <Link className={styles.card__link} to={`/contacts/${id}`}>
+    <Link className={styles.link} to={`/contacts/${id}`}>
       <section className={styles.card}>
-        <div className={styles.card__avatarBlock}>
-          <BorderGradient size="medium">
-            {avatar && (
-              <img
-                className={styles.card__avatarImg}
-                src={avatar}
-                alt="Avatar"
-              />
-            )}
-          </BorderGradient>
-        </div>
         <div className={styles.card__info}>
-          <div className={styles.card__fio}>
-            {lastName} {firstName} {middleName}
+          <div className={styles.card__avatarBlock}>
+            <BorderGradient size="medium">
+              {avatar && (
+                <img
+                  className={styles.card__avatarImg}
+                  src={avatar}
+                  alt="Avatar"
+                />
+              )}
+            </BorderGradient>
           </div>
-          <div>{position}</div>
+          <div className={styles.card__mainData}>
+            <p>
+              {lastName} {firstName} {middleName}
+            </p>
+            <p className={styles.card__position}>{position}</p>
+          </div>
         </div>
-        <div className={styles.card__contact}>{jobPhone}</div>
-        <div className={styles.card__contact}>{jobEmail}</div>
+        <div className={styles.card__department}>{department}</div>
+        <div className={styles.card__contacts}>
+          <p>{jobPhone}</p>
+          <p>{jobEmail}</p>
+        </div>
       </section>
     </Link>
   );
@@ -50,6 +56,7 @@ UserAddressCard.propTypes = {
   middleName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
+  department: PropTypes.string.isRequired,
   jobEmail: PropTypes.string.isRequired,
   jobPhone: PropTypes.string.isRequired,
 };
