@@ -13,9 +13,8 @@ export const Default = {
 
 export const Сolleague = {
   args: {
-    id: '2',
+    isOwn: false,
     contact: {
-      id: '1',
       photo: null,
       first_name: 'Юлия',
       middle_name: 'Сергеевна',
@@ -27,9 +26,8 @@ export const Сolleague = {
 
 export const Me = {
   args: {
-    id: '2',
+    isOwn: true,
     contact: {
-      id: '2',
       photo: null,
       first_name: 'Юлия',
       middle_name: 'Сергеевна',

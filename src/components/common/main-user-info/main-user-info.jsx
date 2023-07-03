@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './main-user-info.module.scss';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
 
-function MainUserInfo({ contact, id }) {
-  const isOwn = contact.id === id;
+function MainUserInfo({ contact, isOwn }) {
 
   return (
     <section className={styles.mainUserInfo}>
@@ -38,9 +37,8 @@ function MainUserInfo({ contact, id }) {
 export default MainUserInfo;
 
 MainUserInfo.propTypes = {
-  id: PropTypes.number,
+  isOwn: PropTypes.bool,
   contact: PropTypes.shape({
-    id: PropTypes.number,
     photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
     first_name: PropTypes.string,
     last_name: PropTypes.string,
@@ -50,9 +48,8 @@ MainUserInfo.propTypes = {
 };
 
 MainUserInfo.defaultProps = {
-  id: '2',
+  isOwn: false,
   contact: {
-    id: '1',
     photo: null,
     first_name: 'Имя',
     middle_name: 'Отчество',

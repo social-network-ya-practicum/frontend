@@ -28,7 +28,7 @@
   }
 
   &__container {
-    width: 100%;
+    width: 227.5px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -50,5 +50,13 @@
     font-size: 16px;
     line-height: 120%;
     color: var.$text_color_default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover{
+      overflow: visible; 
+      white-space: normal;
+    }
   }
 }

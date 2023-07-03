@@ -1,8 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import { dates } from '../../utils/settings';
 
 class ContactStore {
   contactRes = [];
+
+  error = null;
 
   isLoading = false;
 
@@ -23,8 +26,8 @@ class ContactStore {
             ? String(contact.birthday_day)
             : '1',
           birthday_month: contact?.birthday_month
-            ? String(contact.birthday_month)
-            : '1',
+            ? dates[contact.birthday_month].month
+            : 'Января',
           bio: contact?.bio ?? '',
           photo: contact?.photo ?? null,
         }
@@ -35,17 +38,34 @@ class ContactStore {
     makeAutoObservable(this);
   }
 
+  setContactRes = (res) => {
+    this.contactRes = res;
+  };
+
+  setError = (error) => {
+    this.error = error;
+  };
+
+  setIsLoading = (bool) => {
+    this.isLoading = bool;
+  };
+
   getContact = (n) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .getUserData(n)
       .then((data) => {
         runInAction(() => {
-          this.contactRes = data;
-          this.isLoading = false;
+          this.setContactRes(data);
+          this.setIsLoading(false);
         });
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        runInAction((err) => {
+          this.setError(err);
+          this.setIsLoading(false);
+        });
+      });
   };
 }
 
