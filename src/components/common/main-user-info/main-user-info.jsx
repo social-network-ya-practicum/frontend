@@ -25,7 +25,7 @@ function MainUserInfo({ contact, id }) {
         <div className={styles.mainUserInfo__wrapper}>
           <p className={styles.mainUserInfo__role}>{contact.job_title}</p>
           {isOwn && (
-            <NavLink to="/:user/edit" className={styles.mainUserInfo__action}>
+            <NavLink to={`/${id}/edit`} className={styles.mainUserInfo__action}>
               Редактировать профиль
             </NavLink>
           )}

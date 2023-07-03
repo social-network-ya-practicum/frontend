@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import MainLayout from '../layouts/main-layout/main-layout';
 import LoginPage from '../../pages/login-page/login-page';
@@ -44,7 +44,7 @@ const App = observer(() => {
           </Route>
           <Route path="contacts/:contactId" element={<UserPage />} />
           <Route path=":userId" element={<UserPage />} />
-          <Route path=":user/edit" element={<EditPage />} />
+          <Route path=":userId/edit" element={<EditPage />} />
         </Route>
         <Route
           path="/login"
@@ -55,7 +55,8 @@ const App = observer(() => {
           }
         />
       </Route>
-      <Route path="*" element={<div>Page 404</div>} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+      <Route path="/404" element={<div>Page 404</div>} />
     </Routes>
   );
 });
