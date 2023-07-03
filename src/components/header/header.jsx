@@ -96,7 +96,7 @@ function Header({ user, mix, logout }) {
                       </button>
                       <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
-                          to={`${user.id}/edit`}
+                          to={`/${user.id}/edit`}
                           className={styles.header__action}
                           onClick={handleClose}
                         >

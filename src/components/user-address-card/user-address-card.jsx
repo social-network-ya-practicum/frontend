@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
 import styles from './user-address-card.module.scss';
 import BorderGradient from '../common/border-gradient/border-gradient';
+import { useStore } from '../../contexts/RootStoreContext';
 
 function UserAddressCard({
   id,
@@ -14,8 +15,13 @@ function UserAddressCard({
   jobEmail,
   jobPhone,
 }) {
+  const { userStore } = useStore();
+  const { user } = userStore;
+
+  const toPath = user.id === id ? `/${id}` : `/contacts/${id}`;
+
   return (
-    <Link className={styles.card__link} to={`/contacts/${id}`}>
+    <Link className={styles.card__link} to={toPath}>
       <section className={styles.card}>
         <div className={styles.card__avatarBlock}>
           <BorderGradient size="medium">
@@ -41,7 +47,7 @@ function UserAddressCard({
   );
 }
 
-export default memo(UserAddressCard);
+export default observer(UserAddressCard);
 
 UserAddressCard.propTypes = {
   id: PropTypes.string.isRequired,

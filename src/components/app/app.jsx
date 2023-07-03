@@ -45,7 +45,7 @@ const App = observer(() => {
           </Route>
           <Route path="contacts/:contactId" element={<ContactPage />} />
           <Route path=":userId" element={<UserPage />} />
-          <Route path=":user/edit" element={<EditPage />} />
+          <Route path=":userId/edit" element={<EditPage />} />
         </Route>
         <Route
           path="/login"

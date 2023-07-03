@@ -1,36 +1,43 @@
-import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import styles from './contact-page.module.scss';
 import { useStore } from '../../contexts/RootStoreContext';
-import UserPageContent from '../../components/layouts/user-page-content/user-page-content';
+import UserPageContent from '../../components/user-page-content/user-page-content';
 
 const ContactPage = observer(() => {
-  const { userStore, contactStore, postsStore } = useStore();
-  const { user } = userStore;
+  const { contactStore, postsStore } = useStore();
   const { contact, getContact } = contactStore;
-  const contactId = useParams();
-  const { posts, getPostsUser } = postsStore;
+  const { userPosts, getPostsUser, cleanUserPosts } = postsStore;
 
-  const isOwn = contact.id === user.id;
-  const navigate = useNavigate();
+  const { contactId } = useParams();
 
   useEffect(() => {
-    if (isOwn) {
-      navigate(`/${user.id}`);
+    cleanUserPosts();
+    return () => {
+      cleanUserPosts();
+    };
+  }, [cleanUserPosts]);
+
+  const shouldUpdContact = useMemo(
+    () => !contact || contactId !== String(contact.id),
+    [contact, contactId]
+  );
+
+  useEffect(() => {
+    if (shouldUpdContact) {
+      getContact(contactId);
     }
-    getContact(contactId.contactId);
-    getPostsUser(contactId.contactId);
-  }, [contactId, getContact, getPostsUser, isOwn, navigate, user]);
+    if (contact && contactId === String(contact.id)) {
+      getPostsUser(contactId);
+    }
+  }, [contactId, getContact, getPostsUser, contact, shouldUpdContact]);
+
+  if (shouldUpdContact) return null;
 
   return (
     <section className={styles.userPage}>
-      <UserPageContent
-        posts={posts}
-        contact={contact}
-        user={user}
-        isOwn={isOwn}
-      />
+      <UserPageContent posts={userPosts} user={contact} />
     </section>
   );
 });

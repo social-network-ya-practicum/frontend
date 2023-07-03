@@ -1,9 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
-import { dates } from '../../utils/settings';
 
 class ContactStore {
-  contactRes = [];
+  contactRes = null;
 
   error = null;
 
@@ -26,8 +25,8 @@ class ContactStore {
             ? String(contact.birthday_day)
             : '1',
           birthday_month: contact?.birthday_month
-            ? dates[contact.birthday_month].month
-            : 'Января',
+            ? String(contact.birthday_month)
+            : '1',
           bio: contact?.bio ?? '',
           photo: contact?.photo ?? null,
         }
