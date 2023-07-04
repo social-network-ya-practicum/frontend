@@ -41,7 +41,7 @@ const MainPageContent = observer(() => {
         <PostInput />
         <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
       </div>
-      <BirthdayPlate data={birthDays} />
+      <BirthdayPlate data={birthDays} id={user.id} />
     </div>
   );
 });

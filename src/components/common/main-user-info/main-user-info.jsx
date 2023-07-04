@@ -3,33 +3,43 @@ import { NavLink } from 'react-router-dom';
 import styles from './main-user-info.module.scss';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
 
-function MainUserInfo({ contact, id }) {
-  const isOwn = contact.id === id;
-
+function MainUserInfo({ user, isOwn }) {
   return (
     <section className={styles.mainUserInfo}>
       <div className={styles.mainUserInfo__container}>
         <div className={styles.mainUserInfo__photo}>
           <img
             className={`${styles.mainUserInfo__avatar} ${
-              contact.photo ? '' : styles.mainUserInfo__avatar_default
+              user.photo ? '' : styles.mainUserInfo__avatar_default
             }`}
-            src={contact.photo || defaultAvatar}
+            src={user.photo || defaultAvatar}
             alt="Фото"
           />
         </div>
         <h2 className={styles.mainUserInfo__name}>
-          {contact.first_name} {contact.middle_name} {contact.last_name}
+          {user.first_name} {user.middle_name} {user.last_name}
         </h2>
-        <p className={styles.mainUserInfo__text}>Должность</p>
         <div className={styles.mainUserInfo__wrapper}>
-          <p className={styles.mainUserInfo__role}>{contact.job_title}</p>
-          {isOwn && (
-            <NavLink to="/:user/edit" className={styles.mainUserInfo__action}>
+          <div className={styles.mainUserInfo__case}>
+            <p className={styles.mainUserInfo__text}>Должность</p>
+            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+          </div>
+          <div className={styles.mainUserInfo__case}>
+            <p className={styles.mainUserInfo__text}>Подразделение</p>
+            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+          </div>
+        </div>
+        {isOwn && (
+          <>
+            <div className={styles.mainUserInfo__border} />
+            <NavLink
+              to={`/${user.id}/edit`}
+              className={styles.mainUserInfo__action}
+            >
               Редактировать профиль
             </NavLink>
-          )}
-        </div>
+          </>
+        )}
       </div>
     </section>
   );
@@ -38,25 +48,17 @@ function MainUserInfo({ contact, id }) {
 export default MainUserInfo;
 
 MainUserInfo.propTypes = {
-  id: PropTypes.number,
-  contact: PropTypes.shape({
-    id: PropTypes.number,
+  isOwn: PropTypes.bool,
+  user: PropTypes.shape({
     photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
     first_name: PropTypes.string,
     last_name: PropTypes.string,
     middle_name: PropTypes.string,
     job_title: PropTypes.string,
-  }),
+    id: PropTypes.number,
+  }).isRequired,
 };
 
 MainUserInfo.defaultProps = {
-  id: '2',
-  contact: {
-    id: '1',
-    photo: null,
-    first_name: 'Имя',
-    middle_name: 'Отчество',
-    last_name: 'Фамилия',
-    job_title: 'Должность',
-  },
+  isOwn: false,
 };

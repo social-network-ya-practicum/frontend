@@ -4,15 +4,25 @@ import api from '../../utils/main-api';
 class PostsStore {
   posts = [];
 
+  userPosts = [];
+
   isLoading = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  // setPosts(posts) {
-  //   this.posts = posts;
-  // }
+  setIsLoading = (bool) => {
+    this.isLoading = bool;
+  };
+
+  setUserPosts = (posts) => {
+    this.userPosts = posts;
+  };
+
+  cleanUserPosts = () => {
+    this.userPosts = [];
+  };
 
   getPosts = () => {
     this.isLoading = true;
@@ -29,17 +39,15 @@ class PostsStore {
   };
 
   getPostsUser = (userID) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .getUserPostsList(userID)
       .then((data) => {
-        runInAction(() => {
-          this.posts = data.results;
-          this.isLoading = false;
-        });
+        this.setUserPosts(data.results);
       })
       // setPost(data.results))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   addPost = (post) => {

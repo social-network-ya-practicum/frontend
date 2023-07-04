@@ -7,19 +7,19 @@ export const COOKIES_OPTIONS = {
   'max-age': 604_800,
 };
 
-export const dates = {
-  1: { month: 'Январь', max: 31 },
-  2: { month: 'Февраль', max: 29 },
-  3: { month: 'Март', max: 31 },
-  4: { month: 'Апрель', max: 30 },
-  5: { month: 'Май', max: 31 },
-  6: { month: 'Июнь', max: 30 },
-  7: { month: 'Июль', max: 31 },
-  8: { month: 'Август', max: 31 },
-  9: { month: 'Сентябрь', max: 30 },
-  10: { month: 'Октябрь', max: 31 },
-  11: { month: 'Ноябрь', max: 30 },
-  12: { month: 'Декабрь', max: 31 },
+export const calendar = {
+  1: { month: 'Январь', variant: 'января', max: 31 },
+  2: { month: 'Февраль', variant: 'февраля', max: 29 },
+  3: { month: 'Март', variant: 'марта', max: 31 },
+  4: { month: 'Апрель', variant: 'апреля', max: 30 },
+  5: { month: 'Май', variant: 'мая', max: 31 },
+  6: { month: 'Июнь', variant: 'июня', max: 30 },
+  7: { month: 'Июль', variant: 'июля', max: 31 },
+  8: { month: 'Август', variant: 'августа', max: 31 },
+  9: { month: 'Сентябрь', variant: 'сентября', max: 30 },
+  10: { month: 'Октябрь', variant: 'октября', max: 31 },
+  11: { month: 'Ноябрь', variant: 'ноября', max: 30 },
+  12: { month: 'Декабрь', variant: 'декабря', max: 31 },
 };
 
 export const monthes = [

@@ -2,7 +2,9 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
 
 class ContactStore {
-  contactRes = [];
+  contactRes = null;
+
+  error = null;
 
   isLoading = false;
 
@@ -35,17 +37,34 @@ class ContactStore {
     makeAutoObservable(this);
   }
 
+  setContactRes = (res) => {
+    this.contactRes = res;
+  };
+
+  setError = (error) => {
+    this.error = error;
+  };
+
+  setIsLoading = (bool) => {
+    this.isLoading = bool;
+  };
+
   getContact = (n) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .getUserData(n)
       .then((data) => {
         runInAction(() => {
-          this.contactRes = data;
-          this.isLoading = false;
+          this.setContactRes(data);
+          this.setIsLoading(false);
         });
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        runInAction((err) => {
+          this.setError(err);
+          this.setIsLoading(false);
+        });
+      });
   };
 }
 
