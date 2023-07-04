@@ -32,6 +32,7 @@ export const Example = (args) => (
           corporate_phone_number: '+7 926 567 34 34',
         },
       ]}
+      userId="1"
       {...args}
     />
   </BrowserRouter>
