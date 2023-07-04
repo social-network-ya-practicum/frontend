@@ -9,12 +9,14 @@ export default {
 
 export const ExampleBirthdayFree = {
   args: {
+    id: 1,
     data: [],
   },
 };
 
 export const ExampleOneBirthday = {
   args: {
+    id: 1,
     data: [
       {
         id: 0,
@@ -28,6 +30,7 @@ export const ExampleOneBirthday = {
 
 export const ExampleFourBirthday = {
   args: {
+    id: '1',
     data: [
       {
         id: 0,

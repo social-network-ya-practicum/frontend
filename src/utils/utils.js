@@ -1,4 +1,4 @@
-import { dates } from './settings';
+import { calendar } from './settings';
 
 export const setCookie = (name, value, options = {}) => {
   const optionsObj = {
@@ -56,13 +56,13 @@ export const debounce = (callee, timeoutMs) => {
 };
 
 export const getDatesList = (month) => {
-  const maxValue = Object.values(dates).find((i) => i.month === month).max;
+  const maxValue = Object.values(calendar).find((i) => i.month === month).max;
   const list = Array.from({ length: maxValue }, (_, ind) => String(ind + 1));
   return list;
 };
 
 export const getMonthNumber = (month) => {
-  const monthNum = Object.entries(dates).find(
+  const monthNum = Object.entries(calendar).find(
     ([, val]) => val.month === month
   )[0];
   return +monthNum;
