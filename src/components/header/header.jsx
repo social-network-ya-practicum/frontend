@@ -69,6 +69,18 @@ function Header({ user, mix, logout }) {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink
+                      to="/groups"
+                      className={({ isActive }) =>
+                        `${styles.header__link} ${
+                          isActive ? styles.header__link_active : ''
+                        }`
+                      }
+                    >
+                      Группы
+                    </NavLink>
+                  </li>
+                  <li>
                     <div className={styles.header__container}>
                       <NavLink
                         to={`/${user.id}`}
@@ -96,7 +108,7 @@ function Header({ user, mix, logout }) {
                       </button>
                       <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
-                          to={`${user.id}/edit`}
+                          to={`/${user.id}/edit`}
                           className={styles.header__action}
                           onClick={handleClose}
                         >

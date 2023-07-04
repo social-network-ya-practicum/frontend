@@ -8,7 +8,7 @@ import InfoSelect from '../common/info-select/info-select';
 import InfoTextrea from '../common/info-textarea/info-textarea';
 import useValidator from '../../hooks/use-validator';
 import { getDatesList } from '../../utils/utils';
-import { monthes } from '../../utils/settings';
+import { calendar, monthes } from '../../utils/settings';
 
 const InfoForm = ({ onSubmit, mix, disabled, user }) => {
   const {
@@ -32,7 +32,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     corporate_phone_number: user ? user.corporate_phone_number : '',
     personal_phone_number: user ? user.personal_phone_number : '',
     birthday_day: user ? user.birthday_day : '1',
-    birthday_month: user ? user.birthday_month : 'Январь',
+    birthday_month: user ? calendar[user.birthday_month].month : 'Январь',
     bio: user ? user.bio : '',
   };
 
