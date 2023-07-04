@@ -5,6 +5,7 @@ import styles from './main-layout.module.scss';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
 import { useStore } from '../../../contexts/RootStoreContext';
+import ErrorComponent from '../../error-component/error-component';
 
 const MainLayout = observer(() => {
   const { userStore } = useStore();
@@ -16,6 +17,7 @@ const MainLayout = observer(() => {
       <Header mix={styles.mixHeader} user={user} logout={handleLogout} />
       <main className={styles.layout__content}>
         <Outlet />
+        <ErrorComponent mix={styles.mixErrorComponent} />
       </main>
       <Footer user={user} />
     </div>

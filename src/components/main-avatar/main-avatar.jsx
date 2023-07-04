@@ -52,7 +52,6 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(111);
     onSubmit(selectedFile);
   };
 

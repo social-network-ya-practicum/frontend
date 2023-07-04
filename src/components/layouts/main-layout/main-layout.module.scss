@@ -22,3 +22,9 @@
 .mixHeader {
   position: fixed;
 }
+
+.mixErrorComponent {
+  position: fixed;
+  right: calc((100% - 1280px) / 2 + 72px);
+  top: calc(var.$header_height + 44px);
+}
