@@ -15,7 +15,7 @@ const UserPage = observer(() => {
 
   return (
     <section className={styles.userPage}>
-      <UserPageContent posts={userPosts} user={user} isOwn />
+      <UserPageContent posts={userPosts} user={user} ownUser={user} isOwn />
     </section>
   );
 });

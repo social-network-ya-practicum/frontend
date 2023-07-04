@@ -6,9 +6,10 @@ import { useStore } from '../../contexts/RootStoreContext';
 import UserPageContent from '../../components/user-page-content/user-page-content';
 
 const ContactPage = observer(() => {
-  const { contactStore, postsStore } = useStore();
+  const { contactStore, postsStore, userStore } = useStore();
   const { contact, getContact } = contactStore;
   const { userPosts, getPostsUser, cleanUserPosts } = postsStore;
+  const { ownUser } = userStore;
 
   const { contactId } = useParams();
 
@@ -37,7 +38,7 @@ const ContactPage = observer(() => {
 
   return (
     <section className={styles.userPage}>
-      <UserPageContent posts={userPosts} user={contact} />
+      <UserPageContent posts={userPosts} user={contact} ownUser={ownUser} />
     </section>
   );
 });

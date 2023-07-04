@@ -42,6 +42,9 @@ const App = observer(() => {
           <Route element={<MainPageShell />}>
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
+            <Route path="groups" element={<pre>В настоящий момент на сайте ведутся технические работы. <br />
+            <br />
+            Скоро всё заработает - обязательно возвращайтесь!</pre>} />
           </Route>
           <Route path="contacts/:contactId" element={<ContactPage />} />
           <Route path=":userId" element={<UserPage />} />

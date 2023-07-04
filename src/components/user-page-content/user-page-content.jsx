@@ -6,7 +6,7 @@ import ContactsUserInfo from '../common/contacts-user-info/contacts-user-info';
 import AboutUser from '../common/about-user/about-user';
 import Post from '../post/post';
 
-function UserPageContent({ posts, user, isOwn }) {
+function UserPageContent({ posts, user, ownUser, isOwn }) {
   const postsElements = posts.map((post) => (
     <Post
       {...post}
@@ -18,7 +18,7 @@ function UserPageContent({ posts, user, isOwn }) {
       pubdate={post.pub_date}
       images={post.images}
       likecount={post.like_count}
-      currentUser={user}
+      currentUser={ownUser}
     />
   ));
 
@@ -54,6 +54,7 @@ UserPageContent.propTypes = {
   }).isRequired,
   posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   isOwn: PropTypes.bool,
+  ownUser: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
 };
 
 UserPageContent.defaultProps = {

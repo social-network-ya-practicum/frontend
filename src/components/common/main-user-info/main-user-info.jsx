@@ -19,18 +19,27 @@ function MainUserInfo({ user, isOwn }) {
         <h2 className={styles.mainUserInfo__name}>
           {user.first_name} {user.middle_name} {user.last_name}
         </h2>
-        <p className={styles.mainUserInfo__text}>Должность</p>
         <div className={styles.mainUserInfo__wrapper}>
-          <p className={styles.mainUserInfo__role}>{user.job_title}</p>
-          {isOwn && (
+          <div className={styles.mainUserInfo__case}>
+            <p className={styles.mainUserInfo__text}>Должность</p>
+            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+          </div>
+          <div className={styles.mainUserInfo__case}>
+            <p className={styles.mainUserInfo__text}>Подразделение</p>
+            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+          </div>
+        </div>
+        {isOwn && (
+          <>
+            <div className={styles.mainUserInfo__border} />
             <NavLink
               to={`/${user.id}/edit`}
               className={styles.mainUserInfo__action}
             >
               Редактировать профиль
             </NavLink>
-          )}
-        </div>
+          </>
+        )}
       </div>
     </section>
   );
