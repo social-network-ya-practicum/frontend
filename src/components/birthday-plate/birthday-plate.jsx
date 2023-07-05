@@ -9,14 +9,13 @@ function BirthdayPlate({ id, data, mix }) {
   const cnBirthdayPlate = clsx(styles.birthdayPlate, mix);
 
   function date(birthdaydate) {
-    const d = new Date (birthdaydate);
+    const d = new Date(birthdaydate);
     const options = {
       day: 'numeric',
       month: 'long',
     };
-    return d.toLocaleString("ru", options);
+    return d.toLocaleString('ru', options);
   }
-  
 
   return (
     <section className={cnBirthdayPlate}>
@@ -27,9 +26,17 @@ function BirthdayPlate({ id, data, mix }) {
         {data.length > 0 ? (
           data.slice(0, 3).map((person) => (
             <li key={person.id} className={styles.birthdayPlate__item}>
-              <NavLink to={ person.id === id ? `/${person.id}` : `/contacts/${person.id}`}>
+              <NavLink
+                to={
+                  person.id === id ? `/${person.id}` : `/contacts/${person.id}`
+                }
+              >
                 <BorderGradient size="medium" mix={styles.mixBorderGradient}>
-                  <img className={styles.birthdayPlate__image} src={person.photo || ''} alt="Фото" />
+                  <img
+                    className={styles.birthdayPlate__image}
+                    src={person.photo || ''}
+                    alt="Фото"
+                  />
                 </BorderGradient>
               </NavLink>
               <div className={styles.birthdayPlate__info}>
