@@ -30,7 +30,7 @@ const Post = observer(
     const { getPosts, editPost, deletePost, likePost, dislikePost } =
       postsStore;
 
-    // console.log(popupRef)
+    const isLiked = post.users_like.some((item) => item === currentUser.id);
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -55,14 +55,12 @@ const Post = observer(
       // вытщить пост из пропсов? но надо еще данные записать новые
       editPost({ ...post, text: value });
       setIsPostchanging(false);
-      likePost(post);
-      dislikePost(post);
+      // likePost(post);
+      // dislikePost(post);
     }
 
     function handleLikePost() {
-      // likePost(post);
-
-      dislikePost(post);
+      return !isLiked ? likePost(post) : dislikePost(post);
     }
 
     useEffect(() => {

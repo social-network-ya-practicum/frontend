@@ -128,7 +128,7 @@ class PostsStore {
   };
 
   changePostLike(post, isLiked) {
-    return isLiked ? this.likePost(post) : this.dislikePost(post);
+    return !isLiked ? this.likePost(post) : this.dislikePost(post);
   }
 }
 
