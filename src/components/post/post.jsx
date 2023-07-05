@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
 import styles from './post.module.scss';
@@ -24,12 +24,13 @@ const Post = observer(
     const [value, setValue] = useState(text);
     const [isPostChanging, setIsPostchanging] = useState(false);
     const [isPopupOpened, setIsPopupOpened] = useState(false);
+    const popupRef = useRef(null);
 
     const { postsStore } = useStore();
     const { getPosts, editPost, deletePost, likePost, dislikePost } =
       postsStore;
 
-    // console.log(post)
+    // console.log(popupRef)
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -59,10 +60,26 @@ const Post = observer(
     }
 
     function handleLikePost() {
-      likePost(post);
+      // likePost(post);
 
-      // dislikePost(post)
+      dislikePost(post);
     }
+
+    useEffect(() => {
+      const handleClosePopup = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          // setIsPopupOpened(!isPopupOpened);
+          // console.log(event.target)
+          // console.log(isPopupOpened)
+          // console.log(popupRef.current)
+          // console.log(popupRef.current.contains(event.target))
+        }
+      };
+      document.addEventListener('click', handleClosePopup);
+      return () => {
+        document.removeEventListener('click', handleClosePopup);
+      };
+    }, [isPopupOpened]);
 
     return (
       <li className={styles.post}>
@@ -141,6 +158,7 @@ const Post = observer(
           className={`${styles.post__actions} ${
             isPopupOpened && styles.post__actions_active
           }`}
+          ref={popupRef}
         >
           {currentUser.id === author.id && (
             <button

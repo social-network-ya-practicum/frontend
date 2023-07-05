@@ -67,17 +67,18 @@ class MainApi {
         ...this._headers,
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
-    }).then((res) => {
-      if (res.status === 204) {
-        return {};
-      }
-      if (res.ok) {
-        return res.json();
-      }
-      return res.json().then((r) => {
-        throw new Error(JSON.stringify(r));
-      });
-    });
+    }).then((res) => this._checkResponse(res));
+  // .then((res) => {
+  //   if (res.status === 204) {
+  //     return {};
+  //   }
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return res.json().then((r) => {
+  //     throw new Error(JSON.stringify(r));
+  //   });
+  // });
 
   /** Удаляем пользователя */
   deleteUser = (userID) =>
