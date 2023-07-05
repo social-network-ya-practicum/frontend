@@ -10,7 +10,7 @@ export default {
 export const Example = (args) => (
   <BrowserRouter>
     <UserAddressCard
-      id="1"
+      linkPath="1"
       firstName="Эльвира"
       middleName="Ароновна"
       lastName="Зойкина"

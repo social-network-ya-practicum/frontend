@@ -41,12 +41,12 @@ const MainPageContent = observer(() => {
   ));
 
   return (
-    <div className={styles['main-page-content']}>
+    <div className={styles.mainPageContent}>
       <div>
         <PostInput />
-        <ul className={styles['main-page-content__posts']}>{postsElements}</ul>
+        <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
       </div>
-      <BirthdayPlate data={birthDays} />
+      <BirthdayPlate data={birthDays} id={user.id} />
     </div>
   );
 });

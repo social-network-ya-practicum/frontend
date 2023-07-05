@@ -1,9 +1,7 @@
 import { useId } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './info-input.module.scss';
-
-const cn = classNames.bind(styles);
 
 function InfoInput({
   title,
@@ -33,15 +31,15 @@ function InfoInput({
     setError((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const cnRoot = cn('info-input', mix);
-  const cnInput = cn('info-input__input', {
-    'info-input__input_type_error': error,
+  const cnRoot = clsx(styles.infoInput, mix);
+  const cnInput = clsx(styles.infoInput__input, {
+    [styles.infoInput__input_type_error]: error,
   });
 
   return (
     <label className={cnRoot} htmlFor={id}>
-      <div className={styles['info-input__wrapper']}>
-        <span className={styles['info-input__title']}>{title}</span>
+      <div className={styles.infoInput__wrapper}>
+        <span className={styles.infoInput__title}>{title}</span>
 
         <input
           className={cnInput}
@@ -58,7 +56,7 @@ function InfoInput({
           spellCheck="false"
         />
       </div>
-      {error && <span className={styles['info-input__error']}>{error}</span>}
+      {error && <span className={styles.infoInput__error}>{error}</span>}
     </label>
   );
 }

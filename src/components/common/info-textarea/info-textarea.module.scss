@@ -1,3 +1,5 @@
+@use '../../../variables' as var;
+
 $textarea-text-paddingX: 12px;
 $textarea-max-width: 388px;
 
@@ -6,7 +8,7 @@ $textarea-max-width: 388px;
   flex-direction: column;
 
   &__title {
-    font-family: var(--font-family-default);
+    font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -16,7 +18,7 @@ $textarea-max-width: 388px;
 
   &__textarea {
     resize: none;
-    background: var(--bg_color_primary);
+    background: var.$bg_color_primary;
     border-radius: 16px;
     max-width: $textarea-max-width;
     width: 100%;
@@ -27,17 +29,17 @@ $textarea-max-width: 388px;
     overflow-y: hidden;
 
     &::placeholder {
-      color: var(--text_color_placeholder);
+      color: var.$text_color_placeholder;
     }
 
     &_type_error {
-      color: var(--text_color_error);
+      color: var.$text_color_error;
     }
   }
 
   &__error {
     font-size: 14px;
-    color: var(--text_color_error);
+    color: var.$text_color_error;
     padding: 0 $textarea-text-paddingX;
     width: 100%;
     max-width: $textarea-max-width;

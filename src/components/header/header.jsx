@@ -6,30 +6,10 @@ import Arrow from '../../image/arrow-down.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
-import { getCookie, deleteCookie } from '../../utils/utils';
-import { TOKEN_NAME } from '../../utils/settings';
 import Popup from '../common/popup/popup';
 
 function Header({ user, mix, logout }) {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleLogout = () => {
-    const token = getCookie(TOKEN_NAME);
-
-    // -----------------------------------------------------------------------------
-    // После - заменить на запрос из api (mainApi.logout())
-
-    fetch('https://csn.sytes.net/api/v1/auth/token/logout/', {
-      method: 'POST',
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    }).catch((err) => console.log(err));
-    // ---------------------------------------------------------------
-
-    deleteCookie(TOKEN_NAME);
-    logout();
-  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -55,11 +35,7 @@ function Header({ user, mix, logout }) {
       <div className={styles.header}>
         <NavLink to="/" className={styles.header__logo}>
           <BorderGradient>
-            <img
-              className={styles['header__img-logo']}
-              src={Logo}
-              alt="Логотип"
-            />
+            <img className={styles.header__imgLogo} src={Logo} alt="Логотип" />
           </BorderGradient>
           <span className={styles.header__title}>Корпоративная сеть</span>
         </NavLink>
@@ -93,6 +69,18 @@ function Header({ user, mix, logout }) {
                     </NavLink>
                   </li>
                   <li>
+                    <NavLink
+                      to="/groups"
+                      className={({ isActive }) =>
+                        `${styles.header__link} ${
+                          isActive ? styles.header__link_active : ''
+                        }`
+                      }
+                    >
+                      Группы
+                    </NavLink>
+                  </li>
+                  <li>
                     <div className={styles.header__container}>
                       <NavLink
                         to={`/${user.id}`}
@@ -100,7 +88,7 @@ function Header({ user, mix, logout }) {
                       >
                         <BorderGradient>
                           <img
-                            className={styles['header__img-avatar']}
+                            className={styles.header__imgAvatar}
                             src={user.photo || defaultAvatar}
                             alt="Фото"
                           />
@@ -108,19 +96,19 @@ function Header({ user, mix, logout }) {
                         <p className={styles.header__name}>{user.first_name}</p>
                       </NavLink>
                       <button
-                        className={styles['header__menu-button']}
+                        className={styles.header__menuButton}
                         type="button"
                         onClick={handleOpenClick}
                       >
                         <img
-                          className={styles['header__img-arrow']}
+                          className={styles.header__imgArrow}
                           src={Arrow}
                           alt="Настройка профиля"
                         />
                       </button>
                       <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
-                          to={`${user.id}/edit`}
+                          to={`/${user.id}/edit`}
                           className={styles.header__action}
                           onClick={handleClose}
                         >
@@ -129,7 +117,7 @@ function Header({ user, mix, logout }) {
                         <NavLink
                           to="/login"
                           className={styles.header__action}
-                          onClick={handleLogout}
+                          onClick={() => logout()}
                         >
                           Выйти
                         </NavLink>

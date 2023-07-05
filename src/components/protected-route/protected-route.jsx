@@ -22,6 +22,6 @@ const ProtectedRoute = observer(({ children, to }) => {
 export default ProtectedRoute;
 
 ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.node]),
   to: PropTypes.oneOf(['/', '/login']).isRequired,
 };

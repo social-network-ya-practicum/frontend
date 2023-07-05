@@ -1,28 +1,32 @@
+@use '../../variables' as var;
+
+.link {
+  text-decoration: none;
+  color: var.$text_color_default;
+}
+
 .card {
-  font-weight: 400;
-  font-size: 14px;
   display: flex;
   width: 941px;
-  height: 96px;
+  padding: 12px 24px;
+  align-items: flex-start;
+  gap: 103px;
   border-radius: 16px;
-  background: var(--bg_color_layout);
-  padding-left: 24px;
-  padding-right: 36px;
-
-  &__link {
-    text-decoration: none;
-    color: var(--text_color_default);
-  }
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  background: var.$bg_color_layout;
+  overflow-wrap: anywhere;
 
   &__avatarBlock {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: var(--color_ffffff);
+    background-color: var.$color_ffffff;
     display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 24px;
+    justify-content: center;
+    align-items: center;
   }
 
   &__avatarImg {
@@ -33,34 +37,43 @@
 
   &__info {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    width: 391px;
+    align-items: center;
+    gap: 24px;
+    width: 300px;
   }
 
-  &__fio {
-    font-size: 16px;
-    overflow-wrap: anywhere;
-  }
-
-  &__contact {
+  &__mainData {
     display: flex;
-    flex-grow: 2;
-    margin-top: 20px;
-    overflow-wrap: anywhere;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 
-    &:nth-child(3) {
-      justify-content: left;
-    }
+  &__position,
+  &__department {
+    font-size: 14px;
+  }
 
-    &:nth-child(4) {
-      justify-content: right;
-    }
+  &__department {
+    display: flex;
+    padding-top: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 136px;
+  }
+
+  &__contacts {
+    display: flex;
+    padding-top: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 252px;
   }
 
   &:hover {
     cursor: pointer;
-    background-color: var(--color_ffffff);
+    background-color: var.$color_ffffff;
   }
 }

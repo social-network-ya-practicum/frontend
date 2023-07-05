@@ -7,7 +7,7 @@ import ContactsList from '../../components/contacts-list/contacts-list';
 import usePagingObserver from '../../hooks/use-paging-observer';
 
 const ContactsPage = observer(() => {
-  const { contactsStore } = useStore();
+  const { contactsStore, userStore } = useStore();
   const {
     contacts,
     count,
@@ -22,6 +22,9 @@ const ContactsPage = observer(() => {
     getContacts,
     getNextPage,
   } = contactsStore;
+  const {
+    user: { id },
+  } = userStore;
   const ref = useRef();
 
   usePagingObserver(ref, loading, page, totalPages, setPage);
@@ -41,13 +44,13 @@ const ContactsPage = observer(() => {
       <SearchInput
         searchFromStore={search}
         handleChange={setSearch}
-        mix={styles['mix-search-input']}
+        mix={styles.mixSearchInput}
       />
       {error ? (
         <p>{error}</p>
       ) : (
         <>
-          <ContactsList contacts={contacts} />
+          <ContactsList contacts={contacts} userId={id} />
           <div ref={ref} />
         </>
       )}

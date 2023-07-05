@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import AuthInput from '../common/auth-input/auth-input';
 import Button from '../common/button/button';
 import styles from './login-form.module.scss';
 import useValidator from '../../hooks/use-validator';
-
-const cn = classNames.bind(styles);
 
 const LoginForm = ({ onSubmit, mix, disabled }) => {
   const [inputValue, setInputValue] = useState({
@@ -50,7 +48,7 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
     onSubmit(inputValue);
   };
 
-  const cnLoginForm = cn('form', mix);
+  const cnLoginForm = clsx(styles.form, mix);
 
   return (
     <form className={cnLoginForm} onSubmit={handleSubmit} noValidate>
@@ -64,7 +62,7 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
           title="Корпоративная почта"
           value={inputValue.email}
           onChange={onChange}
-          mix={styles[`mix-auth-input`]}
+          mix={styles.mixAuthInput}
           placeholder="Введите email"
           error={error.email}
           setError={setError}
@@ -76,7 +74,7 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
           title="Пароль"
           value={inputValue.password}
           onChange={onChange}
-          mix={styles[`mix-auth-input`]}
+          mix={styles.mixAuthInput}
           placeholder="Введите пароль"
           error={error.password}
           setError={setError}

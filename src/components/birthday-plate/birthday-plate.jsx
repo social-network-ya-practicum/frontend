@@ -1,13 +1,21 @@
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import iconCake from './icon-birthday-cake.svg';
 import BorderGradient from '../common/border-gradient/border-gradient';
 import styles from './birthday-plate.module.scss';
 
-const cn = classNames.bind(styles);
+function BirthdayPlate({ id, data, mix }) {
+  const cnBirthdayPlate = clsx(styles.birthdayPlate, mix);
 
-function BirthdayPlate({ data, mix }) {
-  const cnBirthdayPlate = cn('birthdayPlate', mix);
+  function date(birthdaydate) {
+    const d = new Date(birthdaydate);
+    const options = {
+      day: 'numeric',
+      month: 'long',
+    };
+    return d.toLocaleString('ru', options);
+  }
 
   return (
     <section className={cnBirthdayPlate}>
@@ -18,14 +26,24 @@ function BirthdayPlate({ data, mix }) {
         {data.length > 0 ? (
           data.slice(0, 3).map((person) => (
             <li key={person.id} className={styles.birthdayPlate__item}>
-              <BorderGradient size="medium" mix={styles[`mix-border-gradient`]}>
-                <img src={person.photo || ''} alt="Фото" />
-              </BorderGradient>
+              <NavLink
+                to={
+                  person.id === id ? `/${person.id}` : `/contacts/${person.id}`
+                }
+              >
+                <BorderGradient size="medium" mix={styles.mixBorderGradient}>
+                  <img
+                    className={styles.birthdayPlate__image}
+                    src={person.photo || ''}
+                    alt="Фото"
+                  />
+                </BorderGradient>
+              </NavLink>
               <div className={styles.birthdayPlate__info}>
                 <p>
                   {person.first_name} {person.last_name}
                 </p>
-                <p>{person.birthday_date}</p>
+                <p>{date(person.birthday_date)}</p>
               </div>
             </li>
           ))
@@ -46,6 +64,7 @@ function BirthdayPlate({ data, mix }) {
 export default BirthdayPlate;
 
 BirthdayPlate.propTypes = {
+  id: PropTypes.number,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -57,9 +76,11 @@ BirthdayPlate.propTypes = {
 };
 
 BirthdayPlate.propTypes = {
+  id: PropTypes.number,
   mix: PropTypes.string,
 };
 
 BirthdayPlate.defaultProps = {
+  id: 1,
   mix: null,
 };

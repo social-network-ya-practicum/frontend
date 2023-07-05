@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 import styles from './about-user.module.scss';
+import { calendar } from '../../../utils/settings';
 
-function AboutUser({ contact }) {
+function AboutUser({ user }) {
   return (
-    <section className={styles['about-user']}>
-      <h2 className={styles['about-user__title']}>О себе</h2>
-      <div className={styles['about-user__birthday']}>
-        <p className={styles['about-user__text']}>День рождения</p>
-        <p className={styles['about-user__value']}>
-          {contact.birthday_day} {contact.birthday_month}
+    <section className={styles.aboutUser}>
+      <h2 className={styles.aboutUser__title}>О себе</h2>
+      <div className={styles.aboutUser__birthday}>
+        <p className={styles.aboutUser__text}>День рождения</p>
+        <p className={styles.aboutUser__value}>
+          {user.birthday_day} {calendar[user.birthday_month].variant}
         </p>
       </div>
-      <p className={styles['about-user__bio']}>{contact.bio}</p>
+      <p className={styles.aboutUser__bio}>{user.bio}</p>
     </section>
   );
 }
@@ -19,17 +20,9 @@ function AboutUser({ contact }) {
 export default AboutUser;
 
 AboutUser.propTypes = {
-  contact: PropTypes.shape({
+  user: PropTypes.shape({
     birthday_day: PropTypes.string,
     birthday_month: PropTypes.string,
     bio: PropTypes.string,
-  }),
-};
-
-AboutUser.defaultProps = {
-  contact: {
-    birthday_day: null,
-    birthday_month: null,
-    bio: null,
-  },
+  }).isRequired,
 };

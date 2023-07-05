@@ -20,7 +20,7 @@ const EditPage = observer(() => {
 
       patchUserAvatar(data);
     },
-    [user.id, patchUserAvatar]
+    [user, patchUserAvatar]
   );
 
   const handleSubmitForm = useCallback(
@@ -34,15 +34,15 @@ const EditPage = observer(() => {
 
       patchUser(data);
     },
-    [user.id, patchUser]
+    [user, patchUser]
   );
 
   return (
-    <section className={styles['edit-page']}>
+    <section className={styles.editPage}>
       <MainAvatar
         onSubmit={handleSubmitAvatar}
         avatar={user ? user.photo : null}
-        mix={styles['mix-main-avatar']}
+        mix={styles.mixMainAvatar}
         disabled={isLoadingAvatar}
       />
       <InfoForm onSubmit={handleSubmitForm} user={user} disabled={isLoading} />

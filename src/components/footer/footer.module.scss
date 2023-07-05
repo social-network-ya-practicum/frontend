@@ -1,28 +1,30 @@
+@use '../../variables' as var;
+
 footer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg_color_footer);
+  background-color: var.$bg_color_footer;
   flex-shrink: 0;
 }
 
 .footer {
   width: 100%;
   max-width: 1280px;
-  font-family: var(--font-family-default);
+  font-family: var.$font-family-default;
   padding: 0 72px;
   display: flex;
   position: relative;
 
   &__container {
-    height: var(--footer_height);
+    height: var.$footer_height;
     width: 100%;
     display: flex;
     align-items: center;
     position: relative;
     justify-content: space-between;
-    border-top: 1px solid var(--color_8d8d8d);
+    border-top: 1px solid var.$color_8d8d8d;
   }
 
   &__info {
@@ -42,7 +44,7 @@ footer {
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    color: var(--text_color_secondary2);
+    color: var.$text_color_secondary2;
     margin: 0;
     text-decoration: none;
 

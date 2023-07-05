@@ -10,10 +10,12 @@ import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
 import EditPage from '../../pages/edit-page/edit-page';
 import UserPage from '../../pages/user-page/user-page';
+import ContactPage from '../../pages/contact-page/contact-page';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 const App = observer(() => {
   const { userStore } = useStore();
-  const { getUser, wasUserRequest } = userStore;
+  const { getUser, wasUserRequest, user } = userStore;
 
   useEffect(() => {
     if (wasUserRequest) return;
@@ -24,22 +26,36 @@ const App = observer(() => {
 
   return (
     <Routes>
-      <Route element={<MainLayout />}>
+      <Route
+        element={
+          <ScrollToTop>
+            <MainLayout />
+          </ScrollToTop>
+        }
+      >
         <Route
           path="/"
           element={
-            <ProtectedRoute to="/login">
-              <Outlet />
-            </ProtectedRoute>
+            <ProtectedRoute to="/login">{user && <Outlet />}</ProtectedRoute>
           }
         >
           <Route element={<MainPageShell />}>
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
+            <Route
+              path="groups"
+              element={
+                <pre>
+                  В настоящий момент на сайте ведутся технические работы. <br />
+                  <br />
+                  Скоро всё заработает - обязательно возвращайтесь!
+                </pre>
+              }
+            />
           </Route>
-          <Route path="contacts/:contactId" element={<UserPage />} />
+          <Route path="contacts/:contactId" element={<ContactPage />} />
           <Route path=":userId" element={<UserPage />} />
-          <Route path=":user/edit" element={<EditPage />} />
+          <Route path=":userId/edit" element={<EditPage />} />
         </Route>
         <Route
           path="/login"

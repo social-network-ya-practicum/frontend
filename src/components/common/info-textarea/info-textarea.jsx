@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import { useId, useLayoutEffect, useRef } from 'react';
-import classNames from 'classnames/bind';
+import clsx from 'clsx';
 import styles from './info-textarea.module.scss';
-
-const cn = classNames.bind(styles);
 
 const InfoTextrea = ({
   title,
@@ -19,9 +17,9 @@ const InfoTextrea = ({
   const textareaRef = useRef(null);
 
   const id = useId();
-  const cnRoot = cn('textarea', mix);
-  const cnTextarea = cn('textarea__textarea', {
-    textarea__textarea_type_error: error,
+  const cnRoot = clsx(styles.textarea, mix);
+  const cnTextarea = clsx(styles.textarea__textarea, {
+    [styles.textarea__textarea_type_error]: error,
   });
 
   useLayoutEffect(() => {
