@@ -25,7 +25,7 @@ class PostsStore {
   };
 
   getPosts = () => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .getPostsList()
       .then((data) => {
@@ -35,7 +35,8 @@ class PostsStore {
         });
       })
       // setPost(data.results))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   getPostsUser = (userID) => {
@@ -51,7 +52,7 @@ class PostsStore {
   };
 
   addPost = (post) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .postUserPost(post)
       .then((newPost) => {
@@ -60,11 +61,12 @@ class PostsStore {
           this.isLoading = false;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   deletePost = (id) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .deletePost(id)
       .then(() => {
@@ -73,26 +75,31 @@ class PostsStore {
           this.isLoading = false;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   editPost = (post) => {
-    this.isLoading = true;
-    api.patchUserPost(post).then((updatedPost) => {
-      runInAction(() => {
-        this.posts = this.posts.map((p) => {
-          if (p.id === updatedPost.id) {
-            return updatedPost;
-          }
-          return p;
+    this.setIsLoading(true);
+    api
+      .patchUserPost(post)
+      .then((updatedPost) => {
+        runInAction(() => {
+          this.posts = this.posts.map((p) => {
+            if (p.id === updatedPost.id) {
+              return updatedPost;
+            }
+            return p;
+          });
+          this.isLoading = false;
         });
-        this.isLoading = false;
-      });
-    });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   likePost = (post) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .postLike(post)
       .then((likededPost) => {
@@ -106,11 +113,12 @@ class PostsStore {
           this.isLoading = false;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   dislikePost = (post) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .deleteLike(post)
       .then(() => {
@@ -124,7 +132,8 @@ class PostsStore {
           this.isLoading = false;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 }
 

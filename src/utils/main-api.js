@@ -16,12 +16,17 @@ class MainApi {
     this._headers = config.headers;
   }
 
-  _checkResponse = (res) =>
-    res.ok
-      ? res.json()
-      : res.json().then((r) => {
-          throw new Error(JSON.stringify(r));
-        });
+  _checkResponse = (res) => {
+    if (res.status === 204) {
+      return {};
+    }
+    if (res.ok) {
+      return res.json();
+    }
+    return res.json().then((r) => {
+      throw new Error(JSON.stringify(r));
+    });
+  };
 
   /**
    * Авторизация НАЧАЛО
@@ -69,27 +74,27 @@ class MainApi {
         ...this._headers,
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
-    })
-      // .then((res)=>{
-      //   console.log(res)
-      //   if (res.ok){
-      //     res.json()
-      //   }
-      // })
-      // .then((data)=> console.log(data))
-      // .catch((err) => console.log(err))
+    }).then((res) => this._checkResponse(res));
+  // .then((res)=>{
+  //   console.log(res)
+  //   if (res.ok){
+  //     res.json()
+  //   }
+  // })
+  // .then((data)=> console.log(data))
+  // .catch((err) => console.log(err))
 
-      .then((res) => {
-        if (res.status === 204) {
-          return {};
-        }
-        if (res.ok) {
-          return res.json();
-        }
-        return res.json().then((r) => {
-          throw new Error(JSON.stringify(r));
-        });
-      });
+  // .then((res) => {
+  //   if (res.status === 204) {
+  //     return {};
+  //   }
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return res.json().then((r) => {
+  //     throw new Error(JSON.stringify(r));
+  //   });
+  // });
 
   /**  Удаляем like */
   deleteLike = (data) =>

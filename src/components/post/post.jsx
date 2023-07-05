@@ -27,8 +27,7 @@ const Post = observer(
     const popupRef = useRef(null);
 
     const { postsStore } = useStore();
-    const { getPosts, editPost, deletePost, likePost, dislikePost } =
-      postsStore;
+    const { editPost, deletePost, likePost, dislikePost } = postsStore;
 
     const isLiked = post.users_like.some((item) => item === currentUser.id);
 
@@ -48,7 +47,6 @@ const Post = observer(
 
     function handleDeleteClick() {
       deletePost(id);
-      getPosts();
     }
 
     function handleSaveChange() {
