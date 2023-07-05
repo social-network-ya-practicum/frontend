@@ -17,6 +17,7 @@ const Post = observer(
     pubdate,
     images,
     likecount,
+    postslikes,
     id,
     admin,
     currentUser,
@@ -29,7 +30,7 @@ const Post = observer(
     const { postsStore } = useStore();
     const { editPost, deletePost, likePost, dislikePost } = postsStore;
 
-    const isLiked = post.users_like.some((item) => item === currentUser.id);
+    const isLiked = postslikes.some((item) => item === currentUser.id);
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -113,7 +114,14 @@ const Post = observer(
 
         {!isPostChanging ? (
           <div className={styles.post__likeContainer}>
-            <button className={styles.post__like} onClick={handleLikePost}>
+            <button
+              className={
+                !isLiked
+                  ? `${styles.post__like}`
+                  : `${styles.post__like} ${styles.post__like_active}`
+              }
+              onClick={handleLikePost}
+            >
               {' '}
             </button>
             <span className={styles.post__likeCounter}>{likecount}</span>
@@ -189,6 +197,7 @@ Post.propTypes = {
       image_link: PropTypes.string,
     })
   ),
+  postslikes: PropTypes.arrayOf(PropTypes.number),
   likecount: PropTypes.number,
   id: PropTypes.number,
   admin: PropTypes.bool,
@@ -210,6 +219,7 @@ Post.defaultProps = {
       image_link: '',
     },
   ],
+  postslikes: [3, 4, 5],
   likecount: 18,
   id: 1,
   admin: false,
