@@ -25,17 +25,16 @@ class PostsStore {
   };
 
   getPosts = () => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .getPostsList()
       .then((data) => {
         runInAction(() => {
           this.posts = data.results;
-          this.isLoading = false;
         });
       })
-      // setPost(data.results))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   getPostsUser = (userID) => {
@@ -45,42 +44,89 @@ class PostsStore {
       .then((data) => {
         this.setUserPosts(data.results);
       })
-      // setPost(data.results))
       .catch((err) => console.log(err))
       .finally(() => this.setIsLoading(false));
   };
 
   addPost = (post) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .postUserPost(post)
       .then((newPost) => {
         runInAction(() => {
           this.posts.unshift(newPost);
-          this.isLoading = false;
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
   deletePost = (id) => {
-    this.isLoading = true;
+    this.setIsLoading(true);
     api
       .deletePost(id)
       .then(() => {
         runInAction(() => {
-          this.posts = this.post.filter((post) => post.id !== id);
-          this.isLoading = false;
+          this.posts = this.posts.filter((post) => post.id !== id);
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
   };
 
-  // editPost = (post) => {
-  //   api.patchUserPost(post)
-  //   .then
-  // }
-  //   likePost
+  editPost = (post) => {
+    this.setIsLoading(true);
+    api
+      .patchUserPost(post)
+      .then((updatedPost) => {
+        runInAction(() => {
+          this.posts = this.posts.map((p) => {
+            if (p.id === updatedPost.id) {
+              return updatedPost;
+            }
+            return p;
+          });
+        });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
+  };
+
+  likePost = (post) => {
+    this.setIsLoading(true);
+    api
+      .postLike(post)
+      .then((likededPost) => {
+        runInAction(() => {
+          this.posts = this.posts.map((p) => {
+            if (p.id === likededPost.id) {
+              return likededPost;
+            }
+            return p;
+          });
+        });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
+  };
+
+  dislikePost = (post) => {
+    this.setIsLoading(true);
+    api
+      .deleteLike(post)
+      .then((dislikededPost) => {
+        runInAction(() => {
+          this.posts = this.posts.map((p) => {
+            if (p.id === dislikededPost.id) {
+              return dislikededPost;
+            }
+            return p;
+          });
+        });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => this.setIsLoading(false));
+  };
 }
 
 export default new PostsStore();

@@ -16,12 +16,17 @@ class MainApi {
     this._headers = config.headers;
   }
 
-  _checkResponse = (res) =>
-    res.ok
-      ? res.json()
-      : res.json().then((r) => {
-          throw new Error(JSON.stringify(r));
-        });
+  _checkResponse = (res) => {
+    if (res.status === 204) {
+      return {};
+    }
+    if (res.ok) {
+      return res.json();
+    }
+    return res.json().then((r) => {
+      throw new Error(JSON.stringify(r));
+    });
+  };
 
   /**
    * Авторизация НАЧАЛО
@@ -62,7 +67,7 @@ class MainApi {
 
   /** Удаляем пост */
   deletePost = (postID) =>
-    fetch(`${this._url}/posts/${postID}`, {
+    fetch(`${this._url}/posts/${postID}/`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -70,10 +75,30 @@ class MainApi {
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
     }).then((res) => this._checkResponse(res));
+  // .then((res)=>{
+  //   console.log(res)
+  //   if (res.ok){
+  //     res.json()
+  //   }
+  // })
+  // .then((data)=> console.log(data))
+  // .catch((err) => console.log(err))
+
+  // .then((res) => {
+  //   if (res.status === 204) {
+  //     return {};
+  //   }
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return res.json().then((r) => {
+  //     throw new Error(JSON.stringify(r));
+  //   });
+  // });
 
   /**  Удаляем like */
   deleteLike = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/like`, {
+    fetch(`${this._url}/posts/${data.id}/like/`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -81,6 +106,17 @@ class MainApi {
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
     }).then((res) => this._checkResponse(res));
+  // .then((res) => {
+  //   if (res.status === 204) {
+  //     return {};
+  //   }
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  //   return res.json().then((r) => {
+  //     throw new Error(JSON.stringify(r));
+  //   });
+  // });
 
   /** Удаляем пользователя */
   deleteUser = (userID) =>
@@ -238,7 +274,7 @@ class MainApi {
 
   /** Редактируем пост пользователя */
   patchUserPost = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/`, {
+    fetch(`${this._url}/posts/${data.id}/`, {
       method: 'PATCH',
       credentials: 'include',
       headers: {
@@ -298,7 +334,7 @@ class MainApi {
 
   /**  Ставим like посту */
   postLike = (data) =>
-    fetch(`${this._url}/posts/${data.postID}/like/`, {
+    fetch(`${this._url}/posts/${data.id}/like/`, {
       method: 'POST',
       credentials: 'include',
       headers: {

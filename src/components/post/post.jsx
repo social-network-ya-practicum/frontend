@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
 import styles from './post.module.scss';
@@ -9,15 +10,26 @@ import BorderGradient from '../common/border-gradient/border-gradient';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 
 const Post = observer(
-  ({ text, author, pubdate, images, likecount, id, admin, currentUser }) => {
+  ({
+    post,
+    text,
+    author,
+    pubdate,
+    images,
+    likecount,
+    id,
+    admin,
+    currentUser,
+  }) => {
     const [value, setValue] = useState(text);
     const [isPostChanging, setIsPostchanging] = useState(false);
     const [isPopupOpened, setIsPopupOpened] = useState(false);
+    const popupRef = useRef(null);
 
     const { postsStore } = useStore();
-    const { getPosts } = postsStore;
+    const { editPost, deletePost, likePost, dislikePost } = postsStore;
 
-    // console.log(author)
+    const isLiked = post.users_like.some((item) => item === currentUser.id);
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -34,35 +46,54 @@ const Post = observer(
     }
 
     function handleDeleteClick() {
-      postsStore.deletePost(id);
-      getPosts();
+      deletePost(id);
     }
 
     function handleSaveChange() {
       // вытщить пост из пропсов? но надо еще данные записать новые
-      // postsStore.editPost(post)
+      editPost({ ...post, text: value });
       setIsPostchanging(false);
     }
 
     function handleLikePost() {
-      console.log('меня лайкнули');
+      return !isLiked ? likePost(post) : dislikePost(post);
     }
+
+    useEffect(() => {
+      const handleClosePopup = (event) => {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          // setIsPopupOpened(!isPopupOpened);
+          // console.log(event.target)
+          // console.log(isPopupOpened)
+          // console.log(popupRef.current)
+          // console.log(popupRef.current.contains(event.target))
+        }
+      };
+      document.addEventListener('click', handleClosePopup);
+      return () => {
+        document.removeEventListener('click', handleClosePopup);
+      };
+    }, [isPopupOpened]);
 
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
           {/* <div className={styles.post__avatar}> </div> */}
-          <BorderGradient size="small-plus">
-            <img
-              src={author.photo || defaultAvatar}
-              alt="фото"
-              className={styles.post__avatar}
-            />
-          </BorderGradient>
-          <div className={styles.post__infoBox}>
-            <p className={styles.post__owner}>
-              {author.first_name} {author.last_name}
-            </p>
+          <NavLink to={`/${author.id}`}>
+            <BorderGradient size="small-plus">
+              <img
+                src={author.photo || defaultAvatar}
+                alt="фото"
+                className={styles.post__avatar}
+              />
+            </BorderGradient>
+          </NavLink>
+          <div className={styles['post__info-box']}>
+            <NavLink to={`/${author.id}`} className={styles.post__owner}>
+              <p className={styles.post__owner}>
+                {author.first_name} {author.last_name}
+              </p>
+            </NavLink>
             <span className={styles.post__date}>
               {handlerDataFormat(`${pubdate}`)}
             </span>
@@ -121,6 +152,7 @@ const Post = observer(
           className={`${styles.post__actions} ${
             isPopupOpened && styles.post__actions_active
           }`}
+          ref={popupRef}
         >
           {currentUser.id === author.id && (
             <button
@@ -151,11 +183,15 @@ Post.propTypes = {
     first_name: PropTypes.string,
     last_name: PropTypes.string,
   }),
-  pubdate: PropTypes.instanceOf(Date),
-  images: PropTypes.string,
+  pubdate: PropTypes.string,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      image_link: PropTypes.string,
+    })
+  ),
   likecount: PropTypes.number,
   id: PropTypes.number,
-  admin: PropTypes.bolean,
+  admin: PropTypes.bool,
   currentUser: PropTypes.shape({
     id: PropTypes.number,
   }),
@@ -165,11 +201,15 @@ Post.defaultProps = {
   text: 'Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаемся?',
   author: {
     id: 1,
-    first_name: 'Томара',
+    first_name: 'Тамара',
     last_name: 'Райкина',
   },
   pubdate: '2019-08-24',
-  images: '',
+  images: [
+    {
+      image_link: '',
+    },
+  ],
   likecount: 18,
   id: 1,
   admin: false,
