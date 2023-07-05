@@ -1,6 +1,9 @@
 @use '../../variables' as var;
 
 .error {
+  position: fixed;
+  right: 55px;
+  top: calc(var.$header_height + 44px);
   display: flex;
   min-height: 52px;
   width: 357px;
@@ -8,7 +11,11 @@
   border-radius: 16px;
   background: var.$bg_color_error;
   z-index: 1000;
-  box-shadow: 0 0 10px rgba(49, 57, 120, 0.4);
+  // box-shadow: 0 0 10px rgba(49, 57, 120, 0.4);
+
+  @media screen and (min-width: 1281px) {
+    right: calc((100% - 1280px) / 2 + 72px);
+  }
 
   &__text {
     font-size: 14px;

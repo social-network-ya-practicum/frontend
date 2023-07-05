@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import { ReactComponent as CloseIcon } from './images/close-icon.svg';
 import styles from './error-component.module.scss';
 
-const ErrorComponent = ({ mix }) => {
-  const cnError = clsx(styles.error, mix);
-  return (
+const ErrorComponent = () => {
+  const cnError = clsx(styles.error);
+
+  return createPortal(
     <div className={cnError}>
       <p className={styles.error__text}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, deleniti
@@ -16,12 +18,13 @@ const ErrorComponent = ({ mix }) => {
       <button className={styles.error__closeIcon}>
         <CloseIcon />
       </button>
-    </div>
+    </div>,
+    document.querySelector('#error-modal')
   );
 };
 
 export default ErrorComponent;
 
-ErrorComponent.propTypes = { mix: PropTypes.string };
+// ErrorComponent.propTypes = {  };
 
-ErrorComponent.defaultProps = { mix: undefined };
+// ErrorComponent.defaultProps = {};

@@ -12,6 +12,7 @@ import EditPage from '../../pages/edit-page/edit-page';
 import UserPage from '../../pages/user-page/user-page';
 import ContactPage from '../../pages/contact-page/contact-page';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import ProtectedUser from '../protected-user/protected-user';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -42,6 +43,7 @@ const App = observer(() => {
           <Route element={<MainPageShell />}>
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
+            <Route path="contacts/:contactId" element={<ContactPage />} />
             <Route
               path="groups"
               element={
@@ -53,9 +55,17 @@ const App = observer(() => {
               }
             />
           </Route>
-          <Route path="contacts/:contactId" element={<ContactPage />} />
-          <Route path=":userId" element={<UserPage />} />
-          <Route path=":userId/edit" element={<EditPage />} />
+          <Route
+            path=":userId"
+            element={
+              <ProtectedUser>
+                <Outlet />
+              </ProtectedUser>
+            }
+          >
+            <Route index element={<UserPage />} />
+            <Route path="edit" element={<EditPage />} />
+          </Route>
         </Route>
         <Route
           path="/login"

@@ -36,25 +36,27 @@ function UserPageContent({ posts, user, ownUser, isOwn }) {
 
 export default UserPageContent;
 
+const userType = PropTypes.shape({
+  photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
+  first_name: PropTypes.string,
+  last_name: PropTypes.string,
+  middle_name: PropTypes.string,
+  job_title: PropTypes.string,
+  id: PropTypes.number,
+  email: PropTypes.string,
+  corporate_phone_number: PropTypes.string,
+  personal_email: PropTypes.string,
+  personal_phone_number: PropTypes.string,
+  birthday_day: PropTypes.string,
+  birthday_month: PropTypes.string,
+  bio: PropTypes.string,
+});
+
 UserPageContent.propTypes = {
-  user: PropTypes.shape({
-    photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
-    first_name: PropTypes.string,
-    last_name: PropTypes.string,
-    middle_name: PropTypes.string,
-    job_title: PropTypes.string,
-    id: PropTypes.number,
-    email: PropTypes.string,
-    corporate_phone_number: PropTypes.string,
-    personal_email: PropTypes.string,
-    personal_phone_number: PropTypes.string,
-    birthday_day: PropTypes.string,
-    birthday_month: PropTypes.string,
-    bio: PropTypes.string,
-  }).isRequired,
+  user: userType.isRequired,
   posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   isOwn: PropTypes.bool,
-  ownUser: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  ownUser: userType.isRequired,
 };
 
 UserPageContent.defaultProps = {
