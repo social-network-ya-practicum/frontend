@@ -6,7 +6,7 @@ import { useStore } from '../../contexts/RootStoreContext';
 import styles from './post.module.scss';
 import Textarea from '../common/textarea/textarea';
 import { handlerDataFormat } from '../../utils/data-format';
-import BorderGradient from '../common/border-gradient/border-gradient';
+import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 
 const Post = observer(
@@ -80,13 +80,11 @@ const Post = observer(
         <div className={styles.post__info}>
           {/* <div className={styles.post__avatar}> </div> */}
           <NavLink to={`/${author.id}`}>
-            <BorderGradient size="small-plus">
-              <img
-                src={author.photo || defaultAvatar}
-                alt="фото"
-                className={styles.post__avatar}
-              />
-            </BorderGradient>
+            <RoundIcon
+              size="small-plus"
+              src={author.photo || defaultAvatar}
+              alt="фото"
+            />
           </NavLink>
           <div className={styles['post__info-box']}>
             <NavLink to={`/${author.id}`} className={styles.post__owner}>
