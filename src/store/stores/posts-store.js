@@ -31,10 +31,8 @@ class PostsStore {
       .then((data) => {
         runInAction(() => {
           this.posts = data.results;
-          this.isLoading = false;
         });
       })
-      // setPost(data.results))
       .catch((err) => console.log(err))
       .finally(() => this.setIsLoading(false));
   };
@@ -46,7 +44,6 @@ class PostsStore {
       .then((data) => {
         this.setUserPosts(data.results);
       })
-      // setPost(data.results))
       .catch((err) => console.log(err))
       .finally(() => this.setIsLoading(false));
   };
@@ -58,7 +55,6 @@ class PostsStore {
       .then((newPost) => {
         runInAction(() => {
           this.posts.unshift(newPost);
-          this.isLoading = false;
         });
       })
       .catch((err) => console.log(err))
@@ -72,7 +68,6 @@ class PostsStore {
       .then(() => {
         runInAction(() => {
           this.posts = this.posts.filter((post) => post.id !== id);
-          this.isLoading = false;
         });
       })
       .catch((err) => console.log(err))
@@ -91,7 +86,6 @@ class PostsStore {
             }
             return p;
           });
-          this.isLoading = false;
         });
       })
       .catch((err) => console.log(err))
@@ -110,7 +104,6 @@ class PostsStore {
             }
             return p;
           });
-          this.isLoading = false;
         });
       })
       .catch((err) => console.log(err))
@@ -121,15 +114,14 @@ class PostsStore {
     this.setIsLoading(true);
     api
       .deleteLike(post)
-      .then(() => {
+      .then((dislikededPost) => {
         runInAction(() => {
           this.posts = this.posts.map((p) => {
-            if (p.id === post.id) {
-              return post;
+            if (p.id === dislikededPost.id) {
+              return dislikededPost;
             }
             return p;
           });
-          this.isLoading = false;
         });
       })
       .catch((err) => console.log(err))
