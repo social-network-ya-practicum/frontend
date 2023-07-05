@@ -55,8 +55,6 @@ const Post = observer(
       // вытщить пост из пропсов? но надо еще данные записать новые
       editPost({ ...post, text: value });
       setIsPostchanging(false);
-      // likePost(post);
-      // dislikePost(post);
     }
 
     function handleLikePost() {
@@ -205,7 +203,7 @@ Post.defaultProps = {
   text: 'Мы заключили договор с компанией Пронто. Нужно договориться, какие дальнейшие действия. Отмечаемся?',
   author: {
     id: 1,
-    first_name: 'Томара',
+    first_name: 'Тамара',
     last_name: 'Райкина',
   },
   pubdate: '2019-08-24',

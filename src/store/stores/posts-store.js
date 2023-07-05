@@ -126,10 +126,6 @@ class PostsStore {
       })
       .catch((err) => console.log(err));
   };
-
-  changePostLike(post, isLiked) {
-    return !isLiked ? this.likePost(post) : this.dislikePost(post);
-  }
 }
 
 export default new PostsStore();

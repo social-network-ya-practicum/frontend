@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import MainLayout from '../layouts/main-layout/main-layout';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPageShell from '../layouts/main-page-shell/main-page-shell';
-import MainPageContent from '../layouts/main-page-content/main-page-content';
+import MainPageContent from '../../pages/main-page/main-page-content';
 import ContactsPage from '../../pages/contacts-page/contacts-page';
 import { useStore } from '../../contexts/RootStoreContext';
 import ProtectedRoute from '../protected-route/protected-route';
