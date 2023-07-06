@@ -2,6 +2,9 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteCookie, getCookie, setCookie } from '../../utils/utils';
 import { COOKIES_OPTIONS, TOKEN_NAME } from '../../utils/settings';
 import api from '../../utils/main-api';
+import errorStore from './error-store';
+
+const { addError } = errorStore;
 
 class UserStore {
   userRes = null;
@@ -61,8 +64,10 @@ class UserStore {
     this.isLoadingAvatar = bool;
   };
 
-  logout = () => {
-    api.logout().catch((err) => console.log(err));
+  logout = (isInvalidToken = false) => {
+    if (!isInvalidToken) {
+      api.logout().catch((err) => addError(err));
+    }
     deleteCookie(TOKEN_NAME);
     this.setUserRes(null);
   };
@@ -82,9 +87,7 @@ class UserStore {
           this.setError(err);
           this.setIsLoading(false);
         });
-        // Для develoop ---------------
-        alert(err.message);
-        // ---------------------------
+        addError(err);
       });
   };
 
@@ -104,9 +107,7 @@ class UserStore {
       .then((res) => this.setUserRes(res))
       .catch((err) => {
         this.setError(err);
-        // Для develoop ---------------
-        alert(err.message);
-        // ---------------------------
+        addError(err);
       })
       .finally(() => {
         this.setIsLoading(false);
@@ -122,24 +123,26 @@ class UserStore {
       .then((res) => {
         this.setUserRes(res);
       })
-      .catch((err) => alert(err))
+      .catch((err) => addError(err))
       .finally(() => {
         this.setIsLoading(false);
       });
   };
 
-  patchUserAvatar = (data) => {
+  patchUserAvatar = async (data) => {
     this.setIsLoadingAvatar(true);
     this.setError(null);
-    api
-      .patchUserAvatar(data)
-      .then((res) => {
-        this.setUserRes(res);
-      })
-      .catch((err) => alert(err))
-      .finally(() => {
-        this.setIsLoadingAvatar(false);
-      });
+    let isSuccess = false;
+    try {
+      const res = await api.patchUserAvatar(data);
+      this.setUserRes(res);
+      isSuccess = true;
+    } catch (err) {
+      addError(err);
+    } finally {
+      this.setIsLoadingAvatar(false);
+    }
+    return isSuccess;
   };
 }
 

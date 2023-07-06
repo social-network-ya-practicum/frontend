@@ -1,5 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import errorStore from './error-store';
+
+const { addError } = errorStore;
 
 class PostsStore {
   posts = [];
@@ -33,7 +36,7 @@ class PostsStore {
           this.posts = data.results;
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -44,7 +47,7 @@ class PostsStore {
       .then((data) => {
         this.setUserPosts(data.results);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -57,7 +60,7 @@ class PostsStore {
           this.posts.unshift(newPost);
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -70,7 +73,7 @@ class PostsStore {
           this.posts = this.posts.filter((post) => post.id !== id);
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -88,7 +91,7 @@ class PostsStore {
           });
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -106,7 +109,7 @@ class PostsStore {
           });
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 
@@ -124,7 +127,7 @@ class PostsStore {
           });
         });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
 }

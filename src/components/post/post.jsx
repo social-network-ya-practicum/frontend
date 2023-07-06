@@ -75,11 +75,14 @@ const Post = observer(
       };
     }, [isPopupOpened]);
 
+    const toPath =
+      author.id === currentUser.id ? `/${author.id}` : `/contacts/${author.id}`;
+
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
           {/* <div className={styles.post__avatar}> </div> */}
-          <NavLink to={`/${author.id}`}>
+          <NavLink to={toPath}>
             <RoundIcon
               size="small-plus"
               src={author.photo || defaultAvatar}
@@ -87,7 +90,7 @@ const Post = observer(
             />
           </NavLink>
           <div className={styles['post__info-box']}>
-            <NavLink to={`/${author.id}`} className={styles.post__owner}>
+            <NavLink to={toPath} className={styles.post__owner}>
               <p className={styles.post__owner}>
                 {author.first_name} {author.last_name}
               </p>

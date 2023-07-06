@@ -6,6 +6,7 @@ import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
+import useError from '../../hooks/use-error';
 
 const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   const refForm = useRef(null);
@@ -14,21 +15,19 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedFile, setSelectedFile] = useState(avatar);
-  const [error, setError] = useState('');
-  // @TODO: после ответа дизайнеров, вывести ошибку
-  console.log('err', error);
+  const { setError, clearError } = useError();
 
   const imgSrc = selectedFile ?? defaultAvatar;
 
   const handleEditBtnClick = () => {
-    setError('');
+    setSelectedFile(null);
     setIsEditMode(true);
     refInput.current.click();
   };
 
   const handleImgClick = () => {
     if (!isEditMode) return;
-    setError('');
+    clearError();
     refInput.current.click();
   };
 
@@ -39,7 +38,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
     const err = checkImage(file);
     if (err) {
       setError(err);
-      alert(err);
+      refInput.current.value = null;
       return;
     }
     const reader = new FileReader();
@@ -50,16 +49,19 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(111);
-    onSubmit(selectedFile);
-  };
-
   const handleCancelEdit = () => {
     setSelectedFile(avatar);
-    setError('');
+    clearError();
     setIsEditMode(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedFile === avatar || selectedFile === null) {
+      handleCancelEdit();
+      return;
+    }
+    onSubmit(selectedFile, () => setIsEditMode(false));
   };
 
   const cnMainAvatar = clsx(styles.avatar, mix);

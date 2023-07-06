@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import MainLayout from '../layouts/main-layout/main-layout';
 import LoginPage from '../../pages/login-page/login-page';
@@ -12,6 +12,8 @@ import EditPage from '../../pages/edit-page/edit-page';
 import UserPage from '../../pages/user-page/user-page';
 import ContactPage from '../../pages/contact-page/contact-page';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import ProtectedUser from '../protected-user/protected-user';
+import ProtectedContact from '../protected-contact/protected-contact';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -53,9 +55,25 @@ const App = observer(() => {
               }
             />
           </Route>
-          <Route path="contacts/:contactId" element={<ContactPage />} />
-          <Route path=":userId" element={<UserPage />} />
-          <Route path=":userId/edit" element={<EditPage />} />
+          <Route
+            path="contacts/:contactId"
+            element={
+              <ProtectedContact>
+                <ContactPage />
+              </ProtectedContact>
+            }
+          />
+          <Route
+            path=":userId"
+            element={
+              <ProtectedUser>
+                <Outlet />
+              </ProtectedUser>
+            }
+          >
+            <Route index element={<UserPage />} />
+            <Route path="edit" element={<EditPage />} />
+          </Route>
         </Route>
         <Route
           path="/login"
@@ -66,7 +84,8 @@ const App = observer(() => {
           }
         />
       </Route>
-      <Route path="*" element={<div>Page 404</div>} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+      <Route path="/404" element={<div>Page 404</div>} />
     </Routes>
   );
 });

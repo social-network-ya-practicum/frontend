@@ -67,3 +67,5 @@ export const getMonthNumber = (month) => {
   )[0];
   return +monthNum;
 };
+
+export const generateId = () => Math.random().toString(36).substring(2, 12);
