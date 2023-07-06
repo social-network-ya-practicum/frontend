@@ -1,5 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import errorStore from './error-store';
+
+const { addError } = errorStore;
 
 class ContactStore {
   contactRes = null;
@@ -59,11 +62,12 @@ class ContactStore {
           this.setIsLoading(false);
         });
       })
-      .catch(() => {
-        runInAction((err) => {
+      .catch((err) => {
+        runInAction(() => {
           this.setError(err);
           this.setIsLoading(false);
         });
+        addError(err);
       });
   };
 }

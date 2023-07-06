@@ -1,5 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import errorStore from './error-store';
+
+const { addError } = errorStore;
 
 class ContactsStore {
   search = '';
@@ -47,11 +50,12 @@ class ContactsStore {
           this.loading = false;
         });
       })
-      .catch(() => {
+      .catch((err) => {
         runInAction(() => {
           this.error = 'Ошибка при получении данных с сервера';
           this.loading = false;
         });
+        addError(err);
       });
   };
 
@@ -67,11 +71,12 @@ class ContactsStore {
             this.loading = false;
           });
         })
-        .catch(() => {
+        .catch((err) => {
           runInAction(() => {
             this.error = 'Ошибка при получении данных с сервера';
             this.loading = false;
           });
+          addError(err);
         });
     }
   };
