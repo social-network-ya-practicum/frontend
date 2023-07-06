@@ -2,7 +2,8 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import iconCake from './icon-birthday-cake.svg';
-import BorderGradient from '../common/border-gradient/border-gradient';
+import RoundIcon from '../common/round-icon/round-icon';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 import styles from './birthday-plate.module.scss';
 
 function BirthdayPlate({ id, data, mix }) {
@@ -31,13 +32,12 @@ function BirthdayPlate({ id, data, mix }) {
                   person.id === id ? `/${person.id}` : `/contacts/${person.id}`
                 }
               >
-                <BorderGradient size="medium" mix={styles.mixBorderGradient}>
-                  <img
-                    className={styles.birthdayPlate__image}
-                    src={person.photo || ''}
-                    alt="Фото"
-                  />
-                </BorderGradient>
+                <RoundIcon
+                  src={person.photo || defaultAvatar}
+                  alt="Фото"
+                  size="medium"
+                  mixBlock={styles.mixRoundIconBlock}
+                />
               </NavLink>
               <div className={styles.birthdayPlate__info}>
                 <p>

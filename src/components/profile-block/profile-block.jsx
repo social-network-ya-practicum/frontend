@@ -1,22 +1,12 @@
 import PropTypes from 'prop-types';
 import styles from './profile-block.module.scss';
-import BorderGradient from '../common/border-gradient/border-gradient';
+import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function ProfileBlock({ avatar, firstName, lastName, role, postsCount }) {
   return (
     <div className={styles.profileBlock}>
-      <div className={styles.profileBlock__photo}>
-        {avatar && (
-          <BorderGradient size="large">
-            <img
-              className={styles.profileBlock__avatar}
-              src={avatar || defaultAvatar}
-              alt="аватар"
-            />
-          </BorderGradient>
-        )}
-      </div>
+      <RoundIcon size="large" src={avatar || defaultAvatar} alt="аватар" />
       <h2 className={styles.profileBlock__name}>
         {firstName} {lastName}
       </h2>
