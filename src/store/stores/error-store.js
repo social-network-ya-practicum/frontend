@@ -13,9 +13,11 @@ class ErrorStore {
 
   get isContactExist() {
     const { message, from } = this.privateError;
-    if (!message && !from) return true;
+    if (from === 'getUserData' && message === 'Запрошенный ресурс не найден') {
+      return false;
+    }
 
-    return from === 'getUserData' && message !== 'Запрошенный ресурс не найден';
+    return true;
   }
 
   constructor() {
