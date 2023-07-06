@@ -43,16 +43,22 @@ export default memo(UserAddressCard);
 UserAddressCard.propTypes = {
   linkPath: PropTypes.string.isRequired,
   avatar: PropTypes.string,
-  firstName: PropTypes.string.isRequired,
-  middleName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+  middleName: PropTypes.string,
+  lastName: PropTypes.string,
+  position: PropTypes.string,
   department: PropTypes.string,
-  jobEmail: PropTypes.string.isRequired,
-  jobPhone: PropTypes.string.isRequired,
+  jobEmail: PropTypes.string,
+  jobPhone: PropTypes.string,
 };
 
 UserAddressCard.defaultProps = {
   avatar: '',
   department: 'Административный департамент',
+  firstName: '-',
+  middleName: '-',
+  lastName: '-',
+  position: '-',
+  jobEmail: '-',
+  jobPhone: '-',
 };

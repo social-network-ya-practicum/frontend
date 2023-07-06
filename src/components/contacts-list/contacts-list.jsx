@@ -34,12 +34,12 @@ ContactsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       photo: PropTypes.string,
-      first_name: PropTypes.string.isRequired,
-      middle_name: PropTypes.string.isRequired,
-      last_name: PropTypes.string.isRequired,
-      job_title: PropTypes.string.isRequired,
+      first_name: PropTypes.string,
+      middle_name: PropTypes.string,
+      last_name: PropTypes.string,
+      job_title: PropTypes.string,
       email: PropTypes.string.isRequired,
-      corporate_phone_number: PropTypes.string.isRequired,
+      corporate_phone_number: PropTypes.string,
     })
   ).isRequired,
   userId: PropTypes.number.isRequired,
