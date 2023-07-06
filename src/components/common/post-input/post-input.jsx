@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
-import BorderGradient from '../border-gradient/border-gradient';
+import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
 
 const PostInput = observer(() => {
@@ -160,13 +160,11 @@ const PostInput = observer(() => {
       <form className={styles.postInput__form}>
         <div className={styles.postInput__box}>
           {/* <div className={styles['post-input__avatar']}> </div> */}
-          <BorderGradient size="small">
-            <img
-              src={user.photo || defaultAvatar}
-              alt="фото"
-              className={styles.postInput__avatar}
-            />
-          </BorderGradient>
+          <RoundIcon
+            size="small"
+            src={user.photo || defaultAvatar}
+            alt="фото"
+          />
           <textarea
             className={styles.postInput__input}
             type="text"

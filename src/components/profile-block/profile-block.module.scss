@@ -7,18 +7,6 @@
   width: 163px;
   height: fit-content;
 
-  &__photo {
-    border-radius: 50%;
-    width: 68px;
-    height: 68px;
-    background-image: url(./avatar68.svg);
-  }
-
-  &__avatar {
-    height: 100%;
-    width: 100%;
-  }
-
   &__name {
     font-family: var.$font-family-default;
     font-style: normal;

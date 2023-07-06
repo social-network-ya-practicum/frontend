@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
-import BorderGradient from '../common/border-gradient/border-gradient';
+import RoundIcon from '../common/round-icon/round-icon';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 import Popup from '../common/popup/popup';
@@ -34,9 +34,7 @@ function Header({ user, mix, logout }) {
     <header className={mix}>
       <div className={styles.header}>
         <NavLink to="/" className={styles.header__logo}>
-          <BorderGradient>
-            <img className={styles.header__imgLogo} src={Logo} alt="Логотип" />
-          </BorderGradient>
+          <RoundIcon src={Logo} alt="Логотип" mixImg={styles.header__imgLogo} />
           <span className={styles.header__title}>Корпоративная сеть</span>
         </NavLink>
         <div className={styles.header__info}>
@@ -86,13 +84,10 @@ function Header({ user, mix, logout }) {
                         to={`/${user.id}`}
                         className={styles.header__user}
                       >
-                        <BorderGradient>
-                          <img
-                            className={styles.header__imgAvatar}
-                            src={user.photo || defaultAvatar}
-                            alt="Фото"
-                          />
-                        </BorderGradient>
+                        <RoundIcon
+                          src={user.photo || defaultAvatar}
+                          alt="Фото"
+                        />
                         <p className={styles.header__name}>{user.first_name}</p>
                       </NavLink>
                       <button

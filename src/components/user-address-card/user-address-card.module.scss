@@ -19,22 +19,6 @@
   background: var.$bg_color_layout;
   overflow-wrap: anywhere;
 
-  &__avatarBlock {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: var.$color_ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__avatarImg {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-  }
-
   &__info {
     display: flex;
     align-items: center;
