@@ -8,5 +8,7 @@ export default {
 };
 
 export const DefaultPost = {
-  args: {},
+  args: {
+    photo: '',
+  },
 };

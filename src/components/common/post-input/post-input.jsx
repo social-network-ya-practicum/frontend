@@ -1,9 +1,11 @@
+// import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import BorderGradient from '../border-gradient/border-gradient';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
+// import { set } from 'mobx';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -13,10 +15,11 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
-  const [image, setImage] = useState({
-    file: null,
-    image_link: null,
-  });
+  const [images, setImages] = useState([]);
+  // const [image, setImage] = useState({
+  //   // file: null,
+  //   image_link: null,
+  // });
 
   // const [image, setImage] = useState([]);
 
@@ -39,16 +42,24 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    setImage({
-      file: fileImg,
-    });
+    // setImage({
+    //   file: fileImg,
+    // });
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage({
-        image_link: reader.result,
-      });
-    };
     reader.readAsDataURL(fileImg);
+    reader.onloadend = () => {
+      // setImage({
+      //   image_link: reader.result,
+      // });
+      setImages([
+        ...images,
+        {
+          image_link: reader.result,
+        },
+      ]);
+    };
+
+    // console.log(images)
 
     // setImage(
     //   {
@@ -96,10 +107,7 @@ const PostInput = observer(() => {
   };
 
   function handleCancelfile() {
-    setImage({
-      file: null,
-      image_link: null,
-    });
+    setImages([]);
   }
 
   function handleAddPost() {
@@ -109,12 +117,14 @@ const PostInput = observer(() => {
     //   images:
     //     image.file === null ? [{}] : [image],
     // });
-    // console.log({ text: value, author: user, images: [image] })
+    // console.log(image)
+    console.log(images);
 
     addPost({
       text: value,
       author: user,
-      images: image.file === null ? [] : [image],
+      // images: image.file === null ? [] : [image],
+      images: images === [] ? [] : images,
     });
     setValue('');
     handleCancelfile();
@@ -128,7 +138,7 @@ const PostInput = observer(() => {
         activeInput &&
         !event.target.closest('#post-input') &&
         !value &&
-        !image.prewiev
+        !images[0].prewiev
       ) {
         hanldeCloseActiveInput();
       }
@@ -138,7 +148,7 @@ const PostInput = observer(() => {
     return () => {
       document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput, value, image]);
+  }, [activeInput, value, images]);
 
   // useEffect(() => {
   //   if (file) {
@@ -198,11 +208,11 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
-            {image.image_link && (
+            {images[0] && (
               <div className={styles.postInput__prewiev}>
                 <img
                   className={styles.postInput__img}
-                  src={image.image_link}
+                  src={images[0].image_link}
                   alt="превью"
                 />
                 <button
