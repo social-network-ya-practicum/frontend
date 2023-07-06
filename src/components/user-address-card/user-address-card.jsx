@@ -11,7 +11,7 @@ function UserAddressCard({
   middleName,
   lastName,
   position,
-  department = 'Административный департамент',
+  department,
   jobEmail,
   jobPhone,
 }) {
@@ -56,11 +56,12 @@ UserAddressCard.propTypes = {
   middleName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
-  department: PropTypes.string.isRequired,
+  department: PropTypes.string,
   jobEmail: PropTypes.string.isRequired,
   jobPhone: PropTypes.string.isRequired,
 };
 
 UserAddressCard.defaultProps = {
   avatar: '',
+  department: 'Административный департамент',
 };

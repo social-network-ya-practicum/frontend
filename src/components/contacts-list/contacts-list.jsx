@@ -32,7 +32,7 @@ export default ContactsList;
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       photo: PropTypes.string,
       first_name: PropTypes.string.isRequired,
       middle_name: PropTypes.string.isRequired,
@@ -42,5 +42,5 @@ ContactsList.propTypes = {
       corporate_phone_number: PropTypes.string.isRequired,
     })
   ).isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
