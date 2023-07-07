@@ -81,13 +81,13 @@
   &__like {
     height: 20px;
     width: 20px;
-    background-image: url(./icons/like__default.svg);
+    background-image: url(./icons/like_default.svg);
     background-color: transparent;
     background-position: center;
     border: none;
 
     &_active {
-      background-image: url(./icons/like__active.svg);
+      background-image: url(./icons/like_active.svg);
     }
 
     &:hover {
