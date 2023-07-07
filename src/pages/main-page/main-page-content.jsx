@@ -35,6 +35,7 @@ const MainPageContent = observer(() => {
       pubdate={post.pub_date}
       images={post.images}
       likecount={post.like_count}
+      postslikes={post.users_like}
       currentUser={user}
       // onPostLike={handlePostLike}
     />

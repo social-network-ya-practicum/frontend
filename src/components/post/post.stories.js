@@ -21,6 +21,7 @@ export const DefaultPost = {
         image_link: '',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '18',
     admin: false,
     currentUser: {
@@ -43,6 +44,7 @@ export const DefaultPostWithoutEditButton = {
         image_link: '',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '18',
     admin: false,
     currentUser: {
@@ -65,6 +67,7 @@ export const DefaultAdminPostWithAdminView = {
         image_link: '',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '123',
     admin: true,
     currentUser: {
@@ -87,6 +90,7 @@ export const DefaultUserPostWithAdminView = {
         image_link: '',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '18',
     admin: true,
     currentUser: {
@@ -110,6 +114,7 @@ export const PostWithImage = {
           'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '30',
     admin: false,
     currentUser: {
@@ -132,6 +137,7 @@ export const PostWithLongText = {
         image_link: '',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '4',
     admin: false,
     currentUser: {
@@ -155,6 +161,7 @@ export const PostWithLongTextAndImg = {
           'https://static.probusiness.io/n/03/d/38097027_439276526579800_2735888197547458560_n.jpg',
       },
     ],
+    users_like: [3, 4, 5],
     likecount: '146',
     admin: false,
     currentUser: {

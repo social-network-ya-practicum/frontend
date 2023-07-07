@@ -13,15 +13,8 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
-  const [image, setImage] = useState({
-    file: null,
-    image_link: null,
-  });
-
-  // const [image, setImage] = useState([]);
-
+  const [images, setImages] = useState([]);
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
-  // const [preview, setPreview] = useState(null);
 
   const textStyle = {
     height: heightText,
@@ -39,23 +32,16 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    setImage({
-      file: fileImg,
-    });
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage({
-        image_link: reader.result,
-      });
-    };
     reader.readAsDataURL(fileImg);
-
-    // setImage(
-    //   {
-    //     file: fileImg,
-    //     url: URL.createObjectURL(fileImg),
-    //   },
-    // );
+    reader.onloadend = () => {
+      setImages([
+        ...images,
+        {
+          image_link: reader.result,
+        },
+      ]);
+    };
   };
 
   function handleOpenPopup() {
@@ -71,9 +57,6 @@ const PostInput = observer(() => {
     }
     return arr;
   }
-
-  // console.log(image.image_link);
-  // console.log(isSmilePopupOpened);
 
   const onChange = (event) => setValue(event.target.value);
 
@@ -96,25 +79,16 @@ const PostInput = observer(() => {
   };
 
   function handleCancelfile() {
-    setImage({
-      file: null,
-      image_link: null,
-    });
+    setImages([]);
   }
 
   function handleAddPost() {
-    // console.log({
-    //   text: value,
-    //   author: user,
-    //   images:
-    //     image.file === null ? [{}] : [image],
-    // });
-    // console.log({ text: value, author: user, images: [image] })
+    // console.log(images);
 
     addPost({
       text: value,
       author: user,
-      images: image.file === null ? [] : [image],
+      images: images === [] ? [] : images,
     });
     setValue('');
     handleCancelfile();
@@ -128,7 +102,7 @@ const PostInput = observer(() => {
         activeInput &&
         !event.target.closest('#post-input') &&
         !value &&
-        !image.prewiev
+        !images[0]
       ) {
         hanldeCloseActiveInput();
       }
@@ -138,28 +112,12 @@ const PostInput = observer(() => {
     return () => {
       document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput, value, image]);
-
-  // useEffect(() => {
-  //   if (file) {
-  //     if (file.type.startsWith('image/')) {
-  //       const reader = new FileReader();
-  //       // reader.onloadend = () => {
-  //       //   setFile(reader.result);
-  //       // };
-  //       reader.readAsDataURL(file);
-  //       // console.log('это изображение');
-  //     } else {
-  //       // console.log('это не изображение');
-  //     }
-  //   }
-  // }, [file]);
+  }, [activeInput, value, images]);
 
   return (
     <div id="post-input" className={styles.postInput}>
       <form className={styles.postInput__form}>
         <div className={styles.postInput__box}>
-          {/* <div className={styles['post-input__avatar']}> </div> */}
           <RoundIcon
             size="small"
             src={user.photo || defaultAvatar}
@@ -196,11 +154,11 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
-            {image.image_link && (
+            {images[0] && (
               <div className={styles.postInput__prewiev}>
                 <img
                   className={styles.postInput__img}
-                  src={image.image_link}
+                  src={images[0].image_link}
                   alt="превью"
                 />
                 <button
@@ -242,10 +200,7 @@ const PostInput = observer(() => {
               </button>
 
               {isSmilePopupOpened && (
-                <ul className={styles.postInput__popup}>
-                  {/* <li className={styles['post-input__popup-item']}> </li> */}
-                  {renderSmiles(28)}
-                </ul>
+                <ul className={styles.postInput__popup}>{renderSmiles(28)}</ul>
               )}
             </div>
           </>
