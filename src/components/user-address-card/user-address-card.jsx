@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './user-address-card.module.scss';
-import BorderGradient from '../common/border-gradient/border-gradient';
+import RoundIcon from '../common/round-icon/round-icon';
+import defaultAvatar from '../../image/defaultAvatar.svg';
 
 function UserAddressCard({
   linkPath,
@@ -11,7 +12,7 @@ function UserAddressCard({
   middleName,
   lastName,
   position,
-  department = 'Административный департамент',
+  department,
   jobEmail,
   jobPhone,
 }) {
@@ -19,17 +20,7 @@ function UserAddressCard({
     <Link className={styles.link} to={linkPath}>
       <section className={styles.card}>
         <div className={styles.card__info}>
-          <div className={styles.card__avatarBlock}>
-            <BorderGradient size="medium">
-              {avatar && (
-                <img
-                  className={styles.card__avatarImg}
-                  src={avatar}
-                  alt="Avatar"
-                />
-              )}
-            </BorderGradient>
-          </div>
+          <RoundIcon size="medium" src={avatar || defaultAvatar} alt="Avatar" />
           <div className={styles.card__mainData}>
             <p>
               {lastName} {firstName} {middleName}
@@ -52,15 +43,22 @@ export default memo(UserAddressCard);
 UserAddressCard.propTypes = {
   linkPath: PropTypes.string.isRequired,
   avatar: PropTypes.string,
-  firstName: PropTypes.string.isRequired,
-  middleName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  department: PropTypes.string.isRequired,
-  jobEmail: PropTypes.string.isRequired,
-  jobPhone: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
+  middleName: PropTypes.string,
+  lastName: PropTypes.string,
+  position: PropTypes.string,
+  department: PropTypes.string,
+  jobEmail: PropTypes.string,
+  jobPhone: PropTypes.string,
 };
 
 UserAddressCard.defaultProps = {
   avatar: '',
+  department: 'Административный департамент',
+  firstName: '-',
+  middleName: '-',
+  lastName: '-',
+  position: '-',
+  jobEmail: '-',
+  jobPhone: '-',
 };

@@ -1,5 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import errorStore from './error-store';
+
+const { addError } = errorStore;
 
 class BirthdaysStore {
   birthDays = [];
@@ -20,7 +23,7 @@ class BirthdaysStore {
         });
       })
       .catch((err) => {
-        console.log(err);
+        addError(err);
         this.isLoading = false;
       });
   };

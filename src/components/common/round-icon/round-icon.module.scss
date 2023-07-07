@@ -1,6 +1,6 @@
 @use '../../../variables' as var;
 
-@mixin borderGradient {
+@mixin roundIconBlock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,26 +12,33 @@
   border-radius: 100px;
 }
 
-.borderGradientSmall {
-  @include borderGradient;
+.roundIconBlockSmall {
+  @include roundIconBlock;
   width: 32px;
   height: 32px;
 }
 
-.borderGradientSmallPlus {
-  @include borderGradient;
+.roundIconBlockSmallPlus {
+  @include roundIconBlock;
   width: 36px;
   height: 36px;
 }
 
-.borderGradientMedium {
-  @include borderGradient;
+.roundIconBlockMedium {
+  @include roundIconBlock;
   width: 56px;
   height: 56px;
 }
 
-.borderGradientLarge {
-  @include borderGradient;
+.roundIconBlockLarge {
+  @include roundIconBlock;
   width: 68px;
   height: 68px;
+}
+
+.roundIconImg {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
 }

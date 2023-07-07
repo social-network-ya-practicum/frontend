@@ -9,7 +9,7 @@ const ContactPage = observer(() => {
   const { contactStore, postsStore, userStore } = useStore();
   const { contact, getContact } = contactStore;
   const { userPosts, getPostsUser, cleanUserPosts } = postsStore;
-  const { ownUser } = userStore;
+  const { user } = userStore;
 
   const { contactId } = useParams();
 
@@ -38,7 +38,7 @@ const ContactPage = observer(() => {
 
   return (
     <section className={styles.userPage}>
-      <UserPageContent posts={userPosts} user={contact} ownUser={ownUser} />
+      <UserPageContent posts={userPosts} user={contact} ownUser={user} />
     </section>
   );
 });
