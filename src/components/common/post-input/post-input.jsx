@@ -1,11 +1,9 @@
-// import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/defaultAvatar.svg';
-// import { set } from 'mobx';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -16,15 +14,7 @@ const PostInput = observer(() => {
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
   const [images, setImages] = useState([]);
-  // const [image, setImage] = useState({
-  //   // file: null,
-  //   image_link: null,
-  // });
-
-  // const [image, setImage] = useState([]);
-
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
-  // const [preview, setPreview] = useState(null);
 
   const textStyle = {
     height: heightText,
@@ -42,15 +32,9 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    // setImage({
-    //   file: fileImg,
-    // });
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
-      // setImage({
-      //   image_link: reader.result,
-      // });
       setImages([
         ...images,
         {
@@ -58,15 +42,6 @@ const PostInput = observer(() => {
         },
       ]);
     };
-
-    // console.log(images)
-
-    // setImage(
-    //   {
-    //     file: fileImg,
-    //     url: URL.createObjectURL(fileImg),
-    //   },
-    // );
   };
 
   function handleOpenPopup() {
@@ -82,9 +57,6 @@ const PostInput = observer(() => {
     }
     return arr;
   }
-
-  // console.log(image.image_link);
-  // console.log(isSmilePopupOpened);
 
   const onChange = (event) => setValue(event.target.value);
 
@@ -111,19 +83,11 @@ const PostInput = observer(() => {
   }
 
   function handleAddPost() {
-    // console.log({
-    //   text: value,
-    //   author: user,
-    //   images:
-    //     image.file === null ? [{}] : [image],
-    // });
-    // console.log(image)
-    console.log(images);
+    // console.log(images);
 
     addPost({
       text: value,
       author: user,
-      // images: image.file === null ? [] : [image],
       images: images === [] ? [] : images,
     });
     setValue('');
@@ -138,7 +102,7 @@ const PostInput = observer(() => {
         activeInput &&
         !event.target.closest('#post-input') &&
         !value &&
-        !images[0].prewiev
+        !images[0]
       ) {
         hanldeCloseActiveInput();
       }
@@ -150,26 +114,10 @@ const PostInput = observer(() => {
     };
   }, [activeInput, value, images]);
 
-  // useEffect(() => {
-  //   if (file) {
-  //     if (file.type.startsWith('image/')) {
-  //       const reader = new FileReader();
-  //       // reader.onloadend = () => {
-  //       //   setFile(reader.result);
-  //       // };
-  //       reader.readAsDataURL(file);
-  //       // console.log('это изображение');
-  //     } else {
-  //       // console.log('это не изображение');
-  //     }
-  //   }
-  // }, [file]);
-
   return (
     <div id="post-input" className={styles.postInput}>
       <form className={styles.postInput__form}>
         <div className={styles.postInput__box}>
-          {/* <div className={styles['post-input__avatar']}> </div> */}
           <RoundIcon
             size="small"
             src={user.photo || defaultAvatar}
@@ -252,10 +200,7 @@ const PostInput = observer(() => {
               </button>
 
               {isSmilePopupOpened && (
-                <ul className={styles.postInput__popup}>
-                  {/* <li className={styles['post-input__popup-item']}> </li> */}
-                  {renderSmiles(28)}
-                </ul>
+                <ul className={styles.postInput__popup}>{renderSmiles(28)}</ul>
               )}
             </div>
           </>
