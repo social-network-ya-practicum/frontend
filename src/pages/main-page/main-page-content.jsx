@@ -5,8 +5,8 @@ import { useStore } from '../../contexts/RootStoreContext';
 import styles from './main-page-content.module.scss';
 import PostInput from '../../components/common/post-input/post-input';
 import Post from '../../components/post/post';
-import { TOKEN_NAME } from '../../utils/settings';
-import { getCookie } from '../../utils/utils';
+// import { TOKEN_NAME } from '../../utils/settings';
+// import { getCookie } from '../../utils/utils';
 
 const MainPageContent = observer(() => {
   const { postsStore, userStore, birthdaysStore } = useStore();
@@ -15,7 +15,7 @@ const MainPageContent = observer(() => {
   const { birthDays, getBirthdays } = birthdaysStore;
 
   useEffect(() => {
-    console.log(getCookie(TOKEN_NAME));
+    // console.log(getCookie(TOKEN_NAME));
     getPosts();
     getBirthdays();
   }, [getPosts, getBirthdays]);
