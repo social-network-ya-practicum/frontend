@@ -33,10 +33,10 @@ export const handleErrors = ({ message, code, from }) => {
   }
 
   // !!! Временно через match !!! Для redirect при несуществующем юзере
-  if (message.match(/Запрошенный ресурс не найден/) && from === 'getUserData') {
+  if (message.match(/Страница не найдена/) && from === 'getUserData') {
     return {
       isPrivate: true,
-      message: 'Запрошенный ресурс не найден',
+      message: 'Страница не найдена',
       code,
       from,
     };
