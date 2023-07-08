@@ -48,16 +48,19 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     bio: '',
   };
 
-  const validators = {
-    last_name: checkText,
-    first_name: checkText,
-    middle_name: checkText,
-    job_title: (value) => checkText(value, { max: 50 }),
-    personal_email: (value) => checkEmail(value, { isRequired: false }),
-    corporate_phone_number: checkTel,
-    personal_phone_number: (value) => checkTel(value, { isRequired: false }),
-    bio: (value) => checkTextarea(value, { isRequired: false }),
-  };
+  const validators = useMemo(
+    () => ({
+      last_name: checkText,
+      first_name: checkText,
+      middle_name: checkText,
+      job_title: (value) => checkText(value, { max: 50 }),
+      personal_email: (value) => checkEmail(value, { isRequired: false }),
+      corporate_phone_number: checkTel,
+      personal_phone_number: (value) => checkTel(value, { isRequired: false }),
+      bio: (value) => checkTextarea(value, { isRequired: false }),
+    }),
+    [checkText, checkEmail, checkTel, checkTextarea]
+  );
 
   const validatorsOnChange = useMemo(
     () => ({
@@ -89,9 +92,9 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
         const err = validatorsOnChange[name](value);
         setError((prev) => ({ ...prev, [name]: err }));
       }
-      setInputValue({ ...inputValue, [name]: value });
+      setInputValue((prev) => ({ ...prev, [name]: value }));
     },
-    [validatorsOnChange, inputValue]
+    [validatorsOnChange]
   );
 
   const handleSubmit = (e) => {
@@ -100,7 +103,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     Object.entries(validators).forEach(([k, func]) => {
       const errVal = func(inputValue[k]);
       setError((prev) => ({ ...prev, [k]: errVal }));
-      if (err) err = true;
+      if (errVal) err = true;
     });
     if (err) return;
     onSubmit(inputValue);
