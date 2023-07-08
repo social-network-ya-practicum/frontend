@@ -1,16 +1,16 @@
 @use '../../../variables' as var;
 
-.comment{
+.comment {
   display: grid;
   grid-template-columns: min-content auto;
   max-width: 496px;
   position: relative;
 
-  &__avatar{
+  &__avatar {
     padding: 0 12px 0 48px;
   }
 
-  &__box{
+  &__box {
     position: relative;
     padding: 0 12px;
     display: flex;
@@ -18,7 +18,7 @@
     gap: 4px;
   }
 
-  &__owner{
+  &__owner {
     font-family: var.$font-family-default;
     color: var.$text_color_default;
     font-size: 14px;
@@ -27,7 +27,7 @@
     line-height: 120%;
   }
 
-  &__text{
+  &__text {
     color: var.$text_color_default;
     font-family: var.$font-family-default;
     font-size: 14px;
@@ -36,7 +36,7 @@
     line-height: 120%;
   }
 
-  &__more{
+  &__more {
     position: absolute;
     top: 0;
     right: 0;
@@ -47,12 +47,12 @@
     background-color: transparent;
     border: none;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
 
-  &__popup{
+  &__popup {
     display: flex;
     flex-direction: column;
     gap: 13.5px;
@@ -60,8 +60,7 @@
     z-index: 3;
   }
 
-  &__btn{
-
+  &__btn {
     border: none;
     background-color: transparent;
     color: var.$text_color_default;
@@ -75,7 +74,6 @@
       cursor: pointer;
     }
 
-
     &_type_edit::before {
       content: url(./icon/edit.svg);
       height: 20px;
@@ -83,13 +81,46 @@
       margin-right: 4px;
       vertical-align: middle;
     }
-  
+
     &_type_delete::before {
       content: url(./icon/trash__icon.svg);
       height: 20px;
       width: 20px;
       margin-right: 4px;
       vertical-align: middle;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  &__btnSave {
+    font-family: var.$font-family-default;
+    background: #65f0c6;
+    border-radius: 16px;
+    padding: 12px 24px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #24dca4;
+    }
+  }
+
+  &__btnCancel {
+    font-family: var.$font-family-default;
+    background: #ffffff;
+    border: 2px solid #65f0c6;
+    padding: 10px 22px;
+    border-radius: 16px;
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid #24dca4;
     }
   }
 
