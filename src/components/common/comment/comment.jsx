@@ -37,7 +37,7 @@ function Comment() {
   };
 
   return (
-    <div className={styles.comment}>
+    <li className={styles.comment}>
       <div className={styles.comment__avatar}>
         <RoundIcon size="small" src={defaultAvatar} alt="аватар" />
       </div>
@@ -93,7 +93,7 @@ function Comment() {
           </button>
         </div>
       </Popup>
-    </div>
+    </li>
   );
 }
 

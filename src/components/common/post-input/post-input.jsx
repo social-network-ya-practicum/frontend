@@ -89,6 +89,7 @@ const PostInput = observer(() => {
       text: value,
       author: user,
       images: images === [] ? [] : images,
+      group: null,
     });
     setValue('');
     handleCancelfile();

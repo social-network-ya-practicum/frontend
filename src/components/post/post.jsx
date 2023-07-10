@@ -8,6 +8,7 @@ import Textarea from '../common/textarea/textarea';
 import { handlerDataFormat } from '../../utils/data-format';
 import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/defaultAvatar.svg';
+import Comments from '../comments/comments';
 
 const Post = observer(
   ({
@@ -31,6 +32,8 @@ const Post = observer(
     const { editPost, deletePost, likePost, dislikePost } = postsStore;
 
     const isLiked = postslikes.some((item) => item === currentUser.id);
+
+    console.log(post);
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -114,19 +117,23 @@ const Post = observer(
         />
 
         {!isPostChanging ? (
-          <div className={styles.post__likeContainer}>
-            <button
-              className={
-                !isLiked
-                  ? `${styles.post__like}`
-                  : `${styles.post__like} ${styles.post__like_active}`
-              }
-              onClick={handleLikePost}
-            >
-              {' '}
-            </button>
-            <span className={styles.post__likeCounter}>{likecount}</span>
-          </div>
+          <>
+            <div className={styles.post__likeContainer}>
+              <button
+                className={
+                  !isLiked
+                    ? `${styles.post__like}`
+                    : `${styles.post__like} ${styles.post__like_active}`
+                }
+                onClick={handleLikePost}
+              >
+                {' '}
+              </button>
+              <span className={styles.post__likeCounter}>{likecount}</span>
+            </div>
+
+            <Comments />
+          </>
         ) : (
           <div className={styles.post__change}>
             <div className={styles.post__add}>

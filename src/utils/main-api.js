@@ -363,6 +363,7 @@ class MainApi {
           bio: data.bio,
         },
         images: data.images,
+        group: data.group,
       }),
     })
       .then((res) => this._handleResponse(res, 'postUserPost'))

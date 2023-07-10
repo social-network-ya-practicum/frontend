@@ -9,6 +9,7 @@ function CommentInput() {
   const [heightText, setHeightText] = useState('px');
   const onChange = (event) => setValue(event.target.value);
 
+  // авто высота
   const textStyle = {
     height: heightText,
   };
@@ -31,8 +32,20 @@ function CommentInput() {
     setHeightText(`${target.scrollHeight}px`);
   };
 
+  // остальной функционал
   function hanldeActiveInput() {
     setIsInputActive(true);
+  }
+
+  function handleCleanClick() {
+    setIsInputActive(false);
+    setValue('');
+    setHeightText('32px');
+  }
+
+  function handleAddComment() {
+    console.log('коммент отправим но нет апи');
+    handleCleanClick();
   }
 
   return (
@@ -59,11 +72,19 @@ function CommentInput() {
 
         {isInputActive && (
           <div className={styles.commentInput__btns}>
-            <button type="button" className={styles.commentInput__btnCancel}>
+            <button
+              type="button"
+              className={styles.commentInput__btnCancel}
+              onClick={handleCleanClick}
+            >
               Отменить
             </button>
 
-            <button type="button" className={styles.commentInput__btnSave}>
+            <button
+              type="button"
+              className={styles.commentInput__btnSave}
+              onClick={handleAddComment}
+            >
               Опубликовать
             </button>
           </div>
