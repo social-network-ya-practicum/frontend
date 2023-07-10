@@ -66,9 +66,7 @@ const PostInput = observer(() => {
 
   const handleChange = (event) => {
     setHeightText('auto');
-    if (onChange) {
-      onChange(event);
-    }
+    onChange(event);
   };
 
   const handleInput = (event) => {
