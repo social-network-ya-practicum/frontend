@@ -33,8 +33,6 @@ const Post = observer(
 
     const isLiked = postslikes.some((item) => item === currentUser.id);
 
-    console.log(post);
-
     function handleEditClick() {
       setIsPostchanging(true);
       setIsPopupOpened(false);

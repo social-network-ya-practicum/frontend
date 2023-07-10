@@ -22,6 +22,7 @@ function MainPageShell() {
       <div className={styles.mainPageShell__box}>
         <ProfileBlock
           avatar={user.photo}
+          id={user.id}
           firstName={data.first_name}
           lastName={data.middle_name}
           role={data.job_title}
