@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import clsx from 'clsx';
 import AuthInput from '../common/auth-input/auth-input';
 import Button from '../common/button/button';
@@ -24,18 +24,21 @@ const LoginForm = ({ onSubmit, mix, disabled }) => {
     checkPasswordOnChange,
   } = useValidator();
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'email') {
-      const err = checkEmailOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
-    if (name === 'password') {
-      const err = checkPasswordOnChange(value);
-      setError((prev) => ({ ...prev, [name]: err }));
-    }
-    setInputValue({ ...inputValue, [name]: value });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      if (name === 'email') {
+        const err = checkEmailOnChange(value);
+        setError((prev) => ({ ...prev, [name]: err }));
+      }
+      if (name === 'password') {
+        const err = checkPasswordOnChange(value);
+        setError((prev) => ({ ...prev, [name]: err }));
+      }
+      setInputValue((prev) => ({ ...prev, [name]: value }));
+    },
+    [checkEmailOnChange, checkPasswordOnChange]
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();

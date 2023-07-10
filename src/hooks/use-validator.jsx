@@ -109,9 +109,6 @@ function useValidator() {
       if (value.length < min) {
         return `Минимальное количество символов: ${min}`;
       }
-      if (!/^[\w.,!?]+$/.test(value)) {
-        return 'Недопустимый символ ввода';
-      }
       if (!/[A-Z]/.test(value)) {
         return 'Обязательна минимум одна заглавная буква';
       }
@@ -160,9 +157,6 @@ function useValidator() {
       }
       if (value.length < min) {
         return `Минимальное количество символов: ${min}`;
-      }
-      if (/[^А-Яа-я-\s]/.test(value)) {
-        return 'Недопустимый символ ввода';
       }
       return '';
     },
