@@ -100,6 +100,7 @@ class PostsStore {
     api
       .postLike(post)
       .then((likededPost) => {
+        // console.log(likededPost)
         runInAction(() => {
           this.posts = this.posts.map((p) => {
             if (p.id === likededPost.id) {
@@ -118,6 +119,7 @@ class PostsStore {
     api
       .deleteLike(post)
       .then((dislikededPost) => {
+        // console.log(dislikededPost)
         runInAction(() => {
           this.posts = this.posts.map((p) => {
             if (p.id === dislikededPost.id) {

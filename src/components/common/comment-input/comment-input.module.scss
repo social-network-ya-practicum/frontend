@@ -1,0 +1,80 @@
+@use '../../../variables' as var;
+
+.commentInput {
+  width: 496px;
+
+  &__form {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 12px;
+  }
+
+  &__box {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  &__textarea {
+    background-color: var.$bg_color_primary;
+    border: none;
+    padding: 8px 12px;
+    width: 404px;
+    border-radius: 16px;
+    height: 32px;
+
+    font-family: var.$font-family-default;
+    color: var.$text_color_default;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+
+    resize: none;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus::placeholder {
+      opacity: 0;
+    }
+
+    &::placeholder {
+      color: var.$text_color_secondary2;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  &__btnSave {
+    font-family: var.$font-family-default;
+    background: #65f0c6;
+    border-radius: 16px;
+    padding: 12px 24px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #24dca4;
+    }
+  }
+
+  &__btnCancel {
+    font-family: var.$font-family-default;
+    background: #ffffff;
+    border: 2px solid #65f0c6;
+    padding: 10px 22px;
+    border-radius: 16px;
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid #24dca4;
+    }
+  }
+}

@@ -16,6 +16,8 @@
     margin: 12px 0 4px 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var.$text_color_default;
+    text-decoration: none;
   }
 
   &__role {
@@ -23,15 +25,15 @@
     font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
+    font-size: 14px;
+    line-height: 17px;
+    color: var.$text_color_secondary2;
   }
 
   &__item {
     display: flex;
     justify-content: space-between;
-    margin-top: 28px;
+    margin-top: 20px;
   }
 
   &__text {
@@ -39,17 +41,23 @@
     font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
+    font-size: 14px;
+    line-height: 17px;
+    color: var.$text_color_secondary2;
   }
 
   &__span {
     font-family: var.$font-family-default;
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    color: #757575;
+    font-size: 14px;
+    line-height: 17px;
+    color: var.$text_color_secondary2;
+  }
+
+  &__help {
+    margin-top: 28px;
+    border-top: 1px solid var.$text_color_secondary4;
+    padding-top: 12px;
   }
 }

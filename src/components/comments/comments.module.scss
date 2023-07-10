@@ -1,0 +1,33 @@
+@use '../../variables' as var;
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__more {
+    background-color: transparent;
+    font-family: var.$font-family-default;
+    color: var.$text_color_secondary2;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0px;
+    text-align: left;
+
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
