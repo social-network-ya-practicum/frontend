@@ -11,27 +11,20 @@ import Avatar8 from './image/AvatarsDefault8.svg';
 
 
 function Avatars() {
+
+  const avatars = [ Avatar1, Avatar2, Avatar3, Avatar4, Avatar5, Avatar6, Avatar7, Avatar8 ];
+
+  const avatarsElement = avatars.map((avatar) => (
+    <li key={avatars.indexOf(avatar)}>
+      <img src={avatar} alt="Аватар" className={styles.avatars__img}/>
+    </li>
+  ))
+
   return (
     <div className={styles.avatars}>
-      <img src={Avatar1} alt="Аватар1" className={styles.avatars__img} />
-      <img src={Avatar2} alt="Аватар2" className={styles.avatars__img} />
-      <img src={Avatar3} alt="Аватар3" className={styles.avatars__img} />
-      <img src={Avatar4} alt="Аватар4" className={styles.avatars__img} />
-      <img src={Avatar5} alt="Аватар5" className={styles.avatars__img} />
-      <img src={Avatar6} alt="Аватар6" className={styles.avatars__img} />
-      <img src={Avatar7} alt="Аватар7" className={styles.avatars__img} />
-      <img src={Avatar8} alt="Аватар8" className={styles.avatars__img} />
+      <ul className={styles.avatars__elements}>{avatarsElement}</ul>
     </div>
   );
 }
 
 export default Avatars;
-
-/* Avatars.propTypes = {
-  
-};
-
-Avatars.defaultProps = {
-  isOpen: false,
-  handleClose: undefined,
-}; */

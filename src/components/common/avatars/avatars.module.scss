@@ -1,10 +1,14 @@
 @use '../../../variables' as var;
 
 .avatars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px 18px;
   margin: 20px 0 0 0;
+
+  &__elements {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px 18px;
+  }
 
   &__img {
     padding: 8px;
