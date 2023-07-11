@@ -28,6 +28,7 @@ function BirthdayPlate({ id, data, mix }) {
           data.slice(0, 3).map((person) => (
             <li key={person.id} className={styles.birthdayPlate__item}>
               <NavLink
+                className={styles.birthdayPlate__link}
                 to={
                   person.id === id ? `/${person.id}` : `/contacts/${person.id}`
                 }
@@ -38,13 +39,13 @@ function BirthdayPlate({ id, data, mix }) {
                   size="medium"
                   mixBlock={styles.mixRoundIconBlock}
                 />
+                <div className={styles.birthdayPlate__info}>
+                  <p>
+                    {person.first_name} {person.last_name}
+                  </p>
+                  <p>{date(person.birthday_date)}</p>
+                </div>
               </NavLink>
-              <div className={styles.birthdayPlate__info}>
-                <p>
-                  {person.first_name} {person.last_name}
-                </p>
-                <p>{date(person.birthday_date)}</p>
-              </div>
             </li>
           ))
         ) : (

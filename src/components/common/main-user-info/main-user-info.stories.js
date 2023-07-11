@@ -20,6 +20,7 @@ export const Сolleague = {
       middle_name: 'Сергеевна',
       last_name: 'Левакова',
       job_title: 'Бухгалтер',
+      department: 'Департамент IT',
     },
   },
 };
@@ -33,6 +34,7 @@ export const Me = {
       middle_name: 'Сергеевна',
       last_name: 'Левакова',
       job_title: 'Бухгалтер',
+      department: 'Департамент IT',
     },
   },
 };
