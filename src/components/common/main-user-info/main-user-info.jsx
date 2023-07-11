@@ -26,7 +26,7 @@ function MainUserInfo({ user, isOwn }) {
           </div>
           <div className={styles.mainUserInfo__case}>
             <p className={styles.mainUserInfo__text}>Подразделение</p>
-            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+            <p className={styles.mainUserInfo__role}>{user.department}</p>
           </div>
         </div>
         {isOwn && (
@@ -56,6 +56,7 @@ MainUserInfo.propTypes = {
     middle_name: PropTypes.string,
     job_title: PropTypes.string,
     id: PropTypes.number,
+    department: PropTypes.string,
   }).isRequired,
 };
 

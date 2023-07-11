@@ -75,7 +75,7 @@ header {
 
   &__link {
     @include link;
-    padding: 0px 12px;
+    padding: 0 12px;
     height: 35px;
     border: 1px solid transparent;
     border-radius: 16px;
@@ -90,6 +90,33 @@ header {
     }
   }
 
+  &__notify {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 48px 0 24px;
+    height: 35px;
+  }
+
+  &__notifyCount {
+    position: absolute;
+    bottom: 14.75px;
+    right: -7px;
+    display: flex;
+    width: 17px;
+    height: 17px;
+    padding: 4px 5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background: var.$bg_color_mistake;
+    color: var.$text_color_light;
+    font-size: 6px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
   &__container {
     position: relative;
     display: flex;
@@ -99,7 +126,6 @@ header {
 
   &__user {
     @include link;
-    padding: 0 0 0 24px;
     height: 100%;
   }
 
@@ -155,6 +181,22 @@ header {
 
     &:hover {
       cursor: pointer;
+    }
+
+    &_type_edit::before {
+      content: url(./image/edit.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    &_type_logout::before {
+      content: url(./image/login.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
     }
   }
 }

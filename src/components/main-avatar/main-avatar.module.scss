@@ -75,7 +75,7 @@ $transition-time: 0.5s;
     font-size: 14px;
     font-family: var.$font-family-default;
     line-height: 120%;
-    margin: 8px 0 32px 0;
+    margin: 8px 0 0 0;
     align-self: flex-start;
   }
 
@@ -102,7 +102,18 @@ $transition-time: 0.5s;
     top: -9999px;
   }
 
+  &__btn {
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__btnWrapper {
+    margin-top: 32px;
     display: flex;
     width: 100%;
     gap: 25px;

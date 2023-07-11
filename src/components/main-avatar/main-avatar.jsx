@@ -5,6 +5,7 @@ import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
 import defaultAvatar from '../../image/defaultAvatar.svg';
+import Avatars from '../common/avatars/avatars';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
 import useError from '../../hooks/use-error';
 
@@ -114,11 +115,15 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           ref={refInput}
         />
         {!isEditMode && (
-          <Button width="100%" onClick={handleEditBtnClick}>
-            Редактировать фотографию
-          </Button>
+          <div className={styles.form__btn}>
+            <Button width="100%" onClick={handleEditBtnClick}>
+              Редактировать фотографию
+            </Button>
+          </div>
         )}
         {isEditMode && (
+          <div className={styles.form__container}>
+          <Avatars />
           <div className={styles.form__btnWrapper}>
             <Button
               width="100%"
@@ -131,6 +136,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
             <Button type="submit" width="100%" disabled={disabled}>
               Сохранить
             </Button>
+          </div>
           </div>
         )}
       </form>

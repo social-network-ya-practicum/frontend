@@ -7,6 +7,7 @@ import RoundIcon from '../common/round-icon/round-icon';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/defaultAvatar.svg';
 import Popup from '../common/popup/popup';
+import Notify from './image/notification.svg';
 
 function Header({ user, mix, logout }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -79,6 +80,12 @@ function Header({ user, mix, logout }) {
                     </NavLink>
                   </li>
                   <li>
+                    <div className={styles.header__notify}>
+                      <img src={Notify} alt="Уведомление" />
+                      <div className={styles.header__notifyCount}>3</div>
+                    </div>
+                  </li>
+                  <li>
                     <div className={styles.header__container}>
                       <NavLink
                         to={`/${user.id}`}
@@ -104,14 +111,14 @@ function Header({ user, mix, logout }) {
                       <Popup isOpen={isOpen} handleClose={handleClose}>
                         <NavLink
                           to={`/${user.id}/edit`}
-                          className={styles.header__action}
+                          className={`${styles.header__action} ${styles.header__action_type_edit}`}
                           onClick={handleClose}
                         >
                           Редактировать профиль
                         </NavLink>
                         <NavLink
                           to="/login"
-                          className={styles.header__action}
+                          className={`${styles.header__action} ${styles.header__action_type_logout}`}
                           onClick={() => logout()}
                         >
                           Выйти
