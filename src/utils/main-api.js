@@ -255,6 +255,30 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'getUserPostsList'))
       .catch((err) => this._handleError(err, 'getUserPostsList'));
 
+  /** Получаем список комментариев */
+  getCommentsList = (postID) =>
+    fetch(`${this._url}/posts/${postID}/comments`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getCommentsList'))
+      .catch((err) => this._handleError(err, 'getCommentsList'));
+
+  /** Получаем комментарий */
+  getComment = (commentID, postID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getComment'))
+      .catch((err) => this._handleError(err, 'getComment'));
+
   /**
    * GET - запросы конец
    */
