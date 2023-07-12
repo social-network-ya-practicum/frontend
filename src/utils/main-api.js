@@ -267,7 +267,7 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'getCommentsList'))
       .catch((err) => this._handleError(err, 'getCommentsList'));
 
-  /** Получаем комментарий  */
+  /** Получаем комментарий */
   getComment = (commentID, postID) =>
     fetch(`${this._url}/posts/${postID}/comments/${commentID}`, {
       credentials: 'include',
