@@ -1,29 +1,37 @@
-import { useCallback } from 'react';
-import { Outlet } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
+import { Outlet, useLocation } from 'react-router-dom';
+import clsx from 'clsx';
 import styles from './main-layout.module.scss';
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
-import { useStore } from '../../../contexts/RootStoreContext';
 import ErrorComponent from '../../error-component/error-component';
 
-const MainLayout = observer(() => {
-  const { userStore } = useStore();
-  const { user, logout } = userStore;
-  const handleLogout = useCallback(() => logout(), [logout]);
+const LOGIN_PATH = '/login';
+
+const MainLayout = () => {
+  const { pathname: path } = useLocation();
+
+  const cnLayoutContent = clsx(styles.layout__content, {
+    [styles.layout__content_type_login]: path === LOGIN_PATH,
+  });
 
   return (
     <>
       <div className={styles.layout}>
-        <Header mix={styles.mixHeader} user={user} logout={handleLogout} />
-        <main className={styles.layout__content}>
+        <Header
+          mix={path === LOGIN_PATH ? styles.mixHeaderLogin : styles.mixHeader}
+          type={path === LOGIN_PATH ? 'login' : undefined}
+        />
+        <main className={cnLayoutContent}>
           <Outlet />
         </main>
-        <Footer user={user} />
+        <Footer
+          type={path === LOGIN_PATH ? 'login' : undefined}
+          mix={path === LOGIN_PATH ? styles.mixFooterLogin : undefined}
+        />
       </div>
       <ErrorComponent />
     </>
   );
-});
+};
 
 export default MainLayout;

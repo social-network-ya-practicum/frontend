@@ -123,20 +123,20 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
         )}
         {isEditMode && (
           <div className={styles.form__container}>
-          <Avatars />
-          <div className={styles.form__btnWrapper}>
-            <Button
-              width="100%"
-              variant="secondary"
-              disabled={disabled}
-              onClick={handleCancelEdit}
-            >
-              Отменить
-            </Button>
-            <Button type="submit" width="100%" disabled={disabled}>
-              Сохранить
-            </Button>
-          </div>
+            <Avatars />
+            <div className={styles.form__btnWrapper}>
+              <Button
+                width="100%"
+                variant="secondary"
+                disabled={disabled}
+                onClick={handleCancelEdit}
+              >
+                Отменить
+              </Button>
+              <Button type="submit" width="100%" disabled={disabled}>
+                Сохранить
+              </Button>
+            </div>
           </div>
         )}
       </form>

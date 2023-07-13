@@ -1,0 +1,109 @@
+@use '../../../variables' as var;
+
+@mixin text-style {
+  font-family: var.$font-family-default;
+  font-size: 9.797px;
+  font-style: normal;
+  line-height: 120%;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 338px;
+  padding: 14.7px 17.1px;
+  border-radius: 9.652px;
+  background: linear-gradient(var.$color_ffffff, var.$color_ffffff) padding-box,
+    linear-gradient(90deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
+  border: 1px solid transparent;
+  cursor: default;
+  gap: 7.5px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__userAvatar {
+    display: flex;
+    object-fit: cover;
+    width: 22px;
+    height: 22px;
+  }
+
+  &__userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 0 7.35px;
+  }
+
+  &__userName {
+    @include text-style;
+    font-weight: 700;
+  }
+
+  &__textSecondary {
+    color: var.$text_color_secondary2;
+    font-family: var.$font-family-default;
+    font-size: 8.572px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+  }
+
+  &__moreIcon {
+    align-self: flex-start;
+  }
+
+  &__message {
+    @include text-style;
+    font-weight: 400;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+  }
+
+  &__likeCount {
+    font-family: var.$font-family-default;
+    font-size: 8.572px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    background: var(
+      --gradient,
+      linear-gradient(90deg, #0eb0d1 14.06%, #1fc995 79.17%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 5px;
+  }
+
+  &__comment {
+    display: flex;
+    align-items: center;
+    padding-left: 29.4px;
+  }
+
+  &__commentatorAvatar {
+    display: flex;
+    object-fit: cover;
+    width: 19.6px;
+    height: 19.6px;
+    margin-right: 7.35px;
+  }
+
+  &__commentInput {
+    display: flex;
+    align-items: center;
+    background: var.$bg_color_primary;
+    border-radius: 9.797px;
+    width: 100%;
+    height: 19.6px;
+    padding: 0 7.35px;
+  }
+}

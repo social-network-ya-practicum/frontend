@@ -1,6 +1,6 @@
 @use '../../variables' as var;
 
-header {
+.root {
   width: 100%;
   height: var.$header_height;
   display: flex;
@@ -8,6 +8,10 @@ header {
   justify-content: center;
   background-color: var.$bg_color_header;
   z-index: 10;
+
+  &_type_login {
+    background-color: transparent;
+  }
 }
 
 @mixin link {
@@ -32,6 +36,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &_type_login {
+    background-color: transparent;
+  }
 
   &__logo {
     display: flex;
