@@ -7,7 +7,7 @@ import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
 import RoundIcon from '../common/round-icon/round-icon';
 import styles from './header.module.scss';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import Popup from '../common/popup/popup';
 import Notify from './image/notification.svg';
 import { useStore } from '../../contexts/RootStoreContext';

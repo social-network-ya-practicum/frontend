@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './user-address-card.module.scss';
 import RoundIcon from '../common/round-icon/round-icon';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 
 function UserAddressCard({
   linkPath,

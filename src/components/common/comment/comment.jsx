@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import RoundIcon from '../round-icon/round-icon';
 import styles from './comment.module.scss';
-import defaultAvatar from '../../../image/defaultAvatar.svg';
+import defaultAvatar from '../../../image/default-avatar.svg';
 import Popup from '../popup/popup';
 import Textarea from '../textarea/textarea';
 

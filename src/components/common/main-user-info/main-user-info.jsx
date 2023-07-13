@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './main-user-info.module.scss';
-import defaultAvatar from '../../../image/defaultAvatar.svg';
+import defaultAvatar from '../../../image/default-avatar.svg';
 
 function MainUserInfo({ user, isOwn }) {
   return (

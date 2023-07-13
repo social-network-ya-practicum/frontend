@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import Avatars from '../common/avatars/avatars';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
 import useError from '../../hooks/use-error';

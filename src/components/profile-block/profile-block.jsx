@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './profile-block.module.scss';
 import RoundIcon from '../common/round-icon/round-icon';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 
 function ProfileBlock({ id, avatar, firstName, lastName, role, postsCount }) {
   return (
