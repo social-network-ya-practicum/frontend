@@ -9,35 +9,30 @@ import usePagingObserver from '../../hooks/use-paging-observer';
 const ContactsPage = observer(() => {
   const { contactsStore, userStore } = useStore();
   const {
-    contacts,
-    count,
+    offset,
+    isNextPage,
     search,
-    page,
-    totalPages,
+    contacts,
     loading,
     error,
-    resetContacts,
     setPage,
     setSearch,
     getContacts,
-    getNextPage,
   } = contactsStore;
   const {
     user: { id },
   } = userStore;
   const ref = useRef();
 
-  usePagingObserver(ref, loading, page, totalPages, setPage);
-
-  useEffect(() => () => resetContacts(), [resetContacts]);
+  usePagingObserver(ref, loading, setPage, isNextPage);
 
   useEffect(() => {
     getContacts();
   }, [getContacts, search]);
 
   useEffect(() => {
-    getNextPage();
-  }, [getNextPage, page]);
+    getContacts(true);
+  }, [getContacts, offset]);
 
   return (
     <article>
@@ -54,7 +49,7 @@ const ContactsPage = observer(() => {
           <div ref={ref} />
         </>
       )}
-      {search && !count && !error && (
+      {search && !contacts.length && !error && !loading && (
         <p>К сожалению, поиск не дал результатов</p>
       )}
     </article>

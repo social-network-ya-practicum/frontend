@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-function usePagingObserver(ref, loading, page, totalPages, setPage) {
+function usePagingObserver(ref, loading, setPage, isNextPage) {
   const observer = useRef();
 
   useEffect(() => {
@@ -8,8 +8,8 @@ function usePagingObserver(ref, loading, page, totalPages, setPage) {
     if (!ref.current) return;
 
     const callbackObserver = (entries) => {
-      if (entries[0].isIntersecting && page < totalPages) {
-        setPage(page + 1);
+      if (entries[0].isIntersecting && isNextPage) {
+        setPage();
       }
     };
 
