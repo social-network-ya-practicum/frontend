@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
-import defaultAvatar from '../../../image/defaultAvatar.svg';
+import defaultAvatar from '../../../image/default-avatar.svg';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();

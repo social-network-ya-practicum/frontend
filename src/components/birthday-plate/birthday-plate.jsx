@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import iconCake from './icon-birthday-cake.svg';
 import RoundIcon from '../common/round-icon/round-icon';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import styles from './birthday-plate.module.scss';
 
 function BirthdayPlate({ id, data, mix }) {

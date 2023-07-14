@@ -7,7 +7,7 @@ import styles from './post.module.scss';
 import Textarea from '../common/textarea/textarea';
 import { handlerDataFormat } from '../../utils/data-format';
 import RoundIcon from '../common/round-icon/round-icon';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import Comments from '../comments/comments';
 
 const Post = observer(

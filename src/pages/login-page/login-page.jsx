@@ -1,15 +1,20 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import clsx from 'clsx';
 import LoginForm from '../../components/login-form/login-form';
-import letterSmall from './images/letter-small.svg';
-import letterMedium from './images/letter-medium.svg';
+import poster from './images/poster.jpg';
+import { ReactComponent as CakeIcon } from './images/cake-icon.svg';
+import { ReactComponent as CalendarIcon } from './images/calendar-icon.svg';
+import { ReactComponent as MessageIcon } from './images/messages-icon.svg';
+
 import styles from './login-page.module.scss';
 import { useStore } from '../../contexts/RootStoreContext';
+import FakePost from '../../components/common/fake-post/fake-post';
 
 const LoginPage = observer(() => {
   const { userStore } = useStore();
   const { login, isLoading } = userStore;
+  const [isPosterLoaded, setIsPosterLoaded] = useState(false);
 
   const handleSubmit = useCallback(
     (input) => {
@@ -19,24 +24,55 @@ const LoginPage = observer(() => {
     [login]
   );
 
-  const cnImageSm = clsx(
-    styles.loginPage__image,
-    styles.loginPage__image_size_small
+  const cnRoot = clsx(styles.loginPage, {
+    [styles.loginPage_hidden]: !isPosterLoaded,
+  });
+  const cnLeftBlock = clsx(styles.block, styles.block_type_left);
+  const cnRightBlock = clsx(styles.block, styles.block_type_right);
+  const cnCakeChip = clsx(styles.block__chip, styles.block__chip_variant_cake);
+  const cnCalendarChip = clsx(
+    styles.block__chip,
+    styles.block__chip_variant_calendar
   );
-  const cnImageMd = clsx(
-    styles.loginPage__image,
-    styles.loginPage__image_size_medium
+  const cnMessageChip = clsx(
+    styles.block__chip,
+    styles.block__chip_variant_message
   );
 
   return (
-    <section className={styles.loginPage}>
-      <div className={styles.loginPage__bufferTop} />
-      <div className={styles.loginPage__formWrapper}>
-        <LoginForm onSubmit={handleSubmit} disabled={isLoading} />
-        <img className={cnImageSm} src={letterSmall} alt="small letter" />
-        <img className={cnImageMd} src={letterMedium} alt="medium letter" />
+    <section className={cnRoot}>
+      <div className={cnLeftBlock}>
+        <div className={styles.block__leftWrapper}>
+          <LoginForm onSubmit={handleSubmit} disabled={isLoading} />
+        </div>
       </div>
-      <div className={styles.loginPage__bufferBottom} />
+
+      <div className={cnRightBlock}>
+        <div className={styles.block__rightWrapper}>
+          <img
+            src={poster}
+            alt="Постер"
+            className={styles.block__poster}
+            onLoad={() => setIsPosterLoaded(true)}
+            onError={() => setIsPosterLoaded(true)}
+          />
+
+          <div className={cnCakeChip}>
+            <CakeIcon />
+            Будь в курсе важного
+          </div>
+          <div className={cnCalendarChip}>
+            <CalendarIcon />
+            Назначай встречи
+          </div>
+          <div className={cnMessageChip}>
+            <MessageIcon />
+            Общайся
+          </div>
+          <FakePost variant="first" mix={styles.mixFirstFakePost} />
+          <FakePost variant="second" mix={styles.mixSecondFakePost} />
+        </div>
+      </div>
     </section>
   );
 });

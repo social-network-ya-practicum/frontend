@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import Avatars from '../common/avatars/avatars';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
 import useError from '../../hooks/use-error';
@@ -123,20 +123,20 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
         )}
         {isEditMode && (
           <div className={styles.form__container}>
-          <Avatars />
-          <div className={styles.form__btnWrapper}>
-            <Button
-              width="100%"
-              variant="secondary"
-              disabled={disabled}
-              onClick={handleCancelEdit}
-            >
-              Отменить
-            </Button>
-            <Button type="submit" width="100%" disabled={disabled}>
-              Сохранить
-            </Button>
-          </div>
+            <Avatars />
+            <div className={styles.form__btnWrapper}>
+              <Button
+                width="100%"
+                variant="secondary"
+                disabled={disabled}
+                onClick={handleCancelEdit}
+              >
+                Отменить
+              </Button>
+              <Button type="submit" width="100%" disabled={disabled}>
+                Сохранить
+              </Button>
+            </div>
           </div>
         )}
       </form>

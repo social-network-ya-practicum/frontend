@@ -34,8 +34,8 @@ $transition-time: 0.5s;
     object-fit: cover;
 
     &_type_default {
-      width: 86px;
-      height: 87px;
+      width: max-content;
+      height: max-content;
       transition: $transition-time;
     }
 
@@ -53,11 +53,10 @@ $transition-time: 0.5s;
     &_clickable {
       cursor: pointer;
       &:hover .avatar__img_clickable {
-        width: 90px;
-        height: 91px;
+        transform: scale(1.03);
       }
-      &:hover .avatar__default-title {
-        font-size: 15px;
+      &:hover .avatar__defaultTitle {
+        font-size: 14.3px;
       }
     }
   }
