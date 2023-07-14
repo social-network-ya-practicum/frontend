@@ -1,0 +1,41 @@
+@use '../../../variables' as var;
+
+.layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var.$bg_color_primary;
+  position: relative;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding-top: var.$header_height;
+    width: 100%;
+    max-width: 1280px;
+    flex: 1;
+    min-height: calc(100vh - var.$footer_height);
+
+    &_type_login {
+      min-height: 100vh;
+      padding-top: 0;
+      max-width: inherit;
+    }
+  }
+}
+
+.mixHeader {
+  position: fixed;
+}
+
+.mixHeaderLogin {
+  position: absolute;
+  top: 0;
+}
+
+.mixFooterLogin {
+  position: absolute;
+  bottom: 0;
+}

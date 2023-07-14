@@ -1,0 +1,85 @@
+@use '../../variables' as var;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 552px;
+
+  &__btnWrapper {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 44px 122px 44px 42px;
+    border-radius: 16px;
+    background-color: var.$bg_color_default;
+    border: none;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__fieldsetTitle {
+    font-family: var.$font-family-default;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    margin-bottom: 20px;
+    cursor: default;
+  }
+
+  &__birthday {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 28px;
+  }
+
+  &__labelTitle {
+    font-family: var.$font-family-default;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    margin-right: 27px;
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__textarea {
+    resize: none;
+    background: var.$bg_color_primary;
+    border-radius: 16px;
+    max-width: 388px;
+    width: 100%;
+    min-height: 66px;
+    border: none;
+    outline: none;
+    padding: 4px 12px;
+  }
+}
+
+.mixInfoInput {
+  margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.mixInfoSelectDay {
+  margin-right: 8px;
+}

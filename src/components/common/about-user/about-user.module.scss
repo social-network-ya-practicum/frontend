@@ -1,0 +1,52 @@
+@use '../../../variables' as var;
+
+.aboutUser {
+  width: 552px;
+  padding: 40px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  background: var.$bg_color_default;
+  border-radius: 16px;
+  font-family: var.$font-family-default;
+
+  &__title {
+    width: 100%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    color: var.$text_color_default;
+  }
+
+  &__birthday {
+    width: 100%;
+    margin: 20px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: var.$text_color_secondary2;
+  }
+
+  &__value {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: var.$text_color_default;
+  }
+
+  &__bio {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: var.$text_color_default;
+  }
+}

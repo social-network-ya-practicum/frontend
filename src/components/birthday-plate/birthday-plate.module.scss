@@ -1,0 +1,97 @@
+@use '../../variables' as var;
+
+.birthdayPlate {
+  $headerBG: var.$color_65f0c6;
+  $plateBG: var.$color_ffffff;
+  $fontFamily: var.$font-family-default;
+  $colorText: var.$text_color_default;
+
+  background-color: $plateBG;
+  border-radius: 16px;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 0 0 32px;
+  width: 357px;
+  height: min-content;
+
+  &__header {
+    background-color: $headerBG;
+    padding: 16px 20px 16px;
+  }
+
+  &__title {
+    font-family: $fontFamily;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 20px 20px 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__item:last-child {
+    padding-bottom: 0px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    font-family: $fontFamily;
+    color: $colorText;
+    font-weight: 400;
+    width: 220px;
+
+    p {
+      font-size: 16px;
+      margin: 0;
+      padding: 0 0 4px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p:last-child {
+      font-size: 14px;
+      padding-bottom: 0;
+    }
+  }
+
+  &__birthdayFreeDay {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 20px;
+    }
+
+    p {
+      flex-direction: column;
+      font-family: $fontFamily;
+      font-size: 16px;
+      max-width: 269px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.mixRoundIconBlock {
+  margin-right: 16px;
+}

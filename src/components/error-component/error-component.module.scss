@@ -1,0 +1,64 @@
+@use '../../variables' as var;
+
+.error {
+  list-style: none;
+  position: fixed;
+  right: 55px;
+  top: calc(var.$header_height + 44px);
+  display: flex;
+  flex-direction: column;
+  width: 357px;
+  z-index: 1000;
+  perspective: 1000px;
+
+  @media screen and (min-width: 1281px) {
+    right: calc((100% - 1280px) / 2 + 72px);
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 52px;
+    padding: 16px 20px 16px 28px;
+    border-radius: 16px;
+    background: var.$bg_color_error;
+    position: relative;
+    opacity: 0;
+    transform: translateZ(-150px);
+    transition: 0.5s;
+    // box-shadow: 0 0 10px rgba(49, 57, 120, 0.3);
+
+    &_shown {
+      opacity: 1;
+      transform: translateZ(0px);
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    font-family: var.$font-family-default;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    width: 100%;
+    word-break: break-all;
+    cursor: default;
+  }
+
+  &__closeIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-left: 14px;
+    cursor: pointer;
+  }
+}

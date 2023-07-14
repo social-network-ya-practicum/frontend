@@ -1,0 +1,59 @@
+@use '../../../variables' as var;
+
+$input-text-padding: 12px;
+$input-max-width: 254px;
+
+.infoInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 388px;
+  font-family: var.$font-family-default;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 14px;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: var.$bg_color_primary;
+    border-radius: 16px;
+    height: 28px;
+    width: 100%;
+    max-width: $input-max-width;
+    color: var.$text_color_default;
+    padding: 0 $input-text-padding;
+
+    &::placeholder {
+      color: var.$text_color_placeholder;
+    }
+
+    &_type_error {
+      color: var.$text_color_error;
+    }
+  }
+
+  &__error {
+    font-size: 14px;
+    color: var.$text_color_error;
+    padding: 0 $input-text-padding;
+    width: 100%;
+    max-width: $input-max-width;
+    white-space: pre-wrap;
+    margin-left: auto;
+  }
+}

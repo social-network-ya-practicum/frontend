@@ -1,0 +1,44 @@
+@use '../../../variables' as var;
+
+@mixin roundIconBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(var.$color_ffffff, var.$color_ffffff) padding-box,
+    linear-gradient(180deg, #0b96b3 24.48%, #1fc995 91.67%) border-box;
+  border: 1px solid transparent;
+  border-radius: 100px;
+}
+
+.roundIconBlockSmall {
+  @include roundIconBlock;
+  width: 32px;
+  height: 32px;
+}
+
+.roundIconBlockSmallPlus {
+  @include roundIconBlock;
+  width: 36px;
+  height: 36px;
+}
+
+.roundIconBlockMedium {
+  @include roundIconBlock;
+  width: 56px;
+  height: 56px;
+}
+
+.roundIconBlockLarge {
+  @include roundIconBlock;
+  width: 68px;
+  height: 68px;
+}
+
+.roundIconImg {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}

@@ -1,0 +1,64 @@
+@use '../../../variables' as var;
+
+@mixin commonStyles {
+  $border-width: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  font-size: 16px;
+  line-height: 120%;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  border: $border-width solid;
+  border-radius: 16px;
+  color: inherit;
+  background: none;
+  padding: 0 calc(24px - $border-width * 2);
+  cursor: pointer;
+  transition: var.$anim-duration-default;
+}
+
+.buttonPrimary {
+  @include commonStyles;
+  height: 43px;
+  border-color: var.$btn_color_default;
+  background-color: var.$btn_color_default;
+
+  &:active {
+    border-color: var.$btn_color_active;
+    background-color: var.$btn_color_active;
+  }
+
+  &:hover {
+    border-color: var.$btn_color_hover;
+    background-color: var.$btn_color_hover;
+  }
+
+  &:disabled {
+    border-color: var.$btn_color_disabled;
+    background: var.$btn_color_disabled;
+    color: var.$text_color_secondary;
+  }
+}
+
+.buttonSecondary {
+  @include commonStyles;
+  height: 43px;
+  border-color: var.$btn_color_default;
+
+  &:active {
+    border-color: var.$btn_color_active;
+  }
+
+  &:hover {
+    border-color: var.$btn_color_hover;
+  }
+
+  &:disabled {
+    border-color: var.$btn_color_disabled;
+    color: var.$text_color_secondary;
+  }
+}

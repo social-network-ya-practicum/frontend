@@ -1,0 +1,72 @@
+@use '../../../variables' as var;
+
+$input-text-padding: 12px;
+
+.authInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var.$font-family-default;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  position: relative;
+
+  &__title {
+    margin-bottom: 4px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: var.$bg_color_default;
+    border-radius: 16px;
+    padding: 0 $input-text-padding;
+    height: 48px;
+    position: relative;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    width: 100%;
+    flex: 1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+
+    &::placeholder {
+      color: var.$text_color_placeholder;
+    }
+
+    &_type_error {
+      color: var.$text_color_error;
+    }
+  }
+
+  &__iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    margin-left: 12px;
+  }
+
+  &__error {
+    position: absolute;
+    top: 73px;
+    left: 0;
+    font-size: 14px;
+    color: var.$text_color_error;
+    padding: 0 $input-text-padding;
+  }
+}
