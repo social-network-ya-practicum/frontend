@@ -36,6 +36,7 @@ class UserStore {
             : '1',
           bio: user?.bio ?? '',
           photo: user?.photo ?? null,
+          department: user?.department ?? '',
         }
       : user;
   }

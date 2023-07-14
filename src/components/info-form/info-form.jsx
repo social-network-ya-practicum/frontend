@@ -9,6 +9,7 @@ import InfoTextrea from '../common/info-textarea/info-textarea';
 import useValidator from '../../hooks/use-validator';
 import { getDatesList } from '../../utils/utils';
 import { calendar, monthes } from '../../utils/settings';
+import InfoInputTextarea from '../common/info-input-textarea/info-input-textarea';
 
 const InfoForm = ({ onSubmit, mix, disabled, user }) => {
   const {
@@ -27,6 +28,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     first_name: user ? user.first_name : '',
     middle_name: user ? user.middle_name : '',
     job_title: user ? user.job_title : '',
+    department: user ? user.department : '',
     email: user ? user.email : '',
     personal_email: user ? user.personal_email : '',
     corporate_phone_number: user ? user.corporate_phone_number : '',
@@ -41,6 +43,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
     first_name: '',
     middle_name: '',
     job_title: '',
+    department: '',
     email: '',
     personal_email: '',
     corporate_phone_number: '',
@@ -54,6 +57,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
       first_name: checkText,
       middle_name: checkText,
       job_title: (value) => checkText(value, { max: 50 }),
+      department: (value) => checkText(value, { max: 50 }),
       personal_email: (value) => checkEmail(value, { isRequired: false }),
       corporate_phone_number: checkTel,
       personal_phone_number: (value) => checkTel(value, { isRequired: false }),
@@ -68,6 +72,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
       first_name: checkTextOnChange,
       middle_name: checkTextOnChange,
       job_title: (value) => checkTextOnChange(value, { max: 50 }),
+      department: (value) => checkTextOnChange(value, { max: 50 }),
       personal_email: checkEmailOnChange,
       corporate_phone_number: checkTelOnChange,
       personal_phone_number: checkTelOnChange,
@@ -159,8 +164,7 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           error={error.middle_name}
           setError={setError}
         />
-        <InfoInput
-          type="text"
+        <InfoInputTextarea
           name="job_title"
           title="Должность"
           value={inputValue.job_title}
@@ -168,6 +172,16 @@ const InfoForm = ({ onSubmit, mix, disabled, user }) => {
           mix={styles.mixInfoInput}
           validator={validators.job_title}
           error={error.job_title}
+          setError={setError}
+        />
+        <InfoInputTextarea
+          name="department"
+          title="Подразделение"
+          value={inputValue.department}
+          onChange={onChange}
+          mix={styles.mixInfoInput}
+          validator={validators.department}
+          error={error.department}
           setError={setError}
         />
       </fieldset>
@@ -280,6 +294,7 @@ InfoForm.propTypes = {
     birthday_day: PropTypes.string,
     birthday_month: PropTypes.string,
     bio: PropTypes.string,
+    department: PropTypes.string,
   }).isRequired,
 };
 

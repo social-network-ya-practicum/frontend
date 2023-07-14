@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import styles from './info-select.module.scss';
 import { ReactComponent as Arrow } from './images/arrow.svg';
 
-const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
+const InfoSelect = memo(({ mix, name, optionsList, value, onChange }) => {
   const rootRef = useRef(null);
   const listRef = useRef(null);
   const itemsRef = useRef({});
@@ -161,7 +161,7 @@ const InfoSelect = ({ mix, name, optionsList, value, onChange }) => {
       </div>
     </div>
   );
-};
+});
 
 export default InfoSelect;
 

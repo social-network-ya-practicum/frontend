@@ -283,6 +283,7 @@ class MainApi {
         birthday_day: data.birthday_day,
         birthday_month: data.birthday_month,
         bio: data.bio,
+        department: data.department,
       }),
     })
       .then((res) => this._handleResponse(res, 'patchUserData'))
