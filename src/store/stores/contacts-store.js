@@ -5,13 +5,15 @@ import errorStore from './error-store';
 const { addError } = errorStore;
 
 class ContactsStore {
+  limit = 10;
+
+  offset = 0;
+
+  isNextPages = false;
+
   search = '';
 
-  page = 1;
-
   contacts = [];
-
-  count = 0;
 
   error = '';
 
@@ -21,31 +23,28 @@ class ContactsStore {
     makeAutoObservable(this);
   }
 
-  get totalPages() {
-    return Math.ceil(this.count / 5);
-  }
-
   setSearch = (value) => {
     this.search = value;
   };
 
-  setPage = (value) => {
-    this.page = value;
+  setPage = () => {
+    this.offset += this.limit;
   };
 
-  resetContacts = () => {
-    this.contacts = [];
-  };
-
-  getContacts = () => {
+  getContacts = (isPaging = false) => {
+    if (isPaging && (this.offset === 0 || !this.isNextPage)) return;
+    if (!isPaging) this.offset = 0;
     this.loading = true;
-    if (this.page > 1) this.page = 1;
     api
-      .getAddressBook(`?page=1&search=${this.search}`)
+      .getAddressBook(
+        `?limit=${this.limit}&offset=${this.offset}&search=${this.search}`
+      )
       .then((data) => {
         runInAction(() => {
-          this.contacts = data.results;
-          this.count = data.count;
+          this.contacts = isPaging
+            ? [...this.contacts, ...data.results]
+            : data.results;
+          this.isNextPage = !!data.next;
           this.error = '';
           this.loading = false;
         });
@@ -57,28 +56,6 @@ class ContactsStore {
         });
         addError(err);
       });
-  };
-
-  getNextPage = () => {
-    if (this.page > 1) {
-      this.loading = true;
-      api
-        .getAddressBook(`?page=${this.page}&search=${this.search}`)
-        .then((data) => {
-          runInAction(() => {
-            this.contacts = [...this.contacts, ...data.results];
-            this.error = '';
-            this.loading = false;
-          });
-        })
-        .catch((err) => {
-          runInAction(() => {
-            this.error = 'Ошибка при получении данных с сервера';
-            this.loading = false;
-          });
-          addError(err);
-        });
-    }
   };
 }
 
