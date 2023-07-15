@@ -100,13 +100,11 @@ class PostsStore {
     api
       .postLike(post)
       .then((likededPost) => {
-        // console.log(likededPost)
+        const postInd = this.posts.findIndex((i) => i.id === post.id);
         runInAction(() => {
-          this.posts = this.posts.map((p) => {
-            if (p.id === likededPost.id) {
-              return likededPost;
-            }
-            return p;
+          this.posts.splice(postInd, 1, {
+            ...likededPost,
+            images: post.images,
           });
         });
       })
@@ -119,13 +117,11 @@ class PostsStore {
     api
       .deleteLike(post)
       .then((dislikededPost) => {
-        // console.log(dislikededPost)
+        const postInd = this.posts.findIndex((i) => i.id === post.id);
         runInAction(() => {
-          this.posts = this.posts.map((p) => {
-            if (p.id === dislikededPost.id) {
-              return dislikededPost;
-            }
-            return p;
+          this.posts.splice(postInd, 1, {
+            ...dislikededPost,
+            images: post.images,
           });
         });
       })
