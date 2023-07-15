@@ -76,8 +76,8 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   const cnImg = clsx(styles.avatar__img, {
     [styles.avatar__img_type_default]: imgSrc === defaultAvatar,
   });
-  const cnCloseIcon = clsx(styles.avatar__close, {
-    [styles.avatar__close_disabled]: imgSrc === defaultAvatar || !isEditMode,
+  const cnRestriction = clsx(styles.avatar__restriction, {
+    [styles.avatar__restriction_hidden]: !isEditMode || imgSrc === selectedFile,
   });
 
   return (
@@ -95,14 +95,12 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           <span className={styles.avatar__editTitle}>Добавить фотографию</span>
         </button>
       )}
-      {isEditMode && (
-        <p className={styles.avatar__restriction}>
-          Размер изображения не более 5мб
-        </p>
-      )}
+
+      <p className={cnRestriction}>Размер изображения не более 5мб</p>
+
       {imgSrc !== editAvatar && isEditMode && (
         <CloseIcon
-          className={cnCloseIcon}
+          className={styles.avatar__close}
           onClick={() => {
             refInput.current.value = null;
             setSelectedFile(null);
@@ -125,6 +123,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           onChange={onChange}
           ref={refInput}
         />
+        <Avatars hidden={!isEditMode} setSelectedFile={setSelectedFile} />
         {!isEditMode && (
           <div className={styles.form__btn}>
             <Button width="100%" onClick={handleEditBtnClick}>
@@ -133,21 +132,18 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           </div>
         )}
         {isEditMode && (
-          <div className={styles.form__container}>
-            <Avatars />
-            <div className={styles.form__btnWrapper}>
-              <Button
-                width="100%"
-                variant="secondary"
-                disabled={disabled}
-                onClick={handleCancelEdit}
-              >
-                Отменить
-              </Button>
-              <Button type="submit" width="100%" disabled={disabled}>
-                Сохранить
-              </Button>
-            </div>
+          <div className={styles.form__btnWrapper}>
+            <Button
+              width="100%"
+              variant="secondary"
+              disabled={disabled}
+              onClick={handleCancelEdit}
+            >
+              Отменить
+            </Button>
+            <Button type="submit" width="100%" disabled={disabled}>
+              Сохранить
+            </Button>
           </div>
         )}
       </form>

@@ -1,6 +1,6 @@
 @use '../../variables' as var;
 
-$block-width: 357px;
+$block-width: 358px;
 $border-radius: 16px;
 $transition-time: 0.5s;
 
@@ -68,8 +68,17 @@ $transition-time: 0.5s;
     font-size: 14px;
     font-family: var.$font-family-default;
     line-height: 120%;
-    margin: 8px 0 0 0;
+    margin-top: 8px;
     align-self: flex-start;
+    transition: 0.3s;
+    overflow: hidden;
+    max-height: 100px;
+    transition: 0.3s;
+
+    &_hidden {
+      max-height: 0;
+      margin-top: 0;
+    }
   }
 
   &__close {
@@ -82,6 +91,7 @@ $transition-time: 0.5s;
 
 .form {
   display: flex;
+  flex-direction: column;
   width: 100%;
 
   &__input {
@@ -96,15 +106,10 @@ $transition-time: 0.5s;
     margin-top: 32px;
   }
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-  }
-
   &__btnWrapper {
-    margin-top: 32px;
     display: flex;
     width: 100%;
     gap: 25px;
+    margin-top: 32px;
   }
 }
