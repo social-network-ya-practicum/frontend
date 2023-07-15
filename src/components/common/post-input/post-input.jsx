@@ -136,17 +136,31 @@ const PostInput = observer(() => {
           />
 
           {!activeInput && (
-            <label
-              htmlFor="post-input__file"
-              className={styles.postInput__fileLabel}
-            >
-              <input
-                type="file"
-                id="post-input__file"
-                className={styles.postInput__file}
-                onChange={handleFileChange}
-              />
-            </label>
+            <div className={styles.postInput__fileBox}>
+              <label
+                htmlFor="post-input__img"
+                className={`${styles.postInput__fileLabel} ${styles.postInput__fileLabel_img}`}
+              >
+                <input
+                  type="file"
+                  id="post-input__img"
+                  className={styles.postInput__file}
+                  onChange={handleFileChange}
+                />
+              </label>
+
+              <label
+                htmlFor="post-input__file"
+                className={styles.postInput__fileLabel}
+              >
+                <input
+                  type="file"
+                  id="post-input__file"
+                  className={styles.postInput__file}
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
           )}
         </div>
 
@@ -169,7 +183,19 @@ const PostInput = observer(() => {
               </div>
             )}
             <div className={styles.postInput__stuff}>
-              <div>
+              <div className={styles.postInput__fileBox}>
+                <label
+                  htmlFor="post-input__img"
+                  className={`${styles.postInput__fileLabel} ${styles.postInput__fileLabel_img}`}
+                >
+                  <input
+                    type="file"
+                    id="post-input__img"
+                    className={styles.postInput__file}
+                    onChange={handleFileChange}
+                  />
+                </label>
+
                 <label
                   htmlFor="post-input__file"
                   className={styles.postInput__fileLabel}

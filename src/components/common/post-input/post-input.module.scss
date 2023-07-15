@@ -40,17 +40,26 @@
     }
   }
 
+  &__fileBox {
+    display: flex;
+    gap: 8px;
+  }
+
   &__fileLabel {
     display: inline-block;
     height: 20px;
     width: 20px;
-    background-image: url(./images/file.svg);
+    background-image: url(./images/file__icon.svg);
     background-color: transparent;
     background-position: center;
     border: none;
 
     &:hover {
       cursor: pointer;
+    }
+
+    &_img {
+      background-image: url(./images/img__icon.svg);
     }
   }
 
@@ -98,7 +107,6 @@
     background-color: transparent;
     background-position: center;
     border: none;
-    margin-left: 8px;
 
     &:hover {
       cursor: pointer;
