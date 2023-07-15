@@ -58,7 +58,7 @@ const InfoInputTextarea = memo(
             id={id}
             className={cnInput}
             ref={textareaRef}
-            spellCheck="false"
+            spellCheck="true"
             rows={1}
           />
         </div>

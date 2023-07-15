@@ -31,10 +31,19 @@ function ProfileBlock({ id, avatar, firstName, lastName, role, postsCount }) {
 export default ProfileBlock;
 
 ProfileBlock.propTypes = {
-  id: PropTypes.number.isRequired,
-  role: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-  postsCount: PropTypes.number.isRequired,
+  id: PropTypes.number,
+  role: PropTypes.string,
+  avatar: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  postsCount: PropTypes.number,
+};
+
+ProfileBlock.defaultProps = {
+  id: '#',
+  role: '',
+  avatar: '',
+  firstName: '',
+  lastName: '',
+  postsCount: null,
 };

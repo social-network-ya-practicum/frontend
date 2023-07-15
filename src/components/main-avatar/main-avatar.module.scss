@@ -22,25 +22,13 @@ $transition-time: 0.5s;
   max-width: $block-width;
   position: relative;
 
-  &__imgWrapper {
-    @include img;
-  }
-
   &__img {
-    display: flex;
-    width: 100%;
-    height: 100%;
+    @include img;
     object-position: center;
     object-fit: cover;
 
     &_type_default {
-      width: max-content;
-      height: max-content;
-      transition: $transition-time;
-    }
-
-    &_clickable {
-      cursor: pointer;
+      object-fit: none;
     }
   }
 
@@ -49,19 +37,25 @@ $transition-time: 0.5s;
     flex-direction: column;
     border: none;
     outline: none;
+    cursor: pointer;
 
-    &_clickable {
-      cursor: pointer;
-      &:hover .avatar__img_clickable {
-        transform: scale(1.03);
-      }
-      &:hover .avatar__defaultTitle {
-        font-size: 14.3px;
-      }
+    &:hover .avatar__imgEdit {
+      transform: scale(1.045);
+    }
+    &:hover .avatar__editTitle {
+      font-size: 14.5px;
     }
   }
 
-  &__defaultTitle {
+  &__imgEdit {
+    display: flex;
+    object-position: center;
+    object-fit: none;
+    transition: $transition-time;
+    cursor: pointer;
+  }
+
+  &__editTitle {
     font-size: 14px;
     font-family: var.$font-family-default;
     font-weight: 700;
@@ -83,10 +77,6 @@ $transition-time: 0.5s;
     top: 12px;
     right: 12px;
     cursor: pointer;
-
-    &_disabled {
-      display: none;
-    }
   }
 }
 

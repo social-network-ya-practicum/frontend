@@ -17,7 +17,6 @@ const InfoInput = memo(
     mix,
   }) => {
     const id = useId();
-    console.log(11);
 
     const onFocus = () => {
       if (!validator) return;
