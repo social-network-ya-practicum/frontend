@@ -4,6 +4,7 @@ import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
+import FileBubble from '../file-bubble/file-bubble';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -13,8 +14,24 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
+
   const [images, setImages] = useState([]);
+  const [files, setFiles] = useState([]);
+
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
+
+  function handleCancelFile(id) {
+    const updatedFiles = files.filter((file) => file.id !== id);
+    setFiles(updatedFiles);
+  }
+
+  const fileList = files.map((file) => (
+    <FileBubble
+      name={file.file_info.name}
+      key={file.id}
+      handleDelete={() => handleCancelFile}
+    />
+  ));
 
   const textStyle = {
     height: heightText,
@@ -32,15 +49,29 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
+    console.log(fileImg);
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
-      setImages([
-        ...images,
-        {
-          image_link: reader.result,
-        },
-      ]);
+      if (fileImg.type.startsWith('image/')) {
+        setImages([
+          ...images,
+          {
+            image_link: reader.result,
+          },
+        ]);
+      } else {
+        setFiles([
+          ...files,
+          {
+            id: files.length + 1,
+            file_info: fileImg,
+            file_link: reader.result,
+          },
+        ]);
+      }
+      console.log(images);
+      console.log(files);
     };
   };
 
@@ -76,7 +107,7 @@ const PostInput = observer(() => {
     setHeightText(`${target.scrollHeight}px`);
   };
 
-  function handleCancelfile() {
+  function handleCancelImg() {
     setImages([]);
   }
 
@@ -89,7 +120,7 @@ const PostInput = observer(() => {
       images: images === [] ? [] : images,
     });
     setValue('');
-    handleCancelfile();
+    handleCancelImg();
     setIsSmilePopupOpened(false);
     hanldeCloseActiveInput();
   }
@@ -166,6 +197,7 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
+            {/* превью картинки */}
             {images[0] && (
               <div className={styles.postInput__prewiev}>
                 <img
@@ -176,12 +208,16 @@ const PostInput = observer(() => {
                 <button
                   className={styles.postInput__canselBtn}
                   type="button"
-                  onClick={handleCancelfile}
+                  onClick={handleCancelImg}
                 >
                   {' '}
                 </button>
               </div>
             )}
+
+            {/* превью файлов */}
+            {files.length !== 0 && <ul>{fileList}</ul>}
+
             <div className={styles.postInput__stuff}>
               <div className={styles.postInput__fileBox}>
                 <label
