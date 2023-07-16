@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import SearchIcon from './search-icon.svg';
 import CanselIcon from './cansel-icon.svg';
-import { debounce } from '../../utils/utils';
+import { debounce } from '../../../utils/utils';
 import styles from './search-input.module.scss';
 
-function SearchInput({ searchFromStore, handleChange, mix }) {
+function SearchInput({ searchFromStore, handleChange, placeholder, mix }) {
   const [search, setSearch] = useState(() => {
     if (searchFromStore) return searchFromStore;
     return '';
@@ -41,7 +41,7 @@ function SearchInput({ searchFromStore, handleChange, mix }) {
         type="text"
         name="search"
         className={styles.searchInput__input}
-        placeholder="Должность или фамилия сотрудника"
+        placeholder={placeholder}
         value={search}
         onChange={onHandleEvent}
         autoComplete="search"
@@ -60,9 +60,11 @@ export default SearchInput;
 SearchInput.propTypes = {
   searchFromStore: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
   mix: PropTypes.string,
 };
 
 SearchInput.defaultProps = {
+  placeholder: '',
   mix: null,
 };

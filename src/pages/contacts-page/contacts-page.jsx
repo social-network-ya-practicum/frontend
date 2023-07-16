@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../contexts/RootStoreContext';
 import styles from './contacts-page.module.scss';
-import SearchInput from '../../components/search-input/search-input';
+import SearchInput from '../../components/common/search-input/search-input';
 import ContactsList from '../../components/contacts-list/contacts-list';
 import usePagingObserver from '../../hooks/use-paging-observer';
 
@@ -39,6 +39,7 @@ const ContactsPage = observer(() => {
       <SearchInput
         searchFromStore={search}
         handleChange={setSearch}
+        placeholder="Должность или фамилия сотрудника"
         mix={styles.mixSearchInput}
       />
       {error ? (
