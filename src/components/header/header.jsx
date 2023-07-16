@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
@@ -15,20 +15,25 @@ import { useStore } from '../../contexts/RootStoreContext';
 const Header = observer(({ mix, type }) => {
   const { userStore } = useStore();
   const { user, logout } = userStore;
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const handlePopupClose = useCallback(() => {
+    setIsPopupOpen(false);
+  }, []);
 
   const handleOpenClick = () => {
-    setIsOpen(true);
+    setIsPopupOpen(true);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsPopupOpen(false);
   };
 
   React.useEffect(() => {
     function handleEscapeKey(e) {
       if (e.key === 'Escape') {
-        handleClose();
+        handlePopupClose();
       }
     }
 
@@ -116,22 +121,27 @@ const Header = observer(({ mix, type }) => {
                           alt="Настройка профиля"
                         />
                       </button>
-                      <Popup isOpen={isOpen} handleClose={handleClose}>
-                        <NavLink
-                          to={`/${user.id}/edit`}
-                          className={`${styles.header__action} ${styles.header__action_type_edit}`}
-                          onClick={handleClose}
+                      {isPopupOpen && (
+                        <Popup
+                          isOpen={isPopupOpen}
+                          handleClose={handlePopupClose}
                         >
-                          Редактировать профиль
-                        </NavLink>
-                        <NavLink
-                          to="/login"
-                          className={`${styles.header__action} ${styles.header__action_type_logout}`}
-                          onClick={() => logout()}
-                        >
-                          Выйти
-                        </NavLink>
-                      </Popup>
+                          <NavLink
+                            to={`/${user.id}/edit`}
+                            className={`${styles.header__action} ${styles.header__action_type_edit}`}
+                            onClick={handlePopupClose}
+                          >
+                            Редактировать профиль
+                          </NavLink>
+                          <NavLink
+                            to="/login"
+                            className={`${styles.header__action} ${styles.header__action_type_logout}`}
+                            onClick={handleLogout}
+                          >
+                            Выйти
+                          </NavLink>
+                        </Popup>
+                      )}
                     </div>
                   </li>
                 </ul>

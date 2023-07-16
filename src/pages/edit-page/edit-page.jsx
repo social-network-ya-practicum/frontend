@@ -13,12 +13,7 @@ const EditPage = observer(() => {
 
   const handleSubmitAvatar = useCallback(
     (photo, closeEditMode) => {
-      const data = {
-        id: user.id,
-        photo,
-      };
-
-      patchUserAvatar(data).then((isSuccess) => {
+      patchUserAvatar({ ...user, photo }).then((isSuccess) => {
         if (isSuccess) closeEditMode();
       });
     },

@@ -2,12 +2,12 @@
 
 ### Настройка git для командной работы
 
-- Для настройки, чтобы чекаут был в стиле системы необходимо выполнить:
-  для windows: git config --global core.autocrlf true
-  для Linux, macOS: git config --global core.autocrlf input
+- Для настройки, чтобы чекаут был в стиле системы необходимо выполнить:  
+  для windows: **git config --global core.autocrlf true**  
+  для Linux, macOS: **git config --global core.autocrlf input**
 
-- Для настройки, чтобы коммит был в стиле unix систем необходимо выполнить:
-  git config --global core.eol lf
+- Для настройки, чтобы коммит был в стиле unix систем необходимо выполнить:  
+  **git config --global core.eol lf**
 
 ### Наименования файлов и папок
 

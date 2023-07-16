@@ -55,6 +55,7 @@ const InfoTextrea = ({
         id={id}
         className={cnTextarea}
         ref={textareaRef}
+        spellCheck="true"
       />
       {error && <span className={styles.textarea__error}>{error}</span>}
     </label>

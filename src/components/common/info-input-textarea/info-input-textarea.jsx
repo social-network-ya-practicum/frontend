@@ -1,12 +1,11 @@
-import { memo, useId } from 'react';
+import { memo, useId, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import styles from './info-input.module.scss';
+import styles from './info-input-textarea.module.scss';
 
-const InfoInput = memo(
+const InfoInputTextarea = memo(
   ({
     title,
-    type,
     name,
     value,
     onChange,
@@ -16,7 +15,14 @@ const InfoInput = memo(
     validator,
     mix,
   }) => {
+    const textareaRef = useRef(null);
     const id = useId();
+
+    useLayoutEffect(() => {
+      const el = textareaRef.current;
+      el.style.height = 'auto';
+      el.style.height = `${el.scrollHeight}px`;
+    }, [value]);
 
     const onFocus = () => {
       if (!validator) return;
@@ -32,52 +38,41 @@ const InfoInput = memo(
       setError((prev) => ({ ...prev, [name]: '' }));
     };
 
-    const cnRoot = clsx(styles.infoInput, mix);
-    const cnInput = clsx(styles.infoInput__input, {
-      [styles.infoInput__input_type_error]: error,
+    const cnRoot = clsx(styles.input, mix);
+    const cnInput = clsx(styles.input__textarea, {
+      [styles.input__textarea_type_error]: error,
     });
 
     return (
       <label className={cnRoot} htmlFor={id}>
-        <div className={styles.infoInput__wrapper}>
-          <span className={styles.infoInput__title}>{title}</span>
+        <div className={styles.input__wrapper}>
+          <span className={styles.input__title}>{title}</span>
 
-          <input
-            className={cnInput}
-            type={type}
+          <textarea
             name={name}
             value={value}
             onChange={onChange}
-            readOnly={!onChange}
-            autoComplete="on"
             placeholder={placeholder}
-            id={id}
             onFocus={onFocus}
             onBlur={onBlur}
-            spellCheck="false"
+            id={id}
+            className={cnInput}
+            ref={textareaRef}
+            spellCheck="true"
+            rows={1}
           />
         </div>
-        {error && <span className={styles.infoInput__error}>{error}</span>}
+        {error && <span className={styles.input__error}>{error}</span>}
       </label>
     );
   }
 );
 
-export default InfoInput;
+export default InfoInputTextarea;
 
-InfoInput.propTypes = {
+InfoInputTextarea.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['email', 'text']).isRequired,
-  name: PropTypes.oneOf([
-    'last_name',
-    'first_name',
-    'middle_name',
-    'job_title',
-    'email',
-    'personal_email',
-    'corporate_phone_number',
-    'personal_phone_number',
-  ]).isRequired,
+  name: PropTypes.oneOf(['job_title', 'department']).isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
@@ -87,7 +82,7 @@ InfoInput.propTypes = {
   mix: PropTypes.string,
 };
 
-InfoInput.defaultProps = {
+InfoInputTextarea.defaultProps = {
   placeholder: undefined,
   error: '',
   mix: undefined,
