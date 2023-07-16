@@ -67,6 +67,12 @@
     display: none;
   }
 
+  &__prewievBox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   &__prewiev {
     position: relative;
   }
@@ -91,6 +97,12 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  &__fileList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   &__stuff {

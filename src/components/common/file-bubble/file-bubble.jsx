@@ -2,9 +2,17 @@ import PropTypes from 'prop-types';
 import styles from './file-bubble.module.scss';
 
 function FileBubble({ name, handleDelete }) {
+  const lastDot = name.lastIndexOf('.');
+  const fileName = name.slice(0, lastDot);
+  const fileExtension = name.slice(lastDot + 1);
+
   return (
     <div className={styles.fileBubble}>
-      <p className={styles.fileBubble__name}>{name}</p>
+      <div className={styles.fileBubble__nameBox}>
+        <p className={styles.fileBubble__name}>{fileName}</p>
+        <span className={styles.fileBubble__span}>.{fileExtension}</span>
+      </div>
+
       <button
         className={styles.fileBubble__btn}
         type="button"
@@ -24,5 +32,5 @@ FileBubble.propTypes = {
 };
 
 FileBubble.defaultProps = {
-  name: 'Тестовое название файла',
+  name: 'Тестовое название файла.doc',
 };

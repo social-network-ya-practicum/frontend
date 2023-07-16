@@ -29,7 +29,7 @@ const PostInput = observer(() => {
     <FileBubble
       name={file.file_info.name}
       key={file.id}
-      handleDelete={() => handleCancelFile}
+      handleDelete={() => handleCancelFile(file.id)}
     />
   ));
 
@@ -49,7 +49,6 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
-    console.log(fileImg);
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
@@ -70,8 +69,6 @@ const PostInput = observer(() => {
           },
         ]);
       }
-      console.log(images);
-      console.log(files);
     };
   };
 
@@ -131,7 +128,8 @@ const PostInput = observer(() => {
         activeInput &&
         !event.target.closest('#post-input') &&
         !value &&
-        !images[0]
+        !images[0] &&
+        files.length === 0
       ) {
         hanldeCloseActiveInput();
       }
@@ -141,7 +139,7 @@ const PostInput = observer(() => {
     return () => {
       document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput, value, images]);
+  }, [activeInput, value, images, files]);
 
   return (
     <div id="post-input" className={styles.postInput}>
@@ -197,26 +195,30 @@ const PostInput = observer(() => {
 
         {activeInput && (
           <>
-            {/* превью картинки */}
-            {images[0] && (
-              <div className={styles.postInput__prewiev}>
-                <img
-                  className={styles.postInput__img}
-                  src={images[0].image_link}
-                  alt="превью"
-                />
-                <button
-                  className={styles.postInput__canselBtn}
-                  type="button"
-                  onClick={handleCancelImg}
-                >
-                  {' '}
-                </button>
-              </div>
-            )}
+            <div className={styles.postInput__prewievBox}>
+              {/* превью картинки */}
+              {images[0] && (
+                <div className={styles.postInput__prewiev}>
+                  <img
+                    className={styles.postInput__img}
+                    src={images[0].image_link}
+                    alt="превью"
+                  />
+                  <button
+                    className={styles.postInput__canselBtn}
+                    type="button"
+                    onClick={handleCancelImg}
+                  >
+                    {' '}
+                  </button>
+                </div>
+              )}
 
-            {/* превью файлов */}
-            {files.length !== 0 && <ul>{fileList}</ul>}
+              {/* превью файлов */}
+              {files.length !== 0 && (
+                <ul className={styles.postInput__fileList}>{fileList}</ul>
+              )}
+            </div>
 
             <div className={styles.postInput__stuff}>
               <div className={styles.postInput__fileBox}>
