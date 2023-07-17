@@ -9,7 +9,6 @@ import RoundIcon from '../common/round-icon/round-icon';
 import styles from './header.module.scss';
 import defaultAvatar from '../../image/default-avatar.svg';
 import Popup from '../common/popup/popup';
-import Notify from './image/notification.svg';
 import { useStore } from '../../contexts/RootStoreContext';
 
 const Header = observer(({ mix, type }) => {
@@ -91,12 +90,6 @@ const Header = observer(({ mix, type }) => {
                     >
                       Группы
                     </NavLink>
-                  </li>
-                  <li>
-                    <div className={styles.header__notify}>
-                      <img src={Notify} alt="Уведомление" />
-                      <div className={styles.header__notifyCount}>3</div>
-                    </div>
                   </li>
                   <li>
                     <div className={styles.header__container}>
