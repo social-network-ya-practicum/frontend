@@ -139,6 +139,32 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'deleteUser'))
       .catch((err) => this._handleError(err, 'deleteUser'));
 
+  /** Удаляем комментарий */
+  deleteComment = (postID, commentID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}/`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'deleteComment'))
+      .catch((err) => this._handleError(err, 'deleteComment'));
+
+  /** Удаляем like комментарию */
+  deleteCommentLike = (postID, commentID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}/like/`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'deleteCommentLike'))
+      .catch((err) => this._handleError(err, 'deleteCommentLike'));
+
   /**
    * DELETE - запросы конец
    */
@@ -279,7 +305,6 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'getComment'))
       .catch((err) => this._handleError(err, 'getComment'));
 
-      
   /**
    * GET - запросы конец
    */
@@ -356,6 +381,33 @@ class MainApi {
     })
       .then((res) => this._handleResponse(res, 'patchUserPost'))
       .catch((err) => this._handleError(err, 'patchUserPost'));
+
+  /** Редактируем комментарий */
+  patchComment = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.commentID}/`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: {
+          email: data.email,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          middle_name: data.middleName,
+          job_title: data.jobTitle,
+          personal_email: data.personalEmail,
+          corporate_phone_number: data.corporatePhoneNumber,
+          personal_phone_number: data.personalPhoneNumber,
+          bio: data.bio,
+        },
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'patchComment'))
+      .catch((err) => this._handleError(err, 'patchComment'));
 
   /**
    * PATCH - запросы конец
@@ -439,6 +491,60 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'setNewPass'))
       .catch((err) => this._handleError(err, 'setNewPass'));
 
+  /** Создаем комментарий */
+  postComment = (data) =>
+    fetch(`${this._url}/posts/${data.id}/comments/`, {
+      method: 'POST',
+      credentials: 'includes',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: {
+          email: data.email,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          middle_name: data.middleName,
+          job_title: data.jobTitle,
+          personal_email: data.personalEmail,
+          corporate_phone_number: data.corporatePhoneNumber,
+          personal_phone_number: data.personalPhoneNumber,
+          bio: data.bio,
+        },
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postComment'))
+      .catch((err) => this._handleError(err, 'postComment'));
+
+  /** Ставим like комментарию */
+  postCommentLike = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.commentID}/like`, {
+      method: 'POST',
+      credentials: 'includes',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: {
+          email: data.email,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          middle_name: data.middleName,
+          job_title: data.jobTitle,
+          personal_email: data.personalEmail,
+          corporate_phone_number: data.corporatePhoneNumber,
+          personal_phone_number: data.personalPhoneNumber,
+          bio: data.bio,
+        },
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postCommentLike'))
+      .catch((err) => this._handleError(err, 'postCommentLike'));
+
   /**
    * POST - запросы конец
    */
@@ -474,6 +580,33 @@ class MainApi {
     })
       .then((res) => this._handleResponse(res, 'putUserPost'))
       .catch((err) => this._handleError(err, 'putUserPost'));
+
+  /** Редактируем комментарий */
+  putComment = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.commentID}/`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: {
+          email: data.email,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          middle_name: data.middleName,
+          job_title: data.jobTitle,
+          personal_email: data.personalEmail,
+          corporate_phone_number: data.corporatePhoneNumber,
+          personal_phone_number: data.personalPhoneNumber,
+          bio: data.bio,
+        },
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'putComment'))
+      .catch((err) => this._handleError(err, 'putComment'));
 
   /**
    * PUT - запросы конец
