@@ -279,6 +279,7 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'getComment'))
       .catch((err) => this._handleError(err, 'getComment'));
 
+      
   /**
    * GET - запросы конец
    */
