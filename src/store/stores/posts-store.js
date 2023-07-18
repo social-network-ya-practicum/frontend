@@ -132,6 +132,136 @@ class PostsStore {
       .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
+
+  getComments = (postID, limit = 0, offset = 0) => {
+    let paramsUrl = '';
+    if (limit || offset) {
+      paramsUrl = '?';
+      paramsUrl += limit ? `limit=${limit}` : '';
+      paramsUrl += offset ? `offset=${offset}` : '';
+    }
+    this.setIsLoading(true);
+    api
+      .getCommentsList(postID, paramsUrl)
+      .then((data) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              return { ...post, comments: data.results };
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
+
+  addComment = (comment, postID) => {
+    this.setIsLoading(true);
+    api
+      .postComment({ ...comment, postID })
+      .then((newComment) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              if (post.comments) {
+                post.comments?.unshift(newComment);
+              } else {
+                return { ...post, comments: [newComment] };
+              }
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
+
+  deleteComment = (commentID, postID) => {
+    this.setIsLoading(true);
+    api
+      .deleteComment(commentID, postID)
+      .then((deletedComment) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              post.comments.filter((c) => c.id !== deletedComment.id);
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
+
+  editComment = (comment, postID) => {
+    this.setIsLoading(true);
+    api
+      .patchComment({ comment, postID })
+      .then((updatedComment) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              const updatedComments = post.comments.map((c) => {
+                if (c.id === updatedComment.id) {
+                  return updatedComment;
+                }
+                return c;
+              });
+              return { ...post, comments: updatedComments };
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
+
+  likeComment = (comment, postID) => {
+    this.setIsLoading(true);
+    api
+      .postCommentLike(comment, postID)
+      .then((likedComment) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              const updatedComments = post.comments.map((c) => {
+                if (c.id === likedComment.id) {
+                  return likedComment;
+                }
+                return c;
+              });
+              return { ...post, comments: updatedComments };
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
+
+  dislikeComment = (commentID, postID) => {
+    this.setIsLoading(true);
+    api
+      .deleteCommentLike(commentID, postID)
+      .then((dislikedComment) => {
+        runInAction(() => {
+          this.posts = this.posts.map((post) => {
+            if (post.id === postID) {
+              post.comments.filter((c) => c.id !== dislikedComment.id);
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(this.setIsLoading(false));
+  };
 }
 
 export default new PostsStore();

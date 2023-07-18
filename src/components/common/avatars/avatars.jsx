@@ -9,16 +9,23 @@ import Avatar6 from './image/AvatarsDefault6.svg';
 import Avatar7 from './image/AvatarsDefault7.svg';
 import Avatar8 from './image/AvatarsDefault8.svg';
 
-
 function Avatars() {
-
-  const avatars = [ Avatar1, Avatar2, Avatar3, Avatar4, Avatar5, Avatar6, Avatar7, Avatar8 ];
+  const avatars = [
+    Avatar1,
+    Avatar2,
+    Avatar3,
+    Avatar4,
+    Avatar5,
+    Avatar6,
+    Avatar7,
+    Avatar8,
+  ];
 
   const avatarsElement = avatars.map((avatar) => (
     <li key={avatars.indexOf(avatar)}>
-      <img src={avatar} alt="Аватар" className={styles.avatars__img}/>
+      <img src={avatar} alt="Аватар" className={styles.avatars__img} />
     </li>
-  ))
+  ));
 
   return (
     <div className={styles.avatars}>
