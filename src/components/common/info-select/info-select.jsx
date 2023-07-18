@@ -65,26 +65,27 @@ const InfoSelect = memo(({ mix, name, optionsList, value, onChange }) => {
         variant="info-select"
       >
         {optionsList.map((option) => (
-          <label
+          <li
             key={option}
             className={styles.select__item}
             ref={(el) => {
               if (el) itemsRef.current[option] = el;
             }}
-            htmlFor={option}
           >
-            <input
-              className={styles.select__radio}
-              type="radio"
-              name={name}
-              id={option}
-              value={option}
-              checked={value === option}
-              onChange={onChange}
-              onClick={close}
-            />
-            <span className={styles.select__text}>{option}</span>
-          </label>
+            <label className={styles.select__label} htmlFor={option}>
+              <input
+                className={styles.select__radio}
+                type="radio"
+                name={name}
+                id={option}
+                value={option}
+                checked={value === option}
+                onChange={onChange}
+                onClick={close}
+              />
+              <span className={styles.select__text}>{option}</span>
+            </label>
+          </li>
         ))}
         <Arrow
           className={cnArrow}

@@ -18,15 +18,22 @@ const ScrollableContainer = forwardRef(
     const [scrollRatio, setScrollRatio] = useState(0);
     const [isMouseDown, setIsMouseDown] = useState(false);
     const [startScrollY, setStartScrollY] = useState(0);
+    const [isOverflow, setIsOverflow] = useState(true);
 
     useLayoutEffect(() => {
       const scrollableElem = scrollableAreaRef.current;
       const scroll = scrollRef.current;
       const thumb = thumbRef.current;
 
+      const scrollHeightReal = scrollableElem.scrollHeight;
+      const clientHeightReal = scrollableElem.clientHeight;
+
+      if (scrollHeightReal <= clientHeightReal) {
+        setIsOverflow(false);
+      }
+
       const getScrollRatio = () => {
-        const maxRealScroll =
-          scrollableElem.scrollHeight - scrollableElem.clientHeight;
+        const maxRealScroll = scrollHeightReal - clientHeightReal;
         const maxCustomScroll = scroll.clientHeight - thumb.clientHeight;
         const ratio = maxCustomScroll / maxRealScroll;
         return ratio;
@@ -115,13 +122,14 @@ const ScrollableContainer = forwardRef(
 
     return (
       <div className={cnRoot} ref={ref}>
-        <div
+        <ul
           className={cnScrollableArea}
           ref={scrollableAreaRef}
           onScroll={handleScroll}
         >
           {children}
-
+        </ul>
+        {isOverflow && (
           <div
             className={cnScroll}
             ref={scrollRef}
@@ -130,7 +138,7 @@ const ScrollableContainer = forwardRef(
           >
             <div className={cnScrollThumb} ref={thumbRef} />
           </div>
-        </div>
+        )}
       </div>
     );
   }
