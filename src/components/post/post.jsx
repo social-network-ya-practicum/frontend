@@ -9,6 +9,7 @@ import { handlerDataFormat } from '../../utils/data-format';
 import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/default-avatar.svg';
 import Comments from '../comments/comments';
+import FileView from '../common/file-view/file-view';
 
 const Post = observer(
   ({
@@ -116,6 +117,14 @@ const Post = observer(
 
         {!isPostChanging ? (
           <>
+            <ul className={styles.post__fileList}>
+              <li className={styles.post__fileItem}>
+                <FileView inPost />
+              </li>
+              <li className={styles.post__fileItem}>
+                <FileView inPost />
+              </li>
+            </ul>
             <div className={styles.post__container}>
               <div className={styles.post__likeContainer}>
                 <button

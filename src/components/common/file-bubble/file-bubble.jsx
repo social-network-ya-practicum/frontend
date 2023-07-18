@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
 import styles from './file-bubble.module.scss';
+import FileView from '../file-view/file-view';
 
 function FileBubble({ name, handleDelete }) {
-  const lastDot = name.lastIndexOf('.');
-  const fileName = name.slice(0, lastDot);
-  const fileExtension = name.slice(lastDot + 1);
+  // const lastDot = name.lastIndexOf('.');
+  // const fileName = name.slice(0, lastDot);
+  // const fileExtension = name.slice(lastDot + 1);
 
   return (
     <div className={styles.fileBubble}>
-      <div className={styles.fileBubble__nameBox}>
+      {/* <div className={styles.fileBubble__nameBox}>
         <p className={styles.fileBubble__name}>{fileName}</p>
         <span className={styles.fileBubble__span}>.{fileExtension}</span>
-      </div>
+      </div> */}
+
+      <FileView name={name} />
 
       <button
         className={styles.fileBubble__btn}
