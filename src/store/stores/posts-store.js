@@ -133,16 +133,14 @@ class PostsStore {
       .finally(() => this.setIsLoading(false));
   };
 
-  getComments = (postID, limit = 0, offset = 0) => {
-    let paramsUrl = '';
-    if (limit || offset) {
-      paramsUrl = '?';
-      paramsUrl += limit ? `limit=${limit}` : '';
-      paramsUrl += offset ? `offset=${offset}` : '';
-    }
+  getComments = (postID, params) => {
+    const queryString = params
+      ? `?${new URLSearchParams(params).toString()}`
+      : '';
+
     this.setIsLoading(true);
     api
-      .getCommentsList(postID, paramsUrl)
+      .getCommentsList(postID, queryString)
       .then((data) => {
         runInAction(() => {
           this.posts = this.posts.map((post) => {
@@ -161,19 +159,8 @@ class PostsStore {
     this.setIsLoading(true);
     api
       .postComment({ ...comment, postID })
-      .then((newComment) => {
-        runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              if (post.comments) {
-                post.comments?.unshift(newComment);
-              } else {
-                return { ...post, comments: [newComment] };
-              }
-            }
-            return post;
-          });
-        });
+      .then(() => {
+        this.getComments(postID);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -183,11 +170,14 @@ class PostsStore {
     this.setIsLoading(true);
     api
       .deleteComment(commentID, postID)
-      .then((deletedComment) => {
+      .then(() => {
         runInAction(() => {
           this.posts = this.posts.map((post) => {
             if (post.id === postID) {
-              post.comments.filter((c) => c.id !== deletedComment.id);
+              const updatedComments = post.comments.filter(
+                (c) => c.id !== commentID
+              );
+              return { ...post, comments: updatedComments };
             }
             return post;
           });
@@ -200,7 +190,7 @@ class PostsStore {
   editComment = (comment, postID) => {
     this.setIsLoading(true);
     api
-      .patchComment({ comment, postID })
+      .patchComment({ ...comment, postID })
       .then((updatedComment) => {
         runInAction(() => {
           this.posts = this.posts.map((post) => {
@@ -224,7 +214,7 @@ class PostsStore {
   likeComment = (comment, postID) => {
     this.setIsLoading(true);
     api
-      .postCommentLike(comment, postID)
+      .postCommentLike({ ...comment, postID })
       .then((likedComment) => {
         runInAction(() => {
           this.posts = this.posts.map((post) => {
@@ -253,7 +243,13 @@ class PostsStore {
         runInAction(() => {
           this.posts = this.posts.map((post) => {
             if (post.id === postID) {
-              post.comments.filter((c) => c.id !== dislikedComment.id);
+              const updatedComments = post.comments.map((c) => {
+                if (c.id === dislikedComment.id) {
+                  return dislikedComment;
+                }
+                return c;
+              });
+              return { ...post, comments: updatedComments };
             }
             return post;
           });

@@ -282,7 +282,7 @@ class MainApi {
       .catch((err) => this._handleError(err, 'getUserPostsList'));
 
   /** Получаем список комментариев */
-  getCommentsList = (postID, params = '') => {
+  getCommentsList = (postID, params = '') =>
     fetch(`${this._url}/posts/${postID}/comments${params}`, {
       credentials: 'include',
       headers: {
@@ -292,7 +292,6 @@ class MainApi {
     })
       .then((res) => this._handleResponse(res, 'getCommentsList'))
       .catch((err) => this._handleError(err, 'getCommentsList'));
-  };
 
   /** Получаем комментарий */
   getComment = (commentID, postID) =>
