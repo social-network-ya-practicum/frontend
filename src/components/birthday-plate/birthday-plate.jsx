@@ -19,7 +19,7 @@ function BirthdayPlate({ id, data, mix }) {
   }
 
   return (
-    <section className={cnBirthdayPlate}>
+    <div className={cnBirthdayPlate}>
       <div className={styles.birthdayPlate__header}>
         <h2 className={styles.birthdayPlate__title}>Дни рождения</h2>
       </div>
@@ -58,7 +58,7 @@ function BirthdayPlate({ id, data, mix }) {
           </li>
         )}
       </ul>
-    </section>
+    </div>
   );
 }
 
