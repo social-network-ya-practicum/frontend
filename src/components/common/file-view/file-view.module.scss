@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: min-content min-content;
   max-width: 436px;
+  text-decoration: none;
 
   &__name {
     color: var.$text_color_secondary3;
