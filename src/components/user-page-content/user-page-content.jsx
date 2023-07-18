@@ -18,6 +18,7 @@ function UserPageContent({ posts, user, ownUser, isOwn }) {
       pubdate={post.pub_date}
       images={post.images}
       likecount={post.like_count}
+      postslikes={post.likes}
       currentUser={ownUser}
     />
   ));

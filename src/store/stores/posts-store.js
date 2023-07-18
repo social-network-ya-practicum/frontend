@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
 import errorStore from './error-store';
@@ -100,12 +101,26 @@ class PostsStore {
     api
       .postLike(post)
       .then((likededPost) => {
-        const postInd = this.posts.findIndex((i) => i.id === post.id);
+        const { like_count, likes } = likededPost;
+        const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
+        const indexInUserPosts = this.userPosts.findIndex(
+          (i) => i.id === post.id
+        );
         runInAction(() => {
-          this.posts.splice(postInd, 1, {
-            ...likededPost,
-            images: post.images,
-          });
+          if (indexInPosts >= 0) {
+            this.posts.splice(indexInPosts, 1, {
+              ...post,
+              like_count,
+              likes,
+            });
+          }
+          if (indexInUserPosts >= 0) {
+            this.userPosts.splice(indexInUserPosts, 1, {
+              ...post,
+              like_count,
+              likes,
+            });
+          }
         });
       })
       .catch((err) => addError(err))
@@ -117,12 +132,26 @@ class PostsStore {
     api
       .deleteLike(post)
       .then((dislikededPost) => {
-        const postInd = this.posts.findIndex((i) => i.id === post.id);
+        const { like_count, likes } = dislikededPost;
+        const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
+        const indexInUserPosts = this.userPosts.findIndex(
+          (i) => i.id === post.id
+        );
         runInAction(() => {
-          this.posts.splice(postInd, 1, {
-            ...dislikededPost,
-            images: post.images,
-          });
+          if (indexInPosts >= 0) {
+            this.posts.splice(indexInPosts, 1, {
+              ...post,
+              like_count,
+              likes,
+            });
+          }
+          if (indexInUserPosts >= 0) {
+            this.userPosts.splice(indexInUserPosts, 1, {
+              ...post,
+              like_count,
+              likes,
+            });
+          }
         });
       })
       .catch((err) => addError(err))
