@@ -45,7 +45,19 @@ const MainPageContent = observer(() => {
     <div className={styles.mainPageContent}>
       <div>
         <PostInput />
-        <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
+        <div>
+          <div className={styles.mainPageContent__btns}>
+            <button
+              className={`${styles.mainPageContent__btn} ${styles.mainPageContent__btn_active}`}
+            >
+              Лента
+            </button>
+            <button className={styles.mainPageContent__btn}>
+              Новости компании
+            </button>
+          </div>
+          <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
+        </div>
       </div>
       <BirthdayPlate data={birthDays} id={user.id} />
     </div>
