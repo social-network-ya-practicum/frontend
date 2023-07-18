@@ -1,0 +1,44 @@
+@use '../../../variables' as var;
+
+@mixin common-font-style {
+  font-family: var.$font-family-default;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 120%;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  width: 357px;
+  border-radius: 16px;
+  background: var.$bg_color_secondary;
+  padding: 28px 20px 32px;
+  cursor: default;
+
+  &__title {
+    @include common-font-style;
+    font-weight: 700;
+  }
+
+  &__imageWrapper {
+    display: flex;
+    width: 100%;
+    height: 139px;
+    border-radius: 16px;
+    margin: 24px 0 16px;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__paragraph {
+    @include common-font-style;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+}
