@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import BirthdayPlate from '../../components/birthday-plate/birthday-plate';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -9,10 +9,15 @@ import Post from '../../components/post/post';
 // import { getCookie } from '../../utils/utils';
 
 const MainPageContent = observer(() => {
+  const [filter, setFilter] = useState(null);
   const { postsStore, userStore, birthdaysStore } = useStore();
   const { posts, getPosts } = postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
+
+  const filteredPosts = filter
+    ? posts.filter((item) => item.group === filter)
+    : posts;
 
   useEffect(() => {
     // console.log(getCookie(TOKEN_NAME));
@@ -24,7 +29,7 @@ const MainPageContent = observer(() => {
   //   console.log(post)
   // }
 
-  const postsElements = posts.map((post) => (
+  const postsElements = filteredPosts.map((post) => (
     <Post
       {...post}
       post={post}
@@ -49,10 +54,14 @@ const MainPageContent = observer(() => {
           <div className={styles.mainPageContent__btns}>
             <button
               className={`${styles.mainPageContent__btn} ${styles.mainPageContent__btn_active}`}
+              onClick={() => setFilter(null)}
             >
               Лента
             </button>
-            <button className={styles.mainPageContent__btn}>
+            <button
+              className={styles.mainPageContent__btn}
+              onClick={() => setFilter(1)}
+            >
               Новости компании
             </button>
           </div>

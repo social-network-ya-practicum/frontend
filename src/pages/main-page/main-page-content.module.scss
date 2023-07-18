@@ -4,7 +4,7 @@
   display: grid;
   gap: 32px;
   grid-template-columns: minmax(max-content, 552px) minmax(max-content, 357px);
-  min-height: 90vh;
+  min-height: 83vh;
 
   &__posts {
     margin: 20px 0 0 0;
@@ -27,7 +27,7 @@
     line-height: 120%;
 
     padding: 8px 12px;
-    border-radius: 16px;
+    border-radius: 18px;
     background-color: transparent;
     position: relative;
     background: linear-gradient(var.$color_ffffff, var.$color_ffffff)
