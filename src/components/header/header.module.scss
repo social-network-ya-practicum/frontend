@@ -90,39 +90,12 @@
     transition: border var.$anim-duration-default;
 
     &:hover {
-      border: 1px solid var.$color_d7e9fa;
+      border: 1px solid var.$btn_color_hover;
     }
 
     &_active {
-      border: 1px solid var.$color_d7e9fa;
+      border: 1px solid var.$btn_color_hover;
     }
-  }
-
-  &__notify {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 48px 0 24px;
-    height: 35px;
-  }
-
-  &__notifyCount {
-    position: absolute;
-    bottom: 14.75px;
-    right: -7px;
-    display: flex;
-    width: 17px;
-    height: 17px;
-    padding: 4px 5px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    background: var.$bg_color_mistake;
-    color: var.$text_color_light;
-    font-size: 6px;
-    font-style: normal;
-    font-weight: 700;
   }
 
   &__container {
@@ -130,6 +103,7 @@
     display: flex;
     gap: 16px;
     align-items: center;
+    margin-left: 24px;
   }
 
   &__user {
