@@ -10,6 +10,7 @@ import Post from '../../components/post/post';
 
 const MainPageContent = observer(() => {
   const [filter, setFilter] = useState(null);
+  const [choosenButton, setChoosenButton] = useState(1);
   const { postsStore, userStore, birthdaysStore } = useStore();
   const { posts, getPosts } = postsStore;
   const { user } = userStore;
@@ -25,9 +26,14 @@ const MainPageContent = observer(() => {
     getBirthdays();
   }, [getPosts, getBirthdays]);
 
-  // function handlePostLike(post) {
-  //   console.log(post)
-  // }
+  function handleButtonClick(button) {
+    setChoosenButton(button);
+    if (button === 2) {
+      setFilter(1);
+    } else {
+      setFilter(null);
+    }
+  }
 
   const postsElements = filteredPosts.map((post) => (
     <Post
@@ -53,14 +59,19 @@ const MainPageContent = observer(() => {
         <div>
           <div className={styles.mainPageContent__btns}>
             <button
-              className={`${styles.mainPageContent__btn} ${styles.mainPageContent__btn_active}`}
-              onClick={() => setFilter(null)}
+              className={`${styles.mainPageContent__btn} ${
+                choosenButton === 1 ? styles.mainPageContent__btn_active : ''
+              }`}
+              // }
+              onClick={() => handleButtonClick(1)}
             >
               Лента
             </button>
             <button
-              className={styles.mainPageContent__btn}
-              onClick={() => setFilter(1)}
+              className={`${styles.mainPageContent__btn} ${
+                choosenButton === 2 ? styles.mainPageContent__btn_active : ''
+              }`}
+              onClick={() => handleButtonClick(2)}
             >
               Новости компании
             </button>
