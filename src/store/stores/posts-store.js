@@ -150,15 +150,17 @@ class PostsStore {
         );
         console.log('like-indexInUserPosts', indexInUserPosts);
         runInAction(() => {
-          if (indexInPosts >= 0) {
-            this.posts.splice(indexInPosts, 1, {
+          if (indexInUserPosts >= 0) {
+            console.log('indexInUserPosts-splice');
+            this.userPosts.splice(indexInUserPosts, 1, {
               ...post,
               like_count,
               likes,
             });
           }
-          if (indexInUserPosts >= 0) {
-            this.userPosts.splice(indexInUserPosts, 1, {
+          if (indexInPosts >= 0) {
+            console.log('indexInPosts-splice');
+            this.posts.splice(indexInPosts, 1, {
               ...post,
               like_count,
               likes,
@@ -184,15 +186,17 @@ class PostsStore {
         );
         console.log('dislike-indexInUserPosts', indexInUserPosts);
         runInAction(() => {
-          if (indexInPosts >= 0) {
-            this.posts.splice(indexInPosts, 1, {
+          if (indexInUserPosts >= 0) {
+            console.log('indexInUserPosts-splice');
+            this.userPosts.splice(indexInUserPosts, 1, {
               ...post,
               like_count,
               likes,
             });
           }
-          if (indexInUserPosts >= 0) {
-            this.userPosts.splice(indexInUserPosts, 1, {
+          if (indexInPosts >= 0) {
+            console.log('indexInPosts-splice');
+            this.posts.splice(indexInPosts, 1, {
               ...post,
               like_count,
               likes,
