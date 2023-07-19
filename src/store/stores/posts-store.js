@@ -141,6 +141,8 @@ class PostsStore {
     api
       .postLike(post)
       .then((likededPost) => {
+        const a = 'test-add';
+        console.log(a);
         const { like_count, likes } = likededPost;
         const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
         const indexInUserPosts = this.userPosts.findIndex(
@@ -172,6 +174,8 @@ class PostsStore {
     api
       .deleteLike(post)
       .then((dislikededPost) => {
+        const a = 'test-delete';
+        console.log(a);
         const { like_count, likes } = dislikededPost;
         const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
         const indexInUserPosts = this.userPosts.findIndex(
