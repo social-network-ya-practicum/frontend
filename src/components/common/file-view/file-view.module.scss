@@ -17,8 +17,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: fit-content;
+    width: fit-content;
     position: relative;
+    max-width: 400px;
 
     &::before {
       content: url(./icons/doc.svg);
@@ -28,11 +29,19 @@
       vertical-align: sub;
     }
 
+    // &:hover{
+    //   color: var.$text_color_default;
+    // }
+
     &_notPost {
       color: var.$text_color_secondary2;
       &::before {
         content: url(./icons/doc_inpost.svg);
       }
+
+      // &:hover{
+      //   color: var.$text_color_secondary2;
+      // }
     }
   }
 
@@ -49,5 +58,9 @@
     &_notPost {
       color: var.$text_color_secondary2;
     }
+
+    // &:hover{
+    //   color: var.$text_color_default;
+    // }
   }
 }

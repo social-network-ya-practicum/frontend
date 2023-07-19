@@ -69,6 +69,7 @@ const PostInput = observer(() => {
           },
         ]);
       }
+      // console.log(files)
     };
   };
 
@@ -106,15 +107,17 @@ const PostInput = observer(() => {
 
   function handleCancelImg() {
     setImages([]);
+    setFiles([]);
   }
 
   function handleAddPost() {
-    // console.log(images);
+    // console.log(files);
 
     addPost({
       text: value,
       author: user,
       images: images === [] ? [] : images,
+      files: files === [] ? [] : files,
     });
     setValue('');
     handleCancelImg();

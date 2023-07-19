@@ -363,6 +363,7 @@ class MainApi {
           bio: data.bio,
         },
         images: data.images,
+        files: data.files,
         group: data.group,
       }),
     })

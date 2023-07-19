@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import RoundIcon from '../round-icon/round-icon';
 import styles from './comment.module.scss';
@@ -6,12 +6,10 @@ import defaultAvatar from '../../../image/default-avatar.svg';
 import Popup from '../popup/popup';
 import Textarea from '../textarea/textarea';
 
-function Comment() {
+function Comment({ author, text }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCommentChanging, setIsCommentChanging] = useState(false);
-  const [value, setValue] = useState(
-    'Отлично! Поздравляю Вас! Вы столько трудились, такой сложный заказчик вам попался!'
-  );
+  const [value, setValue] = useState(text);
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
@@ -39,7 +37,11 @@ function Comment() {
   return (
     <li className={styles.comment}>
       <div className={styles.comment__avatar}>
-        <RoundIcon size="small" src={defaultAvatar} alt="аватар" />
+        <RoundIcon
+          size="small"
+          src={defaultAvatar || author.photo}
+          alt="аватар"
+        />
       </div>
       <div className={styles.comment__box}>
         {!isCommentChanging && (
@@ -47,7 +49,9 @@ function Comment() {
             {' '}
           </button>
         )}
-        <p className={styles.comment__owner}>имя фамилия</p>
+        <p className={styles.comment__owner}>
+          {author.first_name} {author.last_name}
+        </p>
 
         {!isCommentChanging ? (
           <p className={styles.comment__text}>{value}</p>
@@ -99,18 +103,24 @@ function Comment() {
 
 export default Comment;
 
-// ProfileBlock.propTypes = {
-//   role: PropTypes.string,
-//   avatar: PropTypes.string,
-//   firstName: PropTypes.string,
-//   lastName: PropTypes.string,
-//   postsCount: PropTypes.number,
-// };
+Comment.propTypes = {
+  // id: PropTypes.number,
+  text: PropTypes.string,
+  author: PropTypes.shape({
+    id: PropTypes.number,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    photo: PropTypes.string,
+  }),
+};
 
-// ProfileBlock.defaultProps = {
-//   role: 'Бухгалтер',
-//   avatar: '',
-//   firstName: 'Юлия',
-//   lastName: 'Леденцова',
-//   postsCount: 8,
-// };
+Comment.defaultProps = {
+  // id: 3,
+  text: 'текст коммента',
+  author: {
+    id: 16,
+    first_name: 'Ларри',
+    last_name: 'Трейнор',
+    photo: null,
+  },
+};

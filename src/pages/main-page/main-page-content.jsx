@@ -45,8 +45,10 @@ const MainPageContent = observer(() => {
       author={post.author}
       pubdate={post.pub_date}
       images={post.images}
+      files={post.files}
       likecount={post.like_count}
       postslikes={post.likes}
+      comments={post.comments}
       currentUser={user}
       // onPostLike={handlePostLike}
     />
