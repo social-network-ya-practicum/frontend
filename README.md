@@ -29,6 +29,7 @@ npm run start
 ### Стэк
 
 - React;
+- MobX;
 - React-router;
 - Storybook;
 - БЭМ;
