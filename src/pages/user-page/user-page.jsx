@@ -7,9 +7,10 @@ import UserPageContent from '../../components/user-page-content/user-page-conten
 const UserPage = observer(() => {
   const { userStore, postsStore } = useStore();
   const { user } = userStore;
-  const { userPosts, getPostsUser, posts } = postsStore;
+  const { userPosts, getPostsUser, posts, isLoading } = postsStore;
   console.log('UserPage-userPosts', userPosts);
   console.log('UserPage-posts', posts);
+  console.log('UserPage-isLoading', isLoading);
 
   useEffect(() => {
     getPostsUser(user.id);
