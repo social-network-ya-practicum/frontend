@@ -141,13 +141,14 @@ class PostsStore {
     api
       .postLike(post)
       .then((likededPost) => {
-        const a = 'test-add';
-        console.log(a);
         const { like_count, likes } = likededPost;
+        console.log('like', like_count, likes);
         const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
+        console.log('like-indexInPosts', indexInPosts);
         const indexInUserPosts = this.userPosts.findIndex(
           (i) => i.id === post.id
         );
+        console.log('like-indexInUserPosts', indexInUserPosts);
         runInAction(() => {
           if (indexInPosts >= 0) {
             this.posts.splice(indexInPosts, 1, {
@@ -174,13 +175,14 @@ class PostsStore {
     api
       .deleteLike(post)
       .then((dislikededPost) => {
-        const a = 'test-delete';
-        console.log(a);
         const { like_count, likes } = dislikededPost;
+        console.log('dislike', like_count, likes);
         const indexInPosts = this.posts.findIndex((i) => i.id === post.id);
+        console.log('dislike-indexInPosts', indexInPosts);
         const indexInUserPosts = this.userPosts.findIndex(
           (i) => i.id === post.id
         );
+        console.log('dislike-indexInUserPosts', indexInUserPosts);
         runInAction(() => {
           if (indexInPosts >= 0) {
             this.posts.splice(indexInPosts, 1, {

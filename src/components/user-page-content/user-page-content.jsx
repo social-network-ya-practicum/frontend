@@ -23,6 +23,8 @@ function UserPageContent({ posts, user, ownUser, isOwn }) {
     />
   ));
 
+  console.log('UserPageContent', posts);
+
   return (
     <section className={styles.userPage}>
       <div className={styles.userPage__container}>
