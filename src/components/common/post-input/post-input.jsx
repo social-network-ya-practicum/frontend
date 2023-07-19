@@ -4,6 +4,7 @@ import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
+import FileBubble from '../file-bubble/file-bubble';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -13,8 +14,24 @@ const PostInput = observer(() => {
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const [activeInput, setActiveInput] = useState(false);
+
   const [images, setImages] = useState([]);
+  const [files, setFiles] = useState([]);
+
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
+
+  function handleCancelFile(id) {
+    const updatedFiles = files.filter((file) => file.id !== id);
+    setFiles(updatedFiles);
+  }
+
+  const fileList = files.map((file) => (
+    <FileBubble
+      name={file.file_info.name}
+      key={file.id}
+      handleDelete={() => handleCancelFile(file.id)}
+    />
+  ));
 
   const textStyle = {
     height: heightText,
@@ -35,12 +52,24 @@ const PostInput = observer(() => {
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
-      setImages([
-        ...images,
-        {
-          image_link: reader.result,
-        },
-      ]);
+      if (fileImg.type.startsWith('image/')) {
+        setImages([
+          ...images,
+          {
+            image_link: reader.result,
+          },
+        ]);
+      } else {
+        setFiles([
+          ...files,
+          {
+            id: files.length + 1,
+            file_info: fileImg,
+            file_link: reader.result,
+          },
+        ]);
+      }
+      // console.log(files)
     };
   };
 
@@ -76,20 +105,22 @@ const PostInput = observer(() => {
     setHeightText(`${target.scrollHeight}px`);
   };
 
-  function handleCancelfile() {
+  function handleCancelImg() {
     setImages([]);
+    setFiles([]);
   }
 
   function handleAddPost() {
-    // console.log(images);
+    // console.log(files);
 
     addPost({
       text: value,
       author: user,
       images: images === [] ? [] : images,
+      files: files === [] ? [] : files,
     });
     setValue('');
-    handleCancelfile();
+    handleCancelImg();
     setIsSmilePopupOpened(false);
     hanldeCloseActiveInput();
   }
@@ -100,7 +131,8 @@ const PostInput = observer(() => {
         activeInput &&
         !event.target.closest('#post-input') &&
         !value &&
-        !images[0]
+        !images[0] &&
+        files.length === 0
       ) {
         hanldeCloseActiveInput();
       }
@@ -110,7 +142,7 @@ const PostInput = observer(() => {
     return () => {
       document.removeEventListener('click', hanldecloseingActiveInput);
     };
-  }, [activeInput, value, images]);
+  }, [activeInput, value, images, files]);
 
   return (
     <div id="post-input" className={styles.postInput}>
@@ -136,40 +168,75 @@ const PostInput = observer(() => {
           />
 
           {!activeInput && (
-            <label
-              htmlFor="post-input__file"
-              className={styles.postInput__fileLabel}
-            >
-              <input
-                type="file"
-                id="post-input__file"
-                className={styles.postInput__file}
-                onChange={handleFileChange}
-              />
-            </label>
+            <div className={styles.postInput__fileBox}>
+              <label
+                htmlFor="post-input__img"
+                className={`${styles.postInput__fileLabel} ${styles.postInput__fileLabel_img}`}
+              >
+                <input
+                  type="file"
+                  id="post-input__img"
+                  className={styles.postInput__file}
+                  onChange={handleFileChange}
+                />
+              </label>
+
+              <label
+                htmlFor="post-input__file"
+                className={styles.postInput__fileLabel}
+              >
+                <input
+                  type="file"
+                  id="post-input__file"
+                  className={styles.postInput__file}
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
           )}
         </div>
 
         {activeInput && (
           <>
-            {images[0] && (
-              <div className={styles.postInput__prewiev}>
-                <img
-                  className={styles.postInput__img}
-                  src={images[0].image_link}
-                  alt="превью"
-                />
-                <button
-                  className={styles.postInput__canselBtn}
-                  type="button"
-                  onClick={handleCancelfile}
-                >
-                  {' '}
-                </button>
-              </div>
-            )}
+            <div className={styles.postInput__prewievBox}>
+              {/* превью картинки */}
+              {images[0] && (
+                <div className={styles.postInput__prewiev}>
+                  <img
+                    className={styles.postInput__img}
+                    src={images[0].image_link}
+                    alt="превью"
+                  />
+                  <button
+                    className={styles.postInput__canselBtn}
+                    type="button"
+                    onClick={handleCancelImg}
+                  >
+                    {' '}
+                  </button>
+                </div>
+              )}
+
+              {/* превью файлов */}
+              {files.length !== 0 && (
+                <ul className={styles.postInput__fileList}>{fileList}</ul>
+              )}
+            </div>
+
             <div className={styles.postInput__stuff}>
-              <div>
+              <div className={styles.postInput__fileBox}>
+                <label
+                  htmlFor="post-input__img"
+                  className={`${styles.postInput__fileLabel} ${styles.postInput__fileLabel_img}`}
+                >
+                  <input
+                    type="file"
+                    id="post-input__img"
+                    className={styles.postInput__file}
+                    onChange={handleFileChange}
+                  />
+                </label>
+
                 <label
                   htmlFor="post-input__file"
                   className={styles.postInput__fileLabel}

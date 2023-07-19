@@ -1,0 +1,66 @@
+@use '../../../variables' as var;
+
+.fileView {
+  display: grid;
+  grid-template-columns: min-content min-content;
+  max-width: 436px;
+  text-decoration: none;
+
+  &__name {
+    color: var.$text_color_secondary3;
+    font-family: var.$font-family-default;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    align-self: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: fit-content;
+    position: relative;
+    max-width: 400px;
+
+    &::before {
+      content: url(./icons/doc.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 4px;
+      vertical-align: sub;
+    }
+
+    // &:hover{
+    //   color: var.$text_color_default;
+    // }
+
+    &_notPost {
+      color: var.$text_color_secondary2;
+      &::before {
+        content: url(./icons/doc_inpost.svg);
+      }
+
+      // &:hover{
+      //   color: var.$text_color_secondary2;
+      // }
+    }
+  }
+
+  &__span {
+    color: var.$text_color_secondary3;
+    font-family: var.$font-family-default;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    align-self: center;
+    margin-bottom: 1px;
+
+    &_notPost {
+      color: var.$text_color_secondary2;
+    }
+
+    // &:hover{
+    //   color: var.$text_color_default;
+    // }
+  }
+}

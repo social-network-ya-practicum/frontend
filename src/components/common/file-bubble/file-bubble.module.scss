@@ -1,0 +1,62 @@
+@use '../../../variables' as var;
+
+.fileBubble {
+  background-color: var.$bg_color_secondary;
+  border-radius: 16px;
+  padding: 10px 12px 10px 8px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 496px;
+
+  &__nameBox {
+    display: grid;
+    grid-template-columns: auto min-content;
+    max-width: 436px;
+  }
+
+  &__name {
+    color: var.$text_color_secondary3;
+    font-family: var.$font-family-default;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    align-self: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: fit-content;
+    position: relative;
+
+    &::before {
+      content: url(./icons/doc.svg);
+      height: 20px;
+      width: 20px;
+      margin-right: 4px;
+      vertical-align: sub;
+    }
+  }
+
+  &__span {
+    color: var.$text_color_secondary3;
+    font-family: var.$font-family-default;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    align-self: center;
+  }
+
+  &__btn {
+    // position: absolute;
+    background-color: transparent;
+    background-image: url(./icons/x__icon.svg);
+    width: 24px;
+    height: 24px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

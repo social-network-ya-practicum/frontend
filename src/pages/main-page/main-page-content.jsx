@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import BirthdayPlate from '../../components/birthday-plate/birthday-plate';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -11,10 +11,16 @@ import RightSidebarContainer from '../../components/common/right-sidebar-contain
 // import { getCookie } from '../../utils/utils';
 
 const MainPageContent = observer(() => {
+  const [filter, setFilter] = useState(null);
+  const [choosenButton, setChoosenButton] = useState(1);
   const { postsStore, userStore, birthdaysStore } = useStore();
   const { posts, getPosts } = postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
+
+  const filteredPosts = filter
+    ? posts.filter((item) => item.group === filter)
+    : posts;
 
   useEffect(() => {
     // console.log(getCookie(TOKEN_NAME));
@@ -22,11 +28,16 @@ const MainPageContent = observer(() => {
     getBirthdays();
   }, [getPosts, getBirthdays]);
 
-  // function handlePostLike(post) {
-  //   console.log(post)
-  // }
+  function handleButtonClick(button) {
+    setChoosenButton(button);
+    if (button === 2) {
+      setFilter(1);
+    } else {
+      setFilter(null);
+    }
+  }
 
-  const postsElements = posts.map((post) => (
+  const postsElements = filteredPosts.map((post) => (
     <Post
       {...post}
       post={post}
@@ -36,8 +47,10 @@ const MainPageContent = observer(() => {
       author={post.author}
       pubdate={post.pub_date}
       images={post.images}
+      files={post.files}
       likecount={post.like_count}
       postslikes={post.likes}
+      comments={post.comments}
       currentUser={user}
       // onPostLike={handlePostLike}
     />
@@ -47,7 +60,28 @@ const MainPageContent = observer(() => {
     <div className={styles.mainPageContent}>
       <div>
         <PostInput />
-        <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
+        <div>
+          <div className={styles.mainPageContent__btns}>
+            <button
+              className={`${styles.mainPageContent__btn} ${
+                choosenButton === 1 ? styles.mainPageContent__btn_active : ''
+              }`}
+              // }
+              onClick={() => handleButtonClick(1)}
+            >
+              Лента
+            </button>
+            <button
+              className={`${styles.mainPageContent__btn} ${
+                choosenButton === 2 ? styles.mainPageContent__btn_active : ''
+              }`}
+              onClick={() => handleButtonClick(2)}
+            >
+              Новости компании
+            </button>
+          </div>
+          <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
+        </div>
       </div>
       <RightSidebarContainer gap="36px">
         <BirthdayPlate data={birthDays} id={user.id} />

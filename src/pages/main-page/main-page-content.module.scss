@@ -1,13 +1,48 @@
+@use '../../variables' as var;
+
 .mainPageContent {
   display: grid;
   gap: 32px;
   grid-template-columns: minmax(max-content, 552px) minmax(max-content, 357px);
-  min-height: 90vh;
+  min-height: 83vh;
 
   &__posts {
-    margin: 32px 0 0 0;
+    margin: 20px 0 0 0;
     padding: 0;
     display: grid;
     gap: 20px;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__btn {
+    color: var.$text_color_default;
+    font-family: var.$font-family-default;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+
+    padding: 8px 12px;
+    border-radius: 18px;
+    background-color: transparent;
+    position: relative;
+    background: linear-gradient(var.$color_ffffff, var.$color_ffffff)
+        padding-box,
+      linear-gradient(to right, #0eb0d1, #1fc995) border-box;
+    border: 1px solid transparent;
+
+    &_active {
+      background: linear-gradient(to right, #0eb0d1, #1fc995) padding-box,
+        linear-gradient(to right, #0eb0d1, #1fc995) border-box;
+      color: white;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

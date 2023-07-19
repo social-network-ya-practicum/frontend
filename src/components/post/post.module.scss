@@ -66,6 +66,18 @@
     height: 100%;
   }
 
+  &__fileList {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__fileItem {
+  }
+
   &__likeContainer {
     display: flex;
     align-items: center;
