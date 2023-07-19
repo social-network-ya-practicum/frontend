@@ -30,6 +30,7 @@ const Post = observer(
     const [isPostChanging, setIsPostchanging] = useState(false);
     const [isPopupOpened, setIsPopupOpened] = useState(false);
     const popupRef = useRef(null);
+    console.log('post', postslikes, likecount);
 
     const { postsStore } = useStore();
     const { editPost, deletePost, likePost, dislikePost } = postsStore;
