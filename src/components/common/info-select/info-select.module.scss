@@ -43,48 +43,33 @@ $border-radius: 16px;
     }
   }
 
-  &__wrapper {
-    display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 2.5px 32px 2.5px 8px;
-    background: var.$color_d7e9fa;
-    border-radius: $border-radius;
-
-    &_hidden {
-      visibility: hidden;
-    }
-  }
-
-  &__list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    height: 135px;
-    padding: 0 3px 0 0;
-    gap: 4px;
-    overflow-y: scroll;
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
   &__item {
+    display: flex;
+    margin-bottom: 4px;
+    border-radius: 16px;
+    width: max-content;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &:hover {
+      background-color: var.$bg_color_default;
+    }
+  }
+
+  &__label {
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     height: 23px;
-    width: max-content;
-    border-radius: 16px;
-    padding: 0 12px;
+    width: 100%;
 
-    &:hover {
-      background-color: var.$bg_color_default;
+    padding: 0 12px;
+    margin-bottom: 4px;
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 
@@ -95,21 +80,8 @@ $border-radius: 16px;
   }
 }
 
-.scroll {
-  display: flex;
-  justify-content: center;
-  width: 20px;
-  height: 110px;
+.mixScrollableContainer {
   position: absolute;
-  right: 12px;
-  top: 26px;
-
-  &__thumb {
-    width: 4px;
-    height: 48px;
-    border-radius: 2px;
-    background-color: var.$color_010101;
-    position: absolute;
-    top: 0;
-  }
+  top: 0;
+  left: 0;
 }

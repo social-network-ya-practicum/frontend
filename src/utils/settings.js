@@ -38,3 +38,19 @@ export const monthes = [
   'Ноябрь',
   'Декабрь',
 ];
+
+export const monthsMap = new Map([
+  ['January', 'января'],
+  ['February', 'февраля'],
+  ['March', 'марта'],
+  ['April ', 'апреля'],
+  ['May ', 'мая'],
+  ['June', 'июня'],
+  ['July', 'июля'],
+  ['August', 'августа'],
+  ['September', 'сентября'],
+  ['October', 'октября'],
+  ['November ', 'ноября'],
+  ['January', 'января'],
+  ['December', 'декабря'],
+]);

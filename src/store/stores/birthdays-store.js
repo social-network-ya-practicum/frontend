@@ -5,7 +5,7 @@ import errorStore from './error-store';
 const { addError } = errorStore;
 
 class BirthdaysStore {
-  birthDays = [];
+  birthDays = null;
 
   isLoading = false;
 

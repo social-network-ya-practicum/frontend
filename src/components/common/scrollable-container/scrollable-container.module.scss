@@ -1,0 +1,97 @@
+@use '../../../variables' as var;
+
+$border-radius: 16px;
+
+.root {
+  display: flex;
+
+  &_hidden {
+    visibility: hidden;
+  }
+
+  &_variant_infoSelect {
+    padding: 2.5px 32px 2.5px 8px;
+    background: var.$color_d7e9fa;
+    border-radius: $border-radius;
+  }
+
+  &_variant_birthdayPlate {
+    width: 100%;
+    padding: 0 21px 20px 0;
+    background: var.$bg_color_default;
+    position: relative;
+  }
+
+  &__scrollableArea {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &_variant_infoSelect {
+      height: 135px;
+      padding: 0 3px 0 0;
+    }
+
+    &_variant_birthdayPlate {
+      padding: 20px 0 0 20px;
+      background: transparent;
+      max-height: 240px;
+    }
+  }
+}
+
+.scroll {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+
+  &_variant_infoSelect {
+    width: 20px;
+    height: 110px;
+    right: 12px;
+    top: 26px;
+  }
+
+  &_variant_birthdayPlate {
+    width: 24px;
+    height: 208px;
+    right: 6.5px;
+    top: 20px;
+
+    &::before {
+      content: '';
+      background: var.$color_f4f4f4;
+      height: 100%;
+      width: 5px;
+      border-radius: 2.5px;
+    }
+  }
+
+  &__thumb {
+    position: absolute;
+
+    &_variant_infoSelect {
+      width: 4px;
+      height: 48px;
+      border-radius: 2px;
+      background-color: var.$color_010101;
+      top: 0;
+    }
+
+    &_variant_birthdayPlate {
+      width: 5px;
+      height: 64px;
+      border-radius: 2.5px;
+      background: linear-gradient(90deg, #0eb0d1 14.06%, #1fc995 79.17%);
+      top: 0;
+    }
+  }
+}
