@@ -139,6 +139,32 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'deleteUser'))
       .catch((err) => this._handleError(err, 'deleteUser'));
 
+  /** Удаляем комментарий */
+  deleteComment = (commentID, postID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}/`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'deleteComment'))
+      .catch((err) => this._handleError(err, 'deleteComment'));
+
+  /** Удаляем like комментарию */
+  deleteCommentLike = (commentID, postID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}/like/`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'deleteCommentLike'))
+      .catch((err) => this._handleError(err, 'deleteCommentLike'));
+
   /**
    * DELETE - запросы конец
    */
@@ -255,6 +281,30 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'getUserPostsList'))
       .catch((err) => this._handleError(err, 'getUserPostsList'));
 
+  /** Получаем список комментариев */
+  getCommentsList = (postID, params = '') =>
+    fetch(`${this._url}/posts/${postID}/comments${params}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getCommentsList'))
+      .catch((err) => this._handleError(err, 'getCommentsList'));
+
+  /** Получаем комментарий */
+  getComment = (commentID, postID) =>
+    fetch(`${this._url}/posts/${postID}/comments/${commentID}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getComment'))
+      .catch((err) => this._handleError(err, 'getComment'));
+
   /**
    * GET - запросы конец
    */
@@ -317,6 +367,23 @@ class MainApi {
     })
       .then((res) => this._handleResponse(res, 'patchUserPost'))
       .catch((err) => this._handleError(err, 'patchUserPost'));
+
+  /** Редактируем комментарий */
+  patchComment = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.id}/`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: data.author,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'patchComment'))
+      .catch((err) => this._handleError(err, 'patchComment'));
 
   /**
    * PATCH - запросы конец
@@ -401,6 +468,40 @@ class MainApi {
       .then((res) => this._handleResponse(res, 'setNewPass'))
       .catch((err) => this._handleError(err, 'setNewPass'));
 
+  /** Создаем комментарий */
+  postComment = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: data.author,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postComment'))
+      .catch((err) => this._handleError(err, 'postComment'));
+
+  /** Ставим like комментарию */
+  postCommentLike = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.id}/like/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: data.author,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postCommentLike'))
+      .catch((err) => this._handleError(err, 'postCommentLike'));
+
   /**
    * POST - запросы конец
    */
@@ -436,6 +537,23 @@ class MainApi {
     })
       .then((res) => this._handleResponse(res, 'putUserPost'))
       .catch((err) => this._handleError(err, 'putUserPost'));
+
+  /** Редактируем комментарий */
+  putComment = (data) =>
+    fetch(`${this._url}/posts/${data.postID}/comments/${data.id}/`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        text: data.text,
+        author: data.author,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'putComment'))
+      .catch((err) => this._handleError(err, 'putComment'));
 
   /**
    * PUT - запросы конец
