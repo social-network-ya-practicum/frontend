@@ -11,7 +11,7 @@ function FileView({ name, inPost, link }) {
       <p
         className={`${styles.fileView__name} ${
           inPost && styles.fileView__name_notPost
-        }`}
+        } ${inPost && styles.fileView__name_active}`}
       >
         {fileName}
       </p>
