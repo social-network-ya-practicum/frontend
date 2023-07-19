@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import RoundIcon from '../round-icon/round-icon';
 import styles from './comment.module.scss';
 import defaultAvatar from '../../../image/default-avatar.svg';
@@ -11,9 +11,9 @@ function Comment({ author, text }) {
   const [isCommentChanging, setIsCommentChanging] = useState(false);
   const [value, setValue] = useState(text);
 
-  const handleClosePopup = () => {
+  const handleClosePopup = useCallback(() => {
     setIsPopupOpen(false);
-  };
+  }, []);
 
   const handleOpenClick = () => {
     setIsPopupOpen(true);
@@ -82,21 +82,23 @@ function Comment({ author, text }) {
         )}
       </div>
 
-      <Popup isOpen={isPopupOpen} handleClose={handleClosePopup}>
-        <div className={styles.comment__popup}>
-          <button
-            className={`${styles.comment__btn} ${styles.comment__btn_type_edit}`}
-            onClick={handleChangeClick}
-          >
-            Редактировать
-          </button>
-          <button
-            className={`${styles.comment__btn} ${styles.comment__btn_type_delete}`}
-          >
-            Удалить комментарий
-          </button>
-        </div>
-      </Popup>
+      {isPopupOpen && (
+        <Popup isOpen={isPopupOpen} handleClose={handleClosePopup}>
+          <div className={styles.comment__popup}>
+            <button
+              className={`${styles.comment__btn} ${styles.comment__btn_type_edit}`}
+              onClick={handleChangeClick}
+            >
+              Редактировать
+            </button>
+            <button
+              className={`${styles.comment__btn} ${styles.comment__btn_type_delete}`}
+            >
+              Удалить комментарий
+            </button>
+          </div>
+        </Popup>
+      )}
     </li>
   );
 }

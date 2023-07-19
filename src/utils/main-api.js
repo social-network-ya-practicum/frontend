@@ -283,26 +283,12 @@ class MainApi {
         birthday_day: data.birthday_day,
         birthday_month: data.birthday_month,
         bio: data.bio,
+        photo: data.photo,
+        department: data.department,
       }),
     })
       .then((res) => this._handleResponse(res, 'patchUserData'))
       .catch((err) => this._handleError(err, 'patchUserData'));
-
-  /**  Редактируем аватар пользователя */
-  patchUserAvatar = (data) =>
-    fetch(`${this._url}/users/${data.id}/`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        ...this._headers,
-        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
-      },
-      body: JSON.stringify({
-        photo: data.photo,
-      }),
-    })
-      .then((res) => this._handleResponse(res, 'patchUserAvatar'))
-      .catch((err) => this._handleError(err, 'patchUserAvatar'));
 
   /** Редактируем пост пользователя */
   patchUserPost = (data) =>

@@ -22,11 +22,15 @@ function MainUserInfo({ user, isOwn }) {
         <div className={styles.mainUserInfo__wrapper}>
           <div className={styles.mainUserInfo__case}>
             <p className={styles.mainUserInfo__text}>Должность</p>
-            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+            <p className={styles.mainUserInfo__role}>
+              {user.job_title || '__'}
+            </p>
           </div>
           <div className={styles.mainUserInfo__case}>
             <p className={styles.mainUserInfo__text}>Подразделение</p>
-            <p className={styles.mainUserInfo__role}>{user.department}</p>
+            <p className={styles.mainUserInfo__role}>
+              {user.department || '__'}
+            </p>
           </div>
         </div>
         {isOwn && (

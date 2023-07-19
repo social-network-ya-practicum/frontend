@@ -61,8 +61,9 @@ $border-radius: 16px;
     list-style: none;
     display: flex;
     flex-direction: column;
-    height: 140px;
+    height: 135px;
     padding: 0 3px 0 0;
+    gap: 4px;
     overflow-y: scroll;
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */

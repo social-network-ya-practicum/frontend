@@ -5,6 +5,7 @@ import Button from '../common/button/button';
 import styles from './main-avatar.module.scss';
 import useValidator from '../../hooks/use-validator';
 import defaultAvatar from '../../image/default-avatar.svg';
+import editAvatar from '../../image/edit-avatar.svg';
 import Avatars from '../common/avatars/avatars';
 import { ReactComponent as CloseIcon } from '../../image/close-icon.svg';
 import useError from '../../hooks/use-error';
@@ -18,7 +19,13 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   const [selectedFile, setSelectedFile] = useState(avatar);
   const { setError, clearError } = useError();
 
-  const imgSrc = selectedFile ?? defaultAvatar;
+  let imgSrc = selectedFile;
+  if (selectedFile === null && !isEditMode) {
+    imgSrc = defaultAvatar;
+  }
+  if (selectedFile === null && isEditMode) {
+    imgSrc = editAvatar;
+  }
 
   const handleEditBtnClick = () => {
     setSelectedFile(null);
@@ -66,38 +73,40 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
   };
 
   const cnMainAvatar = clsx(styles.avatar, mix);
-  const cnBtnPic = clsx(styles.avatar__btnPicture, {
-    [styles.avatar__btnPicture_clickable]: isEditMode,
-  });
   const cnImg = clsx(styles.avatar__img, {
     [styles.avatar__img_type_default]: imgSrc === defaultAvatar,
-    [styles.avatar__img_clickable]: isEditMode && imgSrc === defaultAvatar,
   });
-  const cnCloseIcon = clsx(styles.avatar__close, {
-    [styles.avatar__close_disabled]: imgSrc === defaultAvatar || !isEditMode,
+  const cnRestriction = clsx(styles.avatar__restriction, {
+    [styles.avatar__restriction_hidden]: !isEditMode || imgSrc === selectedFile,
   });
 
   return (
     <div className={cnMainAvatar}>
-      {imgSrc !== defaultAvatar && (
-        <picture className={styles.avatar__imgWrapper}>
-          <source srcSet={imgSrc} media="(min-width: 800px)" />
-          <img className={cnImg} src={imgSrc} alt="аватар" />
-        </picture>
+      {imgSrc !== editAvatar && (
+        <img className={cnImg} src={imgSrc} alt="аватар" />
       )}
-      {imgSrc === defaultAvatar && (
-        <button onClick={handleImgClick} tabIndex={-1} className={cnBtnPic}>
-          <img className={cnImg} src={imgSrc} alt="аватар" />
-          {isEditMode && (
-            <span className={styles.avatar__defaultTitle}>
-              Добавить фотографию
-            </span>
-          )}
+      {imgSrc === editAvatar && (
+        <button
+          onClick={handleImgClick}
+          tabIndex={-1}
+          className={styles.avatar__btnPicture}
+        >
+          <img className={styles.avatar__imgEdit} src={imgSrc} alt="аватар" />
+          <span className={styles.avatar__editTitle}>Добавить фотографию</span>
         </button>
       )}
-      <p className={styles.avatar__restriction}>
-        Размер изображения не более 5мб
-      </p>
+
+      <p className={cnRestriction}>Размер изображения не более 5мб</p>
+
+      {imgSrc !== editAvatar && isEditMode && (
+        <CloseIcon
+          className={styles.avatar__close}
+          onClick={() => {
+            refInput.current.value = null;
+            setSelectedFile(null);
+          }}
+        />
+      )}
       <form
         className={styles.form}
         onSubmit={handleSubmit}
@@ -114,6 +123,7 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           onChange={onChange}
           ref={refInput}
         />
+        <Avatars hidden={!isEditMode} setSelectedFile={setSelectedFile} />
         {!isEditMode && (
           <div className={styles.form__btn}>
             <Button width="100%" onClick={handleEditBtnClick}>
@@ -122,31 +132,21 @@ const MainAvatar = ({ onSubmit, mix, disabled, avatar }) => {
           </div>
         )}
         {isEditMode && (
-          <div className={styles.form__container}>
-            <Avatars />
-            <div className={styles.form__btnWrapper}>
-              <Button
-                width="100%"
-                variant="secondary"
-                disabled={disabled}
-                onClick={handleCancelEdit}
-              >
-                Отменить
-              </Button>
-              <Button type="submit" width="100%" disabled={disabled}>
-                Сохранить
-              </Button>
-            </div>
+          <div className={styles.form__btnWrapper}>
+            <Button
+              width="100%"
+              variant="secondary"
+              disabled={disabled}
+              onClick={handleCancelEdit}
+            >
+              Отменить
+            </Button>
+            <Button type="submit" width="100%" disabled={disabled}>
+              Сохранить
+            </Button>
           </div>
         )}
       </form>
-      <CloseIcon
-        className={cnCloseIcon}
-        onClick={() => {
-          refInput.current.value = null;
-          setSelectedFile(null);
-        }}
-      />
     </div>
   );
 };

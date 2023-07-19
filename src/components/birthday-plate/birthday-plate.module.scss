@@ -1,7 +1,7 @@
 @use '../../variables' as var;
 
 .birthdayPlate {
-  $headerBG: var.$color_65f0c6;
+  $headerBG: var.$bg_color_secondary;
   $plateBG: var.$color_ffffff;
   $fontFamily: var.$font-family-default;
   $colorText: var.$text_color_default;

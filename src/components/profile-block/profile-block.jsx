@@ -40,10 +40,10 @@ ProfileBlock.propTypes = {
 };
 
 ProfileBlock.defaultProps = {
-  id: 1,
-  role: 'Бухгалтер',
+  id: '#',
+  role: '',
   avatar: '',
-  firstName: 'Юлия',
-  lastName: 'Леденцова',
-  postsCount: 8,
+  firstName: '',
+  lastName: '',
+  postsCount: null,
 };

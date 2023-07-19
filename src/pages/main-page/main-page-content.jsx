@@ -5,6 +5,8 @@ import { useStore } from '../../contexts/RootStoreContext';
 import styles from './main-page-content.module.scss';
 import PostInput from '../../components/common/post-input/post-input';
 import Post from '../../components/post/post';
+import Conferences from '../../components/common/conferences/conferences';
+import RightSidebarContainer from '../../components/common/right-sidebar-container/right-sidebar-container';
 // import { TOKEN_NAME } from '../../utils/settings';
 // import { getCookie } from '../../utils/utils';
 
@@ -81,7 +83,10 @@ const MainPageContent = observer(() => {
           <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
         </div>
       </div>
-      <BirthdayPlate data={birthDays} id={user.id} />
+      <RightSidebarContainer gap="36px">
+        <BirthdayPlate data={birthDays} id={user.id} />
+        <Conferences />
+      </RightSidebarContainer>
     </div>
   );
 });
