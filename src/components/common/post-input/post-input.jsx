@@ -27,7 +27,7 @@ const PostInput = observer(() => {
 
   const fileList = files.map((file) => (
     <FileBubble
-      name={file.file_info.name}
+      name={file.file_title}
       key={file.id}
       handleDelete={() => handleCancelFile(file.id)}
     />
@@ -53,6 +53,10 @@ const PostInput = observer(() => {
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
       if (fileImg.type.startsWith('image/')) {
+        // временное ограничение на добавление картинок
+        if (images.length > 1) {
+          return;
+        }
         setImages([
           ...images,
           {
@@ -60,16 +64,19 @@ const PostInput = observer(() => {
           },
         ]);
       } else {
+        if (files.length > 10) {
+          return;
+        }
         setFiles([
           ...files,
           {
-            id: files.length + 1,
-            file_info: fileImg,
+            id: Math.floor(Math.random() * 1000),
+            file_title: fileImg.name,
             file_link: reader.result,
           },
         ]);
       }
-      // console.log(files)
+      // console.log(images)
     };
   };
 
