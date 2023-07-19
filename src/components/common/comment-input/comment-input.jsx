@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './comment-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
-import defaultAvatar from '../../../image/defaultAvatar.svg';
+import defaultAvatar from '../../../image/default-avatar.svg';
 
 function CommentInput() {
   const [isInputActive, setIsInputActive] = useState(false);

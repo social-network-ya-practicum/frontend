@@ -1,6 +1,6 @@
 import RoundIcon from './round-icon';
 import '../../../index.scss';
-import DefaultAvatar from '../../../image/defaultAvatar.svg';
+import DefaultAvatar from '../../../image/default-avatar.svg';
 
 export default {
   title: 'RoundIcon',

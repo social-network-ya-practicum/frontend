@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import iconCake from './icon-birthday-cake.svg';
 import RoundIcon from '../common/round-icon/round-icon';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import styles from './birthday-plate.module.scss';
 
 function BirthdayPlate({ id, data, mix }) {
@@ -19,7 +19,7 @@ function BirthdayPlate({ id, data, mix }) {
   }
 
   return (
-    <section className={cnBirthdayPlate}>
+    <div className={cnBirthdayPlate}>
       <div className={styles.birthdayPlate__header}>
         <h2 className={styles.birthdayPlate__title}>Дни рождения</h2>
       </div>
@@ -58,7 +58,7 @@ function BirthdayPlate({ id, data, mix }) {
           </li>
         )}
       </ul>
-    </section>
+    </div>
   );
 }
 

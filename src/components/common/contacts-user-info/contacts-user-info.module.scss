@@ -31,7 +31,7 @@
     width: 227.5px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
   }
 
   &__text {
@@ -39,7 +39,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 120%;
+    line-height: calc(16px * 1.2);
     color: var.$text_color_secondary2;
   }
 

@@ -1,13 +1,19 @@
 import React from 'react';
+import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './footer.module.scss';
 
-function Footer({ user, mix }) {
+function Footer({ mix, type }) {
+  const cnRoot = clsx(styles.root, styles[`root_type_${type}`], mix);
+  const cnFooterContainer = clsx(
+    styles.footer__container,
+    styles[`footer__container_type_${type}`]
+  );
   return (
-    <footer className={mix}>
+    <footer className={cnRoot}>
       <div className={styles.footer}>
-        <div className={styles.footer__container}>
+        <div className={cnFooterContainer}>
           <div className={styles.footer__info}>
             <nav>
               <ul className={styles.footer__menu}>
@@ -16,7 +22,7 @@ function Footer({ user, mix }) {
                     Помощь
                   </NavLink>
                 </li>
-                {user && (
+                {type !== 'login' && (
                   <>
                     <li>
                       <NavLink to="/#" className={styles.footer__text}>
@@ -45,11 +51,11 @@ function Footer({ user, mix }) {
 export default Footer;
 
 Footer.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.objectOf([null]), PropTypes.object]),
   mix: PropTypes.string,
+  type: PropTypes.oneOf(['login']),
 };
 
 Footer.defaultProps = {
-  user: null,
   mix: undefined,
+  type: undefined,
 };

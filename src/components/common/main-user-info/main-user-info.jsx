@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './main-user-info.module.scss';
-import defaultAvatar from '../../../image/defaultAvatar.svg';
+import defaultAvatar from '../../../image/default-avatar.svg';
 
 function MainUserInfo({ user, isOwn }) {
   return (
@@ -22,11 +22,15 @@ function MainUserInfo({ user, isOwn }) {
         <div className={styles.mainUserInfo__wrapper}>
           <div className={styles.mainUserInfo__case}>
             <p className={styles.mainUserInfo__text}>Должность</p>
-            <p className={styles.mainUserInfo__role}>{user.job_title}</p>
+            <p className={styles.mainUserInfo__role}>
+              {user.job_title || '__'}
+            </p>
           </div>
           <div className={styles.mainUserInfo__case}>
             <p className={styles.mainUserInfo__text}>Подразделение</p>
-            <p className={styles.mainUserInfo__role}>{user.department}</p>
+            <p className={styles.mainUserInfo__role}>
+              {user.department || '__'}
+            </p>
           </div>
         </div>
         {isOwn && (

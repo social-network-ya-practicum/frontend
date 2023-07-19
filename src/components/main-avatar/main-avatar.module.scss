@@ -1,6 +1,6 @@
 @use '../../variables' as var;
 
-$block-width: 357px;
+$block-width: 358px;
 $border-radius: 16px;
 $transition-time: 0.5s;
 
@@ -22,25 +22,13 @@ $transition-time: 0.5s;
   max-width: $block-width;
   position: relative;
 
-  &__imgWrapper {
-    @include img;
-  }
-
   &__img {
-    display: flex;
-    width: 100%;
-    height: 100%;
+    @include img;
     object-position: center;
     object-fit: cover;
 
     &_type_default {
-      width: 86px;
-      height: 87px;
-      transition: $transition-time;
-    }
-
-    &_clickable {
-      cursor: pointer;
+      object-fit: none;
     }
   }
 
@@ -49,20 +37,25 @@ $transition-time: 0.5s;
     flex-direction: column;
     border: none;
     outline: none;
+    cursor: pointer;
 
-    &_clickable {
-      cursor: pointer;
-      &:hover .avatar__img_clickable {
-        width: 90px;
-        height: 91px;
-      }
-      &:hover .avatar__default-title {
-        font-size: 15px;
-      }
+    &:hover .avatar__imgEdit {
+      transform: scale(1.045);
+    }
+    &:hover .avatar__editTitle {
+      font-size: 14.5px;
     }
   }
 
-  &__defaultTitle {
+  &__imgEdit {
+    display: flex;
+    object-position: center;
+    object-fit: none;
+    transition: $transition-time;
+    cursor: pointer;
+  }
+
+  &__editTitle {
     font-size: 14px;
     font-family: var.$font-family-default;
     font-weight: 700;
@@ -75,8 +68,17 @@ $transition-time: 0.5s;
     font-size: 14px;
     font-family: var.$font-family-default;
     line-height: 120%;
-    margin: 8px 0 0 0;
+    margin-top: 8px;
     align-self: flex-start;
+    transition: 0.3s;
+    overflow: hidden;
+    max-height: 100px;
+    transition: 0.3s;
+
+    &_hidden {
+      max-height: 0;
+      margin-top: 0;
+    }
   }
 
   &__close {
@@ -84,15 +86,12 @@ $transition-time: 0.5s;
     top: 12px;
     right: 12px;
     cursor: pointer;
-
-    &_disabled {
-      display: none;
-    }
   }
 }
 
 .form {
   display: flex;
+  flex-direction: column;
   width: 100%;
 
   &__input {
@@ -107,15 +106,10 @@ $transition-time: 0.5s;
     margin-top: 32px;
   }
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-  }
-
   &__btnWrapper {
-    margin-top: 32px;
     display: flex;
     width: 100%;
     gap: 25px;
+    margin-top: 32px;
   }
 }

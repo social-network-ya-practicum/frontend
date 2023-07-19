@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import Logo from '../../image/logo.svg';
 import Arrow from '../../image/arrow-down.svg';
 import RoundIcon from '../common/round-icon/round-icon';
 import styles from './header.module.scss';
-import defaultAvatar from '../../image/defaultAvatar.svg';
+import defaultAvatar from '../../image/default-avatar.svg';
 import Popup from '../common/popup/popup';
-import Notify from './image/notification.svg';
+import { useStore } from '../../contexts/RootStoreContext';
 
-function Header({ user, mix, logout }) {
-  const [isOpen, setIsOpen] = React.useState(false);
+const Header = observer(({ mix, type }) => {
+  const { userStore } = useStore();
+  const { user, logout } = userStore;
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const handlePopupClose = useCallback(() => {
+    setIsPopupOpen(false);
+  }, []);
 
   const handleOpenClick = () => {
-    setIsOpen(true);
+    setIsPopupOpen(true);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsPopupOpen(false);
   };
 
   React.useEffect(() => {
     function handleEscapeKey(e) {
       if (e.key === 'Escape') {
-        handleClose();
+        handlePopupClose();
       }
     }
 
@@ -31,9 +40,12 @@ function Header({ user, mix, logout }) {
     return () => document.removeEventListener('keydown', handleEscapeKey);
   });
 
+  const cnRoot = clsx(styles.root, styles[`root_type_${type}`], mix);
+  const cnHeader = clsx(styles.header, styles[`header_type_${type}`]);
+
   return (
-    <header className={mix}>
-      <div className={styles.header}>
+    <header className={cnRoot}>
+      <div className={cnHeader}>
         <NavLink to="/" className={styles.header__logo}>
           <RoundIcon src={Logo} alt="Логотип" mixImg={styles.header__imgLogo} />
           <span className={styles.header__title}>Корпоративная сеть</span>
@@ -80,12 +92,6 @@ function Header({ user, mix, logout }) {
                     </NavLink>
                   </li>
                   <li>
-                    <div className={styles.header__notify}>
-                      <img src={Notify} alt="Уведомление" />
-                      <div className={styles.header__notifyCount}>3</div>
-                    </div>
-                  </li>
-                  <li>
                     <div className={styles.header__container}>
                       <NavLink
                         to={`/${user.id}`}
@@ -108,22 +114,27 @@ function Header({ user, mix, logout }) {
                           alt="Настройка профиля"
                         />
                       </button>
-                      <Popup isOpen={isOpen} handleClose={handleClose}>
-                        <NavLink
-                          to={`/${user.id}/edit`}
-                          className={`${styles.header__action} ${styles.header__action_type_edit}`}
-                          onClick={handleClose}
+                      {isPopupOpen && (
+                        <Popup
+                          isOpen={isPopupOpen}
+                          handleClose={handlePopupClose}
                         >
-                          Редактировать профиль
-                        </NavLink>
-                        <NavLink
-                          to="/login"
-                          className={`${styles.header__action} ${styles.header__action_type_logout}`}
-                          onClick={() => logout()}
-                        >
-                          Выйти
-                        </NavLink>
-                      </Popup>
+                          <NavLink
+                            to={`/${user.id}/edit`}
+                            className={`${styles.header__action} ${styles.header__action_type_edit}`}
+                            onClick={handlePopupClose}
+                          >
+                            Редактировать профиль
+                          </NavLink>
+                          <NavLink
+                            to="/login"
+                            className={`${styles.header__action} ${styles.header__action_type_logout}`}
+                            onClick={handleLogout}
+                          >
+                            Выйти
+                          </NavLink>
+                        </Popup>
+                      )}
                     </div>
                   </li>
                 </ul>
@@ -134,21 +145,16 @@ function Header({ user, mix, logout }) {
       </div>
     </header>
   );
-}
+});
 
 export default Header;
 
 Header.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    first_name: PropTypes.string,
-    photo: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
-  }),
   mix: PropTypes.string,
-  logout: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['login']),
 };
 
 Header.defaultProps = {
-  user: null,
   mix: undefined,
+  type: undefined,
 };
