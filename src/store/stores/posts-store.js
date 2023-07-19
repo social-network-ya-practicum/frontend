@@ -27,6 +27,46 @@ class PostsStore {
     this.userPosts = [];
   };
 
+  setCommentsInPost = (postID, comments) => {
+    const postIndex = this.posts.findIndex((p) => p.id === postID);
+    const userPostIndex = this.userPosts.findIndex((p) => p.id === postID);
+    if (postIndex >= 0) {
+      this.posts.splice(postIndex, 1, {
+        ...this.posts[postIndex],
+        comments,
+      });
+    }
+    if (userPostIndex >= 0) {
+      this.userPosts.splice(userPostIndex, 1, {
+        ...this.userPosts[userPostIndex],
+        comments,
+      });
+    }
+  };
+
+  changeCommentsInPost = (postID, updatedComment) => {
+    const postIndex = this.posts.findIndex((p) => p.id === postID);
+    const userPostIndex = this.userPosts.findIndex((p) => p.id === postID);
+    const newComments = this.posts[postIndex].comments.map((c) => {
+      if (c.id === updatedComment.id) {
+        return updatedComment;
+      }
+      return c;
+    });
+    if (postIndex >= 0) {
+      this.posts.splice(postIndex, 1, {
+        ...this.posts[postIndex],
+        comments: newComments,
+      });
+    }
+    if (userPostIndex >= 0) {
+      this.userPosts.splice(userPostIndex, 1, {
+        ...this.userPosts[userPostIndex],
+        comments: newComments,
+      });
+    }
+  };
+
   getPosts = () => {
     this.setIsLoading(true);
     api
@@ -138,14 +178,7 @@ class PostsStore {
     api
       .getCommentsList(postID, queryString)
       .then((data) => {
-        runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              return { ...post, comments: data.results };
-            }
-            return post;
-          });
-        });
+        this.setCommentsInPost(postID, data.results);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -168,15 +201,25 @@ class PostsStore {
       .deleteComment(commentID, postID)
       .then(() => {
         runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              const updatedComments = post.comments.filter(
-                (c) => c.id !== commentID
-              );
-              return { ...post, comments: updatedComments };
-            }
-            return post;
-          });
+          const postIndex = this.posts.findIndex((p) => p.id === postID);
+          const userPostIndex = this.userPosts.findIndex(
+            (p) => p.id === postID
+          );
+          const updatedComments = this.posts[postIndex].comments.filter(
+            (c) => c.id !== commentID
+          );
+          if (postIndex >= 0) {
+            this.posts.splice(postIndex, 1, {
+              ...this.posts[postIndex],
+              comments: updatedComments,
+            });
+          }
+          if (userPostIndex >= 0) {
+            this.userPosts.splice(userPostIndex, 1, {
+              ...this.userPosts[userPostIndex],
+              comments: updatedComments,
+            });
+          }
         });
       })
       .catch((err) => addError(err))
@@ -188,20 +231,7 @@ class PostsStore {
     api
       .patchComment({ ...comment, postID })
       .then((updatedComment) => {
-        runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              const updatedComments = post.comments.map((c) => {
-                if (c.id === updatedComment.id) {
-                  return updatedComment;
-                }
-                return c;
-              });
-              return { ...post, comments: updatedComments };
-            }
-            return post;
-          });
-        });
+        this.changeCommentsInPost(postID, updatedComment);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -212,20 +242,7 @@ class PostsStore {
     api
       .postCommentLike({ ...comment, postID })
       .then((likedComment) => {
-        runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              const updatedComments = post.comments.map((c) => {
-                if (c.id === likedComment.id) {
-                  return likedComment;
-                }
-                return c;
-              });
-              return { ...post, comments: updatedComments };
-            }
-            return post;
-          });
-        });
+        this.changeCommentsInPost(postID, likedComment);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -236,20 +253,7 @@ class PostsStore {
     api
       .deleteCommentLike(commentID, postID)
       .then((dislikedComment) => {
-        runInAction(() => {
-          this.posts = this.posts.map((post) => {
-            if (post.id === postID) {
-              const updatedComments = post.comments.map((c) => {
-                if (c.id === dislikedComment.id) {
-                  return dislikedComment;
-                }
-                return c;
-              });
-              return { ...post, comments: updatedComments };
-            }
-            return post;
-          });
-        });
+        this.changeCommentsInPost(postID, dislikedComment);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
