@@ -53,7 +53,7 @@ function CommentInput() {
           <RoundIcon size="small" src={defaultAvatar} alt="аватар" />
           <textarea
             onChange={handleChange}
-            placeholder="Добавит комментарий"
+            placeholder="Добавить комментарий"
             value={value}
             type="text"
             minLength={1}

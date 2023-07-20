@@ -90,7 +90,6 @@ const Post = observer(
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
-          {/* <div className={styles.post__avatar}> </div> */}
           <NavLink to={toPath}>
             <RoundIcon
               size="small-plus"
