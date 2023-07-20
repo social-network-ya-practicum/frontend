@@ -148,8 +148,8 @@ class MainApi {
    */
 
   /** Получаем список групп */
-  getGroups = () =>
-    fetch(`${this._url}/groups`, {
+  getGroups = (params) =>
+    fetch(`${this._url}/groups${params}`, {
       credentials: 'include',
       headers: {
         ...this._headers,

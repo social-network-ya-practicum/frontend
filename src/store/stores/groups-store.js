@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
+import { groupsSort } from '../../utils/utils';
 import errorStore from './error-store';
 import userStore from './user-store';
 
@@ -7,6 +8,8 @@ const { addError } = errorStore;
 
 class GroupsStore {
   search = '';
+
+  searchGroups = [];
 
   allGroups = [];
 
@@ -27,25 +30,26 @@ class GroupsStore {
   getGroups = () => {
     this.loading = true;
     api
-      .getGroups()
+      .getGroups(`?limit=50&offset=0&search=${this.search}`)
       .then((data) => {
         runInAction(() => {
-          const { user } = userStore;
-          const userGroups = [];
-          this.allGroups = data.results
-            .filter((group) => {
-              if (group.id === 1) return false;
-              if (user?.followings.findIndex((id) => id === group.id) === -1)
-                return true;
-              userGroups.push(group);
-              return false;
-            })
-            .sort((group1, group2) => {
-              if (group1.followers_count > group2.followers_count) return -1;
-              if (group1.followers_count < group2.followers_count) return 1;
-              return 0;
-            });
-          this.userGroups = userGroups;
+          if (this.search) {
+            this.searchGroups = data.results.sort(groupsSort);
+          } else {
+            const { user } = userStore;
+            const userGroups = [];
+            this.allGroups = data.results
+              .filter((group) => {
+                if (group.id === 1) return false;
+                if (user?.followings.findIndex((id) => id === group.id) === -1)
+                  return true;
+                userGroups.push(group);
+                return false;
+              })
+              .sort(groupsSort);
+            this.userGroups = userGroups;
+            this.searchGroups = [];
+          }
           this.error = '';
           this.loading = false;
         });

@@ -8,29 +8,49 @@ import UserGroupsList from '../../components/user-groups-list/user-groups-list';
 
 function GroupsPage() {
   const { groupsStore } = useStore();
-  const { error, allGroups, userGroups, getGroups } = groupsStore;
+  const {
+    error,
+    loading,
+    search,
+    searchGroups,
+    allGroups,
+    userGroups,
+    setSearch,
+    getGroups,
+  } = groupsStore;
 
   useEffect(() => {
     getGroups();
-  }, [getGroups]);
+  }, [getGroups, search]);
 
   let rendered;
 
   if (error) rendered = <p>{error}</p>;
-  else if (userGroups.length)
+  else if (!search && userGroups.length)
     rendered = (
       <>
         <UserGroupsList groups={userGroups} />
         <AllGroupsList header="Популярные группы" groups={allGroups} />
       </>
     );
+  else if (search && !searchGroups.length)
+    rendered = (
+      <>
+        {!loading && (
+          <p className={styles.empty}>К сожалению, поиск не дал результатов</p>
+        )}
+        <AllGroupsList header="Популярные группы" groups={allGroups} />
+      </>
+    );
+  else if (search && searchGroups.length)
+    rendered = <AllGroupsList groups={searchGroups} />;
   else rendered = <AllGroupsList groups={allGroups} />;
 
   return (
     <article>
       <SearchInput
-        searchFromStore=""
-        handleChange={() => {}}
+        searchFromStore={search}
+        handleChange={setSearch}
         placeholder="Введите название группы"
         mix={styles.mixSearchInput}
       />
