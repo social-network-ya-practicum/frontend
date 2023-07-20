@@ -9,39 +9,136 @@ export class CustomError extends Error {
 }
 
 export const handleErrors = ({ message, code, from }) => {
+  const errData = {
+    message,
+    code,
+    from,
+    isPrivate: true,
+  };
+  console.error(`${code ?? ''} Error from ${from}:\n${message}`);
+
   if (message === 'Failed to fetch') {
     return {
+      ...errData,
       message:
         'К сожалению, сервер временно недоступен. Пожалуйста, проверьте ваше интернет-соединение и попробуйте снова позже. Извините за возможные неудобства',
-      code,
       isPrivate: false,
-      from,
     };
   }
-  // ----------------------------------------------------------------
-  // Ждём, когда бэки вернут ошибки под унифицированным ключом, чтобы можно было их извлечь
-  //  и обработать
 
-  // !!! Временно через match !!! Для logout при невалидном токене
-  if (message.match(/Недопустимый токен/)) {
+  if (
+    message === 'Невозможно войти с предоставленными учетными данными.' &&
+    from === 'login'
+  ) {
     return {
-      isPrivate: true,
-      message: 'Недопустимый токен',
-      code,
-      from,
+      ...errData,
+      message: 'Неверное имя пользователя или пароль',
+      isPrivate: false,
     };
   }
 
-  // !!! Временно через match !!! Для redirect при несуществующем юзере
-  if (message.match(/Страница не найдена/) && from === 'getUserData') {
+  if (from === 'login') {
     return {
-      isPrivate: true,
-      message: 'Страница не найдена',
-      code,
-      from,
+      ...errData,
+      message: 'Извините, не удалось выполнить вход. Свяжитесь с поддержкой',
+      isPrivate: false,
     };
   }
 
-  const mes = `!!!Временно выводим все ошибки!!!\n ${message}`;
-  return { message: mes, code, from, isPrivate: false };
+  if (from === 'deletePost') {
+    return {
+      ...errData,
+      message: 'Извините, не удалось удалить пост. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'deleteComment') {
+    return {
+      ...errData,
+      message:
+        'Извините, не удалось удалить комментарий. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'getAddressBook') {
+    return {
+      ...errData,
+      message:
+        'Извините, не удалось загрузить данные контактов. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'getPostsList') {
+    return {
+      ...errData,
+      message:
+        'Извините, произошла ошибка загрузки данных. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'getCurrentUserData' || from === 'getUserData') {
+    return {
+      ...errData,
+      message: 'Извините, произошла ошибка. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'patchUserData') {
+    return {
+      ...errData,
+      message:
+        'Извините, не удалось обновить данные пользователя. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (
+    from === 'patchComment' ||
+    from === 'putUserPost' ||
+    from === 'putComment'
+  ) {
+    return {
+      ...errData,
+      message: 'Извините, произошла ошибка. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'postUserPost') {
+    return {
+      ...errData,
+      message: 'Извините, не удалось создать пост. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  if (from === 'postComment') {
+    return {
+      ...errData,
+      message:
+        'Извините, не удалось оставить комментарий. Свяжитесь с поддержкой',
+      isPrivate: false,
+    };
+  }
+
+  // Данная ошибка обработана в errorStore для redirect при невалидном token
+  if (message === 'Недопустимый токен.') {
+    return {
+      ...errData,
+      isPrivate: true,
+      message,
+    };
+  }
+
+  // Данная ошибка обработана в errorStore для redirect при несуществующем юзере
+  if (message === 'Страница не найдена.' && from === 'getUserData') {
+    return { ...errData, isPrivate: true, message };
+  }
+
+  return errData;
 };
