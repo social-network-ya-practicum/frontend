@@ -54,7 +54,7 @@ UserAddressCard.propTypes = {
 
 UserAddressCard.defaultProps = {
   avatar: '',
-  department: 'Административный департамент',
+  department: '',
   firstName: '-',
   middleName: '-',
   lastName: '-',

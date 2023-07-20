@@ -170,6 +170,30 @@ class MainApi {
    * GET - запросы НАЧАЛО
    */
 
+  /** Получаем список групп */
+  getGroups = (params) =>
+    fetch(`${this._url}/groups${params}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getGroups'))
+      .catch((err) => this._handleError(err, 'getGroups'));
+
+  /** Получаем группу */
+  getGroup = (groupID) =>
+    fetch(`${this._url}/groups/${groupID}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getGroup'))
+      .catch((err) => this._handleError(err, 'getGroup'));
+
   /** Получаем адресную книгу */
   getAddressBook = (params) =>
     fetch(`${this._url}/addressbook${params}`, {
