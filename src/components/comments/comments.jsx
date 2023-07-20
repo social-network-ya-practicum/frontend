@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import CommentInput from '../common/comment-input/comment-input';
@@ -5,6 +6,12 @@ import Comment from '../common/comment/comment';
 import styles from './comments.module.scss';
 
 const Comments = observer(({ comments, postID }) => {
+  // const [displayedComments, setDisplayedComments] = useState(comments.slice(0, 3));
+
+  // const handleShownNext = () => {
+  //   setDisplayedComments(comments.slice(0, displayedComments.length + 10))
+  // }
+
   const commentsList = comments.map((comment) => (
     <Comment
       key={comment.id}
@@ -19,9 +26,14 @@ const Comments = observer(({ comments, postID }) => {
     <div className={styles.comments}>
       <ul className={styles.comments__list}>
         {commentsList}
-        <button className={styles.comments__more}>
-          Показать следующие комментарии
-        </button>
+        {commentsList.length > 4 && (
+          <button
+            className={styles.comments__more}
+            // onClick={handleShownNext}
+          >
+            Показать следующие комментарии
+          </button>
+        )}
       </ul>
 
       <CommentInput postID={postID} />
