@@ -2,7 +2,10 @@
 
 @mixin common-blocks-wrapper {
   display: flex;
+  flex-direction: column;
   height: 800px;
+  max-width: 640px;
+  width: 100%;
 }
 
 .loginPage {
@@ -23,23 +26,22 @@
   width: 50%;
 
   &_type_left {
-    padding: 0 66px 0 72px;
     background: var.$bg_color_secondary;
   }
 
   &_type_right {
     background: var.$bg_color_primary;
-    padding: 0 23px 0 16px;
   }
 
   &__leftWrapper {
     @include common-blocks-wrapper;
-    padding-top: 174px;
+    padding: 174px 66px 0 72px;
+    align-self: flex-end;
   }
 
   &__rightWrapper {
     @include common-blocks-wrapper;
-    padding-top: 58px;
+    padding: 58px 23px 0 16px;
     position: relative;
   }
 
@@ -77,17 +79,17 @@
     &_variant_cake {
       transform: rotate(-4.956deg);
       top: 651.4px;
-      left: 28.4px;
+      left: 44.4px;
     }
     &_variant_calendar {
       transform: rotate(-8.094deg);
       top: 444.3px;
-      right: -3px;
+      right: 20px;
     }
     &_variant_message {
       transform: rotate(15.296deg);
       top: 354.7px;
-      right: 98.8px;
+      right: 121.8px;
     }
   }
 }
@@ -96,12 +98,12 @@
   position: absolute;
   transform: rotate(-20.88deg);
   top: 376.91px;
-  left: -38.59px;
+  left: -22.59px;
 }
 
 .mixSecondFakePost {
   position: absolute;
   transform: rotate(15.33deg);
   top: 522.35px;
-  right: 23.7px;
+  right: 46.7px;
 }

@@ -1,6 +1,8 @@
 /** Адрес рабочего приложения */
 export const MAINAPI_URL = 'https://csn.sytes.net/api/v1';
 
+export const CONFERENCES_URL = 'https://csn.sytes.net/conference.html';
+
 export const TOKEN_NAME = 'TOKEN_NAME';
 
 export const COOKIES_OPTIONS = {
@@ -36,3 +38,19 @@ export const monthes = [
   'Ноябрь',
   'Декабрь',
 ];
+
+export const monthsMap = new Map([
+  ['January', 'января'],
+  ['February', 'февраля'],
+  ['March', 'марта'],
+  ['April ', 'апреля'],
+  ['May ', 'мая'],
+  ['June', 'июня'],
+  ['July', 'июля'],
+  ['August', 'августа'],
+  ['September', 'сентября'],
+  ['October', 'октября'],
+  ['November ', 'ноября'],
+  ['January', 'января'],
+  ['December', 'декабря'],
+]);

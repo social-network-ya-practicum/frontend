@@ -9,6 +9,7 @@ import { handlerDataFormat } from '../../utils/data-format';
 import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/default-avatar.svg';
 import Comments from '../comments/comments';
+import FileView from '../common/file-view/file-view';
 
 const Post = observer(
   ({
@@ -22,6 +23,8 @@ const Post = observer(
     id,
     admin,
     currentUser,
+    comments,
+    files,
   }) => {
     const [value, setValue] = useState(text);
     const [isPostChanging, setIsPostchanging] = useState(false);
@@ -32,6 +35,10 @@ const Post = observer(
     const { editPost, deletePost, likePost, dislikePost } = postsStore;
 
     const isLiked = postslikes.some((item) => item === currentUser.id);
+
+    const postFiles = files.map((file) => (
+      <FileView inPost link={file.file_link} name={file.file_title} />
+    ));
 
     function handleEditClick() {
       setIsPostchanging(true);
@@ -83,7 +90,6 @@ const Post = observer(
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
-          {/* <div className={styles.post__avatar}> </div> */}
           <NavLink to={toPath}>
             <RoundIcon
               size="small-plus"
@@ -116,6 +122,7 @@ const Post = observer(
 
         {!isPostChanging ? (
           <>
+            <ul className={styles.post__fileList}>{postFiles}</ul>
             <div className={styles.post__container}>
               <div className={styles.post__likeContainer}>
                 <button
@@ -130,14 +137,17 @@ const Post = observer(
                 </button>
                 <span className={styles.post__likeCounter}>{likecount}</span>
               </div>
-
-              <div className={styles.post__likeContainer}>
-                <button className={styles.post__comments}> </button>
-                <span className={styles.post__likeCounter}>5</span>
-              </div>
+              {comments.length !== 0 && (
+                <div className={styles.post__likeContainer}>
+                  <button className={styles.post__comments}> </button>
+                  <span className={styles.post__likeCounter}>
+                    {comments.length}
+                  </span>
+                </div>
+              )}
             </div>
 
-            <Comments />
+            <Comments comments={comments} postID={id} />
           </>
         ) : (
           <div className={styles.post__change}>
@@ -210,6 +220,11 @@ Post.propTypes = {
       image_link: PropTypes.string,
     })
   ),
+  files: PropTypes.arrayOf(
+    PropTypes.shape({
+      file_link: PropTypes.string,
+    })
+  ),
   postslikes: PropTypes.arrayOf(PropTypes.number),
   likecount: PropTypes.number,
   id: PropTypes.number,
@@ -217,6 +232,17 @@ Post.propTypes = {
   currentUser: PropTypes.shape({
     id: PropTypes.number,
   }),
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      text: PropTypes.string,
+      author: PropTypes.shape({
+        id: PropTypes.number,
+        first_name: PropTypes.string,
+        last_name: PropTypes.string,
+      }),
+    })
+  ),
 };
 
 Post.defaultProps = {
@@ -232,6 +258,11 @@ Post.defaultProps = {
       image_link: '',
     },
   ],
+  files: [
+    {
+      file_link: '',
+    },
+  ],
   postslikes: [3, 4, 5],
   likecount: 18,
   id: 1,
@@ -239,4 +270,15 @@ Post.defaultProps = {
   currentUser: {
     id: 4,
   },
+  comments: [
+    {
+      id: 3,
+      text: 'текст коммента',
+      author: {
+        id: 16,
+        first_name: 'Ларри',
+        last_name: 'Трейнор',
+      },
+    },
+  ],
 };

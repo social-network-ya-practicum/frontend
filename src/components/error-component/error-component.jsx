@@ -75,5 +75,5 @@ ErrorComponent.propTypes = {
 };
 
 ErrorComponent.defaultProps = {
-  lifeTime: 30000,
+  lifeTime: 15000,
 };

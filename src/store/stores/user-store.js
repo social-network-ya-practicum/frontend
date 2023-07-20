@@ -37,6 +37,7 @@ class UserStore {
           bio: user?.bio ?? '',
           photo: user?.photo ?? null,
           followings: user?.followings ?? [],
+          department: user?.department ?? '',
         }
       : user;
   }
@@ -135,7 +136,7 @@ class UserStore {
     this.setError(null);
     let isSuccess = false;
     try {
-      const res = await api.patchUserAvatar(data);
+      const res = await api.patchUserData(data);
       this.setUserRes(res);
       isSuccess = true;
     } catch (err) {

@@ -11,6 +11,7 @@ import ProtectedRoute from '../protected-route/protected-route';
 import EditPage from '../../pages/edit-page/edit-page';
 import UserPage from '../../pages/user-page/user-page';
 import ContactPage from '../../pages/contact-page/contact-page';
+import PageNotFound from '../../pages/page-not-found/page-not-found';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import ProtectedUser from '../protected-user/protected-user';
 import ProtectedContact from '../protected-contact/protected-contact';
@@ -77,7 +78,6 @@ const App = observer(() => {
         />
       </Route>
       <Route path="*" element={<Navigate to="/404" replace />} />
-      <Route path="/404" element={<div>Page 404</div>} />
     </Routes>
   );
 });
