@@ -5,11 +5,15 @@ import styles from './comment.module.scss';
 import defaultAvatar from '../../../image/default-avatar.svg';
 import Popup from '../popup/popup';
 import Textarea from '../textarea/textarea';
+import { useStore } from '../../../contexts/RootStoreContext';
 
-function Comment({ author, text }) {
+function Comment({ author, text, commentID, postID }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isCommentChanging, setIsCommentChanging] = useState(false);
   const [value, setValue] = useState(text);
+
+  const { postsStore } = useStore();
+  const { editComment, deleteComment } = postsStore;
 
   const handleClosePopup = useCallback(() => {
     setIsPopupOpen(false);
@@ -24,13 +28,18 @@ function Comment({ author, text }) {
     handleClosePopup();
   };
 
+  const handleDeleteComment = () => {
+    deleteComment(commentID, postID);
+  };
+
   const handleCancelClick = () => {
-    setValue('отменили изменения');
+    setValue(text);
     setIsCommentChanging(false);
   };
 
   const handleSaveChange = () => {
-    setValue('сохранили изменения');
+    // setValue('сохранили изменения');
+    editComment({ id: commentID, author, text: value }, postID);
     setIsCommentChanging(false);
   };
 
@@ -39,7 +48,7 @@ function Comment({ author, text }) {
       <div className={styles.comment__avatar}>
         <RoundIcon
           size="small"
-          src={defaultAvatar || author.photo}
+          src={author.photo || defaultAvatar}
           alt="аватар"
         />
       </div>
@@ -93,6 +102,7 @@ function Comment({ author, text }) {
             </button>
             <button
               className={`${styles.comment__btn} ${styles.comment__btn_type_delete}`}
+              onClick={handleDeleteComment}
             >
               Удалить комментарий
             </button>
@@ -106,7 +116,8 @@ function Comment({ author, text }) {
 export default Comment;
 
 Comment.propTypes = {
-  // id: PropTypes.number,
+  commentID: PropTypes.number,
+  postID: PropTypes.number,
   text: PropTypes.string,
   author: PropTypes.shape({
     id: PropTypes.number,
@@ -117,7 +128,8 @@ Comment.propTypes = {
 };
 
 Comment.defaultProps = {
-  // id: 3,
+  commentID: 3,
+  postID: 3,
   text: 'текст коммента',
   author: {
     id: 16,

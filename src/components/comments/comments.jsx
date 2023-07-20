@@ -6,7 +6,13 @@ import styles from './comments.module.scss';
 
 const Comments = observer(({ comments, postID }) => {
   const commentsList = comments.map((comment) => (
-    <Comment key={comment.id} author={comment.author} text={comment.text} />
+    <Comment
+      key={comment.id}
+      commentID={comment.id}
+      author={comment.author}
+      text={comment.text}
+      postID={postID}
+    />
   ));
 
   return (

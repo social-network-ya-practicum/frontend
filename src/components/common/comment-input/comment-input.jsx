@@ -14,6 +14,7 @@ function CommentInput({ postID }) {
   const { postsStore, userStore } = useStore();
   const { addComment } = postsStore;
   const { user } = userStore;
+  // console.log(user)
 
   // авто высота
   const textStyle = {
@@ -57,7 +58,11 @@ function CommentInput({ postID }) {
     <div className={styles.commentInput}>
       <form className={styles.commentInput__form}>
         <div className={styles.commentInput__box}>
-          <RoundIcon size="small" src={defaultAvatar} alt="аватар" />
+          <RoundIcon
+            size="small"
+            src={user.photo || defaultAvatar}
+            alt="аватар"
+          />
           <textarea
             onChange={handleChange}
             placeholder="Добавит комментарий"
