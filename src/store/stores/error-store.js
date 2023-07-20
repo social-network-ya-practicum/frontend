@@ -8,7 +8,7 @@ class ErrorStore {
 
   get isInvalidToken() {
     const { message } = this.privateError;
-    return message === 'Недопустимый токен';
+    return message === 'Недопустимый токен.';
   }
 
   get isContactExist() {
@@ -24,7 +24,6 @@ class ErrorStore {
     const errId = id || generateId();
     if (isPrivate) {
       this.privateError = { id: errId, message, from };
-      console.error(`Error from ${from}\n${message}`);
     } else {
       this.errors = [{ id: errId, message, from }, ...this.errors];
     }

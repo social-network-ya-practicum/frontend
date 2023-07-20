@@ -20,10 +20,7 @@ class MainApi {
 
     try {
       return await res.json().then((err) => {
-        // Пока у бэков проблемы с отдачей ошибки под конкретным ключом, вывожу JSON
-        // для всех без обработки
-        const message = JSON.stringify(err);
-        // const message = err.errors[0].detail;
+        const message = err.errors[0].detail;
         throw new CustomError(
           handleErrors({
             message,
