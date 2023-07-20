@@ -43,6 +43,15 @@
       //   color: var.$text_color_secondary2;
       // }
     }
+
+    &_active{
+      &:hover{
+        color: var.$text_color_default; 
+        &::before {
+          content: url(./icons/doc_active.svg);
+        }
+      }  
+    }
   }
 
   &__span {

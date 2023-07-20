@@ -37,7 +37,7 @@ const Post = observer(
     const isLiked = postslikes.some((item) => item === currentUser.id);
 
     const postFiles = files.map((file) => (
-      <FileView inPost link={file.file_link} />
+      <FileView inPost link={file.file_link} name={file.file_title} />
     ));
 
     function handleEditClick() {
@@ -123,15 +123,7 @@ const Post = observer(
 
         {!isPostChanging ? (
           <>
-            <ul className={styles.post__fileList}>
-              {/* <li className={styles.post__fileItem}>
-                <FileView inPost />
-              </li>
-              <li className={styles.post__fileItem}>
-                <FileView inPost />
-              </li> */}
-              {postFiles}
-            </ul>
+            <ul className={styles.post__fileList}>{postFiles}</ul>
             <div className={styles.post__container}>
               <div className={styles.post__likeContainer}>
                 <button
