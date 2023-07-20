@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styles from './comment-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
+import { useStore } from '../../../contexts/RootStoreContext';
 
-function CommentInput() {
+function CommentInput({ postID }) {
   const [isInputActive, setIsInputActive] = useState(false);
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');
   const onChange = (event) => setValue(event.target.value);
+
+  const { postsStore, userStore } = useStore();
+  const { addComment } = postsStore;
+  const { user } = userStore;
 
   // авто высота
   const textStyle = {
@@ -42,7 +48,8 @@ function CommentInput() {
   }
 
   function handleAddComment() {
-    console.log('коммент отправим но нет апи');
+    // console.log('коммент отправим но нет апи');
+    addComment({ text: value, author: user }, postID);
     handleCleanClick();
   }
 
@@ -93,3 +100,11 @@ function CommentInput() {
 }
 
 export default CommentInput;
+
+CommentInput.propTypes = {
+  postID: PropTypes.number,
+};
+
+CommentInput.defaultProps = {
+  postID: 1,
+};

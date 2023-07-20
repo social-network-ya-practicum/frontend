@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react-lite';
 import CommentInput from '../common/comment-input/comment-input';
 import Comment from '../common/comment/comment';
 import styles from './comments.module.scss';
 
-function Comments({ comments }) {
+const Comments = observer(({ comments, postID }) => {
   const commentsList = comments.map((comment) => (
-    <Comment key={comment.id} author={comment.author} />
+    <Comment key={comment.id} author={comment.author} text={comment.text} />
   ));
 
   return (
@@ -17,14 +18,15 @@ function Comments({ comments }) {
         </button>
       </ul>
 
-      <CommentInput />
+      <CommentInput postID={postID} />
     </div>
   );
-}
+});
 
 export default Comments;
 
 Comments.propTypes = {
+  postID: PropTypes.number,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -39,6 +41,7 @@ Comments.propTypes = {
 };
 
 Comments.defaultProps = {
+  postID: 1,
   comments: [
     {
       id: 3,
