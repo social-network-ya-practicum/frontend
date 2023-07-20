@@ -1,0 +1,46 @@
+@use "../../variables" as var;
+
+.container {
+  padding-bottom: 44px;
+
+  &__header {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -0.24px;
+    padding-bottom: 36px;
+  }
+  
+  &__groupsList {
+    list-style-type: none;
+    display: flex;
+    overflow: hidden;
+    width: 941px;
+    gap: 68.5px;
+  }
+}
+
+.scrollArrows {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+
+  &__arrow {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 35px;
+    background: var.$bg_color_secondary;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__arrowRight {
+    transform: rotate(180deg);
+  }
+}
