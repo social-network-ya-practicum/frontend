@@ -147,7 +147,7 @@ const Post = observer(
               )}
             </div>
 
-            <Comments comments={comments} />
+            <Comments comments={comments} postID={id} />
           </>
         ) : (
           <div className={styles.post__change}>
