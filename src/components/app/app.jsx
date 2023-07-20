@@ -47,6 +47,7 @@ const App = observer(() => {
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
             <Route path="groups" element={<GroupsPage />} />
+            <Route path="/404" element={<PageNotFound />} />
           </Route>
           <Route
             path="contacts/:contactId"
