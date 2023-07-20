@@ -1,11 +1,9 @@
 name: CSN frontend
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - closed
+  push:
+    branches:
+      - 'develop'
 
 jobs:
   build_and_push_to_docker_hub:
