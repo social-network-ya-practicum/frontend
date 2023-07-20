@@ -6,6 +6,10 @@ import errorStore from './error-store';
 const { addError } = errorStore;
 
 class PostsStore {
+  limit = 10;
+
+  isNextPage = false;
+
   posts = [];
 
   userPosts = [];
@@ -68,13 +72,19 @@ class PostsStore {
     }
   };
 
-  getPosts = () => {
+  getPosts = (offset = 0) => {
+    if (offset && !this.isNextPage) return;
+    const queryString = `?${new URLSearchParams({
+      limit: this.limit,
+      offset,
+    }).toString()}`;
     this.setIsLoading(true);
     api
-      .getPostsList()
+      .getPostsList(queryString)
       .then((data) => {
         runInAction(() => {
-          this.posts = data.results;
+          this.posts = offset ? [...this.posts, ...data.results] : data.results;
+          this.isNextPage = !!data.next;
         });
       })
       .catch((err) => addError(err))

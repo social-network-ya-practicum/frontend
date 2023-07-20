@@ -198,8 +198,8 @@ class MainApi {
       .catch((err) => this._handleError(err, 'getBirthdayList'));
 
   /** Получаем список постов */
-  getPostsList = () =>
-    fetch(`${this._url}/posts`, {
+  getPostsList = (params = '') =>
+    fetch(`${this._url}/posts${params}`, {
       credentials: 'include',
       headers: {
         ...this._headers,
