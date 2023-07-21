@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './enter-the-group.module.scss';
 import Button from '../common/button/button';
 import RoundIcon from '../common/round-icon/round-icon';
+import defaultAvatar from '../../image/default-avatar.svg';
 
 function EnterTheGroup({
   title,
@@ -12,10 +13,10 @@ function EnterTheGroup({
   followersCount,
   handleSubscribe,
 }) {
-  const followersNew = followers.slice(0, 5);
+  const followersNew = followers.slice(-5);
   const followersElements = followersNew.map((follower) => (
-    <li key={follower.id}>
-      <RoundIcon size="medium-minus" src={follower.photo} />
+    <li key={follower.id} className={styles.enterTheGroup__avatar}>
+      <RoundIcon size="medium-minus" src={follower.photo || defaultAvatar} />
     </li>
   ));
 
@@ -26,9 +27,7 @@ function EnterTheGroup({
       <p className={styles.enterTheGroup__text}>{description}</p>
       <div className={styles.enterTheGroup__container}>
         <div className={styles.enterTheGroup__followers}>
-          <div className={styles.enterTheGroup__avatars}>
-            {followersElements}
-          </div>
+          <ul className={styles.enterTheGroup__avatars}>{followersElements}</ul>
           <p className={styles.enterTheGroup__count}>
             {followersCount} участников
           </p>

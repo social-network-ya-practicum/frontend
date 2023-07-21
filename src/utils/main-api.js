@@ -416,7 +416,7 @@ class MainApi {
 
   /**  Подписываемся на группу */
   postGroup = (data) =>
-    fetch(`${this._url}/groups/${data.id}/subscribe`, {
+    fetch(`${this._url}/groups/${data}/subscribe/`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -425,8 +425,6 @@ class MainApi {
       },
       body: JSON.stringify({
         created_date: data.created_date,
-        followers: data.followers,
-        id: data.id,
       }),
     })
       .then((res) => this._handleResponse(res, 'postGroup'))

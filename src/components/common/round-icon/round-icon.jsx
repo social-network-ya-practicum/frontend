@@ -7,7 +7,7 @@ function RoundIcon({ size, src, alt, mixBlock, mixImg }) {
     {
       [styles.roundIconBlockSmall]: size === 'small',
       [styles.roundIconBlockSmallPlus]: size === 'small-plus',
-      [styles.roundIconBlockMedium]: size === 'medium-minus',
+      [styles.roundIconBlockMediumMinus]: size === 'medium-minus',
       [styles.roundIconBlockMedium]: size === 'medium',
       [styles.roundIconBlockLarge]: size === 'large',
     },

@@ -4,7 +4,7 @@
   width: 941px;
   height: 355px;
   border-radius: 16px;
-  background: linear-gradient(90deg, #0EB0D1 14.06%, #1FC995 79.17%);
+  background: linear-gradient(90deg, #0eb0d1 14.06%, #1fc995 79.17%);
   padding: 44px 52px 28px 44px;
 
   &__title {
@@ -41,12 +41,17 @@
 
   &__followers {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
   }
 
   &__avatars {
     display: flex;
-    gap: -10px;
+  }
+
+  &__avatar {
+    display: flex;
+    list-style-type: none;
+    margin-left: -10px;
   }
 
   &__count {
@@ -57,7 +62,5 @@
     color: var.$text_color_light;
     margin-left: 3px;
   }
-
-  
 
 }

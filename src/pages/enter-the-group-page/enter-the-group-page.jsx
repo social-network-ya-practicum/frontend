@@ -5,10 +5,11 @@ import { useStore } from '../../contexts/RootStoreContext';
 import styles from './enter-the-group-page.module.scss';
 import Post from '../../components/post/post';
 import EnterTheGroup from '../../components/enter-the-group/enter-the-group';
+import GroupInfo from '../../components/group-info/group-info';
+import Conferences from '../../components/common/conferences/conferences';
 
 const EnterTheGroupPage = observer(() => {
-  const { userStore, groupStore, postsStore } = useStore();
-  const { posts } = postsStore;
+  const { userStore, groupStore } = useStore();
   const { group, getGroup, postGroup } = groupStore;
   const { user } = userStore;
 
@@ -18,15 +19,13 @@ const EnterTheGroupPage = observer(() => {
     getGroup(groupId);
   }, [getGroup, groupId]);
 
-  console.log(group);
-
-  // const { posts } = group.posts_group;
-
   const handleSubscribe = () => {
     postGroup(groupId);
   };
 
-  const postsElements = posts.map((post) => (
+  if (!group) return null;
+
+  const postsElements = group.posts_group.map((post) => (
     <Post
       {...post}
       post={post}
@@ -42,21 +41,38 @@ const EnterTheGroupPage = observer(() => {
     />
   ));
 
-  return (
-    <div className={styles.enterTheGroupPage}>
-      <EnterTheGroup
-        title={group.title}
-        imageLink={group.image_link}
-        description={group.description}
-        followers={group.followers}
-        followersCount={group.followers_count}
-        handleSubscribe={handleSubscribe}
-      />
-      <div>
-        <ul className={styles.enterTheGroupPage__posts}>{postsElements}</ul>
-      </div>
-    </div>
-  );
+  let rendered;
+
+  if (user.followings.findIndex((id) => id === group.id) !== -1)
+    rendered = (
+      <>
+        <div>
+          <ul className={styles.enterTheGroupPage__posts}>{postsElements}</ul>
+        </div>
+        <div className={styles.enterTheGroupPage__container}>
+          <GroupInfo />
+          <Conferences />
+        </div>
+      </>
+    );
+  else
+    rendered = (
+      <>
+        <EnterTheGroup
+          title={group.title}
+          imageLink={group.image_link}
+          description={group.description}
+          followers={group.followers}
+          followersCount={group.followers_count}
+          handleSubscribe={handleSubscribe}
+        />
+        <div>
+          <ul className={styles.enterTheGroupPage__posts}>{postsElements}</ul>
+        </div>
+      </>
+    );
+
+  return <div className={styles.enterTheGroupPage}>{rendered}</div>;
 });
 
 export default EnterTheGroupPage;
