@@ -78,7 +78,6 @@ const PostInput = observer(() => {
           },
         ]);
       }
-      // console.log(images)
     };
   };
 
