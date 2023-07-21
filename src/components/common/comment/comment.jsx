@@ -12,7 +12,8 @@ function Comment({ author, text, commentID, postID }) {
   const [isCommentChanging, setIsCommentChanging] = useState(false);
   const [value, setValue] = useState(text);
 
-  const { postsStore } = useStore();
+  const { postsStore, userStore } = useStore();
+  const { user } = userStore;
   const { editComment, deleteComment } = postsStore;
 
   const handleClosePopup = useCallback(() => {
@@ -53,7 +54,7 @@ function Comment({ author, text, commentID, postID }) {
         />
       </div>
       <div className={styles.comment__box}>
-        {!isCommentChanging && (
+        {!isCommentChanging && author.id === user.id && (
           <button className={styles.comment__more} onClick={handleOpenClick}>
             {' '}
           </button>

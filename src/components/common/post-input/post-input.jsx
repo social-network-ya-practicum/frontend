@@ -5,6 +5,7 @@ import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
 import FileBubble from '../file-bubble/file-bubble';
+import { generateId } from '../../../utils/utils';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -70,7 +71,7 @@ const PostInput = observer(() => {
         setFiles([
           ...files,
           {
-            id: Math.floor(Math.random() * 1000),
+            id: generateId(),
             file_title: fileImg.name,
             file_link: reader.result,
           },
