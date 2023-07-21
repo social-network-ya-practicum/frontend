@@ -6,6 +6,7 @@ import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
 import FileBubble from '../file-bubble/file-bubble';
 import { generateId } from '../../../utils/utils';
+import { regex } from '../../../utils/settings';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -95,7 +96,12 @@ const PostInput = observer(() => {
     return arr;
   }
 
-  const onChange = (event) => setValue(event.target.value);
+  const onChange = (event) => {
+    const inputValue = event.target.value;
+    if (regex.test(inputValue)) {
+      setValue(inputValue);
+    }
+  };
 
   useEffect(() => {
     setHeightText('auto');
