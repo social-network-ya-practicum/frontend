@@ -18,7 +18,7 @@ const Comments = observer(({ comments, postID }) => {
     getComments(postID, 10);
     setPage();
   };
-  console.log(commentsData);
+  // console.log(commentsData);
   const commentsList = comments.map((comment) => (
     <Comment
       key={comment.id}

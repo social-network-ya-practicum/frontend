@@ -8,7 +8,7 @@ const { addError } = errorStore;
 class PostsStore {
   posts = [];
 
-  limit = 10;
+  limit = 1000;
 
   offset = 5;
 
@@ -45,8 +45,8 @@ class PostsStore {
       // console.log(...this.posts[postIndex])
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
-        // comments
-        comments: this.posts[postIndex].comments.concat(comments),
+        comments,
+        // comments: this.posts[postIndex].comments.concat(comments),
       });
     }
     if (userPostIndex >= 0) {
@@ -69,8 +69,8 @@ class PostsStore {
     if (postIndex >= 0) {
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
-        // comments: newComments,
-        comments: this.posts[postIndex].comments.concat(newComments),
+        comments: newComments,
+        // comments: this.posts[postIndex].comments.concat(newComments),
       });
     }
     if (userPostIndex >= 0) {
