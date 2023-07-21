@@ -414,6 +414,24 @@ class MainApi {
    * POST - запросы НАЧАЛО
    */
 
+  /**  Подписываемся на группу */
+  postGroup = (data) =>
+    fetch(`${this._url}/groups/${data.id}/subscribe`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        created_date: data.created_date,
+        followers: data.followers,
+        id: data.id,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postGroup'))
+      .catch((err) => this._handleError(err, 'postGroup'));
+
   /**  Создаём пост */
   postUserPost = (data) =>
     fetch(`${this._url}/posts/`, {

@@ -1,0 +1,63 @@
+@use '../../variables' as var;
+
+.enterTheGroup {
+  width: 941px;
+  height: 355px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #0EB0D1 14.06%, #1FC995 79.17%);
+  padding: 44px 52px 28px 44px;
+
+  &__title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -0.24px;
+    color: var.$text_color_light;
+  }
+
+  &__img {
+    width: 734px;
+    height: 76px;
+    border-radius: 16px;
+    margin: 20px 0 16px;
+    object-fit: cover;
+  }
+
+  &__text {
+    width: 734px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    color: var.$text_color_light;
+  }
+
+  &__container {
+    display: flex;
+    margin-top: 45px;
+    justify-content: space-between;
+  }
+
+  &__followers {
+    display: flex;
+    align-items: end;
+  }
+
+  &__avatars {
+    display: flex;
+    gap: -10px;
+  }
+
+  &__count {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    color: var.$text_color_light;
+    margin-left: 3px;
+  }
+
+  
+
+}
