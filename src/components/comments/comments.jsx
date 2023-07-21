@@ -4,14 +4,21 @@ import { observer } from 'mobx-react-lite';
 import CommentInput from '../common/comment-input/comment-input';
 import Comment from '../common/comment/comment';
 import styles from './comments.module.scss';
+import { useStore } from '../../contexts/RootStoreContext';
 
 const Comments = observer(({ comments, postID }) => {
   // const [displayedComments, setDisplayedComments] = useState(comments.slice(0, 3));
 
-  // const handleShownNext = () => {
-  //   setDisplayedComments(comments.slice(0, displayedComments.length + 10))
-  // }
+  const { postsStore } = useStore();
+  const { getComments, commentsData, setPage } = postsStore;
 
+  const handleShownNext = () => {
+    // setDisplayedComments(comments.slice(0, displayedComments.length + 10))
+
+    getComments(postID, 10);
+    setPage();
+  };
+  console.log(commentsData);
   const commentsList = comments.map((comment) => (
     <Comment
       key={comment.id}
@@ -26,11 +33,8 @@ const Comments = observer(({ comments, postID }) => {
     <div className={styles.comments}>
       <ul className={styles.comments__list}>
         {commentsList}
-        {commentsList.length > 4 && (
-          <button
-            className={styles.comments__more}
-            // onClick={handleShownNext}
-          >
+        {commentsList.length > 4 && commentsData.next !== null && (
+          <button className={styles.comments__more} onClick={handleShownNext}>
             Показать следующие комментарии
           </button>
         )}

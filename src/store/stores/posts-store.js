@@ -8,6 +8,12 @@ const { addError } = errorStore;
 class PostsStore {
   posts = [];
 
+  limit = 10;
+
+  offset = 5;
+
+  commentsData = {};
+
   userPosts = [];
 
   isLoading = false;
@@ -15,6 +21,10 @@ class PostsStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  setPage = () => {
+    this.offset += this.limit;
+  };
 
   setIsLoading = (bool) => {
     this.isLoading = bool;
@@ -32,9 +42,11 @@ class PostsStore {
     const postIndex = this.posts.findIndex((p) => p.id === postID);
     const userPostIndex = this.userPosts.findIndex((p) => p.id === postID);
     if (postIndex >= 0) {
+      // console.log(...this.posts[postIndex])
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
-        comments,
+        // comments
+        comments: this.posts[postIndex].comments.concat(comments),
       });
     }
     if (userPostIndex >= 0) {
@@ -57,7 +69,8 @@ class PostsStore {
     if (postIndex >= 0) {
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
-        comments: newComments,
+        // comments: newComments,
+        comments: this.posts[postIndex].comments.concat(newComments),
       });
     }
     if (userPostIndex >= 0) {
@@ -200,13 +213,16 @@ class PostsStore {
 
   getComments = (postID, params) => {
     const queryString = params
-      ? `?${new URLSearchParams(params).toString()}`
+      ? `?${new URLSearchParams(params).toString()}&limit=${
+          this.limit
+        }&offset=${this.offset}`
       : '';
 
     this.setIsLoading(true);
     api
       .getCommentsList(postID, queryString)
       .then((data) => {
+        this.commentsData = data;
         this.setCommentsInPost(postID, data.results);
       })
       .catch((err) => addError(err))
