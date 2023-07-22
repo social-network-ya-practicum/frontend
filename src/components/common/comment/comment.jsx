@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import RoundIcon from '../round-icon/round-icon';
 import styles from './comment.module.scss';
 import defaultAvatar from '../../../image/default-avatar.svg';
@@ -12,8 +13,11 @@ function Comment({ author, text, commentID, postID }) {
   const [isCommentChanging, setIsCommentChanging] = useState(false);
   const [value, setValue] = useState(text);
 
-  const { postsStore } = useStore();
+  const { postsStore, userStore } = useStore();
+  const { user } = userStore;
   const { editComment, deleteComment } = postsStore;
+  const toPath =
+    author.id === user.id ? `/${author.id}` : `/contacts/${author.id}`;
 
   const handleClosePopup = useCallback(() => {
     setIsPopupOpen(false);
@@ -46,21 +50,25 @@ function Comment({ author, text, commentID, postID }) {
   return (
     <li className={styles.comment}>
       <div className={styles.comment__avatar}>
-        <RoundIcon
-          size="small"
-          src={author.photo || defaultAvatar}
-          alt="аватар"
-        />
+        <NavLink to={toPath}>
+          <RoundIcon
+            size="small"
+            src={author.photo || defaultAvatar}
+            alt="аватар"
+          />
+        </NavLink>
       </div>
       <div className={styles.comment__box}>
-        {!isCommentChanging && (
+        {!isCommentChanging && author.id === user.id && (
           <button className={styles.comment__more} onClick={handleOpenClick}>
             {' '}
           </button>
         )}
-        <p className={styles.comment__owner}>
-          {author.first_name} {author.last_name}
-        </p>
+        <NavLink to={toPath} className={styles.comment__owner}>
+          <p className={styles.comment__owner}>
+            {author.first_name} {author.last_name}
+          </p>
+        </NavLink>
 
         {!isCommentChanging ? (
           <p className={styles.comment__text}>{value}</p>

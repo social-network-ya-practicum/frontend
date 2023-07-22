@@ -1,13 +1,19 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import styles from './textarea.module.scss';
+import { regex } from '../../../utils/settings';
 
 function Textarea({ value, setValue, charLimit, isPostChanging }) {
   const [textExpanded, setTextExpanded] = useState(false);
 
   const [height, setHeight] = useState('auto');
 
-  const onChange = (event) => setValue(event.target.value);
+  const onChange = (event) => {
+    const inputValue = event.target.value;
+    if (regex.test(inputValue)) {
+      setValue(inputValue);
+    }
+  };
 
   useEffect(() => {
     setHeight('auto');
