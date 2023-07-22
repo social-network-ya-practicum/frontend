@@ -6,7 +6,9 @@ import errorStore from './error-store';
 const { addError } = errorStore;
 
 class PostsStore {
-  limit = 10;
+  limit = 5;
+
+  offset = 0;
 
   isNextPage = false;
 
@@ -30,6 +32,10 @@ class PostsStore {
 
   cleanUserPosts = () => {
     this.userPosts = [];
+  };
+
+  setPage = () => {
+    this.offset += this.limit;
   };
 
   setCommentsInPost = (postID, comments) => {
@@ -72,18 +78,20 @@ class PostsStore {
     }
   };
 
-  getPosts = (offset = 0) => {
-    if (offset && !this.isNextPage) return;
+  getPosts = () => {
+    if (this.offset && !this.isNextPage) return;
     const queryString = `?${new URLSearchParams({
       limit: this.limit,
-      offset,
+      offset: this.offset,
     }).toString()}`;
     this.setIsLoading(true);
     api
       .getPostsList(queryString)
       .then((data) => {
         runInAction(() => {
-          this.posts = offset ? [...this.posts, ...data.results] : data.results;
+          this.posts = this.offset
+            ? [...this.posts, ...data.results]
+            : data.results;
           this.isNextPage = !!data.next;
         });
       })
@@ -109,6 +117,7 @@ class PostsStore {
       .then((newPost) => {
         runInAction(() => {
           this.posts.unshift(newPost);
+          this.posts.pop();
         });
       })
       .catch((err) => addError(err))
@@ -122,6 +131,11 @@ class PostsStore {
       .then(() => {
         runInAction(() => {
           this.posts = this.posts.filter((post) => post.id !== id);
+          if (this.offset === 0) {
+            this.getPosts();
+          } else {
+            this.offset = 0;
+          }
         });
       })
       .catch((err) => addError(err))

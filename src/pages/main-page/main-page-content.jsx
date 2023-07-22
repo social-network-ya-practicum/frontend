@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import BirthdayPlate from '../../components/birthday-plate/birthday-plate';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -15,24 +15,20 @@ const MainPageContent = observer(() => {
   const [filter, setFilter] = useState(null);
   const [choosenButton, setChoosenButton] = useState(1);
   const { postsStore, userStore, birthdaysStore } = useStore();
-  const { posts, getPosts, isLoading, limit, isNextPage } = postsStore;
+  const { posts, getPosts, isLoading, offset, setPage, isNextPage } =
+    postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
+
   const ref = useRef();
-
-  const [offset, setOffset] = useState(0);
-  const setPage = useCallback(() => {
-    setOffset((prevState) => prevState + limit);
-  }, [limit]);
-
   usePagingObserver(ref, isLoading, setPage, isNextPage);
 
   const filteredPosts = filter
-    ? posts.filter((item) => item.text === filter)
+    ? posts.filter((item) => item.group === filter)
     : posts;
 
   useEffect(() => {
-    getPosts(offset);
+    getPosts();
   }, [getPosts, offset]);
 
   useEffect(() => {
