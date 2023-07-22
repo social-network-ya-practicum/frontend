@@ -125,6 +125,7 @@ class PostsStore {
       .then(() => {
         runInAction(() => {
           this.posts = this.posts.filter((post) => post.id !== id);
+          this.userPosts = this.userPosts.filter((post) => post.id !== id);
         });
       })
       .catch((err) => addError(err))
@@ -138,6 +139,12 @@ class PostsStore {
       .then((updatedPost) => {
         runInAction(() => {
           this.posts = this.posts.map((p) => {
+            if (p.id === updatedPost.id) {
+              return updatedPost;
+            }
+            return p;
+          });
+          this.userPosts = this.userPosts.map((p) => {
             if (p.id === updatedPost.id) {
               return updatedPost;
             }
