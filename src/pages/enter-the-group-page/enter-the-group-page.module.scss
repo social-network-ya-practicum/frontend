@@ -1,0 +1,15 @@
+.enterTheGroupPage {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+  &__posts {
+    min-width: 552px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

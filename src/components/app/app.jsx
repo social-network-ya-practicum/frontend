@@ -16,6 +16,7 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import ProtectedUser from '../protected-user/protected-user';
 import ProtectedContact from '../protected-contact/protected-contact';
 import GroupsPage from '../../pages/groups-page/groups-page';
+import EnterTheGroupPage from '../../pages/enter-the-group-page/enter-the-group-page';
 
 const App = observer(() => {
   const { userStore } = useStore();
@@ -47,7 +48,8 @@ const App = observer(() => {
             <Route index element={<MainPageContent />} />
             <Route path="contacts" element={<ContactsPage />} />
             <Route path="groups" element={<GroupsPage />} />
-            <Route path="/404" element={<PageNotFound />} />
+            <Route path="groups/:groupId" element={<EnterTheGroupPage />} />
+            <Route path="404" element={<PageNotFound />} />
           </Route>
           <Route
             path="contacts/:contactId"
