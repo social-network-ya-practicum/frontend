@@ -32,6 +32,10 @@ class PostsStore {
     this.offset += this.limit;
   };
 
+  resetOffset = () => {
+    this.offset = 0;
+  };
+
   setIsLoading = (bool) => {
     this.isLoading = bool;
   };
@@ -139,6 +143,7 @@ class PostsStore {
       .deletePost(id)
       .then(() => {
         runInAction(() => {
+          this.posts = this.posts.filter((post) => post.id !== id);
           if (this.offset === 0) {
             this.getPosts();
           } else {

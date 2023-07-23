@@ -15,8 +15,15 @@ const MainPageContent = observer(() => {
   const [filter, setFilter] = useState(null);
   const [choosenButton, setChoosenButton] = useState(1);
   const { postsStore, userStore, birthdaysStore } = useStore();
-  const { posts, getPosts, isLoading, offset, setPage, isNextPage } =
-    postsStore;
+  const {
+    posts,
+    getPosts,
+    isLoading,
+    offset,
+    setPage,
+    resetOffset,
+    isNextPage,
+  } = postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
 
@@ -29,6 +36,11 @@ const MainPageContent = observer(() => {
 
   useEffect(() => {
     getPosts();
+    resetOffset();
+  }, [getPosts, resetOffset]);
+
+  useEffect(() => {
+    if (offset !== 0) getPosts();
   }, [getPosts, offset]);
 
   useEffect(() => {
