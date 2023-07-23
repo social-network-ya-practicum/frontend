@@ -63,6 +63,7 @@ const ScrollableContainer = forwardRef(
     };
 
     const handleMouseDown = (e) => {
+      e.preventDefault();
       const scrollY = scrollRef.current.getBoundingClientRect().top;
       const mouseY = e.clientY;
       const delta = mouseY - scrollY;

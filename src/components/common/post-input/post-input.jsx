@@ -7,6 +7,8 @@ import defaultAvatar from '../../../image/default-avatar.svg';
 import FileBubble from '../file-bubble/file-bubble';
 import { generateId } from '../../../utils/utils';
 import { regex } from '../../../utils/settings';
+import useValidator from '../../../hooks/use-validator';
+import useError from '../../../hooks/use-error';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -22,11 +24,13 @@ const PostInput = observer(() => {
 
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
 
+  const { checkImage } = useValidator();
+  const { setError, clearError } = useError();
+
   function handleCancelFile(id) {
     const updatedFiles = files.filter((file) => file.id !== id);
     setFiles(updatedFiles);
   }
-
   const fileList = files.map((file) => (
     <FileBubble
       name={file.file_title}
@@ -51,6 +55,13 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
+
+    const err = checkImage(fileImg);
+    if (err) {
+      setError(err);
+      //  refInput.current.value = null;
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
@@ -191,6 +202,7 @@ const PostInput = observer(() => {
                   id="post-input__img"
                   className={styles.postInput__file}
                   onChange={handleFileChange}
+                  onClick={() => clearError()}
                 />
               </label>
 
@@ -247,6 +259,7 @@ const PostInput = observer(() => {
                     id="post-input__img"
                     className={styles.postInput__file}
                     onChange={handleFileChange}
+                    onClick={() => clearError()}
                   />
                 </label>
 
@@ -259,6 +272,7 @@ const PostInput = observer(() => {
                     id="post-input__file"
                     className={styles.postInput__file}
                     onChange={handleFileChange}
+                    onClick={() => clearError()}
                   />
                 </label>
                 <button

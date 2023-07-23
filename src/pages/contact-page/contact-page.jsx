@@ -8,8 +8,9 @@ import UserPageContent from '../../components/user-page-content/user-page-conten
 const ContactPage = observer(() => {
   const { contactStore, postsStore, userStore } = useStore();
   const { contact, getContact } = contactStore;
-  const { userPosts, getPostsUser, cleanUserPosts } = postsStore;
+  const { userPosts, getPostsUser, cleanUserPosts, isLoading } = postsStore;
   const { user } = userStore;
+  console.log(isLoading);
 
   const { contactId } = useParams();
 

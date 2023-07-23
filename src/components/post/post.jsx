@@ -10,6 +10,7 @@ import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/default-avatar.svg';
 import Comments from '../comments/comments';
 import FileView from '../common/file-view/file-view';
+import { generateId } from '../../utils/utils';
 
 const Post = observer(
   ({
@@ -37,7 +38,12 @@ const Post = observer(
     const isLiked = postslikes.some((item) => item === currentUser.id);
 
     const postFiles = files.map((file) => (
-      <FileView inPost link={file.file_link} name={file.file_title} />
+      <FileView
+        inPost
+        link={file.file_link}
+        name={file.file_title}
+        key={generateId()}
+      />
     ));
 
     function handleEditClick() {

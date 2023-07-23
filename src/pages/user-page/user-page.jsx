@@ -7,7 +7,8 @@ import UserPageContent from '../../components/user-page-content/user-page-conten
 const UserPage = observer(() => {
   const { userStore, postsStore } = useStore();
   const { user } = userStore;
-  const { userPosts, getPostsUser } = postsStore;
+  const { userPosts, getPostsUser, isLoading } = postsStore;
+  console.log(isLoading);
 
   useEffect(() => {
     getPostsUser(user.id);
