@@ -6,7 +6,7 @@ import errorStore from './error-store';
 const { addError } = errorStore;
 
 class PostsStore {
-  limit = 5;
+  limit = 10;
 
   offset = 0;
 
@@ -130,7 +130,6 @@ class PostsStore {
       .deletePost(id)
       .then(() => {
         runInAction(() => {
-          this.posts = this.posts.filter((post) => post.id !== id);
           if (this.offset === 0) {
             this.getPosts();
           } else {
