@@ -8,11 +8,11 @@ const { addError } = errorStore;
 class PostsStore {
   posts = [];
 
-  limit = 1000;
+  // limit = 1000;
 
-  offset = 5;
+  // offset = 5;
 
-  commentsData = {};
+  // commentsData = {};
 
   userPosts = [];
 
@@ -213,17 +213,16 @@ class PostsStore {
 
   getComments = (postID, params) => {
     const queryString = params
-      ? `?${new URLSearchParams(params).toString()}&limit=${
-          this.limit
-        }&offset=${this.offset}`
+      ? `?${new URLSearchParams(params).toString()}`
       : '';
 
     this.setIsLoading(true);
     api
       .getCommentsList(postID, queryString)
       .then((data) => {
-        this.commentsData = data;
-        this.setCommentsInPost(postID, data.results);
+        // console.log(data)
+        // this.commentsData = data;
+        this.setCommentsInPost(postID, data);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
