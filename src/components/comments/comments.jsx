@@ -31,10 +31,6 @@ const Comments = observer(({ comments, postID }) => {
     }
   }, [commentsList, comments]);
 
-  console.log(commentsList.length);
-  console.log(comments.length);
-
-  console.log(showCount);
   return (
     <div className={styles.comments}>
       <ul className={styles.comments__list}>
