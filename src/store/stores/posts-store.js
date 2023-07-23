@@ -60,13 +60,14 @@ class PostsStore {
   changeCommentsInPost = (postID, updatedComment) => {
     const postIndex = this.posts.findIndex((p) => p.id === postID);
     const userPostIndex = this.userPosts.findIndex((p) => p.id === postID);
-    const newComments = this.posts[postIndex].comments.map((c) => {
-      if (c.id === updatedComment.id) {
-        return updatedComment;
-      }
-      return c;
-    });
+
     if (postIndex >= 0) {
+      const newComments = this.posts[postIndex].comments.map((c) => {
+        if (c.id === updatedComment.id) {
+          return updatedComment;
+        }
+        return c;
+      });
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
         comments: newComments,
@@ -74,9 +75,17 @@ class PostsStore {
       });
     }
     if (userPostIndex >= 0) {
+      const newCommentsUser = this.userPosts[userPostIndex].comments.map(
+        (c) => {
+          if (c.id === updatedComment.id) {
+            return updatedComment;
+          }
+          return c;
+        }
+      );
       this.userPosts.splice(userPostIndex, 1, {
         ...this.userPosts[userPostIndex],
-        comments: newComments,
+        comments: newCommentsUser,
       });
     }
   };
@@ -256,19 +265,23 @@ class PostsStore {
           const userPostIndex = this.userPosts.findIndex(
             (p) => p.id === postID
           );
-          const updatedComments = this.posts[postIndex].comments.filter(
-            (c) => c.id !== commentID
-          );
+
           if (postIndex >= 0) {
+            const updatedCommentsPosts = this.posts[postIndex].comments.filter(
+              (c) => c.id !== commentID
+            );
             this.posts.splice(postIndex, 1, {
               ...this.posts[postIndex],
-              comments: updatedComments,
+              comments: updatedCommentsPosts,
             });
           }
           if (userPostIndex >= 0) {
+            const updatedCommentsUser = this.userPosts[
+              userPostIndex
+            ].comments.filter((c) => c.id !== commentID);
             this.userPosts.splice(userPostIndex, 1, {
               ...this.userPosts[userPostIndex],
-              comments: updatedComments,
+              comments: updatedCommentsUser,
             });
           }
         });
