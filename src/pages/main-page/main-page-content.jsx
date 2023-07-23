@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import BirthdayPlate from '../../components/birthday-plate/birthday-plate';
 import { useStore } from '../../contexts/RootStoreContext';
@@ -7,6 +7,7 @@ import PostInput from '../../components/common/post-input/post-input';
 import Post from '../../components/post/post';
 import Conferences from '../../components/common/conferences/conferences';
 import RightSidebarContainer from '../../components/common/right-sidebar-container/right-sidebar-container';
+import usePagingObserver from '../../hooks/use-paging-observer';
 // import { TOKEN_NAME } from '../../utils/settings';
 // import { getCookie } from '../../utils/utils';
 
@@ -14,19 +15,37 @@ const MainPageContent = observer(() => {
   const [filter, setFilter] = useState(null);
   const [choosenButton, setChoosenButton] = useState(1);
   const { postsStore, userStore, birthdaysStore } = useStore();
-  const { posts, getPosts } = postsStore;
+  const {
+    posts,
+    getPosts,
+    isLoading,
+    offset,
+    setPage,
+    resetOffset,
+    isNextPage,
+  } = postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
+
+  const ref = useRef();
+  usePagingObserver(ref, isLoading, setPage, isNextPage);
 
   const filteredPosts = filter
     ? posts.filter((item) => item.group === filter)
     : posts;
 
   useEffect(() => {
-    // console.log(getCookie(TOKEN_NAME));
     getPosts();
+    resetOffset();
+  }, [getPosts, resetOffset]);
+
+  useEffect(() => {
+    if (offset !== 0) getPosts();
+  }, [getPosts, offset]);
+
+  useEffect(() => {
     getBirthdays();
-  }, [getPosts, getBirthdays]);
+  }, [getBirthdays]);
 
   function handleButtonClick(button) {
     setChoosenButton(button);
@@ -81,6 +100,7 @@ const MainPageContent = observer(() => {
             </button>
           </div>
           <ul className={styles.mainPageContent__posts}>{postsElements}</ul>
+          <div ref={ref} />
         </div>
       </div>
       <RightSidebarContainer gap="36px">
