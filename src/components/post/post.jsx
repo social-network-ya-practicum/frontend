@@ -10,6 +10,7 @@ import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/default-avatar.svg';
 import Comments from '../comments/comments';
 import FileView from '../common/file-view/file-view';
+import { generateId } from '../../utils/utils';
 
 const Post = observer(
   ({
@@ -37,7 +38,12 @@ const Post = observer(
     const isLiked = postslikes.some((item) => item === currentUser.id);
 
     const postFiles = files.map((file) => (
-      <FileView inPost link={file.file_link} />
+      <FileView
+        inPost
+        link={file.file_link}
+        name={file.file_title}
+        key={generateId()}
+      />
     ));
 
     function handleEditClick() {
@@ -90,7 +96,6 @@ const Post = observer(
     return (
       <li className={styles.post}>
         <div className={styles.post__info}>
-          {/* <div className={styles.post__avatar}> </div> */}
           <NavLink to={toPath}>
             <RoundIcon
               size="small-plus"
@@ -123,15 +128,7 @@ const Post = observer(
 
         {!isPostChanging ? (
           <>
-            <ul className={styles.post__fileList}>
-              {/* <li className={styles.post__fileItem}>
-                <FileView inPost />
-              </li>
-              <li className={styles.post__fileItem}>
-                <FileView inPost />
-              </li> */}
-              {postFiles}
-            </ul>
+            <ul className={styles.post__fileList}>{postFiles}</ul>
             <div className={styles.post__container}>
               <div className={styles.post__likeContainer}>
                 <button
@@ -156,7 +153,7 @@ const Post = observer(
               )}
             </div>
 
-            <Comments comments={comments} />
+            <Comments comments={comments} postID={id} />
           </>
         ) : (
           <div className={styles.post__change}>

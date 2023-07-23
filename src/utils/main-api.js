@@ -20,10 +20,7 @@ class MainApi {
 
     try {
       return await res.json().then((err) => {
-        // Пока у бэков проблемы с отдачей ошибки под конкретным ключом, вывожу JSON
-        // для всех без обработки
-        const message = JSON.stringify(err);
-        // const message = err.errors[0].detail;
+        const message = err.errors[0].detail;
         throw new CustomError(
           handleErrors({
             message,
@@ -172,6 +169,30 @@ class MainApi {
   /**
    * GET - запросы НАЧАЛО
    */
+
+  /** Получаем список групп */
+  getGroups = (params) =>
+    fetch(`${this._url}/groups${params}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getGroups'))
+      .catch((err) => this._handleError(err, 'getGroups'));
+
+  /** Получаем группу */
+  getGroup = (groupID) =>
+    fetch(`${this._url}/groups/${groupID}`, {
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+    })
+      .then((res) => this._handleResponse(res, 'getGroup'))
+      .catch((err) => this._handleError(err, 'getGroup'));
 
   /** Получаем адресную книгу */
   getAddressBook = (params) =>
@@ -392,6 +413,22 @@ class MainApi {
   /**
    * POST - запросы НАЧАЛО
    */
+
+  /**  Подписываемся на группу */
+  postGroup = (data) =>
+    fetch(`${this._url}/groups/${data}/subscribe/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        created_date: data.created_date,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'postGroup'))
+      .catch((err) => this._handleError(err, 'postGroup'));
 
   /**  Создаём пост */
   postUserPost = (data) =>

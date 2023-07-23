@@ -69,3 +69,9 @@ export const getMonthNumber = (month) => {
 };
 
 export const generateId = () => Math.random().toString(36).substring(2, 12);
+
+export const groupsSort = (group1, group2) => {
+  if (group1.followers_count > group2.followers_count) return -1;
+  if (group1.followers_count < group2.followers_count) return 1;
+  return 0;
+};

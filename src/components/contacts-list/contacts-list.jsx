@@ -18,6 +18,7 @@ function ContactsList({ contacts, userId }) {
             middleName={employee.middle_name}
             lastName={employee.last_name}
             position={employee.job_title}
+            department={employee.department}
             jobEmail={employee.email}
             jobPhone={employee.corporate_phone_number}
           />

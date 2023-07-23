@@ -14,6 +14,12 @@ class PostsStore {
 
   posts = [];
 
+  // limit = 1000;
+
+  // offset = 5;
+
+  // commentsData = {};
+
   userPosts = [];
 
   isLoading = false;
@@ -21,6 +27,10 @@ class PostsStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  setPage = () => {
+    this.offset += this.limit;
+  };
 
   setIsLoading = (bool) => {
     this.isLoading = bool;
@@ -34,17 +44,15 @@ class PostsStore {
     this.userPosts = [];
   };
 
-  setPage = () => {
-    this.offset += this.limit;
-  };
-
   setCommentsInPost = (postID, comments) => {
     const postIndex = this.posts.findIndex((p) => p.id === postID);
     const userPostIndex = this.userPosts.findIndex((p) => p.id === postID);
     if (postIndex >= 0) {
+      // console.log(...this.posts[postIndex])
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
         comments,
+        // comments: this.posts[postIndex].comments.concat(comments),
       });
     }
     if (userPostIndex >= 0) {
@@ -68,6 +76,7 @@ class PostsStore {
       this.posts.splice(postIndex, 1, {
         ...this.posts[postIndex],
         comments: newComments,
+        // comments: this.posts[postIndex].comments.concat(newComments),
       });
     }
     if (userPostIndex >= 0) {
@@ -135,6 +144,7 @@ class PostsStore {
           } else {
             this.offset = 0;
           }
+          this.userPosts = this.userPosts.filter((post) => post.id !== id);
         });
       })
       .catch((err) => addError(err))
@@ -148,6 +158,12 @@ class PostsStore {
       .then((updatedPost) => {
         runInAction(() => {
           this.posts = this.posts.map((p) => {
+            if (p.id === updatedPost.id) {
+              return updatedPost;
+            }
+            return p;
+          });
+          this.userPosts = this.userPosts.map((p) => {
             if (p.id === updatedPost.id) {
               return updatedPost;
             }
@@ -230,7 +246,9 @@ class PostsStore {
     api
       .getCommentsList(postID, queryString)
       .then((data) => {
-        this.setCommentsInPost(postID, data.results);
+        // console.log(data)
+        // this.commentsData = data;
+        this.setCommentsInPost(postID, data);
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));

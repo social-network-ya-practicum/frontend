@@ -1,0 +1,17 @@
+.header {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.24px;
+  padding-bottom: 36px;
+}
+
+.groupsList {
+  list-style-type: none;
+  display: grid;
+  width: 941px;
+  grid-template-columns: repeat(auto-fit, 268px);
+  column-gap: 68.5px;
+  row-gap: 36px;
+}

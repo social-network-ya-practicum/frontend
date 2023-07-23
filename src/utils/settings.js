@@ -54,3 +54,6 @@ export const monthsMap = new Map([
   ['January', 'января'],
   ['December', 'декабря'],
 ]);
+
+export const regex =
+  /^[a-zA-Zа-яА-ЯёЁ0-9\s.,;:!?"'{}()[\]|\\@#$%^&*_<>\-~`/=//+/]*$/;

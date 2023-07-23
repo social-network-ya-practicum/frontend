@@ -1,30 +1,56 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react-lite';
 import CommentInput from '../common/comment-input/comment-input';
 import Comment from '../common/comment/comment';
 import styles from './comments.module.scss';
+// import { useStore } from '../../contexts/RootStoreContext';
 
-function Comments({ comments }) {
-  const commentsList = comments.map((comment) => (
-    <Comment key={comment.id} author={comment.author} />
-  ));
+const Comments = observer(({ comments, postID }) => {
+  const [showCount, setShowCount] = useState(5);
+
+  const handleShownNext = () => {
+    setShowCount(showCount + 10);
+  };
+
+  const commentsList = comments
+    .slice(0, showCount)
+    .map((comment) => (
+      <Comment
+        key={comment.id}
+        commentID={comment.id}
+        author={comment.author}
+        text={comment.text}
+        postID={postID}
+      />
+    ));
+
+  useEffect(() => {
+    if (commentsList.length === comments.length) {
+      setShowCount(comments.length + 1);
+    }
+  }, [commentsList, comments]);
 
   return (
     <div className={styles.comments}>
       <ul className={styles.comments__list}>
         {commentsList}
-        <button className={styles.comments__more}>
-          Показать следующие комментарии
-        </button>
+        {commentsList.length > 4 && comments.length > showCount && (
+          <button className={styles.comments__more} onClick={handleShownNext}>
+            Показать следующие комментарии
+          </button>
+        )}
       </ul>
 
-      <CommentInput />
+      <CommentInput postID={postID} />
     </div>
   );
-}
+});
 
 export default Comments;
 
 Comments.propTypes = {
+  postID: PropTypes.number,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -39,6 +65,7 @@ Comments.propTypes = {
 };
 
 Comments.defaultProps = {
+  postID: 1,
   comments: [
     {
       id: 3,

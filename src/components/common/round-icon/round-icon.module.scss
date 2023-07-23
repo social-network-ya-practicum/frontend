@@ -24,6 +24,12 @@
   height: 36px;
 }
 
+.roundIconBlockMediumMinus {
+  @include roundIconBlock;
+  width: 45px;
+  height: 45px;
+}
+
 .roundIconBlockMedium {
   @include roundIconBlock;
   width: 56px;

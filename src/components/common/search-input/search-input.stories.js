@@ -1,5 +1,5 @@
 import SearchInput from './search-input';
-import '../../index.scss';
+import '../../../index.scss';
 
 export default {
   title: 'SearchInput',

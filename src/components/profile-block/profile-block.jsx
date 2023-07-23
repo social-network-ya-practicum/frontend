@@ -22,7 +22,9 @@ function ProfileBlock({ id, avatar, firstName, lastName, role, postsCount }) {
         <span className={styles.profileBlock__span}>{postsCount}</span>
       </div>
       <div className={styles.profileBlock__help}>
-        <p className={styles.profileBlock__text}>Помощь</p>
+        <NavLink to="/404" className={styles.profileBlock__text}>
+          <p className={styles.profileBlock__text}>Помощь</p>
+        </NavLink>
       </div>
     </div>
   );

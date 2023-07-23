@@ -29,19 +29,20 @@
       vertical-align: sub;
     }
 
-    // &:hover{
-    //   color: var.$text_color_default;
-    // }
-
     &_notPost {
       color: var.$text_color_secondary2;
       &::before {
         content: url(./icons/doc_inpost.svg);
       }
+    }
 
-      // &:hover{
-      //   color: var.$text_color_secondary2;
-      // }
+    &_active {
+      &:hover {
+        color: var.$text_color_default;
+        &::before {
+          content: url(./icons/doc_active.svg);
+        }
+      }
     }
   }
 
@@ -58,9 +59,5 @@
     &_notPost {
       color: var.$text_color_secondary2;
     }
-
-    // &:hover{
-    //   color: var.$text_color_default;
-    // }
   }
 }

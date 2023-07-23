@@ -5,6 +5,10 @@ import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
 import defaultAvatar from '../../../image/default-avatar.svg';
 import FileBubble from '../file-bubble/file-bubble';
+import { generateId } from '../../../utils/utils';
+import { regex } from '../../../utils/settings';
+import useValidator from '../../../hooks/use-validator';
+import useError from '../../../hooks/use-error';
 
 const PostInput = observer(() => {
   const { userStore, postsStore } = useStore();
@@ -20,14 +24,16 @@ const PostInput = observer(() => {
 
   const [isSmilePopupOpened, setIsSmilePopupOpened] = useState(false);
 
+  const { checkImage } = useValidator();
+  const { setError, clearError } = useError();
+
   function handleCancelFile(id) {
     const updatedFiles = files.filter((file) => file.id !== id);
     setFiles(updatedFiles);
   }
-
   const fileList = files.map((file) => (
     <FileBubble
-      name={file.file_info.name}
+      name={file.file_title}
       key={file.id}
       handleDelete={() => handleCancelFile(file.id)}
     />
@@ -49,10 +55,21 @@ const PostInput = observer(() => {
   const handleFileChange = (event) => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
+
+    const err = checkImage(fileImg);
+    if (err) {
+      setError(err);
+      //  refInput.current.value = null;
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
       if (fileImg.type.startsWith('image/')) {
+        // временное ограничение на добавление картинок
+        if (images.length > 1) {
+          return;
+        }
         setImages([
           ...images,
           {
@@ -60,16 +77,18 @@ const PostInput = observer(() => {
           },
         ]);
       } else {
+        if (files.length > 10) {
+          return;
+        }
         setFiles([
           ...files,
           {
-            id: files.length + 1,
-            file_info: fileImg,
+            id: generateId(),
+            file_title: fileImg.name,
             file_link: reader.result,
           },
         ]);
       }
-      // console.log(files)
     };
   };
 
@@ -87,7 +106,12 @@ const PostInput = observer(() => {
     return arr;
   }
 
-  const onChange = (event) => setValue(event.target.value);
+  const onChange = (event) => {
+    const inputValue = event.target.value;
+    if (regex.test(inputValue)) {
+      setValue(inputValue);
+    }
+  };
 
   useEffect(() => {
     setHeightText('auto');
@@ -178,6 +202,7 @@ const PostInput = observer(() => {
                   id="post-input__img"
                   className={styles.postInput__file}
                   onChange={handleFileChange}
+                  onClick={() => clearError()}
                 />
               </label>
 
@@ -234,6 +259,7 @@ const PostInput = observer(() => {
                     id="post-input__img"
                     className={styles.postInput__file}
                     onChange={handleFileChange}
+                    onClick={() => clearError()}
                   />
                 </label>
 
@@ -246,6 +272,7 @@ const PostInput = observer(() => {
                     id="post-input__file"
                     className={styles.postInput__file}
                     onChange={handleFileChange}
+                    onClick={() => clearError()}
                   />
                 </label>
                 <button

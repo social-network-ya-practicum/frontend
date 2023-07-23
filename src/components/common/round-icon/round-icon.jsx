@@ -7,6 +7,7 @@ function RoundIcon({ size, src, alt, mixBlock, mixImg }) {
     {
       [styles.roundIconBlockSmall]: size === 'small',
       [styles.roundIconBlockSmallPlus]: size === 'small-plus',
+      [styles.roundIconBlockMediumMinus]: size === 'medium-minus',
       [styles.roundIconBlockMedium]: size === 'medium',
       [styles.roundIconBlockLarge]: size === 'large',
     },
@@ -25,7 +26,13 @@ function RoundIcon({ size, src, alt, mixBlock, mixImg }) {
 export default RoundIcon;
 
 RoundIcon.propTypes = {
-  size: PropTypes.oneOf(['small', 'small-plus', 'medium', 'large']),
+  size: PropTypes.oneOf([
+    'small',
+    'small-plus',
+    'medium-minus',
+    'medium',
+    'large',
+  ]),
   src: PropTypes.string,
   alt: PropTypes.string,
   mixBlock: PropTypes.string,
