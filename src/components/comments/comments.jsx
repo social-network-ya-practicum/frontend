@@ -1,39 +1,45 @@
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import CommentInput from '../common/comment-input/comment-input';
 import Comment from '../common/comment/comment';
 import styles from './comments.module.scss';
-import { useStore } from '../../contexts/RootStoreContext';
+// import { useStore } from '../../contexts/RootStoreContext';
 
 const Comments = observer(({ comments, postID }) => {
-  // const [displayedComments, setDisplayedComments] = useState(comments.slice(0, 3));
-
-  const { postsStore } = useStore();
-  const { getComments, commentsData, setPage } = postsStore;
+  const [showCount, setShowCount] = useState(5);
 
   const handleShownNext = () => {
-    // setDisplayedComments(comments.slice(0, displayedComments.length + 10))
-
-    getComments(postID, 10);
-    setPage();
+    setShowCount(showCount + 10);
   };
-  // console.log(commentsData);
-  const commentsList = comments.map((comment) => (
-    <Comment
-      key={comment.id}
-      commentID={comment.id}
-      author={comment.author}
-      text={comment.text}
-      postID={postID}
-    />
-  ));
 
+  const commentsList = comments
+    .slice(0, showCount)
+    .map((comment) => (
+      <Comment
+        key={comment.id}
+        commentID={comment.id}
+        author={comment.author}
+        text={comment.text}
+        postID={postID}
+      />
+    ));
+
+  useEffect(() => {
+    if (commentsList.length === comments.length) {
+      setShowCount(comments.length + 1);
+    }
+  }, [commentsList, comments]);
+
+  console.log(commentsList.length);
+  console.log(comments.length);
+
+  console.log(showCount);
   return (
     <div className={styles.comments}>
       <ul className={styles.comments__list}>
         {commentsList}
-        {commentsList.length > 4 && commentsData.next !== null && (
+        {commentsList.length > 4 && comments.length > showCount && (
           <button className={styles.comments__more} onClick={handleShownNext}>
             Показать следующие комментарии
           </button>
