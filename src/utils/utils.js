@@ -75,3 +75,15 @@ export const groupsSort = (group1, group2) => {
   if (group1.followers_count < group2.followers_count) return 1;
   return 0;
 };
+
+export const getSign = (num) => {
+  const lastDigit = num % 10;
+  const twoLastDigits = num % 100;
+  if (lastDigit === 1 && twoLastDigits !== 11) {
+    return 'участник';
+  }
+  if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(twoLastDigits)) {
+    return 'участника';
+  }
+  return 'участников';
+};

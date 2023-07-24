@@ -3,12 +3,14 @@ import FollowersSlider from '../common/followers-slider/followers-slider';
 import styles from './group-followers.module.scss';
 
 function GroupFollowers({ owner, followers, followersCount }) {
+  const sign = [2, 3, 4].includes(followersCount % 10) ? 'человека' : 'человек';
+
   return (
     <div className={styles.groupFollowers}>
       <div className={styles.groupFollowers__info}>
         <h2 className={styles.groupFollowers__title}>Участники</h2>
         <span className={styles.groupFollowers__span}>
-          {followersCount} человек
+          {`${followersCount} ${sign}`}
         </span>
       </div>
       <FollowersSlider followers={followers} owner={owner} />
