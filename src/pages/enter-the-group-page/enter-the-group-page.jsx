@@ -38,8 +38,10 @@ const EnterTheGroupPage = observer(() => {
       author={post.author}
       pubdate={post.pub_date}
       images={post.images}
+      files={post.files}
       likecount={post.like_count}
       postslikes={post.likes}
+      comments={post.comments}
       currentUser={user}
     />
   ));
@@ -63,6 +65,7 @@ const EnterTheGroupPage = observer(() => {
           />
           <Conferences />
           <GroupFollowers
+            owner={user}
             followers={group.followers}
             followersCount={group.followers_count}
           />

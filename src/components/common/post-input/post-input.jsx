@@ -15,6 +15,7 @@ const PostInput = observer(({ groupID }) => {
   const { userStore, postsStore } = useStore();
   const { user } = userStore;
   const { addPost } = postsStore;
+  // console.log(isLoading);
 
   const [value, setValue] = useState('');
   const [heightText, setHeightText] = useState('px');

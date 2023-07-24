@@ -447,34 +447,38 @@ class MainApi {
       .catch((err) => this._handleError(err, 'postGroup'));
 
   /**  Создаём пост */
-  postUserPost = (data) =>
-    fetch(`${this._url}/posts/`, {
+  postUserPost = (data) => {
+    const obj = {
+      text: data.text,
+      author: {
+        email: data.email,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        middle_name: data.middleName,
+        job_title: data.jobTitle,
+        personal_email: data.personalEmail,
+        corporate_phone_number: data.corporatePhoneNumber,
+        personal_phone_number: data.personalPhoneNumber,
+        bio: data.bio,
+      },
+      images: data.images,
+      files: data.files,
+    };
+
+    const body = data.group ? { ...obj, group: data.group } : obj;
+
+    return fetch(`${this._url}/posts/`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         ...this._headers,
         Authorization: `Token ${getCookie(TOKEN_NAME)}`,
       },
-      body: JSON.stringify({
-        text: data.text,
-        author: {
-          email: data.email,
-          first_name: data.firstName,
-          last_name: data.lastName,
-          middle_name: data.middleName,
-          job_title: data.jobTitle,
-          personal_email: data.personalEmail,
-          corporate_phone_number: data.corporatePhoneNumber,
-          personal_phone_number: data.personalPhoneNumber,
-          bio: data.bio,
-        },
-        images: data.images,
-        files: data.files,
-        group: data.group,
-      }),
+      body: JSON.stringify(body),
     })
       .then((res) => this._handleResponse(res, 'postUserPost'))
       .catch((err) => this._handleError(err, 'postUserPost'));
+  };
 
   /**  Ставим like посту */
   postLike = (data) =>

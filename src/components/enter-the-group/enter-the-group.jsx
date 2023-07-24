@@ -4,6 +4,7 @@ import styles from './enter-the-group.module.scss';
 import Button from '../common/button/button';
 import RoundIcon from '../common/round-icon/round-icon';
 import defaultAvatar from '../../image/default-avatar.svg';
+import { getSign } from '../../utils/utils';
 
 function EnterTheGroup({
   title,
@@ -29,7 +30,7 @@ function EnterTheGroup({
         <div className={styles.enterTheGroup__followers}>
           <ul className={styles.enterTheGroup__avatars}>{followersElements}</ul>
           <p className={styles.enterTheGroup__count}>
-            {followersCount} участников
+            {`${followersCount} ${getSign(followersCount)}`}
           </p>
         </div>
         <Button width="189px" onClick={handleSubscribe}>
