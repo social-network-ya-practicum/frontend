@@ -1,0 +1,42 @@
+@use '../../../variables' as var;
+
+.followersSlider{
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__followers{
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+  
+  &__btns{
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  &__btn{
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 35px;
+    background-image: url(./icons/arrow-up.svg);
+    border: none;
+    background-color: var.$bg_color_primary;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &_right{
+      transform: rotate(180deg);
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+

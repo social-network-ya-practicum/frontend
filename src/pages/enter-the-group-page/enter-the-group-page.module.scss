@@ -11,6 +11,8 @@
 
   &__posts {
     min-width: 552px;
+    display: grid;
+    gap: 20px;
   }
 
   &__container {

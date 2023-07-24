@@ -8,6 +8,7 @@ import EnterTheGroup from '../../components/enter-the-group/enter-the-group';
 import PostInput from '../../components/common/post-input/post-input';
 import GroupInfo from '../../components/group-info/group-info';
 import Conferences from '../../components/common/conferences/conferences';
+import GroupFollowers from '../../components/group-followers/group-followers';
 
 const EnterTheGroupPage = observer(() => {
   const { userStore, groupStore } = useStore();
@@ -49,7 +50,7 @@ const EnterTheGroupPage = observer(() => {
     rendered = (
       <>
         <div>
-          <PostInput />
+          <PostInput groupID={group.id} />
           <ul className={styles.enterTheGroupPage__posts}>{postsElements}</ul>
         </div>
         <div className={styles.enterTheGroupPage__container}>
@@ -61,6 +62,10 @@ const EnterTheGroupPage = observer(() => {
             deleteGroup={deleteGroup}
           />
           <Conferences />
+          <GroupFollowers
+            followers={group.followers}
+            followersCount={group.followers_count}
+          />
         </div>
       </>
     );
