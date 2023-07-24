@@ -77,6 +77,22 @@ class GroupStore {
       .catch((err) => addError(err))
       .finally(() => this.setIsLoading(false));
   };
+
+  deleteGroup = (id) => {
+    this.setIsLoading(true);
+    api
+      .deleteGroup(id)
+      .then(() => {
+        runInAction(() => {
+          this.userGroups = this.userGroups.filter((group) => group.id !== id);
+          // const userGroups = [];
+          // userGroups.push(group);
+          // this.userGroups = userGroups;
+        });
+      })
+      .catch((err) => addError(err))
+      .finally(() => this.setIsLoading(false));
+  };
 }
 
 export default new GroupStore();
