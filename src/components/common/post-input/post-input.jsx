@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useStore } from '../../../contexts/RootStoreContext';
 import styles from './post-input.module.scss';
 import RoundIcon from '../round-icon/round-icon';
@@ -10,7 +11,7 @@ import { regex } from '../../../utils/settings';
 import useValidator from '../../../hooks/use-validator';
 import useError from '../../../hooks/use-error';
 
-const PostInput = observer(() => {
+const PostInput = observer(({ groupID }) => {
   const { userStore, postsStore } = useStore();
   const { user } = userStore;
   const { addPost } = postsStore;
@@ -142,6 +143,7 @@ const PostInput = observer(() => {
       author: user,
       images: images === [] ? [] : images,
       files: files === [] ? [] : files,
+      group: groupID,
     });
     setValue('');
     handleCancelImg();
@@ -303,3 +305,11 @@ const PostInput = observer(() => {
 });
 
 export default PostInput;
+
+PostInput.propTypes = {
+  groupID: PropTypes.number,
+};
+
+PostInput.defaultProps = {
+  groupID: null,
+};

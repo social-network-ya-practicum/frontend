@@ -50,7 +50,7 @@ const EnterTheGroupPage = observer(() => {
     rendered = (
       <>
         <div>
-          <PostInput />
+          <PostInput groupID={group.id} />
           <ul className={styles.enterTheGroupPage__posts}>{postsElements}</ul>
         </div>
         <div className={styles.enterTheGroupPage__container}>
