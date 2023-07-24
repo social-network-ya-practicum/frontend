@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import defaultImage from './images/default.jpeg';
 import trashImage from './images/trash.svg';
-
 import styles from './group-info.module.scss';
 
-function GroupInfo({ id, title, description, imageLink }) {
+function GroupInfo({ id, title, description, imageLink, deleteGroup }) {
+  const navigate = useNavigate();
+
   const unsubscribe = () => {
-    // eslint-disable-next-line no-console
-    console.log(`Отписаться от группы ${id}. Ждем api групп`);
+    deleteGroup(id);
+    navigate('/groups');
   };
 
   return (
@@ -34,6 +36,7 @@ GroupInfo.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   imageLink: PropTypes.string,
+  deleteGroup: PropTypes.func.isRequired,
 };
 
 GroupInfo.defaultProps = {
