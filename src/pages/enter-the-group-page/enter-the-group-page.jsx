@@ -65,6 +65,7 @@ const EnterTheGroupPage = observer(() => {
           />
           <Conferences />
           <GroupFollowers
+            owner={user}
             followers={group.followers}
             followersCount={group.followers_count}
           />

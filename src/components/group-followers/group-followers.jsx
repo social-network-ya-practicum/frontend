@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import FollowersSlider from '../common/followers-slider/followers-slider';
 import styles from './group-followers.module.scss';
 
-function GroupFollowers({ followers, followersCount }) {
+function GroupFollowers({ owner, followers, followersCount }) {
   return (
     <div className={styles.groupFollowers}>
       <div className={styles.groupFollowers__info}>
@@ -11,7 +11,7 @@ function GroupFollowers({ followers, followersCount }) {
           {followersCount} человек
         </span>
       </div>
-      <FollowersSlider followers={followers} />
+      <FollowersSlider followers={followers} owner={owner} />
     </div>
   );
 }
@@ -26,6 +26,9 @@ GroupFollowers.propTypes = {
       photo: PropTypes.string,
     })
   ).isRequired,
+  owner: PropTypes.shape({
+    id: PropTypes.number,
+  }).isRequired,
 };
 
 GroupFollowers.defaultProps = {
