@@ -44,6 +44,11 @@ class GroupStore {
     this.isLoading = bool;
   };
 
+  // хак для обновления постов на странице группы при изменении поста
+  updateGroup = () => {
+    if (this.groupRes) this.getGroup(this.groupRes.id);
+  };
+
   getGroup = (n) => {
     this.setIsLoading(true);
     api
