@@ -1,7 +1,6 @@
 @use '../../variables' as var;
 
-
-.groupFollowers{
+.groupFollowers {
   padding: 44px 22px;
   border-radius: 16px;
   background: var.$bg_color_secondary;
@@ -9,13 +8,13 @@
   flex-direction: column;
   gap: 32px;
 
-  &__info{
+  &__info {
     display: flex;
     justify-content: space-between;
     align-items: end;
   }
 
-  &__title{
+  &__title {
     font-family: var.$font-family-default;
     font-size: 24px;
     font-style: normal;
@@ -25,7 +24,7 @@
     color: var.$text_color_default;
   }
 
-  &__span{
+  &__span {
     color: var.$text_color_secondary2;
     font-family: var.$font-family-default;
     font-size: 16px;

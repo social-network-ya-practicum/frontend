@@ -53,7 +53,10 @@ const EnterTheGroupPage = observer(() => {
         <div className={styles.enterTheGroupPage__container}>
           <GroupInfo />
           <Conferences />
-          <GroupFollowers />
+          <GroupFollowers
+            followers={group.followers}
+            followersCount={group.followers_count}
+          />
         </div>
       </>
     );
