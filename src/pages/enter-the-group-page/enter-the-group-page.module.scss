@@ -3,6 +3,12 @@
   flex-direction: row;
   gap: 40px;
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
   &__posts {
     min-width: 552px;
   }

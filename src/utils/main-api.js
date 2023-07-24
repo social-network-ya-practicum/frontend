@@ -97,6 +97,22 @@ class MainApi {
    * DELETE - запросы НАЧАЛО
    */
 
+  /**  Отписываемся от группы */
+  deleteGroup = (data) =>
+    fetch(`${this._url}/groups/${data}/subscribe/`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        ...this._headers,
+        Authorization: `Token ${getCookie(TOKEN_NAME)}`,
+      },
+      body: JSON.stringify({
+        id: data.id,
+      }),
+    })
+      .then((res) => this._handleResponse(res, 'deleteGroup'))
+      .catch((err) => this._handleError(err, 'deleteGroup'));
+
   /** Удаляем пост */
   deletePost = (postID) =>
     fetch(`${this._url}/posts/${postID}/`, {

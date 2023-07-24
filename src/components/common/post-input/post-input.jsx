@@ -56,16 +56,16 @@ const PostInput = observer(() => {
     setActiveInput(true);
     const fileImg = event.target.files[0];
 
-    const err = checkImage(fileImg);
-    if (err) {
-      setError(err);
-      //  refInput.current.value = null;
-      return;
-    }
     const reader = new FileReader();
     reader.readAsDataURL(fileImg);
     reader.onloadend = () => {
       if (fileImg.type.startsWith('image/')) {
+        const err = checkImage(fileImg);
+        if (err) {
+          setError(err);
+          //  refInput.current.value = null;
+          return;
+        }
         // временное ограничение на добавление картинок
         if (images.length > 1) {
           return;
