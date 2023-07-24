@@ -7,6 +7,7 @@ import Post from '../../components/post/post';
 import EnterTheGroup from '../../components/enter-the-group/enter-the-group';
 import GroupInfo from '../../components/group-info/group-info';
 import Conferences from '../../components/common/conferences/conferences';
+import GroupFollowers from '../../components/group-followers/group-followers';
 
 const EnterTheGroupPage = observer(() => {
   const { userStore, groupStore } = useStore();
@@ -52,6 +53,7 @@ const EnterTheGroupPage = observer(() => {
         <div className={styles.enterTheGroupPage__container}>
           <GroupInfo />
           <Conferences />
+          <GroupFollowers />
         </div>
       </>
     );
