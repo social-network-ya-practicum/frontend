@@ -11,9 +11,14 @@ import usePagingObserver from '../../hooks/use-paging-observer';
 // import { TOKEN_NAME } from '../../utils/settings';
 // import { getCookie } from '../../utils/utils';
 
+const filterValues = {
+  feed: { id: null, title: 'Лента' },
+  news: { id: 1, title: 'Новости компании' },
+};
+
 const MainPageContent = observer(() => {
-  const [filter, setFilter] = useState(null);
-  const [choosenButton, setChoosenButton] = useState(1);
+  const { feed, news } = filterValues;
+  const [filter, setFilter] = useState(feed.title);
   const { postsStore, userStore, birthdaysStore } = useStore();
   const {
     posts,
@@ -26,13 +31,18 @@ const MainPageContent = observer(() => {
   } = postsStore;
   const { user } = userStore;
   const { birthDays, getBirthdays } = birthdaysStore;
-
   const ref = useRef();
   usePagingObserver(ref, isLoading, setPage, isNextPage);
 
-  const filteredPosts = filter
-    ? posts.filter((item) => item.group === filter)
-    : posts;
+  const filteredPosts =
+    filter === news.title
+      ? posts.filter((item) => item.group === news.id)
+      : posts.filter(
+          (item) =>
+            user.followings.includes(item.group) ||
+            item.group === news.id ||
+            item.group === null
+        );
 
   useEffect(() => {
     getPosts();
@@ -46,15 +56,6 @@ const MainPageContent = observer(() => {
   useEffect(() => {
     getBirthdays();
   }, [getBirthdays]);
-
-  function handleButtonClick(button) {
-    setChoosenButton(button);
-    if (button === 2) {
-      setFilter(1);
-    } else {
-      setFilter(null);
-    }
-  }
 
   const postsElements = filteredPosts.map((post) => (
     <Post
@@ -83,20 +84,20 @@ const MainPageContent = observer(() => {
           <div className={styles.mainPageContent__btns}>
             <button
               className={`${styles.mainPageContent__btn} ${
-                choosenButton === 1 ? styles.mainPageContent__btn_active : ''
+                filter === feed.title ? styles.mainPageContent__btn_active : ''
               }`}
               // }
-              onClick={() => handleButtonClick(1)}
+              onClick={() => setFilter(feed.title)}
             >
-              Лента
+              {feed.title}
             </button>
             <button
               className={`${styles.mainPageContent__btn} ${
-                choosenButton === 2 ? styles.mainPageContent__btn_active : ''
+                filter === news.title ? styles.mainPageContent__btn_active : ''
               }`}
-              onClick={() => handleButtonClick(2)}
+              onClick={() => setFilter(news.title)}
             >
-              Новости компании
+              {news.title}
             </button>
           </div>
           <ul className={styles.mainPageContent__posts}>{postsElements}</ul>

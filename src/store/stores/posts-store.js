@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from '../../utils/main-api';
 import errorStore from './error-store';
+import groupStore from './group-store';
 
 const { addError } = errorStore;
+const { updateGroup } = groupStore;
 
 class PostsStore {
   limit = 10;
@@ -140,6 +143,7 @@ class PostsStore {
         runInAction(() => {
           this.posts.unshift(newPost);
           this.posts.pop();
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -159,6 +163,8 @@ class PostsStore {
             this.offset = 0;
           }
           this.userPosts = this.userPosts.filter((post) => post.id !== id);
+
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -183,6 +189,7 @@ class PostsStore {
             }
             return p;
           });
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -191,6 +198,7 @@ class PostsStore {
 
   likePost = (post) => {
     this.setIsLoading(true);
+    console.log(post);
     api
       .postLike(post)
       .then((likededPost) => {
@@ -214,6 +222,8 @@ class PostsStore {
               likes,
             });
           }
+
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -245,6 +255,7 @@ class PostsStore {
               likes,
             });
           }
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -274,6 +285,7 @@ class PostsStore {
       .postComment({ ...comment, postID })
       .then(() => {
         this.getComments(postID);
+        updateGroup();
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -308,6 +320,7 @@ class PostsStore {
               comments: updatedCommentsUser,
             });
           }
+          updateGroup();
         });
       })
       .catch((err) => addError(err))
@@ -320,6 +333,7 @@ class PostsStore {
       .patchComment({ ...comment, postID })
       .then((updatedComment) => {
         this.changeCommentsInPost(postID, updatedComment);
+        updateGroup();
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -331,6 +345,7 @@ class PostsStore {
       .postCommentLike({ ...comment, postID })
       .then((likedComment) => {
         this.changeCommentsInPost(postID, likedComment);
+        updateGroup();
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
@@ -342,6 +357,7 @@ class PostsStore {
       .deleteCommentLike(commentID, postID)
       .then((dislikedComment) => {
         this.changeCommentsInPost(postID, dislikedComment);
+        updateGroup();
       })
       .catch((err) => addError(err))
       .finally(this.setIsLoading(false));
