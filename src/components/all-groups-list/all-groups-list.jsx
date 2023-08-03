@@ -13,7 +13,7 @@ function AllGroupsList({ header, groups }) {
               linkpath={`/groups/${group.id}`}
               imgSrc={group.image_link}
               title={group.title}
-              description={group.description}
+              resume={group.resume}
               followCount={group.followers_count}
             />
           </li>
@@ -31,7 +31,7 @@ AllGroupsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      resume: PropTypes.string.isRequired,
       followers_count: PropTypes.number.isRequired,
       image_link: PropTypes.string.isRequired,
     })
