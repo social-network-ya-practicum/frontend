@@ -12,7 +12,7 @@ export const Example = (args) => (
     <GroupCard
       title="Фотографируй все!"
       imgSrc="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
-      description="Группа для тех, кто любит фотографировать и делиться своими находками"
+      resume="Группа для тех, кто любит фотографировать и делиться своими находками"
       followCount={148}
       {...args}
     />
